@@ -1,0 +1,960 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblCoustomerDetails">
+          <Key>
+            <PropertyRef Name="CoustomerId" />
+          </Key>
+          <Property Name="CoustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" />
+          <Property Name="Email" Type="nvarchar" MaxLength="80" />
+          <Property Name="ContactNumber" Type="nchar" MaxLength="13" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="10" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblInventoryData">
+          <Key>
+            <PropertyRef Name="InventoryID" />
+          </Key>
+          <Property Name="InventoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductCategoryId" Type="int" />
+          <Property Name="MasterId" Type="int" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="150" />
+          <Property Name="ToTheStore" Type="bit" />
+          <Property Name="InsertedDate" Type="datetime" />
+          <Property Name="ToTheOutside" Type="bit" />
+          <Property Name="OutedDateFromStore" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblInventoryHistory">
+          <Key>
+            <PropertyRef Name="inventoryHistoryId" />
+          </Key>
+          <Property Name="inventoryHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="inventoryId" Type="int" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+        </EntityType>
+        <EntityType Name="tblMasterStore">
+          <Key>
+            <PropertyRef Name="mStoreId" />
+          </Key>
+          <Property Name="mStoreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="perchesedCount" Type="int" />
+          <Property Name="unitPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PerchesedDate" Type="datetime" />
+          <Property Name="RecoredEnterdBy" Type="int" />
+          <Property Name="createdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblMasterTicketDetails">
+          <Key>
+            <PropertyRef Name="mTicketID" />
+          </Key>
+          <Property Name="mTicketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketID" Type="int" />
+          <Property Name="isAssigned" Type="bit" />
+          <Property Name="AssignedDate" Type="datetime" />
+          <Property Name="AssignedTo" Type="int" />
+          <Property Name="IsAccepted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblMasterWarrenty">
+          <Key>
+            <PropertyRef Name="mWarrentyId" />
+          </Key>
+          <Property Name="mWarrentyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="inventoryId" Type="int" />
+          <Property Name="createdate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblProductCategories">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="100" />
+          <Property Name="VendorName" Type="nvarchar" MaxLength="100" />
+          <Property Name="VendorContact" Type="nchar" MaxLength="13" />
+          <Property Name="VendorAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="VendorEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblTicket">
+          <Key>
+            <PropertyRef Name="TicketId" />
+          </Key>
+          <Property Name="TicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventoryID" Type="int" />
+          <Property Name="CoustomerId" Type="int" />
+          <Property Name="TicketDiscription" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsOpen" Type="bit" />
+          <Property Name="IsClosed" Type="bit" />
+          <Property Name="OpenedDate" Type="datetime" />
+          <Property Name="ClosedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblTicketComment">
+          <Key>
+            <PropertyRef Name="ticketCommentID" />
+          </Key>
+          <Property Name="ticketCommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mTicketID" Type="int" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="CommentedDate" Type="datetime" />
+          <Property Name="CommentedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Email" Type="nvarchar" MaxLength="80" />
+          <Property Name="MobileNumber" Type="nchar" MaxLength="13" />
+          <Property Name="UserLevel" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblUserlLevel">
+          <Key>
+            <PropertyRef Name="UserlevelID" />
+          </Key>
+          <Property Name="UserlevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserLevel" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblWarrentyExtendedDate">
+          <Key>
+            <PropertyRef Name="weId" />
+          </Key>
+          <Property Name="weId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mWarrentyId" Type="int" />
+          <Property Name="expiredDate" Type="datetime" />
+          <Property Name="IsExpired" Type="bit" />
+          <Property Name="IsWarrentyExtended" Type="bit" />
+          <Property Name="warrentyExtendedFromDate" Type="datetime" />
+          <Property Name="warrentyExtendedToDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="createddate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblWarrentyhistory">
+          <Key>
+            <PropertyRef Name="whId" />
+          </Key>
+          <Property Name="whId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mWarrentyId" Type="int" />
+          <Property Name="comment" Type="nvarchar(max)" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <Association Name="FK_tblCoustomerDetails_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblCoustomerDetails" Type="Self.tblCoustomerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblCoustomerDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInventoryData_tblMasterStore">
+          <End Role="tblMasterStore" Type="Self.tblMasterStore" Multiplicity="0..1" />
+          <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterStore">
+              <PropertyRef Name="mStoreId" />
+            </Principal>
+            <Dependent Role="tblInventoryData">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInventoryHistory_tblInventoryData">
+          <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="0..1" />
+          <End Role="tblInventoryHistory" Type="Self.tblInventoryHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInventoryData">
+              <PropertyRef Name="InventoryID" />
+            </Principal>
+            <Dependent Role="tblInventoryHistory">
+              <PropertyRef Name="inventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInventoryHistory_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblInventoryHistory" Type="Self.tblInventoryHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblInventoryHistory">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMasterStore_tblProductCategories">
+          <End Role="tblProductCategories" Type="Self.tblProductCategories" Multiplicity="0..1" />
+          <End Role="tblMasterStore" Type="Self.tblMasterStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProductCategories">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tblMasterStore">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMasterTicketDetails_tblTicket">
+          <End Role="tblTicket" Type="Self.tblTicket" Multiplicity="0..1" />
+          <End Role="tblMasterTicketDetails" Type="Self.tblMasterTicketDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTicket">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="tblMasterTicketDetails">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMasterWarrenty_tblInventoryData">
+          <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="0..1" />
+          <End Role="tblMasterWarrenty" Type="Self.tblMasterWarrenty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInventoryData">
+              <PropertyRef Name="InventoryID" />
+            </Principal>
+            <Dependent Role="tblMasterWarrenty">
+              <PropertyRef Name="inventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTicket_tblInventoryData">
+          <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="0..1" />
+          <End Role="tblTicket" Type="Self.tblTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInventoryData">
+              <PropertyRef Name="InventoryID" />
+            </Principal>
+            <Dependent Role="tblTicket">
+              <PropertyRef Name="InventoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTicketComment_tblMasterTicketDetails">
+          <End Role="tblMasterTicketDetails" Type="Self.tblMasterTicketDetails" Multiplicity="0..1" />
+          <End Role="tblTicketComment" Type="Self.tblTicketComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterTicketDetails">
+              <PropertyRef Name="mTicketID" />
+            </Principal>
+            <Dependent Role="tblTicketComment">
+              <PropertyRef Name="mTicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUser_tblUserlLevel">
+          <End Role="tblUserlLevel" Type="Self.tblUserlLevel" Multiplicity="0..1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserlLevel">
+              <PropertyRef Name="UserlevelID" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="UserLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWarrentyExtendedDate_tblMasterWarrenty">
+          <End Role="tblMasterWarrenty" Type="Self.tblMasterWarrenty" Multiplicity="0..1" />
+          <End Role="tblWarrentyExtendedDate" Type="Self.tblWarrentyExtendedDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterWarrenty">
+              <PropertyRef Name="mWarrentyId" />
+            </Principal>
+            <Dependent Role="tblWarrentyExtendedDate">
+              <PropertyRef Name="mWarrentyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWarrentyhistory_tblMasterWarrenty">
+          <End Role="tblMasterWarrenty" Type="Self.tblMasterWarrenty" Multiplicity="0..1" />
+          <End Role="tblWarrentyhistory" Type="Self.tblWarrentyhistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterWarrenty">
+              <PropertyRef Name="mWarrentyId" />
+            </Principal>
+            <Dependent Role="tblWarrentyhistory">
+              <PropertyRef Name="mWarrentyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectDBModelStoreContainer">
+          <EntitySet Name="tblCoustomerDetails" EntityType="Self.tblCoustomerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblInventoryData" EntityType="Self.tblInventoryData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblInventoryHistory" EntityType="Self.tblInventoryHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMasterStore" EntityType="Self.tblMasterStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMasterTicketDetails" EntityType="Self.tblMasterTicketDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMasterWarrenty" EntityType="Self.tblMasterWarrenty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProductCategories" EntityType="Self.tblProductCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTicket" EntityType="Self.tblTicket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTicketComment" EntityType="Self.tblTicketComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserlLevel" EntityType="Self.tblUserlLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWarrentyExtendedDate" EntityType="Self.tblWarrentyExtendedDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWarrentyhistory" EntityType="Self.tblWarrentyhistory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblCoustomerDetails_tblUser" Association="Self.FK_tblCoustomerDetails_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblCoustomerDetails" EntitySet="tblCoustomerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInventoryData_tblMasterStore" Association="Self.FK_tblInventoryData_tblMasterStore">
+            <End Role="tblMasterStore" EntitySet="tblMasterStore" />
+            <End Role="tblInventoryData" EntitySet="tblInventoryData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInventoryHistory_tblInventoryData" Association="Self.FK_tblInventoryHistory_tblInventoryData">
+            <End Role="tblInventoryData" EntitySet="tblInventoryData" />
+            <End Role="tblInventoryHistory" EntitySet="tblInventoryHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInventoryHistory_tblUser" Association="Self.FK_tblInventoryHistory_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblInventoryHistory" EntitySet="tblInventoryHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMasterStore_tblProductCategories" Association="Self.FK_tblMasterStore_tblProductCategories">
+            <End Role="tblProductCategories" EntitySet="tblProductCategories" />
+            <End Role="tblMasterStore" EntitySet="tblMasterStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMasterTicketDetails_tblTicket" Association="Self.FK_tblMasterTicketDetails_tblTicket">
+            <End Role="tblTicket" EntitySet="tblTicket" />
+            <End Role="tblMasterTicketDetails" EntitySet="tblMasterTicketDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMasterWarrenty_tblInventoryData" Association="Self.FK_tblMasterWarrenty_tblInventoryData">
+            <End Role="tblInventoryData" EntitySet="tblInventoryData" />
+            <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTicket_tblInventoryData" Association="Self.FK_tblTicket_tblInventoryData">
+            <End Role="tblInventoryData" EntitySet="tblInventoryData" />
+            <End Role="tblTicket" EntitySet="tblTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTicketComment_tblMasterTicketDetails" Association="Self.FK_tblTicketComment_tblMasterTicketDetails">
+            <End Role="tblMasterTicketDetails" EntitySet="tblMasterTicketDetails" />
+            <End Role="tblTicketComment" EntitySet="tblTicketComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUser_tblUserlLevel" Association="Self.FK_tblUser_tblUserlLevel">
+            <End Role="tblUserlLevel" EntitySet="tblUserlLevel" />
+            <End Role="tblUser" EntitySet="tblUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWarrentyExtendedDate_tblMasterWarrenty" Association="Self.FK_tblWarrentyExtendedDate_tblMasterWarrenty">
+            <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenty" />
+            <End Role="tblWarrentyExtendedDate" EntitySet="tblWarrentyExtendedDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWarrentyhistory_tblMasterWarrenty" Association="Self.FK_tblWarrentyhistory_tblMasterWarrenty">
+            <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenty" />
+            <End Role="tblWarrentyhistory" EntitySet="tblWarrentyhistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblCoustomerDetail">
+          <Key>
+            <PropertyRef Name="CoustomerId" />
+          </Key>
+          <Property Name="CoustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNumber" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblCoustomerDetails_tblUser" FromRole="tblCoustomerDetails" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblInventoryData">
+          <Key>
+            <PropertyRef Name="InventoryID" />
+          </Key>
+          <Property Name="InventoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductCategoryId" Type="Int32" />
+          <Property Name="MasterId" Type="Int32" />
+          <Property Name="SerialNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ToTheStore" Type="Boolean" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+          <Property Name="ToTheOutside" Type="Boolean" />
+          <Property Name="OutedDateFromStore" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblMasterStore" Relationship="Self.FK_tblInventoryData_tblMasterStore" FromRole="tblInventoryData" ToRole="tblMasterStore" />
+          <NavigationProperty Name="tblInventoryHistories" Relationship="Self.FK_tblInventoryHistory_tblInventoryData" FromRole="tblInventoryData" ToRole="tblInventoryHistory" />
+          <NavigationProperty Name="tblMasterWarrenties" Relationship="Self.FK_tblMasterWarrenty_tblInventoryData" FromRole="tblInventoryData" ToRole="tblMasterWarrenty" />
+          <NavigationProperty Name="tblTickets" Relationship="Self.FK_tblTicket_tblInventoryData" FromRole="tblInventoryData" ToRole="tblTicket" />
+        </EntityType>
+        <EntityType Name="tblInventoryHistory">
+          <Key>
+            <PropertyRef Name="inventoryHistoryId" />
+          </Key>
+          <Property Name="inventoryHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="inventoryId" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <NavigationProperty Name="tblInventoryData" Relationship="Self.FK_tblInventoryHistory_tblInventoryData" FromRole="tblInventoryHistory" ToRole="tblInventoryData" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblInventoryHistory_tblUser" FromRole="tblInventoryHistory" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblMasterStore">
+          <Key>
+            <PropertyRef Name="mStoreId" />
+          </Key>
+          <Property Name="mStoreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="perchesedCount" Type="Int32" />
+          <Property Name="unitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PerchesedDate" Type="DateTime" Precision="3" />
+          <Property Name="RecoredEnterdBy" Type="Int32" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblInventoryDatas" Relationship="Self.FK_tblInventoryData_tblMasterStore" FromRole="tblMasterStore" ToRole="tblInventoryData" />
+          <NavigationProperty Name="tblProductCategory" Relationship="Self.FK_tblMasterStore_tblProductCategories" FromRole="tblMasterStore" ToRole="tblProductCategories" />
+        </EntityType>
+        <EntityType Name="tblMasterTicketDetail">
+          <Key>
+            <PropertyRef Name="mTicketID" />
+          </Key>
+          <Property Name="mTicketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketID" Type="Int32" />
+          <Property Name="isAssigned" Type="Boolean" />
+          <Property Name="AssignedDate" Type="DateTime" Precision="3" />
+          <Property Name="AssignedTo" Type="Int32" />
+          <Property Name="IsAccepted" Type="Boolean" />
+          <NavigationProperty Name="tblTicket" Relationship="Self.FK_tblMasterTicketDetails_tblTicket" FromRole="tblMasterTicketDetails" ToRole="tblTicket" />
+          <NavigationProperty Name="tblTicketComments" Relationship="Self.FK_tblTicketComment_tblMasterTicketDetails" FromRole="tblMasterTicketDetails" ToRole="tblTicketComment" />
+        </EntityType>
+        <EntityType Name="tblMasterWarrenty">
+          <Key>
+            <PropertyRef Name="mWarrentyId" />
+          </Key>
+          <Property Name="mWarrentyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="inventoryId" Type="Int32" />
+          <Property Name="createdate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tblInventoryData" Relationship="Self.FK_tblMasterWarrenty_tblInventoryData" FromRole="tblMasterWarrenty" ToRole="tblInventoryData" />
+          <NavigationProperty Name="tblWarrentyExtendedDates" Relationship="Self.FK_tblWarrentyExtendedDate_tblMasterWarrenty" FromRole="tblMasterWarrenty" ToRole="tblWarrentyExtendedDate" />
+          <NavigationProperty Name="tblWarrentyhistories" Relationship="Self.FK_tblWarrentyhistory_tblMasterWarrenty" FromRole="tblMasterWarrenty" ToRole="tblWarrentyhistory" />
+        </EntityType>
+        <EntityType Name="tblProductCategory">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VendorName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VendorContact" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="VendorAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VendorEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tblMasterStores" Relationship="Self.FK_tblMasterStore_tblProductCategories" FromRole="tblProductCategories" ToRole="tblMasterStore" />
+        </EntityType>
+        <EntityType Name="tblTicket">
+          <Key>
+            <PropertyRef Name="TicketId" />
+          </Key>
+          <Property Name="TicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InventoryID" Type="Int32" />
+          <Property Name="CoustomerId" Type="Int32" />
+          <Property Name="TicketDiscription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsOpen" Type="Boolean" />
+          <Property Name="IsClosed" Type="Boolean" />
+          <Property Name="OpenedDate" Type="DateTime" Precision="3" />
+          <Property Name="ClosedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblInventoryData" Relationship="Self.FK_tblTicket_tblInventoryData" FromRole="tblTicket" ToRole="tblInventoryData" />
+          <NavigationProperty Name="tblMasterTicketDetails" Relationship="Self.FK_tblMasterTicketDetails_tblTicket" FromRole="tblTicket" ToRole="tblMasterTicketDetails" />
+        </EntityType>
+        <EntityType Name="tblTicketComment">
+          <Key>
+            <PropertyRef Name="ticketCommentID" />
+          </Key>
+          <Property Name="ticketCommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mTicketID" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CommentedDate" Type="DateTime" Precision="3" />
+          <Property Name="CommentedBy" Type="Int32" />
+          <NavigationProperty Name="tblMasterTicketDetail" Relationship="Self.FK_tblTicketComment_tblMasterTicketDetails" FromRole="tblTicketComment" ToRole="tblMasterTicketDetails" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="UserLevel" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCoustomerDetails" Relationship="Self.FK_tblCoustomerDetails_tblUser" FromRole="tblUser" ToRole="tblCoustomerDetails" />
+          <NavigationProperty Name="tblInventoryHistories" Relationship="Self.FK_tblInventoryHistory_tblUser" FromRole="tblUser" ToRole="tblInventoryHistory" />
+          <NavigationProperty Name="tblUserlLevel" Relationship="Self.FK_tblUser_tblUserlLevel" FromRole="tblUser" ToRole="tblUserlLevel" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblUserlLevel">
+          <Key>
+            <PropertyRef Name="UserlevelID" />
+          </Key>
+          <Property Name="UserlevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblUserlLevel" FromRole="tblUserlLevel" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblWarrentyExtendedDate">
+          <Key>
+            <PropertyRef Name="weId" />
+          </Key>
+          <Property Name="weId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mWarrentyId" Type="Int32" />
+          <Property Name="expiredDate" Type="DateTime" Precision="3" />
+          <Property Name="IsExpired" Type="Boolean" />
+          <Property Name="IsWarrentyExtended" Type="Boolean" />
+          <Property Name="warrentyExtendedFromDate" Type="DateTime" Precision="3" />
+          <Property Name="warrentyExtendedToDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblMasterWarrenty" Relationship="Self.FK_tblWarrentyExtendedDate_tblMasterWarrenty" FromRole="tblWarrentyExtendedDate" ToRole="tblMasterWarrenty" />
+        </EntityType>
+        <EntityType Name="tblWarrentyhistory">
+          <Key>
+            <PropertyRef Name="whId" />
+          </Key>
+          <Property Name="whId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mWarrentyId" Type="Int32" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tblMasterWarrenty" Relationship="Self.FK_tblWarrentyhistory_tblMasterWarrenty" FromRole="tblWarrentyhistory" ToRole="tblMasterWarrenty" />
+        </EntityType>
+        <Association Name="FK_tblCoustomerDetails_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblCoustomerDetails" Type="Self.tblCoustomerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblCoustomerDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInventoryData_tblMasterStore">
+          <End Role="tblMasterStore" Type="Self.tblMasterStore" Multiplicity="0..1" />
+          <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterStore">
+              <PropertyRef Name="mStoreId" />
+            </Principal>
+            <Dependent Role="tblInventoryData">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInventoryHistory_tblInventoryData">
+          <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="0..1" />
+          <End Role="tblInventoryHistory" Type="Self.tblInventoryHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInventoryData">
+              <PropertyRef Name="InventoryID" />
+            </Principal>
+            <Dependent Role="tblInventoryHistory">
+              <PropertyRef Name="inventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMasterWarrenty_tblInventoryData">
+          <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="0..1" />
+          <End Role="tblMasterWarrenty" Type="Self.tblMasterWarrenty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInventoryData">
+              <PropertyRef Name="InventoryID" />
+            </Principal>
+            <Dependent Role="tblMasterWarrenty">
+              <PropertyRef Name="inventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTicket_tblInventoryData">
+          <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="0..1" />
+          <End Role="tblTicket" Type="Self.tblTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInventoryData">
+              <PropertyRef Name="InventoryID" />
+            </Principal>
+            <Dependent Role="tblTicket">
+              <PropertyRef Name="InventoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInventoryHistory_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblInventoryHistory" Type="Self.tblInventoryHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblInventoryHistory">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMasterStore_tblProductCategories">
+          <End Role="tblProductCategories" Type="Self.tblProductCategory" Multiplicity="0..1" />
+          <End Role="tblMasterStore" Type="Self.tblMasterStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProductCategories">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="tblMasterStore">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMasterTicketDetails_tblTicket">
+          <End Role="tblTicket" Type="Self.tblTicket" Multiplicity="0..1" />
+          <End Role="tblMasterTicketDetails" Type="Self.tblMasterTicketDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTicket">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="tblMasterTicketDetails">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTicketComment_tblMasterTicketDetails">
+          <End Role="tblMasterTicketDetails" Type="Self.tblMasterTicketDetail" Multiplicity="0..1" />
+          <End Role="tblTicketComment" Type="Self.tblTicketComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterTicketDetails">
+              <PropertyRef Name="mTicketID" />
+            </Principal>
+            <Dependent Role="tblTicketComment">
+              <PropertyRef Name="mTicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWarrentyExtendedDate_tblMasterWarrenty">
+          <End Role="tblMasterWarrenty" Type="Self.tblMasterWarrenty" Multiplicity="0..1" />
+          <End Role="tblWarrentyExtendedDate" Type="Self.tblWarrentyExtendedDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterWarrenty">
+              <PropertyRef Name="mWarrentyId" />
+            </Principal>
+            <Dependent Role="tblWarrentyExtendedDate">
+              <PropertyRef Name="mWarrentyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWarrentyhistory_tblMasterWarrenty">
+          <End Role="tblMasterWarrenty" Type="Self.tblMasterWarrenty" Multiplicity="0..1" />
+          <End Role="tblWarrentyhistory" Type="Self.tblWarrentyhistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterWarrenty">
+              <PropertyRef Name="mWarrentyId" />
+            </Principal>
+            <Dependent Role="tblWarrentyhistory">
+              <PropertyRef Name="mWarrentyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUser_tblUserlLevel">
+          <End Role="tblUserlLevel" Type="Self.tblUserlLevel" Multiplicity="0..1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserlLevel">
+              <PropertyRef Name="UserlevelID" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="UserLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblCoustomerDetails" EntityType="Self.tblCoustomerDetail" />
+          <EntitySet Name="tblInventoryDatas" EntityType="Self.tblInventoryData" />
+          <EntitySet Name="tblInventoryHistories" EntityType="Self.tblInventoryHistory" />
+          <EntitySet Name="tblMasterStores" EntityType="Self.tblMasterStore" />
+          <EntitySet Name="tblMasterTicketDetails" EntityType="Self.tblMasterTicketDetail" />
+          <EntitySet Name="tblMasterWarrenties" EntityType="Self.tblMasterWarrenty" />
+          <EntitySet Name="tblProductCategories" EntityType="Self.tblProductCategory" />
+          <EntitySet Name="tblTickets" EntityType="Self.tblTicket" />
+          <EntitySet Name="tblTicketComments" EntityType="Self.tblTicketComment" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="tblUserlLevels" EntityType="Self.tblUserlLevel" />
+          <EntitySet Name="tblWarrentyExtendedDates" EntityType="Self.tblWarrentyExtendedDate" />
+          <EntitySet Name="tblWarrentyhistories" EntityType="Self.tblWarrentyhistory" />
+          <AssociationSet Name="FK_tblCoustomerDetails_tblUser" Association="Self.FK_tblCoustomerDetails_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblCoustomerDetails" EntitySet="tblCoustomerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInventoryData_tblMasterStore" Association="Self.FK_tblInventoryData_tblMasterStore">
+            <End Role="tblMasterStore" EntitySet="tblMasterStores" />
+            <End Role="tblInventoryData" EntitySet="tblInventoryDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInventoryHistory_tblInventoryData" Association="Self.FK_tblInventoryHistory_tblInventoryData">
+            <End Role="tblInventoryData" EntitySet="tblInventoryDatas" />
+            <End Role="tblInventoryHistory" EntitySet="tblInventoryHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMasterWarrenty_tblInventoryData" Association="Self.FK_tblMasterWarrenty_tblInventoryData">
+            <End Role="tblInventoryData" EntitySet="tblInventoryDatas" />
+            <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTicket_tblInventoryData" Association="Self.FK_tblTicket_tblInventoryData">
+            <End Role="tblInventoryData" EntitySet="tblInventoryDatas" />
+            <End Role="tblTicket" EntitySet="tblTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInventoryHistory_tblUser" Association="Self.FK_tblInventoryHistory_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblInventoryHistory" EntitySet="tblInventoryHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMasterStore_tblProductCategories" Association="Self.FK_tblMasterStore_tblProductCategories">
+            <End Role="tblProductCategories" EntitySet="tblProductCategories" />
+            <End Role="tblMasterStore" EntitySet="tblMasterStores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMasterTicketDetails_tblTicket" Association="Self.FK_tblMasterTicketDetails_tblTicket">
+            <End Role="tblTicket" EntitySet="tblTickets" />
+            <End Role="tblMasterTicketDetails" EntitySet="tblMasterTicketDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTicketComment_tblMasterTicketDetails" Association="Self.FK_tblTicketComment_tblMasterTicketDetails">
+            <End Role="tblMasterTicketDetails" EntitySet="tblMasterTicketDetails" />
+            <End Role="tblTicketComment" EntitySet="tblTicketComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWarrentyExtendedDate_tblMasterWarrenty" Association="Self.FK_tblWarrentyExtendedDate_tblMasterWarrenty">
+            <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenties" />
+            <End Role="tblWarrentyExtendedDate" EntitySet="tblWarrentyExtendedDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWarrentyhistory_tblMasterWarrenty" Association="Self.FK_tblWarrentyhistory_tblMasterWarrenty">
+            <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenties" />
+            <End Role="tblWarrentyhistory" EntitySet="tblWarrentyhistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUser_tblUserlLevel" Association="Self.FK_tblUser_tblUserlLevel">
+            <End Role="tblUserlLevel" EntitySet="tblUserlLevels" />
+            <End Role="tblUser" EntitySet="tblUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
+          <EntitySetMapping Name="tblCoustomerDetails">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblCoustomerDetail">
+              <MappingFragment StoreEntitySet="tblCoustomerDetails">
+                <ScalarProperty Name="CoustomerId" ColumnName="CoustomerId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInventoryDatas">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblInventoryData">
+              <MappingFragment StoreEntitySet="tblInventoryData">
+                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
+                <ScalarProperty Name="ProductCategoryId" ColumnName="ProductCategoryId" />
+                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="ToTheStore" ColumnName="ToTheStore" />
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="ToTheOutside" ColumnName="ToTheOutside" />
+                <ScalarProperty Name="OutedDateFromStore" ColumnName="OutedDateFromStore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInventoryHistories">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblInventoryHistory">
+              <MappingFragment StoreEntitySet="tblInventoryHistory">
+                <ScalarProperty Name="inventoryHistoryId" ColumnName="inventoryHistoryId" />
+                <ScalarProperty Name="inventoryId" ColumnName="inventoryId" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMasterStores">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblMasterStore">
+              <MappingFragment StoreEntitySet="tblMasterStore">
+                <ScalarProperty Name="mStoreId" ColumnName="mStoreId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="perchesedCount" ColumnName="perchesedCount" />
+                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+                <ScalarProperty Name="PerchesedDate" ColumnName="PerchesedDate" />
+                <ScalarProperty Name="RecoredEnterdBy" ColumnName="RecoredEnterdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMasterTicketDetails">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblMasterTicketDetail">
+              <MappingFragment StoreEntitySet="tblMasterTicketDetails">
+                <ScalarProperty Name="mTicketID" ColumnName="mTicketID" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="isAssigned" ColumnName="isAssigned" />
+                <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="IsAccepted" ColumnName="IsAccepted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMasterWarrenties">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblMasterWarrenty">
+              <MappingFragment StoreEntitySet="tblMasterWarrenty">
+                <ScalarProperty Name="mWarrentyId" ColumnName="mWarrentyId" />
+                <ScalarProperty Name="inventoryId" ColumnName="inventoryId" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProductCategories">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblProductCategory">
+              <MappingFragment StoreEntitySet="tblProductCategories">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+                <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
+                <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTickets">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblTicket">
+              <MappingFragment StoreEntitySet="tblTicket">
+                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
+                <ScalarProperty Name="CoustomerId" ColumnName="CoustomerId" />
+                <ScalarProperty Name="TicketDiscription" ColumnName="TicketDiscription" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsOpen" ColumnName="IsOpen" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="OpenedDate" ColumnName="OpenedDate" />
+                <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTicketComments">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblTicketComment">
+              <MappingFragment StoreEntitySet="tblTicketComment">
+                <ScalarProperty Name="ticketCommentID" ColumnName="ticketCommentID" />
+                <ScalarProperty Name="mTicketID" ColumnName="mTicketID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CommentedDate" ColumnName="CommentedDate" />
+                <ScalarProperty Name="CommentedBy" ColumnName="CommentedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserlLevels">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblUserlLevel">
+              <MappingFragment StoreEntitySet="tblUserlLevel">
+                <ScalarProperty Name="UserlevelID" ColumnName="UserlevelID" />
+                <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWarrentyExtendedDates">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblWarrentyExtendedDate">
+              <MappingFragment StoreEntitySet="tblWarrentyExtendedDate">
+                <ScalarProperty Name="weId" ColumnName="weId" />
+                <ScalarProperty Name="mWarrentyId" ColumnName="mWarrentyId" />
+                <ScalarProperty Name="expiredDate" ColumnName="expiredDate" />
+                <ScalarProperty Name="IsExpired" ColumnName="IsExpired" />
+                <ScalarProperty Name="IsWarrentyExtended" ColumnName="IsWarrentyExtended" />
+                <ScalarProperty Name="warrentyExtendedFromDate" ColumnName="warrentyExtendedFromDate" />
+                <ScalarProperty Name="warrentyExtendedToDate" ColumnName="warrentyExtendedToDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWarrentyhistories">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblWarrentyhistory">
+              <MappingFragment StoreEntitySet="tblWarrentyhistory">
+                <ScalarProperty Name="whId" ColumnName="whId" />
+                <ScalarProperty Name="mWarrentyId" ColumnName="mWarrentyId" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

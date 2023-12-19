@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a09da0c6abc84c83ab05e934d7f72e6f" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="ProjectDBModel.tblCoustomerDetail" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblInventoryData" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblInventoryHistory" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblMasterStore" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblMasterTicketDetail" Width="1.5" PointX="9.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblMasterWarrenty" Width="1.5" PointX="7.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblProductCategory" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblTicket" Width="1.5" PointX="7.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblTicketComment" Width="1.5" PointX="12" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblUser" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblUserlLevel" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblWarrentyExtendedDate" Width="1.5" PointX="9.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblWarrentyhistory" Width="1.5" PointX="9.75" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblCoustomerDetails_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblInventoryData_tblMasterStore" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblInventoryHistory_tblInventoryData" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblMasterWarrenty_tblInventoryData" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblTicket_tblInventoryData" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblInventoryHistory_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblMasterStore_tblProductCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblMasterTicketDetails_tblTicket" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblTicketComment_tblMasterTicketDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblWarrentyExtendedDate_tblMasterWarrenty" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblWarrentyhistory_tblMasterWarrenty" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblUser_tblUserlLevel" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

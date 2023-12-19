@@ -1,0 +1,75 @@
+﻿@model PeojectTWI.Models.masterStore
+
+@{
+    ViewBag.Title = "deleteMasterStore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>deleteMasterStore</h2>
+
+<div>
+    <h4>masterStore</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.mStoreId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mStoreId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.perchesedCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.perchesedCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unitPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unitPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerchesedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerchesedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecoredEnterdBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecoredEnterdBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createdDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createdDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Delete Master Item", "removeMasterStore", new { msDeleteid = Model.mStoreId  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

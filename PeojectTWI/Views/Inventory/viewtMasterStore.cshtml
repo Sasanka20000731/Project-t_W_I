@@ -1,0 +1,71 @@
+﻿@model IEnumerable<PeojectTWI.Data.tblMasterStore>
+
+@{
+    ViewBag.Title = "viewtMasterStore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>viewtMasterStore</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.mStoreId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.perchesedCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PerchesedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecoredEnterdBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createdDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.mStoreId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.perchesedCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PerchesedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecoredEnterdBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "editMasterStore", new { msid = item.mStoreId }, new { @class = "Edit-User-link" })|
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "deleteMasterStore", new { msIDDelete = item.mStoreId }, new { @class = "Edit-User-link" })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34114.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeojectTWI", "PeojectTWI\PeojectTWI.csproj", "{F29C6A13-8EEC-4C42-84D2-FC789F9C0256}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F29C6A13-8EEC-4C42-84D2-FC789F9C0256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29C6A13-8EEC-4C42-84D2-FC789F9C0256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29C6A13-8EEC-4C42-84D2-FC789F9C0256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29C6A13-8EEC-4C42-84D2-FC789F9C0256}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92C243F3-1E62-46AA-8755-41A0A87FA25C}
+	EndGlobalSection
+EndGlobal
