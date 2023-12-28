@@ -53,7 +53,6 @@ namespace PeojectTWI.Controllers
         {
             var user = db.tblUsers;
             return View(user);
-
         }
 
         public ActionResult updateUser(user u)

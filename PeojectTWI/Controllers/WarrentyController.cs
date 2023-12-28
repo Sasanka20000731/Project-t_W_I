@@ -27,9 +27,12 @@ namespace PeojectTWI.Controllers
             _warrentyService = new WarrentyService();
         }
 
-        public ActionResult Index()
+        public ActionResult ViewAllWerrenty()
         {
-            return View();
+            var warrenty = db.tblMasterWarrenties;
+            return View(warrenty);
         }
+
+
     }
 }

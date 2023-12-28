@@ -58,6 +58,7 @@ namespace PeojectTWI.Services.InventoryService
                 entity.VendorName = vendorName;
                 entity.VendorContact = vendorContact;
                 entity.VendorEmail = vendorEmail;
+                entity.VendorAddress = vendorAddress;
                 entity.Active = Active;
                 await db.SaveChangesAsync();
             }

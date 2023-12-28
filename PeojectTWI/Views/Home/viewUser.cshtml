@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<PeojectTWI.Data.tblUser>
 
 @{
-    ViewBag.Title = "viewUser";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+   Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>viewUser</h2>
+<h2>View All Users</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "addUser")
 </p>
 <table class="table">
     <tr>
@@ -86,7 +85,6 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "updateUser", new { uid = item.UserId }, new { @class = "Edit-User-link" })|
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Status", "userAccountStatus", new { uid_Status = item.UserId }, new { @class = "Edit-User-link" })
             </td>
         </tr>

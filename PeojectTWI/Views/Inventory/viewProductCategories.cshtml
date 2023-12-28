@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<PeojectTWI.Data.tblProductCategory>
 
 @{
-    ViewBag.Title = "viewProductCategories";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>viewProductCategories</h2>
+<h2>View Product Categories</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "insertProductCategory")
 </p>
 <table class="table">
     <tr>
@@ -68,7 +67,6 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "editProductCategory", new { pid = item.ProductID }, new { @class = "Edit-User-link" })|
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "deleteProductCategory", new { pidDelete = item.ProductID }, new { @class = "Edit-User-link" })
             </td>
         </tr>
