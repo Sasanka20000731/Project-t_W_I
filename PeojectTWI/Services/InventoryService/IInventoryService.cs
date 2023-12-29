@@ -28,8 +28,10 @@ namespace PeojectTWI.Services.InventoryService
 
         Task updateMasterStore(int mStoreId, int? productId, int? perchesedCount, decimal? unitPrice, DateTime? perchesedDate, int? recoredEnterdBy);
 
-        
         Task deleteMasterData(int msID);
+
+        List<productCategory> GetProductCategoryValues();
+
     }
 
 

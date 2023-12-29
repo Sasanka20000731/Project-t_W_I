@@ -118,7 +118,17 @@ namespace PeojectTWI.Controllers
 
         }
 
+        public JsonResult GetProductCategoryValues()
+        {
+            var ProdcutCategory = _inventoryService.GetProductCategoryValues();
 
+            return Json(ProdcutCategory, JsonRequestBehavior.AllowGet);
+        }
+        //public JsonResult GetmasterStoreValues()
+        //{
+        //    var MasterStore = _inventoryService.GetmasterStoreValues();
+        //    return Json(MasterStore, JsonRequestBehavior.AllowGet);
+        //}
 
 
 

@@ -38,5 +38,6 @@ namespace PeojectTWI.Data
         public virtual DbSet<tblUserlLevel> tblUserlLevels { get; set; }
         public virtual DbSet<tblWarrentyExtendedDate> tblWarrentyExtendedDates { get; set; }
         public virtual DbSet<tblWarrentyhistory> tblWarrentyhistories { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

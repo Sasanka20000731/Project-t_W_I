@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tblCoustomerDetails">
           <Key>
             <PropertyRef Name="CoustomerId" />
@@ -80,7 +90,7 @@
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BranchName" Type="nvarchar" MaxLength="100" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="100" />
           <Property Name="VendorName" Type="nvarchar" MaxLength="100" />
           <Property Name="VendorContact" Type="nchar" MaxLength="13" />
           <Property Name="VendorAddress" Type="nvarchar" MaxLength="200" />
@@ -306,6 +316,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ProjectDBModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCoustomerDetails" EntityType="Self.tblCoustomerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblInventoryData" EntityType="Self.tblInventoryData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblInventoryHistory" EntityType="Self.tblInventoryHistory" Schema="dbo" store:Type="Tables" />
@@ -469,6 +480,7 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="tblMasterStores" Relationship="Self.FK_tblMasterStore_tblProductCategories" FromRole="tblProductCategories" ToRole="tblMasterStore" />
+          <Property Name="BrandName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblTicket">
           <Key>
@@ -758,7 +770,18 @@
             <End Role="tblUserlLevel" EntitySet="tblUserlLevels" />
             <End Role="tblUser" EntitySet="tblUsers" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="ProjectDBModel.sysdiagram" />
         </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -844,8 +867,8 @@
           <EntitySetMapping Name="tblProductCategories">
             <EntityTypeMapping TypeName="ProjectDBModel.tblProductCategory">
               <MappingFragment StoreEntitySet="tblProductCategories">
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
                 <ScalarProperty Name="VendorName" ColumnName="VendorName" />
                 <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
                 <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
@@ -931,6 +954,17 @@
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="createdDate" ColumnName="createdDate" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProjectDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

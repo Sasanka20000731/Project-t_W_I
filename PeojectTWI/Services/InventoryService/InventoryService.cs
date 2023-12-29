@@ -134,5 +134,130 @@ namespace PeojectTWI.Services.InventoryService
                 await db.SaveChangesAsync();
             }
         }
+
+        public List<productCategory> GetProductCategoryValues()
+        {
+
+            return (from p in db.tblProductCategories
+                   where p.Active == true
+                 select new productCategory { 
+                     ProductID = p.ProductID,
+                     BranchName = p.BranchName}).ToList();
+
+
+          
+        }
+
+
+
+
+        //public List<Branches> GetUnitBranch()
+        //{
+        //    return (from p in RepositoryFileRecovery.DbEntities.tblBranchUnits
+        //            where p.Active == true
+        //            select new Branches { Name = p.UnitName, UniqueID = p.tblBranch.LeaseMasterId + "_" + p.Id }).ToList();
+        //}
+
+        //public List<Branches> GetRegionBranch(int userID, bool isOneBranch)
+        //{
+        //    if (isOneBranch == true)
+        //    {
+        //        var xy = (from q in RepositoryFileRecovery.DbEntities.tblBranches
+        //                  join r in RepositoryFileRecovery.DbEntities.tblUsers on q.Id equals r.Branch
+        //                  where r.Active == true && q.Active == true && r.Id == userID && q.IsUnit == false
+        //                  select new Branches
+        //                  {
+        //                      Name = q.Branch,
+        //                      UniqueID = q.LeaseMasterId + "_0"
+        //                  }).ToList();
+
+        //        xy.AddRange((from q in RepositoryFileRecovery.DbEntities.tblBranches
+        //                     join r in RepositoryFileRecovery.DbEntities.tblBranchUnits on q.Id equals r.BranchId
+        //                     join s in RepositoryFileRecovery.DbEntities.tblUsers on q.Id equals s.Branch
+        //                     where s.Active == true && q.Active == true && r.Active == true && s.Id == userID && q.IsUnit == true
+        //                     select new Branches
+        //                     {
+        //                         Name = r.UnitName,
+        //                         UniqueID = q.LeaseMasterId + "_" + r.UnitIndex
+        //                     }).ToList());
+        //        return xy;
+        //    }
+        //    else
+        //    {
+        //        var xy = (from p in RepositoryFileRecovery.DbEntities.tblUserAccessibleBranches
+        //                  join q in RepositoryFileRecovery.DbEntities.tblBranches on p.BranchId equals q.Id
+        //                  where p.Active == true && q.Active == true && p.UserId == userID && q.IsUnit == false
+        //                  select new Branches
+        //                  {
+        //                      Name = q.Branch,
+        //                      UniqueID = q.LeaseMasterId + "_0"
+        //                  }).ToList();
+        //        xy.AddRange((from p in RepositoryFileRecovery.DbEntities.tblUserAccessibleBranches
+        //                     join q in RepositoryFileRecovery.DbEntities.tblBranches on p.BranchId equals q.Id
+        //                     join r in RepositoryFileRecovery.DbEntities.tblBranchUnits on q.Id equals r.BranchId
+        //                     where p.Active == true && q.Active == true && r.Active == true && p.UserId == userID && q.IsUnit == true
+        //                     select new Branches
+        //                     {
+        //                         Name = r.UnitName,
+        //                         UniqueID = q.LeaseMasterId + "_" + r.UnitIndex
+        //                     }).ToList());
+        //        return xy;
+        //    }
+        //}
+
+        //public List<Region> GetRegionIds(int regionManagerId)
+        //{
+        //    return (from p in RepositoryFileRecovery.DbEntities.tblBranches
+        //            join q in RepositoryFileRecovery.DbEntities.tblUserAccessibleBranches on p.Id equals q.BranchId
+        //            where p.Active == true && q.UserId == regionManagerId && p.Region != null
+        //            select new Region { RegionId = p.Region.Value }).Distinct().ToList();
+
+        //}
+
+        //public List<UserProfile> GetUserRegistrationDetails(string UserName)
+        //{
+        //    List<UserProfile> userProfiles = new List<UserProfile>();
+
+        //    using (var context = new FileRecoveryEntities())
+        //    {
+        //        var dataTable = new DataTable();
+
+        //        using (var cmd = context.Database.Connection.CreateCommand())
+        //        {
+        //            cmd.CommandText = "spGetEmployerDetails_Registration";
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            cmd.Parameters.Add(new SqlParameter("@@empCode", UserName));
+
+
+        //            using (var adapter = new SqlDataAdapter((SqlCommand)cmd))
+        //            {
+        //                adapter.Fill(dataTable);
+        //            }
+        //        }
+
+        //        foreach (DataRow row in dataTable.Rows)
+        //        {
+        //            UserProfile details = new UserProfile
+        //            {
+        //                EmployeeId = row["EmpNo"].ToString(),
+        //                FirstName = row["FirstName"].ToString(),
+        //                LastName = row["LastName"].ToString(),
+        //                BranchName = row["BranchId"].ToString(),
+        //                DepartmentName = row["DepartmentId"].ToString(),
+        //                Email = row["Email"].ToString(),
+        //                UserGroupCode = row["GroupCode"].ToString(),
+        //                UserLevelCode = row["LevelCode"].ToString()
+
+        //            };
+        //            userProfiles.Add(details);
+
+        //        }
+
+        //        return userProfiles.ToList();
+
+        //    }
+
+
+        //}
     }
 }

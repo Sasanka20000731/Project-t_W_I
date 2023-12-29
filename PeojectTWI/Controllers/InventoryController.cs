@@ -156,8 +156,7 @@ namespace PeojectTWI.Controllers
 
 
         public ActionResult WareHouseManage()
-        {
-      
+        {     
             return View();
         }
 
