@@ -8,7 +8,7 @@ namespace PeojectTWI.Models
     public class productCategory
     {
         public int ProductID { get; set; }
-        public string BranchName { get; set; }
+        public string BrandName { get; set; }
         public string VendorName { get; set; }
         public string VendorContact { get; set; }
         public string VendorAddress { get; set; }

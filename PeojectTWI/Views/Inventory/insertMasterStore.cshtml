@@ -1,33 +1,29 @@
 ﻿@model PeojectTWI.Models.masterStore
 
 @{
-    ViewBag.Title = "insertMasterStore";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>insertMasterStore</h2>
+<h2>Insert into MasterStore</h2>
 
 @using (Html.BeginForm("insertMasterStore", "Inventory"))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>tblMasterStore</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.mStoreId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.mStoreId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.mStoreId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.ProductId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ProductId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+
+              @*  @Html.DropDownList("printerID", new SelectList(Model.PrinterIDs), "Select printer", new { @class = "form-control", @required = "required" })*@
+
+                @*@Html.ValidationMessageFor(model => model.PrinterID, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
@@ -79,6 +75,4 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+

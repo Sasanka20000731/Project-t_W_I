@@ -2,6 +2,8 @@
 using PeojectTWI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -14,7 +16,7 @@ namespace PeojectTWI.Services.InventoryService
         public void insertProductCategory(string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress)
         {
             tblProductCategory tpc = new tblProductCategory();
-            tpc.BranchName = brandName;
+            tpc.BrandName = brandName;
             tpc.VendorContact = vendorContact;
             tpc.VendorName = vendorName;
             tpc.VendorAddress = vendorAddress;
@@ -39,7 +41,7 @@ namespace PeojectTWI.Services.InventoryService
 
             tblProductCategory TPC = db.tblProductCategories.SingleOrDefault(x => x.ProductID == pid);
             pd.ProductID = TPC.ProductID;
-            pd.BranchName = TPC.BranchName;
+            pd.BrandName = TPC.BrandName;
             pd.VendorName = TPC.VendorName;
             pd.VendorContact = TPC.VendorContact;
             pd.VendorAddress = TPC.VendorAddress;
@@ -54,7 +56,7 @@ namespace PeojectTWI.Services.InventoryService
 
             if (entity != null)
             {
-                entity.BranchName = brandName;
+                entity.BrandName = brandName;
                 entity.VendorName = vendorName;
                 entity.VendorContact = vendorContact;
                 entity.VendorEmail = vendorEmail;
@@ -137,16 +139,111 @@ namespace PeojectTWI.Services.InventoryService
 
         public List<productCategory> GetProductCategoryValues()
         {
-
             return (from p in db.tblProductCategories
                    where p.Active == true
                  select new productCategory { 
                      ProductID = p.ProductID,
-                     BranchName = p.BranchName}).ToList();
-
-
-          
+                     BrandName = p.BrandName}).ToList();
         }
+
+
+        public List<masterStore> GetmasterStoreValues()
+        {
+            return (from p in db.tblProductCategories join
+                    q in db.tblMasterStores on p.ProductID equals q.ProductId
+                    select new masterStore
+                    {
+                        mStoreId = q.mStoreId,
+                        MasterProductName = p.BrandName
+                    }).ToList();
+        }
+
+        public bool ManageWareHouseData(int dataType, int ProductCategory, int MasterStore, string SerialNo)
+        {
+            using (var context = new ProjectDBEntities())
+            {
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = "exec [sp_ManageWareHouse]  @DataType, @ProductCategory, @MasterStore, @SerialNo";
+                    command.Parameters.Add(new SqlParameter("@DataType", dataType));
+                    command.Parameters.Add(new SqlParameter("@ProductCategory", ProductCategory));
+                    command.Parameters.Add(new SqlParameter("@MasterStore", MasterStore));
+                    command.Parameters.Add(new SqlParameter("@SerialNo", SerialNo));
+                    context.Database.Connection.Open();
+                    var v = command.ExecuteReader();
+                        return (v.Read());
+                }
+
+                //var dataTypeParam = new SqlParameter("@DataType", dataType);
+                //var productCategoryParam = new SqlParameter("@ProductCategory", ProductCategory);
+                //var masterStoreParam = new SqlParameter("@MasterStore", MasterStore);
+                //var serialNoParam = new SqlParameter("@SerialNo", SerialNo);
+
+                //var result = context.Database.SqlQuery<int>("EXEC sp_ManageWareHouse @DataType, @ProductCategory, @MasterStore, @SerialNo",
+                //    dataTypeParam, productCategoryParam, masterStoreParam, serialNoParam).FirstOrDefault();
+
+                //return (result); 
+            }
+
+        }
+
+        public List<WHmanage> ViewWareHousedata(DateTime? FromDate, DateTime? Todate)
+        {
+            List<WHmanage> whmanageList = new List<WHmanage>();
+
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable1 = new DataTable();
+
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = "exec [sp_ViewAllInventoryData] @FromDate, @ToDATE";
+                    command.Parameters.Add(new SqlParameter("@FromDate", (object)FromDate ?? DBNull.Value));
+                    command.Parameters.Add(new SqlParameter("@ToDATE", (object)Todate ?? DBNull.Value));
+
+                    context.Database.Connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        DataTable1.Load(reader);
+                    }
+                }
+
+                foreach (DataRow row in DataTable1.Rows)
+                {
+                    WHmanage wHmanage = new WHmanage
+                    {
+                        BrandName = row["BrandName"].ToString(),
+                        VendorName = row["VendorName"].ToString(),
+                        VendorContact = row["VendorContact"].ToString(),
+                        VendorEmail = row["VendorEmail"].ToString(),
+                        PerchesedCount = Convert.ToInt32(row["PerchesedCount"]),
+                        UnitPrice = Convert.ToDecimal(row["UnitPrice"]),
+                        TotalCost = Convert.ToDecimal(row["TotalCost"]),
+                        InSaleInventory = Convert.ToInt32(row["InSaleInventory"]),
+                        NotInAnyStore = Convert.ToInt32(row["NotInAnyStore"]),
+                        RemainingCount = Convert.ToInt32(row["RemainingCount"])
+
+                    };
+
+                    whmanageList.Add(wHmanage);
+                }
+            }
+
+            return whmanageList.ToList();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

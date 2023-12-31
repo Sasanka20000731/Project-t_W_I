@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Full WareHouse</h2>
+
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="WHManageDataLoad()">
+    <div class="col-md-12 col-sm-12 form-group">
+        <div class="col-md-12 col-sm-12 form-group">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Vendor</th>
+                            <th>Vendor Contact</th>
+                            <th>Vendor Email</th>
+                            <th>Perchesed Count</th>
+                            <th>Unit Price</th>
+                            <th>Total Cost</th>
+                            <th>In Sale Store</th>
+                            <th>Out From Store</th>
+                            <th>Remaining</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in Result">
+                            <td>{{ item.BrandName }}</td>
+                            <td>{{ item.VendorName }}</td>
+                            <td>{{ item.VendorContact }}</td>
+                            <td>{{ item.VendorEmail }}</td>
+                            <td>{{ item.PerchesedCount }}</td>
+                            <td>Rs.{{ item.UnitPrice | number : 2 }}</td>
+                            <td>Rs.{{ item.TotalCost | number : 2 }}</td>
+                            <td>{{ item.InSaleInventory }}</td>
+                            <td>{{ item.NotInAnyStore }}</td>
+                            <td>{{ item.RemainingCount }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/InventoryService.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />

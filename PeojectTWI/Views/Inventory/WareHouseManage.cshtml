@@ -1,6 +1,5 @@
 ﻿
 @{
-    ViewBag.Title = "WareHouseManage";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,14 +13,14 @@
             <div class="col-md-6">
                 <div class="col-6">
                     <label>
-                        <input type="radio" name="RadioValue" value="In" ng-model="RadioValue"> In to the Store
+                        <input type="radio" name="RadioValue" value=1 ng-model="RadioValue"> In to the Store
                     </label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="col-lg-6">
                     <label>
-                        <input type="radio" name="RadioValue" value="Out" ng-model="RadioValue"> Out To the Store
+                        <input type="radio" name="RadioValue" value=2 ng-model="RadioValue"> Out To the Store
                     </label>
                 </div>
             </div>
@@ -33,15 +32,9 @@
                     <label for="droproductCategory">Product Categories</label>
 
                     <select id="droproductCategory" name="droproductCategory">
-                        <option value="value1">Value 1</option>
-                        <option value="value2">Value 2</option>
-                        <option ng-repeat="pro in TypeChoices.FacType" value="{{pro.Value}}">{{pro.Text}}</option>
+                        <option value="">Select Product Category</option>
+                        <option ng-repeat="item in TypeChoices" value="{{item.ProductID}}">{{item.BrandName}}</option>
                     </select>
-
-                    @*<select id="dropFacType" class="form-control " ng-init="pro.value='0'" ng-model="pro.value" style="height: 34px;">
-                        <option ng-repeat="pro in TypeChoices.FacType" value="{{pro.Value}}">{{pro.Text}}</option>
-                    </select>*@
-
                 </div>
             </div>
 
@@ -49,9 +42,8 @@
                 <div class="col-6">
                     <label for="droMasterStore">Master Stock</label>
                     <select id="droMasterStore" name="droMasterStore">
-                        <option value="valueA">Value A</option>
-                        <option value="valueB">Value B</option>
-            
+                        <option value="">Select Master Store</option>
+                        <option ng-repeat="item in TypeChoices2" value="{{item.mStoreId}}">{{item.MasterProductName}}</option>
                     </select>
                 </div>
             </div>

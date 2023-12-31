@@ -1,20 +1,16 @@
 ﻿@model IEnumerable<PeojectTWI.Data.tblMasterStore>
 
 @{
-    ViewBag.Title = "viewtMasterStore";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>viewtMasterStore</h2>
+<h2>MasterStore</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.mStoreId)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.ProductId)
         </th>
@@ -39,9 +35,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.mStoreId)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductId)
             </td>

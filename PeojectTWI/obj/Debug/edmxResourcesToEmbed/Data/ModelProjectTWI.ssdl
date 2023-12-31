@@ -75,7 +75,7 @@
       <PropertyRef Name="ProductID" />
     </Key>
     <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BranchName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BrandName" Type="nvarchar" MaxLength="100" />
     <Property Name="VendorName" Type="nvarchar" MaxLength="100" />
     <Property Name="VendorContact" Type="nchar" MaxLength="13" />
     <Property Name="VendorAddress" Type="nvarchar" MaxLength="200" />
@@ -300,6 +300,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_ViewAllInventoryData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FromDate" Type="datetime" Mode="In" />
+    <Parameter Name="ToDATE" Type="datetime" Mode="In" />
+  </Function>
   <EntityContainer Name="ProjectDBModelStoreContainer">
     <EntitySet Name="tblCoustomerDetails" EntityType="Self.tblCoustomerDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblInventoryData" EntityType="Self.tblInventoryData" Schema="dbo" store:Type="Tables" />

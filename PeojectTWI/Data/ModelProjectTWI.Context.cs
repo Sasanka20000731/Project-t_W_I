@@ -12,6 +12,8 @@ namespace PeojectTWI.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ProjectDBEntities : DbContext
     {
@@ -38,6 +40,18 @@ namespace PeojectTWI.Data
         public virtual DbSet<tblUserlLevel> tblUserlLevels { get; set; }
         public virtual DbSet<tblWarrentyExtendedDate> tblWarrentyExtendedDates { get; set; }
         public virtual DbSet<tblWarrentyhistory> tblWarrentyhistories { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+    
+        public virtual ObjectResult<sp_ViewAllInventoryData_Result> sp_ViewAllInventoryData(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDATE)
+        {
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDATEParameter = toDATE.HasValue ?
+                new ObjectParameter("ToDATE", toDATE) :
+                new ObjectParameter("ToDATE", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ViewAllInventoryData_Result>("sp_ViewAllInventoryData", fromDateParameter, toDATEParameter);
+        }
     }
 }

@@ -37,7 +37,7 @@ namespace PeojectTWI.Controllers
         [HttpPost]
         public ActionResult insertProductCategory(productCategory pd)
         {
-            _inventoryService.insertProductCategory( pd.BranchName, pd.VendorName, pd.VendorContact, pd.VendorEmail, pd.VendorAddress);
+            _inventoryService.insertProductCategory( pd.BrandName, pd.VendorName, pd.VendorContact, pd.VendorEmail, pd.VendorAddress);
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace PeojectTWI.Controllers
 
             try
             {
-                _inventoryService.updateProductCategory(pdc.ProductID, pdc.BranchName, pdc.VendorName, pdc.VendorContact, pdc.VendorEmail, pdc.VendorAddress, pdc.Active);
+                _inventoryService.updateProductCategory(pdc.ProductID, pdc.BrandName, pdc.VendorName, pdc.VendorContact, pdc.VendorEmail, pdc.VendorAddress, pdc.Active);
             }
             catch (Exception ex)
             {
@@ -95,6 +95,21 @@ namespace PeojectTWI.Controllers
 
         public ActionResult insertMasterStore()
         {
+            //using (var context = new ProjectDBEntities())
+            //{
+
+
+            //    AA.BranchList = context.Table_Branch.Select(b => b.BranchID).ToList();
+            //    // AA.PrinterIDs = context.Table_Printer.Select(b => b.PrinterID).ToList();
+            //    AA.PrinterIDs = context.Table_Printer
+            //    .Where(p => !context.Table_PrinterAllocation.Any(pa => pa.PrinterID == p.PrinterID))
+            //    .Select(p => p.PrinterID)
+            //    .ToList();
+
+            //}
+
+            //return View("EditAllocation", AA);
+
             return View();
         }
 
@@ -160,6 +175,35 @@ namespace PeojectTWI.Controllers
             return View();
         }
 
+        public JsonResult GetProductCategoryValues()
+        {
+            var ProdcutCategory = _inventoryService.GetProductCategoryValues();
+            return Json(ProdcutCategory, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetmasterStoreValues()
+        {
+            var MasterStore = _inventoryService.GetmasterStoreValues();
+            return Json(MasterStore, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult ManageWareHouseData(int dataType,int ProductCategory, int MasterStore, string SerialNo)
+        {
+            bool whmanageReslut = _inventoryService.ManageWareHouseData(dataType, ProductCategory, MasterStore,  SerialNo);
+            return Json(whmanageReslut, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ViewWareHouse()
+        {
+            return View();
+        }
+
+        public JsonResult ViewWareHousedata(DateTime? FromDate = null, DateTime? Todate = null) 
+        {
+            List<WHmanage> WHList = _inventoryService.ViewWareHousedata(FromDate, Todate);
+
+            return Json(WHList,JsonRequestBehavior.AllowGet);        
+        }
 
     }
 }
