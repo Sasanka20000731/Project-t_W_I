@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PeojectTWI.Models;
 
 namespace PeojectTWI.Services.UserService
 {
@@ -17,5 +18,7 @@ namespace PeojectTWI.Services.UserService
         Task updateUser(int userId,string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob);
 
         Task changeUserStatus(int userId, bool? status);
+
+        List<loggedUser> GetLoggedUsers(string UserName);
     }
 }

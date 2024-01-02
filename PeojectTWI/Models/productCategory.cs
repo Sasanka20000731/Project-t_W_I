@@ -13,7 +13,7 @@ namespace PeojectTWI.Models
         public string VendorContact { get; set; }
         public string VendorAddress { get; set; }
         public string VendorEmail { get; set; }
-
         public bool Active { get; set; }
+        public string ProductName { get; set; }
     }
 }

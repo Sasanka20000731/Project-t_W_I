@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace PeojectTWI.Services.InventoryService
 {
@@ -86,6 +87,9 @@ namespace PeojectTWI.Services.InventoryService
             tms.perchesedCount = perchesedCount;
             tms.unitPrice = unitPrice;
             tms.PerchesedDate = perchesedDate;
+            tms.createdDate = DateTime.Now;
+            var ss = HttpContext.Current.Session["LoggedUseriD"];
+            tms.RecoredEnterdBy =  Convert.ToInt32(ss);
             db.tblMasterStores.Add(tms);
             db.SaveChanges();
         }

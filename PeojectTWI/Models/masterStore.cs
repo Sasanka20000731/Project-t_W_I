@@ -14,10 +14,14 @@ namespace PeojectTWI.Models
         public Nullable<System.DateTime> PerchesedDate { get; set; }
         public Nullable<int> RecoredEnterdBy { get; set; }
         public Nullable<System.DateTime> createdDate { get; set; }
-
         public string MasterProductName { get; set; }
+        public List<Product> ProductList { get; set; }
+    }
 
-        public List<string> ProductNameList { get; set; }
-        public List<int> ProductIDList { get; set; }
+    public class Product
+    {
+        public int ProductCategoryID { get; set; }
+        public string ProductBrandName { get; set; }
+        public string ProductName { get; set; }
     }
 }

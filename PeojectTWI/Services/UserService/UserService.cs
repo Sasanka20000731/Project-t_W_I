@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using PeojectTWI.Models;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.Mvc;
+
+
 
 namespace PeojectTWI.Services.UserService
 {
@@ -106,5 +112,21 @@ namespace PeojectTWI.Services.UserService
                 }
             throw new NotImplementedException();
         }
+
+
+
+        public List<loggedUser> GetLoggedUsers(string UserName)
+        {
+            return (from p in db.tblUsers
+                    where p.Active == true && p.UserName == UserName
+                    select new loggedUser
+                    {
+                        UserId = p.UserId,
+                        UserLevel = p.UserLevel
+                    }).ToList();
+        }
+
+
+
     }
 }

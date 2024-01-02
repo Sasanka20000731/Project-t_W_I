@@ -33,6 +33,8 @@ namespace PeojectTWI.Controllers
 
         public ActionResult Index()
         {
+            var a = _userService.GetLoggedUsers("Admin");
+             Session["LoggedUserID"] = a[0].UserId;
             return View();
         }
 

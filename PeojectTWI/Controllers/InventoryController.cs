@@ -95,22 +95,18 @@ namespace PeojectTWI.Controllers
 
         public ActionResult insertMasterStore()
         {
-            //using (var context = new ProjectDBEntities())
-            //{
-
-
-            //    AA.BranchList = context.Table_Branch.Select(b => b.BranchID).ToList();
-            //    // AA.PrinterIDs = context.Table_Printer.Select(b => b.PrinterID).ToList();
-            //    AA.PrinterIDs = context.Table_Printer
-            //    .Where(p => !context.Table_PrinterAllocation.Any(pa => pa.PrinterID == p.PrinterID))
-            //    .Select(p => p.PrinterID)
-            //    .ToList();
-
-            //}
-
-            //return View("EditAllocation", AA);
-
-            return View();
+            masterStore mss = new masterStore();
+            using (var context = new ProjectDBEntities())
+            {
+                mss.ProductList = context.tblProductCategories
+                .Where(m => m.Active == true)
+                .Select(m => new Product
+                {
+                    ProductCategoryID = m.ProductID,
+                    ProductBrandName = m.BrandName
+                }).ToList();
+            }
+            return View(mss);
         }
 
         [HttpPost]
