@@ -17,5 +17,6 @@ namespace PeojectTWI.Models
         public int InSaleInventory { get; set; }
         public int NotInAnyStore { get; set; }
         public int RemainingCount { get; set; }
+        public string ProductName { get; set; }
     }
 }

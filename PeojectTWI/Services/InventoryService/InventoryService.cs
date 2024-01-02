@@ -14,7 +14,7 @@ namespace PeojectTWI.Services.InventoryService
     public class InventoryService : IInventoryService
     {
         ProjectDBEntities db = new ProjectDBEntities();
-        public void insertProductCategory(string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress)
+        public void insertProductCategory(string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName)
         {
             tblProductCategory tpc = new tblProductCategory();
             tpc.BrandName = brandName;
@@ -22,6 +22,7 @@ namespace PeojectTWI.Services.InventoryService
             tpc.VendorName = vendorName;
             tpc.VendorAddress = vendorAddress;
             tpc.VendorEmail = vendorEmail;
+            tpc.ProductName = productName;
             tpc.CreateDate = DateTime.Now;
             tpc.Active = true;
             db.tblProductCategories.Add(tpc);
@@ -47,11 +48,12 @@ namespace PeojectTWI.Services.InventoryService
             pd.VendorContact = TPC.VendorContact;
             pd.VendorAddress = TPC.VendorAddress;
             pd.VendorEmail = TPC.VendorEmail;
+            pd.ProductName = TPC.ProductName;
 
             return (pd);
         }
 
-        public async Task updateProductCategory(int productCategoryId, string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, bool Active)
+        public async Task updateProductCategory(int productCategoryId, string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, bool Active, string productName)
         {
             var entity = await db.tblProductCategories.FindAsync(productCategoryId);
 
@@ -62,6 +64,7 @@ namespace PeojectTWI.Services.InventoryService
                 entity.VendorContact = vendorContact;
                 entity.VendorEmail = vendorEmail;
                 entity.VendorAddress = vendorAddress;
+                entity.ProductName = productName;
                 entity.Active = Active;
                 await db.SaveChangesAsync();
             }
@@ -147,7 +150,7 @@ namespace PeojectTWI.Services.InventoryService
                    where p.Active == true
                  select new productCategory { 
                      ProductID = p.ProductID,
-                     BrandName = p.BrandName}).ToList();
+                     ProductName = p.ProductName}).ToList();
         }
 
 
@@ -226,8 +229,8 @@ namespace PeojectTWI.Services.InventoryService
                         TotalCost = Convert.ToDecimal(row["TotalCost"]),
                         InSaleInventory = Convert.ToInt32(row["InSaleInventory"]),
                         NotInAnyStore = Convert.ToInt32(row["NotInAnyStore"]),
-                        RemainingCount = Convert.ToInt32(row["RemainingCount"])
-
+                        RemainingCount = Convert.ToInt32(row["RemainingCount"]),
+                        ProductName  = row["ProductName"].ToString()
                     };
 
                     whmanageList.Add(wHmanage);

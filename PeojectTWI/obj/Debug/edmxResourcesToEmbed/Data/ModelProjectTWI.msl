@@ -1,6 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
+    <FunctionImportMapping FunctionImportName="sp_ViewAllInventoryData" FunctionName="ProjectDBModel.Store.sp_ViewAllInventoryData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.sp_ViewAllInventoryData_Result">
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+          <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+          <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
+          <ScalarProperty Name="PerchesedCount" ColumnName="PerchesedCount" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="InSaleInventory" ColumnName="InSaleInventory" />
+          <ScalarProperty Name="NotInAnyStore" ColumnName="NotInAnyStore" />
+          <ScalarProperty Name="RemainingCount" ColumnName="RemainingCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="tblCoustomerDetails">
       <EntityTypeMapping TypeName="ProjectDBModel.tblCoustomerDetail">
         <MappingFragment StoreEntitySet="tblCoustomerDetails">
@@ -80,6 +96,7 @@
     <EntitySetMapping Name="tblProductCategories">
       <EntityTypeMapping TypeName="ProjectDBModel.tblProductCategory">
         <MappingFragment StoreEntitySet="tblProductCategories">
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
@@ -170,21 +187,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_ViewAllInventoryData" FunctionName="ProjectDBModel.Store.sp_ViewAllInventoryData">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ProjectDBModel.sp_ViewAllInventoryData_Result">
-          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
-          <ScalarProperty Name="VendorName" ColumnName="VendorName" />
-          <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
-          <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
-          <ScalarProperty Name="PerchesedCount" ColumnName="PerchesedCount" />
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
-          <ScalarProperty Name="InSaleInventory" ColumnName="InSaleInventory" />
-          <ScalarProperty Name="NotInAnyStore" ColumnName="NotInAnyStore" />
-          <ScalarProperty Name="RemainingCount" ColumnName="RemainingCount" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

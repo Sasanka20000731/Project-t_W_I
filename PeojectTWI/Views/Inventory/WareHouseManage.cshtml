@@ -33,12 +33,12 @@
 
                     <select id="droproductCategory" name="droproductCategory">
                         <option value="">Select Product Category</option>
-                        <option ng-repeat="item in TypeChoices" value="{{item.ProductID}}">{{item.BrandName}}</option>
+                        <option ng-repeat="item in TypeChoices" value="{{item.ProductID}}">{{item.ProductName}}</option>
                     </select>
                 </div>
             </div>
 
-            <div class="col-md-6">
+            @*<div class="col-md-6">
                 <div class="col-6">
                     <label for="droMasterStore">Master Stock</label>
                     <select id="droMasterStore" name="droMasterStore">
@@ -46,7 +46,7 @@
                         <option ng-repeat="item in TypeChoices2" value="{{item.mStoreId}}">{{item.MasterProductName}}</option>
                     </select>
                 </div>
-            </div>
+            </div>*@
 
         </div>
 

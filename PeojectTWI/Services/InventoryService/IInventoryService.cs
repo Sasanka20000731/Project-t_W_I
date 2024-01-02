@@ -10,13 +10,14 @@ namespace PeojectTWI.Services.InventoryService
 {
     interface IInventoryService
     {
-        void insertProductCategory( string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress);
+
+        void insertProductCategory( string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName);
 
         System.Data.Entity.DbSet<tblProductCategory> viewProductCategories();
 
         productCategory getProductCategoryDetails(int pid);
 
-        Task updateProductCategory(int productCategoryId,string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, bool Active);
+        Task updateProductCategory(int productCategoryId,string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, bool Active, string productName);
 
         Task deleteProductCategory(int productId);
 

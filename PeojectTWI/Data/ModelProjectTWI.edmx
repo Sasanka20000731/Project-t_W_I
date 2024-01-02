@@ -87,6 +87,7 @@
           <Property Name="VendorEmail" Type="nvarchar" MaxLength="100" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="Active" Type="bit" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tblTicket">
           <Key>
@@ -377,6 +378,10 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ProjectDBEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_ViewAllInventoryData" ReturnType="Collection(ProjectDBModel.sp_ViewAllInventoryData_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDATE" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <EntitySet Name="tblCoustomerDetails" EntityType="ProjectDBModel.tblCoustomerDetail" />
           <EntitySet Name="tblInventoryDatas" EntityType="ProjectDBModel.tblInventoryData" />
           <EntitySet Name="tblInventoryHistories" EntityType="ProjectDBModel.tblInventoryHistory" />
@@ -438,11 +443,19 @@
             <End Role="tblUserlLevel" EntitySet="tblUserlLevels" />
             <End Role="tblUser" EntitySet="tblUsers" />
           </AssociationSet>
-          <FunctionImport Name="sp_ViewAllInventoryData" ReturnType="Collection(ProjectDBModel.sp_ViewAllInventoryData_Result)">
-            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
-            <Parameter Name="ToDATE" Mode="In" Type="DateTime" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_ViewAllInventoryData_Result">
+          <Property Type="String" Name="BrandName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="VendorName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="VendorContact" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="VendorEmail" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="PerchesedCount" Nullable="true" />
+          <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalCost" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="InSaleInventory" Nullable="true" />
+          <Property Type="Int32" Name="NotInAnyStore" Nullable="true" />
+          <Property Type="Int32" Name="RemainingCount" Nullable="true" />
+        </ComplexType>
         <EntityType Name="tblCoustomerDetail">
           <Key>
             <PropertyRef Name="CoustomerId" />
@@ -539,6 +552,7 @@
           <Property Name="VendorEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblMasterStores" Relationship="ProjectDBModel.FK_tblMasterStore_tblProductCategories" FromRole="tblProductCategory" ToRole="tblMasterStore" />
         </EntityType>
         <EntityType Name="tblTicket">
@@ -767,24 +781,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="sp_ViewAllInventoryData_Result">
-          <Property Type="String" Name="BrandName" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="VendorName" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="VendorContact" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="VendorEmail" Nullable="true" MaxLength="30" />
-          <Property Type="Int32" Name="PerchesedCount" Nullable="true" />
-          <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="TotalCost" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="InSaleInventory" Nullable="true" />
-          <Property Type="Int32" Name="NotInAnyStore" Nullable="true" />
-          <Property Type="Int32" Name="RemainingCount" Nullable="true" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
+          <FunctionImportMapping FunctionImportName="sp_ViewAllInventoryData" FunctionName="ProjectDBModel.Store.sp_ViewAllInventoryData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjectDBModel.sp_ViewAllInventoryData_Result">
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+                <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
+                <ScalarProperty Name="PerchesedCount" ColumnName="PerchesedCount" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="InSaleInventory" ColumnName="InSaleInventory" />
+                <ScalarProperty Name="NotInAnyStore" ColumnName="NotInAnyStore" />
+                <ScalarProperty Name="RemainingCount" ColumnName="RemainingCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="tblCoustomerDetails">
             <EntityTypeMapping TypeName="ProjectDBModel.tblCoustomerDetail">
               <MappingFragment StoreEntitySet="tblCoustomerDetails">
@@ -864,6 +882,7 @@
           <EntitySetMapping Name="tblProductCategories">
             <EntityTypeMapping TypeName="ProjectDBModel.tblProductCategory">
               <MappingFragment StoreEntitySet="tblProductCategories">
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
@@ -954,22 +973,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_ViewAllInventoryData" FunctionName="ProjectDBModel.Store.sp_ViewAllInventoryData">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ProjectDBModel.sp_ViewAllInventoryData_Result">
-                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
-                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
-                <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
-                <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
-                <ScalarProperty Name="PerchesedCount" ColumnName="PerchesedCount" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
-                <ScalarProperty Name="InSaleInventory" ColumnName="InSaleInventory" />
-                <ScalarProperty Name="NotInAnyStore" ColumnName="NotInAnyStore" />
-                <ScalarProperty Name="RemainingCount" ColumnName="RemainingCount" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

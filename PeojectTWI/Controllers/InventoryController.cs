@@ -37,7 +37,7 @@ namespace PeojectTWI.Controllers
         [HttpPost]
         public ActionResult insertProductCategory(productCategory pd)
         {
-            _inventoryService.insertProductCategory( pd.BrandName, pd.VendorName, pd.VendorContact, pd.VendorEmail, pd.VendorAddress);
+            _inventoryService.insertProductCategory( pd.BrandName, pd.VendorName, pd.VendorContact, pd.VendorEmail, pd.VendorAddress, pd.ProductName);
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace PeojectTWI.Controllers
 
             try
             {
-                _inventoryService.updateProductCategory(pdc.ProductID, pdc.BrandName, pdc.VendorName, pdc.VendorContact, pdc.VendorEmail, pdc.VendorAddress, pdc.Active);
+                _inventoryService.updateProductCategory(pdc.ProductID, pdc.BrandName, pdc.VendorName, pdc.VendorContact, pdc.VendorEmail, pdc.VendorAddress, pdc.Active, pdc.ProductName);
             }
             catch (Exception ex)
             {
@@ -103,7 +103,7 @@ namespace PeojectTWI.Controllers
                 .Select(m => new Product
                 {
                     ProductCategoryID = m.ProductID,
-                    ProductBrandName = m.BrandName
+                    ProductName = m.ProductName
                 }).ToList();
             }
             return View(mss);
@@ -176,11 +176,11 @@ namespace PeojectTWI.Controllers
             var ProdcutCategory = _inventoryService.GetProductCategoryValues();
             return Json(ProdcutCategory, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetmasterStoreValues()
-        {
-            var MasterStore = _inventoryService.GetmasterStoreValues();
-            return Json(MasterStore, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult GetmasterStoreValues()
+        //{
+        //    var MasterStore = _inventoryService.GetmasterStoreValues();
+        //    return Json(MasterStore, JsonRequestBehavior.AllowGet);
+        //}
 
 
         public JsonResult ManageWareHouseData(int dataType,int ProductCategory, int MasterStore, string SerialNo)
@@ -197,7 +197,6 @@ namespace PeojectTWI.Controllers
         public JsonResult ViewWareHousedata(DateTime? FromDate = null, DateTime? Todate = null) 
         {
             List<WHmanage> WHList = _inventoryService.ViewWareHousedata(FromDate, Todate);
-
             return Json(WHList,JsonRequestBehavior.AllowGet);        
         }
 

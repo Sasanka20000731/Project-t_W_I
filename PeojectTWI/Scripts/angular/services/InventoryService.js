@@ -9,12 +9,12 @@
             console.log(xhr.error);
         })
 
-        $http.get('/Inventory/GetmasterStoreValues')
-        .success(function (response) {
-            $scope.TypeChoices2 = response;
-        }).error(function (xhr) {
-            console.log(xhr.error);
-        })
+        //$http.get('/Inventory/GetmasterStoreValues')
+        //.success(function (response) {
+        //    $scope.TypeChoices2 = response;
+        //}).error(function (xhr) {
+        //    console.log(xhr.error);
+        //})
     };
 
     $scope.SaveData = function () {
