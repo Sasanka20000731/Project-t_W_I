@@ -23,7 +23,7 @@
             params: {
                 dataType: $scope.RadioValue,
                 ProductCategory: $("#droproductCategory").val(),
-                MasterStore: $("#droMasterStore").val(),
+                
                 SerialNo: $scope.SerialNumber
             }
         };

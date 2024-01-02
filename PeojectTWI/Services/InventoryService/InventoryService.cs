@@ -154,27 +154,27 @@ namespace PeojectTWI.Services.InventoryService
         }
 
 
-        public List<masterStore> GetmasterStoreValues()
-        {
-            return (from p in db.tblProductCategories join
-                    q in db.tblMasterStores on p.ProductID equals q.ProductId
-                    select new masterStore
-                    {
-                        mStoreId = q.mStoreId,
-                        MasterProductName = p.BrandName
-                    }).ToList();
-        }
+        //public List<masterStore> GetmasterStoreValues()
+        //{
+        //    return (from p in db.tblProductCategories join
+        //            q in db.tblMasterStores on p.ProductID equals q.ProductId
+        //            select new masterStore
+        //            {
+        //                mStoreId = q.mStoreId,
+        //                MasterProductName = p.BrandName
+        //            }).ToList();
+        //}
 
-        public bool ManageWareHouseData(int dataType, int ProductCategory, int MasterStore, string SerialNo)
+        public bool ManageWareHouseData(int dataType, int ProductCategory, string SerialNo)
         {
             using (var context = new ProjectDBEntities())
             {
                 using (var command = context.Database.Connection.CreateCommand())
                 {
-                    command.CommandText = "exec [sp_ManageWareHouse]  @DataType, @ProductCategory, @MasterStore, @SerialNo";
+                    command.CommandText = "exec [sp_ManageWareHouse]  @DataType, @ProductCategory, @SerialNo";
                     command.Parameters.Add(new SqlParameter("@DataType", dataType));
                     command.Parameters.Add(new SqlParameter("@ProductCategory", ProductCategory));
-                    command.Parameters.Add(new SqlParameter("@MasterStore", MasterStore));
+                   // command.Parameters.Add(new SqlParameter("@MasterStore", MasterStore));
                     command.Parameters.Add(new SqlParameter("@SerialNo", SerialNo));
                     context.Database.Connection.Open();
                     var v = command.ExecuteReader();

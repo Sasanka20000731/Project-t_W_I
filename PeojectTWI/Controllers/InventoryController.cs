@@ -113,7 +113,21 @@ namespace PeojectTWI.Controllers
         public ActionResult insertMasterStore(masterStore ms)
         {
             _inventoryService.insertMasterStore(ms.ProductId, ms.perchesedCount, ms.unitPrice, ms.PerchesedDate);
-            return View();
+            masterStore mss = new masterStore();
+            using (var context = new ProjectDBEntities())
+            {
+                mss.ProductList = context.tblProductCategories
+                .Where(m => m.Active == true)
+                .Select(m => new Product
+                {
+                    ProductCategoryID = m.ProductID,
+                    ProductName = m.ProductName
+                }).ToList();
+            }
+ 
+
+
+            return View(mss);
         }
 
         public ActionResult viewtMasterStore()
@@ -183,9 +197,9 @@ namespace PeojectTWI.Controllers
         //}
 
 
-        public JsonResult ManageWareHouseData(int dataType,int ProductCategory, int MasterStore, string SerialNo)
+        public JsonResult ManageWareHouseData(int dataType,int ProductCategory,  string SerialNo)
         {
-            bool whmanageReslut = _inventoryService.ManageWareHouseData(dataType, ProductCategory, MasterStore,  SerialNo);
+            bool whmanageReslut = _inventoryService.ManageWareHouseData(dataType, ProductCategory, SerialNo);
             return Json(whmanageReslut, JsonRequestBehavior.AllowGet);
         }
 
