@@ -146,12 +146,26 @@ namespace PeojectTWI.Services.InventoryService
 
         public List<productCategory> GetProductCategoryValues()
         {
-            return (from p in db.tblProductCategories
-                   where p.Active == true
-                 select new productCategory { 
-                     ProductID = p.ProductID,
-                     ProductName = p.ProductName}).ToList();
+            var result = (from a in db.tblProductCategories
+                          join b in db.tblMasterStores on a.ProductID equals b.ProductId
+                          where a.Active == true
+                          select new productCategory
+                          {
+                              ProductID = a.ProductID,
+                              ProductName = a.ProductName
+                          }).ToList();
+
+            return result;
         }
+
+        //public List<productCategory> GetProductCategoryValues()
+        //{
+        //    return (from p in db.tblProductCategories
+        //           where p.Active == true
+        //         select new productCategory { 
+        //             ProductID = p.ProductID,
+        //             ProductName = p.ProductName}).ToList();
+        //}
 
 
         //public List<masterStore> GetmasterStoreValues()
@@ -165,33 +179,30 @@ namespace PeojectTWI.Services.InventoryService
         //            }).ToList();
         //}
 
-        public bool ManageWareHouseData(int dataType, int ProductCategory, string SerialNo)
+        public string ManageWareHouseData(int dataType, int ProductCategory, string SerialNo)
         {
             using (var context = new ProjectDBEntities())
             {
                 using (var command = context.Database.Connection.CreateCommand())
                 {
-                    command.CommandText = "exec [sp_ManageWareHouse]  @DataType, @ProductCategory, @SerialNo";
+                    command.CommandText = "exec [sp_ManageWareHouse] @DataType, @ProductCategory, @SerialNo";
                     command.Parameters.Add(new SqlParameter("@DataType", dataType));
                     command.Parameters.Add(new SqlParameter("@ProductCategory", ProductCategory));
-                   // command.Parameters.Add(new SqlParameter("@MasterStore", MasterStore));
                     command.Parameters.Add(new SqlParameter("@SerialNo", SerialNo));
+
                     context.Database.Connection.Open();
-                    var v = command.ExecuteReader();
-                        return (v.Read());
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader["RESULT"].ToString();
+                        }
+                    }
                 }
-
-                //var dataTypeParam = new SqlParameter("@DataType", dataType);
-                //var productCategoryParam = new SqlParameter("@ProductCategory", ProductCategory);
-                //var masterStoreParam = new SqlParameter("@MasterStore", MasterStore);
-                //var serialNoParam = new SqlParameter("@SerialNo", SerialNo);
-
-                //var result = context.Database.SqlQuery<int>("EXEC sp_ManageWareHouse @DataType, @ProductCategory, @MasterStore, @SerialNo",
-                //    dataTypeParam, productCategoryParam, masterStoreParam, serialNoParam).FirstOrDefault();
-
-                //return (result); 
             }
 
+            return null; 
         }
 
         public List<WHmanage> ViewWareHousedata(DateTime? FromDate, DateTime? Todate)

@@ -35,7 +35,8 @@ namespace PeojectTWI.Services.InventoryService
 
         //List<masterStore> GetmasterStoreValues();
 
-        bool ManageWareHouseData(int dataType, int ProductCategory,  string SerialNo);
+        string ManageWareHouseData(int dataType, int ProductCategory,  string SerialNo);
+
         List <WHmanage> ViewWareHousedata(DateTime? FromDate,DateTime? Todate);
 
     }

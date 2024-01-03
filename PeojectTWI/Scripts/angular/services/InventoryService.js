@@ -18,32 +18,22 @@
     };
 
     $scope.SaveData = function () {
-        debugger
+        
         data = {
             params: {
                 dataType: $scope.RadioValue,
                 ProductCategory: $("#droproductCategory").val(),
-                
                 SerialNo: $scope.SerialNumber
             }
         };
-        debugger;
         $http.get('/Inventory/ManageWareHouseData', data)
             .success(function (response) {
+                $scope.popMessage = response;
                 debugger;
-                $scope.popMessage(response);
+                alertify.success($scope.popMessage, 3000);
             }).error(function (xhr) {
                 console.log(xhr.error);
             })
-    }
-
-    $scope.popMessage = function (x) {
-        debugger;
-        if (x === true) {
-            alertify.success("Operation completed successfully.");
-        } else {
-            alertify.error("An error occurred during the operation.");
-        }
     }
 
     $scope.WHManageDataLoad = function () {
@@ -60,10 +50,8 @@
         .error(function (xhr) {
             console.log(xhr.error);
         })
-    };
 
-
-
+    }
 
 });
 

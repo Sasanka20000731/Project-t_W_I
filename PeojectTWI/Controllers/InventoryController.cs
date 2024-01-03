@@ -199,7 +199,8 @@ namespace PeojectTWI.Controllers
 
         public JsonResult ManageWareHouseData(int dataType,int ProductCategory,  string SerialNo)
         {
-            bool whmanageReslut = _inventoryService.ManageWareHouseData(dataType, ProductCategory, SerialNo);
+            var whmanageReslut = _inventoryService.ManageWareHouseData(dataType, ProductCategory, SerialNo);
+
             return Json(whmanageReslut, JsonRequestBehavior.AllowGet);
         }
 
