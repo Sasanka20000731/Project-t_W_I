@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\WarrentyController.cs" />
     <Compile Include="Data\ModelProjectTWI.Context.cs">
@@ -200,6 +201,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\InventoryService\IInventoryService.cs" />
     <Compile Include="Services\InventoryService\InventoryService.cs" />
+    <Compile Include="Services\SaleService\ISaleService.cs" />
+    <Compile Include="Services\SaleService\SaleService.cs" />
     <Compile Include="Services\TicketService\ITicketService.cs" />
     <Compile Include="Services\TicketService\TicketService.cs" />
     <Compile Include="Services\UserService\IUserService.cs" />
@@ -531,6 +534,7 @@
     <Content Include="Scripts\angular\New\angular.js" />
     <Content Include="Scripts\angular\services\app.js" />
     <Content Include="Scripts\angular\services\InventoryService.js" />
+    <Content Include="Scripts\angular\services\SaleServices.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-1.3.2.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-1.3.2.min.js" />
     <Content Include="Scripts\bold-reports\bold.report-designer.min.js" />
@@ -1660,6 +1664,7 @@
     <Content Include="Views\Warrenty\ViewAllWerrenty.cshtml" />
     <Content Include="Views\Inventory\WareHouseManage.cshtml" />
     <Content Include="Views\Inventory\ViewWareHouse.cshtml" />
+    <Content Include="Views\Sale\SaleItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

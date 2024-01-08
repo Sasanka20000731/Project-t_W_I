@@ -91,14 +91,14 @@ namespace PeojectTWI.Services.UserService
                     entity.DOB = dob;
                     await db.SaveChangesAsync();
                 }
-                throw new NotImplementedException();
+              
                
             }
             catch (Exception )
             {
                
             }
-            throw new NotImplementedException();
+      
         }
 
 

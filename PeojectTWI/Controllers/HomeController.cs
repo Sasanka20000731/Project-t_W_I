@@ -78,12 +78,12 @@ namespace PeojectTWI.Controllers
             try
             {
                 var a = _userService.updateUser(user.UserId, user.UserName, user.FirstName, user.LastName, user.UserLevel, user.MobileNumber, user.Email, user.DOB);
-                return RedirectToAction("Index");
+                return RedirectToAction("viewUser");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Error updating user: " + ex.Message;
-                return View("Index");
+                return View("viewUser");
             }
         }
 

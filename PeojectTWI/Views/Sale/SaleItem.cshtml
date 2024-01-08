@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sale Item</h2>
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadData()">
+
+    Coustomer Detail form
+    (name, number, email, address, backup number)
+
+    Peoduct Detail form auto fill after enter serial number
+    (serial number verification , product details, perched date from vendor, vendor details)
+
+    warrenty time  12 / 24 / 36 
+    (according to coustomer requiremnt)
+
+    (price according to warrenty perioud + cost + profit)
+
+
+    (discount forum)
+</div>
+
+
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/SaleServices.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />

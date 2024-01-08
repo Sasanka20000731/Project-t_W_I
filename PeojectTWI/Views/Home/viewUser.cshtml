@@ -33,14 +33,14 @@
             @Html.DisplayNameFor(model => model.MobileNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserLevel)
+            @Html.DisplayNameFor(model => model.tblUserlLevel.UserLevel)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Active)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Password)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CreatedDate)
         </th>
@@ -72,14 +72,14 @@
                 @Html.DisplayFor(modelItem => item.MobileNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserLevel)
+                @Html.DisplayFor(modelItem => item.tblUserlLevel.UserLevel)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Active)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Password)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
