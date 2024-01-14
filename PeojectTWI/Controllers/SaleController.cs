@@ -1,5 +1,6 @@
 ﻿using PeojectTWI.Data;
 using PeojectTWI.Services.InventoryService;
+using PeojectTWI.Services.SaleService;
 using PeojectTWI.Services.TicketService;
 using PeojectTWI.Services.UserService;
 using PeojectTWI.Services.WarrentyService;
@@ -19,6 +20,7 @@ namespace PeojectTWI.Controllers
         private ITicketService _ticketService;
         private IInventoryService _inventoryService;
         private IWarrentyService _warrentyService;
+        private ISaleService _saleService;
 
         public SaleController()
         {
@@ -26,14 +28,36 @@ namespace PeojectTWI.Controllers
             _ticketService = new TicketService();
             _inventoryService = new InventoryService();
             _warrentyService = new WarrentyService();
+            _saleService = new SaleService();
         }
-
 
         public ActionResult SaleItem()
         {
             return View();
         }
 
+        public ActionResult RejectSaleItem()
+        {
+            return View();
+        }
+
+
+        public JsonResult GetProductDetailsToSale(string SerialNo)
+        {
+            var ProductDetails = _saleService.GetItemDetailsTosale(SerialNo);
+
+            return Json(ProductDetails, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SaveSaleItem(string cName, string cContact, string cEmail, string cAddress, string cbackUpccontact, string SerialNo, decimal Discount , decimal Price, int Warrenty)
+        {
+            int warrenty = Warrenty == 1 ? 12 : Warrenty == 2 ? 24 : Warrenty == 3 ? 36 ;
+
+            var result = _saleService.saveSaleItem(cName,cContact,cEmail,cAddress,cbackUpccontact,SerialNo,Discount,Price,warrenty);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+   
 
 
 

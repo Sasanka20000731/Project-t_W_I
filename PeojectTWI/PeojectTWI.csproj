@@ -196,6 +196,7 @@
     <Compile Include="Models\loggedUser.cs" />
     <Compile Include="Models\masterStore.cs" />
     <Compile Include="Models\productCategory.cs" />
+    <Compile Include="Models\saleItem.cs" />
     <Compile Include="Models\user.cs" />
     <Compile Include="Models\WHmanage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1665,6 +1666,7 @@
     <Content Include="Views\Inventory\WareHouseManage.cshtml" />
     <Content Include="Views\Inventory\ViewWareHouse.cshtml" />
     <Content Include="Views\Sale\SaleItem.cshtml" />
+    <Content Include="Views\Sale\RejectSaleItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

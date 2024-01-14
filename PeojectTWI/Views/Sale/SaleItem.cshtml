@@ -3,23 +3,175 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Sale Item</h2>
 <div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadData()">
 
-    Coustomer Detail form
-    (name, number, email, address, backup number)
+    @*Coustomer Detail form*@
+    <div class="customer-form col-5">
+            <h2>Customer Details Form</h2>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" ng-model="CoustomerName" required>
+            </div>
 
-    Peoduct Detail form auto fill after enter serial number
-    (serial number verification , product details, perched date from vendor, vendor details)
+            <div class="form-group">
+                <label for="number">Phone Number:</label>
+                <input type="tel" id="number" name="number" ng-model="CoustomerContact" required>
+            </div>
 
-    warrenty time  12 / 24 / 36 
-    (according to coustomer requiremnt)
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" ng-model="CoustomerEmail" required>
+            </div>
 
-    (price according to warrenty perioud + cost + profit)
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" ng-model="CoustomerAddress" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="backupNumber">Backup Phone Number:</label>
+                <input type="tel" id="backupNumber" name="backupNumber" ng-model="CoustomerBackupContact">
+            </div>
+
+        </div>
 
 
-    (discount forum)
+    <div class="col-1">
+
+    </div>
+
+
+    @*Peoduct Detail form auto fill after enter serial number*@
+    <div class="product-form col-5">
+        <h2>Product Details Form</h2>
+        <div class="form-group">
+            <label for="serialNumber">Serial Number:</label>
+            <input type="text" id="serialNumber" name="serialNumber" ng-model="SerialNumber" ng-change="GetProductDetails()">
+            <div class="validation"  ng-hide="validationMessage">Enter valid number</div>
+            @*<div class="validation" id="ValidationMessage" ng-show="validationMessage && x == 1">Enter valid number</div>*@
+        </div>
+
+        <div class="form-group">
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="productName" ng-model="Productname" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="purchaseDate">Unit Price :</label>
+            <input type="text" id="unitPrice" name="unitPrice" ng-model="unitPrice | number :2 " readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Warranty Period:</label>
+            <div class="row">
+                <div class="col-lg-4">12 months</div>
+                <div class="col-lg-4">24 months</div>
+                <div class="col-lg-4">36 months</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <input type="radio" id="warranty12" name="warranty" value=1 ng-model="radio" ng-click="PriceCalculation(1)">
+                </div>
+                <div class="col-lg-4">
+                    <input type="radio" id="warranty24" name="warranty" value=2 ng-model="radio" ng-click="PriceCalculation(2)">
+                </div>
+                <div class="col-lg-4">
+                    <input type="radio" id="warranty36" name="warranty" value=3 ng-model="radio" ng-click="PriceCalculation(3)">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="discount">Discount (%)</label>
+            <input type="text" id="discount" name="discount" ng-model="Discount" ng-change="DiscountManageCalculator()">
+            <div class="validation" ng-hide="validationMessageDiscount">discount is more than 10% of cost</div>
+        </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="text" id="price" ng-model="Price" name="price" readonly>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-5">
+                    <button type="button" ng-click="resetForm()">Reset</button>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-5">
+
+                    <button type="submit" ng-click="SaleItem()" >Submit</button>
+
+                </div>
+            </div>
+        </div>
 </div>
+
+<style>
+    .containerBlock {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: space-around;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .validation {
+    
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color:red;
+    
+    }
+
+
+    .customer-form, .product-form {
+        width: 45%;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 30%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    h2 {
+        color: #333;
+        font-size: 110%;
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+
 
 
 
