@@ -49,19 +49,33 @@ namespace PeojectTWI.Controllers
             return Json(ProductDetails, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveSaleItem(string cName, string cContact, string cEmail, string cAddress, string cbackUpccontact, string SerialNo, decimal Discount , decimal Price, int Warrenty)
+        public JsonResult SaveSaleItem(string cName, string cContact, string cEmail, string cAddress, string SerialNo, decimal Discount , decimal Price, int Warrenty)
         {
             
             int warranty = (Warrenty == 1) ? 12 : (Warrenty == 2) ? 24 : (Warrenty == 3) ? 36 : 0;
 
 
-            var result = _saleService.saveSaleItem(cName,cContact,cEmail,cAddress,cbackUpccontact,SerialNo,Discount,Price, warranty);
+            var result = _saleService.saveSaleItem(cName,cContact,cEmail,cAddress,SerialNo,Discount,Price, warranty);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-   
 
 
+        public JsonResult GetSoldItemDataTable(string SerialNo = null, string InvoiceNo = null, string ContactNo = null)
+        {
+            var result = SerialNo != null ? _saleService.GetSoldItemData(SerialNo, null, null)
+                 : InvoiceNo != null ? _saleService.GetSoldItemData(null, Convert.ToInt32(InvoiceNo), null) :
+                  _saleService.GetSoldItemData(null, null, ContactNo);
+           // var result = _saleService.GetSoldItemData(SerialNo,Convert.ToInt32(InvoiceNo),ContactNo);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetSelectedSoldItemData(string SerialNo = null, string InvoiceNo = null, string ContactNo = null)
+        {
+            var result = _saleService.GetSelectedSoldItemData(SerialNo);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

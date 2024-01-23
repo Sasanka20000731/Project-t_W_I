@@ -2,6 +2,9 @@
 
     $scope.Discount = 0;
 
+   
+
+
     $scope.LoadData = function () {
 
         $scope.HideValidation(1)
@@ -16,7 +19,6 @@
                 //console.log(xhr.error);
             })
     }
-
 
     $scope.GetProductDetails = function () {
         data = {
@@ -42,7 +44,6 @@
                 alertify.success($scope.popMessage, 3000);
             })
     }
-
 
     $scope.HideValidation = function (x) {
         if (x == 1) {
@@ -87,7 +88,6 @@
 
     }
 
-
     $scope.warrentyCharge = function (x) {
 
         if (x === 1) {
@@ -124,13 +124,13 @@
     }
 
     $scope.SaleItem = function () {
+        debugger
         data = {
             params: {
-                cName: CoustomerName,
-                cContact: CoustomerContact,
-                cEmail: CoustomerEmail,
-                cAddress: CoustomerAddress,
-                cbackUpccontact: CoustomerBackupContact,
+                cName: $scope.CoustomerName,
+                cContact: $scope.CoustomerContact,
+                cEmail: $scope.CoustomerEmail,
+                cAddress: $scope.CoustomerAddress,
                 SerialNo: $scope.SerialNumber,
                 Discount: $scope.Discount,
                 Price: $scope.Price,
@@ -138,22 +138,78 @@
 
             }
         };
+        debugger;
         $http.get('/Sale/SaveSaleItem', data)
             .success(function (response) {
-     
-
+                debugger;
+                if (response === 1) {
+                    alertify.success('Success', 3000);
+                    $scope.resetForm();
+                } else {
+                    alertify.error('Error', 3000);
+                    console.log(xhr.error);
+                }
             }).error(function (xhr) {
                 console.log(xhr.error);
-                alertify.error($scope.popMessage, 3000);
+                alertify.error('Error', 3000);
             })
+    }
 
+    $scope.resetForm = function () {
+        $("#name").val("");
+        $("#number").val("");
+        $("#email").val("");
+        $("#serialNumber").val("");
+        $("#address").val("");
+        $("#productName").val("");
+        $scope.radio = 0;
+        $("#discount").val("");
+        $("#price").val("");
+        $("#productName").val("");
+    }
 
+    $scope.SearchSale = function () {
+        data = {
+            params: {
+                SerialNo: $scope.SerialNumber,
+                InvoiceNocContact: $scope.InvoiceNumber,
+                ContactNo: $scope.ContactNumber
+            }
+        };
+        debugger;
+        $http.get('/Sale/GetSoldItemDataTable', data)
+            .success(function (response) {
+                debugger;
+                $scope.LoadedData = response;
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+                alertify.error('Error', 3000);
+            })
     }
 
 
-
-
-
-
+    $scope.SearchDetails = function (x) {
+        var Serial = x;
+        data = {
+            params: {
+                SerialNo: Serial
+            }
+        };
+        debugger;
+        $http.get('/Sale/GetSelectedSoldItemData', data)
+            .success(function (response) {
+                debugger;
+                $scope.serialNumberToDisplay = response[0].SerialNumber;
+                $scope.saleDate = response[0].SoldDate;
+                $scope.customerName = response[0].CoustomerName;
+                $scope.customerNumber = response[0].ContactNumber;
+               
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+                alertify.error('Error', 3000);
+            })
+    }
 
 });

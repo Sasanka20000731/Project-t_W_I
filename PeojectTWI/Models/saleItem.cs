@@ -12,6 +12,10 @@ namespace PeojectTWI.Models
         public string BrandName { get; set; }
         public string ProductName  { get; set; }
         public string vendorName { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string CoustomerName { get; set; }
+        public string ContactNumber { get; set; }
+        public string SoldDate { get; set; }
 
     }
 }

@@ -14,17 +14,23 @@ namespace PeojectTWI.Data
     
     public partial class tblCoustomerDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblCoustomerDetail()
+        {
+            this.tblSalesDetails = new HashSet<tblSalesDetail>();
+        }
+    
         public int CoustomerId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string CoustomerName { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
         public string ContactNumber { get; set; }
         public string UserName { get; set; }
-        public Nullable<int> UserID { get; set; }
         public string Password { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
     
-        public virtual tblUser tblUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblSalesDetail> tblSalesDetails { get; set; }
     }
 }

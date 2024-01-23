@@ -6,34 +6,64 @@
 
 <div class="row" id="form" ng-app="myapp" ng-controller="MyController">
 
-    <div class="col-5">
-  
-        <form name="form1">
-            <div class="form-group">
-                <label>Enter Serial Number:</label>
-                <input type="text" class="form-control" ng-model="serialNumber1" required>
-            </div>
+    <div class="col-5" style="box-shadow: 0px 0px 9px rgba(49, 11, 112, 0.5);" >
 
-            <div class="form-group">
-                <label>Enter NIC Number:</label>
-                <input type="text" class="form-control" ng-model="nicNumber1" required>
-            </div>
+        <div class="row-cols-8">
+            <form name="form1">
+                <div class="form-group" style="margin-top:20px;">
+                    <label>Enter Serial Number:</label>
+                    <input type="text" class="form-control" ng-model="SerialNumber" required>
+                </div>
 
-            <div class="form-group">
-                <label>Invoice Number:</label>
-                <input type="text" class="form-control" ng-model="InvoiceNumber" required>
-            </div>
+                <div class="form-group">
+                    <label>Contact Number:</label>
+                    <input type="text" class="form-control" ng-model="ContactNumber" required>
+                </div>
 
-            <button type="button" ng-click="SearchSale()" class="form-control">Search</button>
-        </form>
+                <div class="form-group">
+                    <label>Invoice Number:</label>
+                    <input type="text" class="form-control" ng-model="InvoiceNumber" required>
+                </div>
+
+                <button type="button" ng-click="SearchSale()" class="form-control">Search</button>
+            </form>
+        </div>
+     <br/>
+        <div class="row-cols-8">
+            <table class="table table-responsive table-bordered" width="100%" style="margin-bottom:20px;" >
+                <thead style="font-size: 8px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgb(204, 204, 204);">
+                    <tr style="background-color: #1a2c34;color: #fff; width:100%">
+
+                        <th class="text-center" width="10%">No</th>
+                        <th class="text-center" width="50%">Serial No</th>
+                        <th class="text-center" width="25%">Date</th>
+                        <th class="text-center" width="25%"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="repeat in LoadedData  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
+                        <td class="text-center">{{$index + 1}}</td>
+                        <td class="text-center" ng-bind="repeat.SerialNumber">sdadasd</td>
+                        <td class="text-center" style="text-align:left; padding-left: 2%;" ng-bind="repeat.SoldDate"></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-google" id="btnUpdate" style="height:25px;padding-top:0px;" ng-click="SearchDetails(repeat.SerialNumber)">
+                                <i class="fa fa-trash-o" aria-hidden="true" style="vertical-align: super; padding-top: 5px;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      
     </div>
-    <div class="col-2"></div>
-    <div class="col-5">
+
+    <div class="col-1"></div>
+    <div class="col-6" style="box-shadow: 0px 0px 9px rgba(49, 11, 112, 0.5);" >
 
  
-            <div class="form-group">
+            <div class="form-group" style="margin-top:20px;">
                 <label>Serial Number:</label>
-                <input type="text" class="form-control" ng-model="serialNumber2" required>
+                <input type="text" class="form-control" ng-model="serialNumberToDisplay" required>
             </div>
 
             <div class="form-group">
@@ -51,12 +81,8 @@
                 <input type="text" ng-model="customerNumber" class="form-control" required>
             </div>
 
-            <div class="form-group">
-                <label>Customer NIC:</label>
-                <input type="text" ng-model="customerNic" class="form-control" required>
-            </div>
 
-            <button type="button" ng-click="rejectForm()" class="form-control">Reject</button>
+            <button type="button" ng-click="rejectForm()" class="form-control" style="margin-bottom:20px;">Reject</button>
 
     </div>
 
@@ -64,6 +90,9 @@
 </div>
 
 <style>
+    .td {
+        font-size:8px;
+    }
     .containerBlock {
         margin: 20px;
         padding: 20px;
