@@ -26,11 +26,17 @@ namespace PeojectTWI.Controllers
             _inventoryService = new InventoryService();
             _warrentyService = new WarrentyService();
         }
-
+    
         public ActionResult ViewAllWerrenty()
         {
             var warrenty = db.tblMasterWarrenties;
             return View(warrenty);
+        }
+ 
+        public ActionResult CheckWarrenty() 
+        {
+
+            return View();
         }
 
 

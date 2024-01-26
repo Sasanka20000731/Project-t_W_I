@@ -1,0 +1,109 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Check Warrenty Details</h3>
+
+
+<div class="row" id="form" ng-app="myapp" ng-controller="MyController" style="padding-top:2em">
+
+    
+        <div class="col-8">
+            <div class="form-group; col-12">
+                <label>Serial Number:</label>
+                <input type="text" class="form-control" style="margin-bottom: 8px;" ng-model="serialNumberToDisplay">
+            </div>
+            <div class="form-group; col-12">
+                <label>Mobile Number:</label>
+                <input type="text" class="form-control" style="margin-bottom:8px;" ng-model="customerNumber">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group; col-12" style="margin-top:18%">
+                <button type="button" ng-click="SearchWarrenty()" class="form-control">Search Warrenty</button>
+            </div>
+        </div>
+  
+        <div class="col-12" style="box-shadow: 0px 0px 9px rgba(49, 11, 112, 0.5); margin-top:10Px;">
+
+
+            <div class="form-group" style="margin-top:20px;">
+                <label>Serial Number:</label>
+                <input type="text" class="form-control" ng-model="serialNumberToDisplay" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Sale Date:</label>
+                <input type="text" class="form-control" ng-model="saleDate"  readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Expired Date:</label>
+                <input type="text" ng-model="customerName" class="form-control"  readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Remark</label>
+                <input type="text" ng-model="customerNumber" class="form-control" required>
+            </div>
+
+
+            <button type="button" ng-click="rejectForm()" class="form-control" style="margin-bottom:20px;">Reject</button>
+
+        </div>
+       
+
+</div>
+
+<style>
+    .td {
+        font-size: 8px;
+    }
+
+    .containerBlock {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .row {
+        margin-bottom: 20px;
+    }
+
+    button {
+        color: black;
+        padding: 10px 30%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        button:hover {
+            background-color: #45a049;
+        }
+</style>
+
+
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/WarrentyService.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
