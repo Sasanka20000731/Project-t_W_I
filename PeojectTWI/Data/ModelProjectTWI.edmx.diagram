@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a09da0c6abc84c83ab05e934d7f72e6f" Name="Diagram1" ZoomLevel="47">
-        <EntityTypeShape EntityType="ProjectDBModel.tblCoustomerDetail" Width="1.5" PointX="7.5" PointY="15.375" />
         <EntityTypeShape EntityType="ProjectDBModel.tblInventoryData" Width="1.5" PointX="5.25" PointY="6.25" />
         <EntityTypeShape EntityType="ProjectDBModel.tblInventoryHistory" Width="1.5" PointX="7.5" PointY="2.75" />
         <EntityTypeShape EntityType="ProjectDBModel.tblMasterStore" Width="1.5" PointX="3" PointY="6.5" />
@@ -18,7 +17,6 @@
         <EntityTypeShape EntityType="ProjectDBModel.tblUserlLevel" Width="1.5" PointX="3" PointY="1.875" />
         <EntityTypeShape EntityType="ProjectDBModel.tblWarrentyExtendedDate" Width="1.5" PointX="9.75" PointY="13" />
         <EntityTypeShape EntityType="ProjectDBModel.tblWarrentyhistory" Width="1.5" PointX="9.75" PointY="10" />
-        <AssociationConnector Association="ProjectDBModel.FK_tblCoustomerDetails_tblUser" />
         <AssociationConnector Association="ProjectDBModel.FK_tblInventoryData_tblMasterStore" />
         <AssociationConnector Association="ProjectDBModel.FK_tblInventoryHistory_tblInventoryData" />
         <AssociationConnector Association="ProjectDBModel.FK_tblMasterWarrenty_tblInventoryData" />
@@ -30,6 +28,10 @@
         <AssociationConnector Association="ProjectDBModel.FK_tblWarrentyExtendedDate_tblMasterWarrenty" />
         <AssociationConnector Association="ProjectDBModel.FK_tblWarrentyhistory_tblMasterWarrenty" />
         <AssociationConnector Association="ProjectDBModel.FK_tblUser_tblUserlLevel" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblSalesDetail" Width="1.5" PointX="12.75" PointY="11.375" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblSalesDetails_tblInventoryData" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblCoustomerDetail" Width="1.5" PointX="10.375" PointY="1" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblSalesDetails_tblCoustomerDetails" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

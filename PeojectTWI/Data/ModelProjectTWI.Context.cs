@@ -27,7 +27,6 @@ namespace PeojectTWI.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tblCoustomerDetail> tblCoustomerDetails { get; set; }
         public virtual DbSet<tblInventoryData> tblInventoryDatas { get; set; }
         public virtual DbSet<tblInventoryHistory> tblInventoryHistories { get; set; }
         public virtual DbSet<tblMasterStore> tblMasterStores { get; set; }
@@ -40,6 +39,8 @@ namespace PeojectTWI.Data
         public virtual DbSet<tblUserlLevel> tblUserlLevels { get; set; }
         public virtual DbSet<tblWarrentyExtendedDate> tblWarrentyExtendedDates { get; set; }
         public virtual DbSet<tblWarrentyhistory> tblWarrentyhistories { get; set; }
+        public virtual DbSet<tblSalesDetail> tblSalesDetails { get; set; }
+        public virtual DbSet<tblCoustomerDetail> tblCoustomerDetails { get; set; }
     
         public virtual ObjectResult<sp_ViewAllInventoryData_Result> sp_ViewAllInventoryData(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDATE)
         {

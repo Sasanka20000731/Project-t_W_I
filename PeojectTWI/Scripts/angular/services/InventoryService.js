@@ -11,7 +11,7 @@
 
         //$http.get('/Inventory/GetmasterStoreValues')
         //.success(function (response) {
-        //    $scope.TypeChoices2 = response;
+        //    $scope.TypeChoices2 = response; 
         //}).error(function (xhr) {
         //    console.log(xhr.error);
         //})

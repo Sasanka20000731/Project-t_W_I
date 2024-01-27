@@ -5,15 +5,14 @@
       <PropertyRef Name="CoustomerId" />
     </Key>
     <Property Name="CoustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
-    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="CoustomerName" Type="nvarchar(max)" />
     <Property Name="Address" Type="nvarchar" MaxLength="300" />
     <Property Name="Email" Type="nvarchar" MaxLength="80" />
     <Property Name="ContactNumber" Type="nchar" MaxLength="13" />
     <Property Name="UserName" Type="nvarchar" MaxLength="10" />
-    <Property Name="UserID" Type="int" />
-    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="Active" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="tblInventoryData">
     <Key>
@@ -83,6 +82,17 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="Active" Type="bit" />
     <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tblSalesDetails">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InventoryId" Type="int" />
+    <Property Name="CoustomerId" Type="int" />
+    <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="SoldPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CreatedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="tblTicket">
     <Key>
@@ -157,18 +167,6 @@
     <Property Name="createdDate" Type="datetime" />
     <Property Name="Active" Type="bit" />
   </EntityType>
-  <Association Name="FK_tblCoustomerDetails_tblUser">
-    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
-    <End Role="tblCoustomerDetails" Type="Self.tblCoustomerDetails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tblUser">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="tblCoustomerDetails">
-        <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_tblInventoryData_tblMasterStore">
     <End Role="tblMasterStore" Type="Self.tblMasterStore" Multiplicity="0..1" />
     <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="*" />
@@ -238,6 +236,30 @@
       </Principal>
       <Dependent Role="tblMasterWarrenty">
         <PropertyRef Name="inventoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSalesDetails_tblCoustomerDetails">
+    <End Role="tblCoustomerDetails" Type="Self.tblCoustomerDetails" Multiplicity="0..1" />
+    <End Role="tblSalesDetails" Type="Self.tblSalesDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCoustomerDetails">
+        <PropertyRef Name="CoustomerId" />
+      </Principal>
+      <Dependent Role="tblSalesDetails">
+        <PropertyRef Name="CoustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSalesDetails_tblInventoryData">
+    <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="0..1" />
+    <End Role="tblSalesDetails" Type="Self.tblSalesDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInventoryData">
+        <PropertyRef Name="InventoryID" />
+      </Principal>
+      <Dependent Role="tblSalesDetails">
+        <PropertyRef Name="InventoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -313,16 +335,13 @@
     <EntitySet Name="tblMasterTicketDetails" EntityType="Self.tblMasterTicketDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblMasterWarrenty" EntityType="Self.tblMasterWarrenty" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProductCategories" EntityType="Self.tblProductCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSalesDetails" EntityType="Self.tblSalesDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTicket" EntityType="Self.tblTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTicketComment" EntityType="Self.tblTicketComment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUserlLevel" EntityType="Self.tblUserlLevel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblWarrentyExtendedDate" EntityType="Self.tblWarrentyExtendedDate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblWarrentyhistory" EntityType="Self.tblWarrentyhistory" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_tblCoustomerDetails_tblUser" Association="Self.FK_tblCoustomerDetails_tblUser">
-      <End Role="tblUser" EntitySet="tblUser" />
-      <End Role="tblCoustomerDetails" EntitySet="tblCoustomerDetails" />
-    </AssociationSet>
     <AssociationSet Name="FK_tblInventoryData_tblMasterStore" Association="Self.FK_tblInventoryData_tblMasterStore">
       <End Role="tblMasterStore" EntitySet="tblMasterStore" />
       <End Role="tblInventoryData" EntitySet="tblInventoryData" />
@@ -346,6 +365,14 @@
     <AssociationSet Name="FK_tblMasterWarrenty_tblInventoryData" Association="Self.FK_tblMasterWarrenty_tblInventoryData">
       <End Role="tblInventoryData" EntitySet="tblInventoryData" />
       <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSalesDetails_tblCoustomerDetails" Association="Self.FK_tblSalesDetails_tblCoustomerDetails">
+      <End Role="tblCoustomerDetails" EntitySet="tblCoustomerDetails" />
+      <End Role="tblSalesDetails" EntitySet="tblSalesDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSalesDetails_tblInventoryData" Association="Self.FK_tblSalesDetails_tblInventoryData">
+      <End Role="tblInventoryData" EntitySet="tblInventoryData" />
+      <End Role="tblSalesDetails" EntitySet="tblSalesDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_tblTicket_tblInventoryData" Association="Self.FK_tblTicket_tblInventoryData">
       <End Role="tblInventoryData" EntitySet="tblInventoryData" />
