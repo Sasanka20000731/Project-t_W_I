@@ -21,7 +21,7 @@ namespace PeojectTWI.Data
         public Nullable<decimal> SoldPrice { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
     
-        public virtual tblInventoryData tblInventoryData { get; set; }
         public virtual tblCoustomerDetail tblCoustomerDetail { get; set; }
+        public virtual tblInventoryData tblInventoryData { get; set; }
     }
 }

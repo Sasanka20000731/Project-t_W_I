@@ -201,6 +201,7 @@
     <Compile Include="Models\productCategory.cs" />
     <Compile Include="Models\saleItem.cs" />
     <Compile Include="Models\user.cs" />
+    <Compile Include="Models\Warrenty.cs" />
     <Compile Include="Models\WHmanage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\InventoryService\IInventoryService.cs" />
@@ -539,6 +540,7 @@
     <Content Include="Scripts\angular\services\app.js" />
     <Content Include="Scripts\angular\services\InventoryService.js" />
     <Content Include="Scripts\angular\services\SaleServices.js" />
+    <Content Include="Scripts\angular\services\WarrentyService.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-1.3.2.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-1.3.2.min.js" />
     <Content Include="Scripts\bold-reports\bold.report-designer.min.js" />
@@ -1670,6 +1672,7 @@
     <Content Include="Views\Inventory\ViewWareHouse.cshtml" />
     <Content Include="Views\Sale\SaleItem.cshtml" />
     <Content Include="Views\Sale\RejectSaleItem.cshtml" />
+    <Content Include="Views\Warrenty\CheckWarrenty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

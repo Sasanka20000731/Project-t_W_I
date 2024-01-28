@@ -35,7 +35,9 @@ namespace PeojectTWI.Services.InventoryService
 
         //List<masterStore> GetmasterStoreValues();
 
+        string CheckExsist(int dataType, int ProductCategory, string SerialNo);
         string ManageWareHouseData(int dataType, int ProductCategory,  string SerialNo);
+
 
         List <WHmanage> ViewWareHousedata(DateTime? FromDate,DateTime? Todate);
 

@@ -20,7 +20,7 @@ namespace PeojectTWI.Services.SaleService
             var result = (from a in db.tblInventoryDatas
                           join b in db.tblMasterStores on a.MasterId equals b.mStoreId
                           join c in db.tblProductCategories on b.ProductId equals c.ProductID
-                          where c.Active == true && a.SerialNumber == SerialNo
+                          where c.Active == true && a.ToTheStore== true && a.SerialNumber == SerialNo
                           select new saleItem
                           {
                               SerialNumber = a.SerialNumber,

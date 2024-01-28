@@ -251,6 +251,34 @@ namespace PeojectTWI.Services.InventoryService
             return whmanageList.ToList();
         }
 
+        public string CheckExsist(int dataType, int productCategory, string serialNo)
+        {
+            string resultMessage = "";
+
+            if (dataType == 1)
+            {
+                var result = (from a in db.tblInventoryDatas
+                              where (a.ProductCategoryId == productCategory && a.SerialNumber == serialNo && a.ToTheStore == true)
+                              select a).FirstOrDefault();
+
+                resultMessage = result != null ? "Already in the store" : "";
+            }
+            else if (dataType == 2)
+            {
+                var result = (from a in db.tblInventoryDatas
+                              where (a.ProductCategoryId == productCategory && a.SerialNumber == serialNo && a.ToTheOutside == true)
+                              select a).FirstOrDefault();
+
+                resultMessage = result != null ? "Already not in the store" : "";
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+
+            return resultMessage;
+        }
+
 
 
 

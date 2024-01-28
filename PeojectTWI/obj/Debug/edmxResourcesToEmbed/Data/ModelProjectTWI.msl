@@ -17,6 +17,21 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="tblCoustomerDetails">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblCoustomerDetail">
+        <MappingFragment StoreEntitySet="tblCoustomerDetails">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CoustomerName" ColumnName="CoustomerName" />
+          <ScalarProperty Name="CoustomerId" ColumnName="CoustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblInventoryDatas">
       <EntityTypeMapping TypeName="ProjectDBModel.tblInventoryData">
         <MappingFragment StoreEntitySet="tblInventoryData">
@@ -70,8 +85,13 @@
     <EntitySetMapping Name="tblMasterWarrenties">
       <EntityTypeMapping TypeName="ProjectDBModel.tblMasterWarrenty">
         <MappingFragment StoreEntitySet="tblMasterWarrenty">
+          <ScalarProperty Name="IsExtended" ColumnName="IsExtended" />
+          <ScalarProperty Name="IsExpiered" ColumnName="IsExpiered" />
+          <ScalarProperty Name="WarrentyMonths" ColumnName="WarrentyMonths" />
+          <ScalarProperty Name="ExpierReminderDate" ColumnName="ExpierReminderDate" />
+          <ScalarProperty Name="WarrentyExpierdDate" ColumnName="WarrentyExpierdDate" />
           <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="WarrentyStartDate" ColumnName="WarrentyStartDate" />
           <ScalarProperty Name="inventoryId" ColumnName="inventoryId" />
           <ScalarProperty Name="mWarrentyId" ColumnName="mWarrentyId" />
         </MappingFragment>
@@ -89,6 +109,18 @@
           <ScalarProperty Name="VendorName" ColumnName="VendorName" />
           <ScalarProperty Name="BrandName" ColumnName="BrandName" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSalesDetails">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblSalesDetail">
+        <MappingFragment StoreEntitySet="tblSalesDetails">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="SoldPrice" ColumnName="SoldPrice" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="CoustomerId" ColumnName="CoustomerId" />
+          <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -168,33 +200,6 @@
           <ScalarProperty Name="comment" ColumnName="comment" />
           <ScalarProperty Name="mWarrentyId" ColumnName="mWarrentyId" />
           <ScalarProperty Name="whId" ColumnName="whId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblSalesDetails">
-      <EntityTypeMapping TypeName="ProjectDBModel.tblSalesDetail">
-        <MappingFragment StoreEntitySet="tblSalesDetails">
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="SoldPrice" ColumnName="SoldPrice" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="CoustomerId" ColumnName="CoustomerId" />
-          <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
-          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblCoustomerDetails">
-      <EntityTypeMapping TypeName="ProjectDBModel.tblCoustomerDetail">
-        <MappingFragment StoreEntitySet="tblCoustomerDetails">
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="CoustomerName" ColumnName="CoustomerName" />
-          <ScalarProperty Name="CoustomerId" ColumnName="CoustomerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

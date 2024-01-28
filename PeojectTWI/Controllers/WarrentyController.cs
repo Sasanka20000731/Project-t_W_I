@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PeojectTWI.Models;
 
 namespace PeojectTWI.Controllers
 {
@@ -26,12 +27,30 @@ namespace PeojectTWI.Controllers
             _inventoryService = new InventoryService();
             _warrentyService = new WarrentyService();
         }
-
+    
         public ActionResult ViewAllWerrenty()
         {
             var warrenty = db.tblMasterWarrenties;
             return View(warrenty);
         }
+ 
+        public ActionResult CheckWarrenty() 
+        {
+
+            return View();
+        }
+        public JsonResult GetWarrentyList(string ContactNumber)
+        {
+            var WarrentyList = _warrentyService.GetWarrentyList(ContactNumber);
+            return Json(WarrentyList, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetWarrentyCommentList(string SerialNumber)
+        {
+            var WarrentyCommentList = _warrentyService.GetWarrentyComments(SerialNumber);
+            return Json(WarrentyCommentList, JsonRequestBehavior.AllowGet);
+        }
+
 
 
     }

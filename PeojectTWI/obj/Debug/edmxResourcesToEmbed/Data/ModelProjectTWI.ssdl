@@ -6,7 +6,7 @@
     </Key>
     <Property Name="CoustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CoustomerName" Type="nvarchar(max)" />
-    <Property Name="Address" Type="nvarchar" MaxLength="300" />
+    <Property Name="Address" Type="nvarchar(max)" />
     <Property Name="Email" Type="nvarchar" MaxLength="80" />
     <Property Name="ContactNumber" Type="nchar" MaxLength="13" />
     <Property Name="UserName" Type="nvarchar" MaxLength="10" />
@@ -66,8 +66,13 @@
     </Key>
     <Property Name="mWarrentyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="inventoryId" Type="int" />
-    <Property Name="createdate" Type="datetime" />
+    <Property Name="WarrentyStartDate" Type="datetime" />
     <Property Name="Active" Type="bit" />
+    <Property Name="WarrentyExpierdDate" Type="date" />
+    <Property Name="ExpierReminderDate" Type="date" />
+    <Property Name="WarrentyMonths" Type="int" />
+    <Property Name="IsExpiered" Type="bit" />
+    <Property Name="IsExtended" Type="bit" />
   </EntityType>
   <EntityType Name="tblProductCategories">
     <Key>

@@ -196,6 +196,13 @@ namespace PeojectTWI.Controllers
         //    return Json(MasterStore, JsonRequestBehavior.AllowGet);
         //}
 
+        public JsonResult CheckExist(int dataType, int ProductCategory, string SerialNo)
+        {
+            var ExsistReslut = _inventoryService.CheckExsist(dataType, ProductCategory, SerialNo);
+
+            return Json(ExsistReslut, JsonRequestBehavior.AllowGet);
+        }
+
 
         public JsonResult ManageWareHouseData(int dataType,int ProductCategory,  string SerialNo)
         {
@@ -203,6 +210,8 @@ namespace PeojectTWI.Controllers
 
             return Json(whmanageReslut, JsonRequestBehavior.AllowGet);
         }
+
+
 
         public ActionResult ViewWareHouse()
         {

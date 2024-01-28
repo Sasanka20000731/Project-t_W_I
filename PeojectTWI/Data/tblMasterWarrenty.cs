@@ -23,8 +23,13 @@ namespace PeojectTWI.Data
     
         public int mWarrentyId { get; set; }
         public Nullable<int> inventoryId { get; set; }
-        public Nullable<System.DateTime> createdate { get; set; }
+        public Nullable<System.DateTime> WarrentyStartDate { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<System.DateTime> WarrentyExpierdDate { get; set; }
+        public Nullable<System.DateTime> ExpierReminderDate { get; set; }
+        public Nullable<int> WarrentyMonths { get; set; }
+        public Nullable<bool> IsExpiered { get; set; }
+        public Nullable<bool> IsExtended { get; set; }
     
         public virtual tblInventoryData tblInventoryData { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
