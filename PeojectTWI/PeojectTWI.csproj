@@ -1673,6 +1673,7 @@
     <Content Include="Views\Sale\SaleItem.cshtml" />
     <Content Include="Views\Sale\RejectSaleItem.cshtml" />
     <Content Include="Views\Warrenty\CheckWarrenty.cshtml" />
+    <Content Include="Views\Warrenty\ExtendWarrenty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,6 +14,8 @@ namespace PeojectTWI.Models
 
         public string WarrentyComments { get; set; }
         public string WarrentyCommentedDate { get; set; }
+
+        public string WarrentyStatus { get; set; }
     }
         
 

@@ -33,7 +33,7 @@
 
                         <th class="text-center" width="10%">No</th>
                         <th class="text-center" width="50%">Serial No</th>
-                        <th class="text-center" width="25%">Date</th>
+                        <th class="text-center" width="25%">Expired</th>
                         <th class="text-center" width="25%"> </th>
                     </tr>
                 </thead>
@@ -41,10 +41,13 @@
                     <tr ng-repeat="repeat in LoadedWarrentyDataList  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
                         <td class="text-center">{{$index + 1}}</td>
                         <td class="text-center" ng-bind="repeat.SerialNo"></td>
-                        <td class="text-center" ng-bind="repeat.WarrentyStartDate"></td>
+                        <td class="text-center" ng-bind="repeat.WarrentyStatus"></td>
                         <td class="text-center">
                             <button type="button" class="btn btn-google" id="btnViewMoreData" style="height:25px;padding-top:0px;" ng-click="SearchWarrentyBySerial(repeat.SerialNo)">
-                                <i class="fa fa-trash-o" aria-hidden="true" style="vertical-align: super; padding-top: 5px;"></i>
+                                <i class="fa fa-edit" aria-hidden="true" style="vertical-align: super; padding-top: 5px;"></i>
+                            </button>
+                            <button type="button" class="btn btn-google" id="btnExtend" style="height:25px;padding-top:0px;" ng-click="Extend()"; ng-if="repeat.WarrentyStatus === 'Expired'">
+                                <i class="fa fa-book" aria-hidden="true" style="vertical-align: super; padding-top: 5px;"></i>
                             </button>
                         </td>
                     </tr>

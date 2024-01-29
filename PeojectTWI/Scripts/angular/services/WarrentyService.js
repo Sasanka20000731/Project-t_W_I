@@ -66,5 +66,23 @@
 
     }
 
+    $scope.Extend = function () {
+        debugger
+        data = {
+            params: {
+                SerialNumber: x
+            }
+        };
+        $http.get('/Warrenty/ExtendWarrenty',data)
+            .success(function (response) {
+
+                debugger;
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+
+    }
+
 
 });
