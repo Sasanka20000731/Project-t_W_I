@@ -1,15 +1,9 @@
 ﻿
-@{
-    ViewBag.Title = "ExtendWarrenty";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Extend Warrenty</h2>
 
 
 <div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="PageLoad()">
 
-
+    <input type="hidden" id="serialNumber" value="@ViewBag.SerialNumber" ng-model="SerialNum" />
     <div class="product-form col-5">
 
         <div class="form-group">

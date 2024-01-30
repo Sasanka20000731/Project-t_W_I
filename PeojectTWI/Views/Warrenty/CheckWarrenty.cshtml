@@ -46,9 +46,16 @@
                             <button type="button" class="btn btn-google" id="btnViewMoreData" style="height:25px;padding-top:0px;" ng-click="SearchWarrentyBySerial(repeat.SerialNo)">
                                 <i class="fa fa-edit" aria-hidden="true" style="vertical-align: super; padding-top: 5px;"></i>
                             </button>
-                            <button type="button" class="btn btn-google" id="btnExtend" style="height:25px;padding-top:0px;" ng-click="Extend()"; ng-if="repeat.WarrentyStatus === 'Expired'">
+                            <a href="#" class="btn btn-google" id="btnExtend" style="height:25px;padding-top:0px;" ng-if="repeat.WarrentyStatus === 'Expired'" ng-click="extendWarranty(repeat.SerialNo)">
                                 <i class="fa fa-book" aria-hidden="true" style="vertical-align: super; padding-top: 5px;"></i>
-                            </button>
+                            </a>
+                            @*<a href="#" class="btn btn-google" id="btnExtend" style="height:25px;padding-top:0px;" ng-if="repeat.WarrentyStatus === 'Expired'" ; onclick="extendWarranty('{{JSON.stringify(repeat.SerialNo)}}')">
+                                <i class="fa fa-book" aria-hidden="true" style="vertical-align: super; padding-top: 5px;"></i>
+                            </a>*@
+                            @*<a href="#" class="btn btn-google" id="btnExtend" style="height:25px;padding-top:0px;" ng-if="repeat.WarrentyStatus === 'Expired'" onclick="extendWarranty('{{repeat.SerialNo}}')">
+            <i class="fa fa-book" aria-hidden="true" style="vertical-align: super; padding-top: 5px;"></i>
+        </a>*@
+
                         </td>
                     </tr>
                 </tbody>
@@ -135,6 +142,17 @@
             background-color: #45a049;
         }
 </style>
+
+<script>
+    function extendWarranty(serialNo) {
+        debugger;
+        // Construct the URL for the WarrentyController/ExtendWarrenty action result
+        var extendUrl = '/Warrenty/ExtendWarrenty?SerialNumber=' + serialNo;
+
+        // Redirect to the URL
+        window.location.href = extendUrl;
+    }
+</script>
 
 
 <script src="~/Scripts/angular/angular.min.js"></script>

@@ -74,11 +74,9 @@ namespace PeojectTWI.Services.UserService
 
         public async Task updateUser(int userId,string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob)
         {
-
             try
             {
                 var entity = await db.tblUsers.FindAsync(userId);
-
                 if (entity != null)
                 {
                     entity.UserName = userName;
@@ -91,8 +89,6 @@ namespace PeojectTWI.Services.UserService
                     entity.DOB = dob;
                     await db.SaveChangesAsync();
                 }
-              
-               
             }
             catch (Exception )
             {

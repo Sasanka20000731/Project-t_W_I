@@ -53,9 +53,11 @@ namespace PeojectTWI.Controllers
 
         public ActionResult ExtendWarrenty(string SerialNumber)
         {
-
+            ViewBag.SerialNumber = SerialNumber;
             return View();
         }
+
+       
 
 
     }
