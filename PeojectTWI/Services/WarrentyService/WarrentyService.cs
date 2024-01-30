@@ -40,8 +40,11 @@ namespace PeojectTWI.Services.WarrentyService
                           select new Warrenty
                           {
                               SerialNo = d.SerialNumber,
-                              WarrentyStartDate = c.WarrentyStartDate.ToString()
+                              WarrentyStatus = (DateTime.Now > c.WarrentyExpierdDate)
+                                                 ? "Expired"
+                                                 : "Not Expired"
                           }).ToList();
+
 
             return result;
 

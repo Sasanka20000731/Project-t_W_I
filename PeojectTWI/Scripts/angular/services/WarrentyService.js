@@ -66,5 +66,81 @@
 
     }
 
+    $scope.Extend = function () {
+        debugger
+        //data = {
+        //    params: {
+        //        SerialNumber: x
+        //    }
+        //};
+        //$http.get('/Warrenty/ExtendWarrenty',data)
+        //    .success(function (response) {
+
+        //        debugger;
+        //    })
+        //    .error(function (xhr) {
+        //        console.log(xhr.error);
+        //    })
+
+        modalInsatance = $uibModal.open({
+            templateUrl: "/Warrenty/ExtendWarrenty",
+            controller: "MyController",
+            backdrop: "static",
+            keyboard: false,
+            id: "dvbusinessModal"
+        });
+
+    }
+
+    //$scope.RejectRow = function (value, ExpectedValue) {
+
+    //    scope.GlobleExpectedValue = ExpectedValue;
+    //    debugger;
+    //    scope.GlobalId = value;
+    //    modalInsatance = $uibModal.open({
+    //        templateUrl: "/Home/CommadModal",
+    //        controller: "secondController",
+    //        backdrop: "static",
+    //        keyboard: false,
+    //        id: "dvbusinessModal"
+    //    });
+
+    //}
+
+    $scope.WarrExtndCal = function (x) {
+        $scope.ExtendPtice = 0;
+        $scope.currentValue = 0;
+        if (x === "1") {
+            $scope.ExtendPtice = ($scope.currentValue / 100 * 10) * 12;
+        } else if (x === "2") {
+            $scope.ExtendPtice = ($scope.currentValue / 100 * 8) * 24;
+        } else if (x === "3") {
+            $scope.ExtendPtice = ($scope.currentValue / 100 * 6) * 36;
+        }
+        return $scope.ExtendPtice;
+    }
+
+    $scope.Save = function (x) {
+     
+        if (x === "1") {
+            $scope.ExtendPtice = ($scope.currentValue / 100 * 10) * 12;
+        } else if (x === "2") {
+            $scope.ExtendPtice = ($scope.currentValue / 100 * 8) * 24;
+        } else if (x === "3") {
+            $scope.ExtendPtice = ($scope.currentValue / 100 * 6) * 36;
+        }
+        return $scope.ExtendPtice;
+    }
+
+
+    $scope.OpenCloseThis = function () {
+     
+
+    } 
+
+
+
+
+
 
 });

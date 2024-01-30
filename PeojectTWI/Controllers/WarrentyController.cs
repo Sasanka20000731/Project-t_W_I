@@ -51,6 +51,13 @@ namespace PeojectTWI.Controllers
             return Json(WarrentyCommentList, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult ExtendWarrenty(string SerialNumber)
+        {
+
+            return View();
+        }
+
+       
 
 
     }
