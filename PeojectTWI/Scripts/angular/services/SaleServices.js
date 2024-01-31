@@ -124,7 +124,7 @@
     }
 
     $scope.SaleItem = function () {
-        debugger
+
         data = {
             params: {
                 cName: $scope.CoustomerName,
@@ -138,10 +138,9 @@
 
             }
         };
-        debugger;
+  
         $http.get('/Sale/SaveSaleItem', data)
             .success(function (response) {
-                debugger;
                 if (response === 1) {
                     alertify.success('Success', 3000);
                     $scope.resetForm();
@@ -176,10 +175,8 @@
                 ContactNo: $scope.ContactNumber
             }
         };
-        debugger;
         $http.get('/Sale/GetSoldItemDataTable', data)
             .success(function (response) {
-                debugger;
                 $scope.LoadedData = response;
             })
             .error(function (xhr) {
@@ -196,10 +193,8 @@
                 SerialNo: Serial
             }
         };
-        debugger;
         $http.get('/Sale/GetSelectedSoldItemData', data)
             .success(function (response) {
-                debugger;
                 $scope.serialNumberToDisplay = response[0].SerialNumber;
                 $scope.saleDate = response[0].SoldDate;
                 $scope.customerName = response[0].CoustomerName;

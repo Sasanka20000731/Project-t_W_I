@@ -154,7 +154,6 @@ namespace PeojectTWI.Services.InventoryService
                               ProductID = a.ProductID,
                               ProductName = a.ProductName
                           }).ToList();
-
             return result;
         }
 

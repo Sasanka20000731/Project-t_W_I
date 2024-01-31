@@ -13,21 +13,20 @@ namespace PeojectTWI.Services.WarrentyService
     {
         ProjectDBEntities db = new ProjectDBEntities();
          public List<Warrenty> GetWarrentyComments(string SerialNumber) {
-
             var result = (from a in db.tblInventoryDatas
                           join b in db.tblMasterWarrenties on a.InventoryID equals b.inventoryId
                           join c in db.tblWarrentyhistories on b.mWarrentyId equals c.mWarrentyId
+                          join d in db.tblSalesDetails on a.InventoryID equals d.InventoryId
                           where (a.SerialNumber == SerialNumber) 
                           select new Warrenty
                           {
                               WarrentyStartDate = b.WarrentyStartDate.ToString(),
                               WarrentyExpiredDate = b.WarrentyExpierdDate.ToString(),
                               WarrentyComments = c.comment,
-                              WarrentyCommentedDate = c.createdDate.ToString()
+                              WarrentyCommentedDate = c.createdDate.ToString(),
+                              SoldPrice = d.SoldPrice
                           }).ToList();
-
             return result;
-
         }
 
         public List<Warrenty> GetWarrentyList(string ContactNumber)
@@ -44,14 +43,17 @@ namespace PeojectTWI.Services.WarrentyService
                                                  ? "Expired"
                                                  : "Not Expired"
                           }).ToList();
-
-
             return result;
-
         }
 
+        public int SaveExtenWarrenty(string SerialNumber, decimal ExtendCost)
+        {
 
-
+            //Implement Sp
+            // tblmwarrebty, warrentyHostory , sale , warrentyexten
+            return 0;
+        
+        }
 
     }
 }

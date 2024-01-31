@@ -57,7 +57,13 @@ namespace PeojectTWI.Controllers
             return View();
         }
 
-       
+
+        public JsonResult SaveExtenWarrenty(string SerialNumber, decimal ExtendCost)
+        {
+            var Result = _warrentyService.SaveExtenWarrenty(SerialNumber, ExtendCost);
+            return Json(Result, JsonRequestBehavior.AllowGet);
+        }
+
 
 
     }

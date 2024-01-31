@@ -3,22 +3,22 @@
 
 <div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="PageLoad()">
 
-    <input type="hidden" id="serialNumber" value="@ViewBag.SerialNumber" ng-model="SerialNum" />
+    <input type="hidden" id="serialNumberId" value="@ViewBag.SerialNumber" ng-model="SerialNum" />
     <div class="product-form col-5">
 
         <div class="form-group">
             <label>Serial Number:</label>
-            <input type="text" class="form-control" ng-model="SNumberToDisplay" style="width:100%" required>
+            <input type="text" class="form-control" ng-model="SerialNumberToDisplay" style="width:100%" required>
         </div>
 
         <div class="form-group">
             <label>Warrenty Start Date:</label>
-            <input type="text" class="form-control" ng-model="WaStartDate" required>
+            <input type="text" class="form-control" ng-model="WarrentyStartDateToDisplay" required>
         </div>
 
         <div class="form-group">
             <label>Warrenty End Date:</label>
-            <input type="text" class="form-control" ng-model="WExpiredDate" required>
+            <input type="text" class="form-control" ng-model="WarrentyExpiredDateToDisplay" required>
         </div>
 
 
@@ -37,13 +37,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4">
-                    <input type="radio" id="warranty12" name="warranty" value=1 ng-model="radio" ng-click="PriceCalculationWarrenty(1)">
+                    <input type="radio" id="warranty12" name="warranty" value=1 ng-model="radio" ng-click="WarrExtndCal(1)">
                 </div>
                 <div class="col-lg-4">
-                    <input type="radio" id="warranty24" name="warranty" value=2 ng-model="radio" ng-click="PriceCalculationWarrenty(2)">
+                    <input type="radio" id="warranty24" name="warranty" value=2 ng-model="radio" ng-click="WarrExtndCal(2)">
                 </div>
                 <div class="col-lg-4">
-                    <input type="radio" id="warranty36" name="warranty" value=3 ng-model="radio" ng-click="PriceCalculationWarrenty(3)">
+                    <input type="radio" id="warranty36" name="warranty" value=3 ng-model="radio" ng-click="WarrExtndCal(3)">
                 </div>
             </div>
 
@@ -51,12 +51,12 @@
 
         <div class="form-group">
             <label>Total:</label>
-            <input type="text" class="form-control" ng-model="TotalCost" required>
+            <input type="text" class="form-control" ng-model="ExtendPrice | number:2" required>
         </div>
 
         <div class="form-group">
 
-            <button type="button" class="btn btn-google" id="BtnExtendWarrentyIt" style="height:25px;padding-top:0px;" ng-click="ExtendWarrenty()">
+            <button type="button" class="btn btn-google" id="BtnExtendWarrentyIt" style="height:25px;padding-top:0px;" ng-click="SaveExtendWarrenty()">
                 Extend Warrenty
             </button>
             <button type="button" class="btn btn-google" id="BtnExtendWarrentyIt" style="height:25px;padding-top:0px;" ng-click="ResetExtendForm()">

@@ -16,6 +16,8 @@ namespace PeojectTWI.Models
         public string WarrentyCommentedDate { get; set; }
 
         public string WarrentyStatus { get; set; }
+
+        public Nullable<decimal> SoldPrice { get; set; }
     }
         
 
