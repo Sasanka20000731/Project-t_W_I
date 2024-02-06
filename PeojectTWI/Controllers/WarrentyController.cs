@@ -58,9 +58,12 @@ namespace PeojectTWI.Controllers
         }
 
 
-        public JsonResult SaveExtenWarrenty(string SerialNumber, decimal ExtendCost)
+        public JsonResult SaveExtenWarrenty(string SerialNumber,int Warrenty, decimal ExtendCost)
         {
-            var Result = _warrentyService.SaveExtenWarrenty(SerialNumber, ExtendCost);
+            int warranty = (Warrenty == 1) ? 12 : (Warrenty == 2) ? 24 : (Warrenty == 3) ? 36 : 0;
+
+
+            var Result = _warrentyService.SaveExtenWarrenty(SerialNumber, warranty, ExtendCost);
             return Json(Result, JsonRequestBehavior.AllowGet);
         }
 

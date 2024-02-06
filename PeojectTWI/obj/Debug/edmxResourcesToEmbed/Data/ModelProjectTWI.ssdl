@@ -98,6 +98,7 @@
     <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
     <Property Name="SoldPrice" Type="decimal" Precision="18" Scale="0" />
     <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ExtendPrice" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="tblTicket">
     <Key>

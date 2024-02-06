@@ -103,6 +103,7 @@
           <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="SoldPrice" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ExtendPrice" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="tblTicket">
           <Key>
@@ -607,6 +608,7 @@
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="SoldPrice" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ExtendPrice" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="tblCoustomerDetail" Relationship="ProjectDBModel.FK_tblSalesDetails_tblCoustomerDetails" FromRole="tblSalesDetail" ToRole="tblCoustomerDetail" />
           <NavigationProperty Name="tblInventoryData" Relationship="ProjectDBModel.FK_tblSalesDetails_tblInventoryData" FromRole="tblSalesDetail" ToRole="tblInventoryData" />
         </EntityType>
@@ -967,6 +969,7 @@
           <EntitySetMapping Name="tblSalesDetails">
             <EntityTypeMapping TypeName="ProjectDBModel.tblSalesDetail">
               <MappingFragment StoreEntitySet="tblSalesDetails">
+                <ScalarProperty Name="ExtendPrice" ColumnName="ExtendPrice" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="SoldPrice" ColumnName="SoldPrice" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />

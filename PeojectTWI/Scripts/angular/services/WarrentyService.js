@@ -111,14 +111,19 @@
         data = {
             params: {
                 SerialNumber: $scope.SerialNumberToDisplay,
+                Warrenty: $scope.radio,
                 ExtendCost: $scope.ExtendPrice
             }
         };
         debugger;
         $http.get('/Warrenty/SaveExtenWarrenty', data)
             .success(function (response) {
-                $scope.LoadedWarrentyDataList = response;
-                $scope.ClearFormOne();
+                if (response == 1) {
+                    alertify.success('Successfully Extended', 3000);
+                } else {
+                    alertify.error('Error', 3000);
+                }
+               
 
             })
             .error(function (xhr) {

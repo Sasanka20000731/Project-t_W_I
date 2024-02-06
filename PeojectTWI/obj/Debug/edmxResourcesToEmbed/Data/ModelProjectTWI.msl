@@ -115,6 +115,7 @@
     <EntitySetMapping Name="tblSalesDetails">
       <EntityTypeMapping TypeName="ProjectDBModel.tblSalesDetail">
         <MappingFragment StoreEntitySet="tblSalesDetails">
+          <ScalarProperty Name="ExtendPrice" ColumnName="ExtendPrice" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="SoldPrice" ColumnName="SoldPrice" />
           <ScalarProperty Name="Discount" ColumnName="Discount" />
