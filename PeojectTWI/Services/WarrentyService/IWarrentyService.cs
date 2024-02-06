@@ -13,7 +13,7 @@ namespace PeojectTWI.Services.WarrentyService
 
         List<Warrenty> GetWarrentyList(string ContactNumber);
 
-        int SaveExtenWarrenty(string SerialNumber, decimal ExtendCost);
+        int SaveExtenWarrenty(string SerialNumber, int WarrentyMonths, decimal ExtendCost);
 
     }
 }

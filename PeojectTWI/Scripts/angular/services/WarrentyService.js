@@ -111,6 +111,7 @@
         data = {
             params: {
                 SerialNumber: $scope.SerialNumberToDisplay,
+                Warrenty: $scope.radio,
                 ExtendCost: $scope.ExtendPrice
             }
         };
