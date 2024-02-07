@@ -83,6 +83,18 @@
             <input type="text" class="form-control" ng-model="WarrentyExpiredDateToDisplay" required>
         </div>
 
+        <div>
+            <label>Warrenty Status</label>
+            <div class="row" ng-show="showExpiredDetails">
+                <div class="col-sm">
+                    <input type="text" class="form-control" ng-model="WarrentyStatus" required>
+                </div>
+                <div class="col-sm">
+                    <input type="submit" class=" form-control" id="ExtedExpiredWarrentyID" name="ExtedExpiredWarrentyID" ng-click="extendWarranty(SerialNumberToDisplay)" />
+                </div>
+            </div>
+        </div>
+   
         <div class="form-group">
             <label>Warrenty History</label>
 

@@ -26,7 +26,10 @@ namespace PeojectTWI.Services.WarrentyService
                               WarrentyStartDate = b.WarrentyStartDate.ToString(),
                               WarrentyExpiredDate = b.WarrentyExpierdDate.ToString(),
                               WarrentyComments = c.comment,
-                              WarrentyCommentedDate = c.createdDate.ToString()
+                              WarrentyCommentedDate = c.createdDate.ToString(),
+                              WarrentyStatus = (DateTime.Now > b.WarrentyExpierdDate)
+                                                 ? "Expired"
+                                                 : "Not Expired"
                           }).Distinct().ToList();
 
             decimal? bb = (from a in db.tblInventoryDatas

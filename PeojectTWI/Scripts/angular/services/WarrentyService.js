@@ -27,7 +27,7 @@
         $http.get('/Warrenty/GetWarrentyList', data)
             .success(function (response) {
                 $scope.LoadedWarrentyDataList = response;
-                $scope.ClearFormOne();
+                //$scope.ClearFormOne();
                  
             })
             .error(function (xhr) {
@@ -50,6 +50,8 @@
                 $scope.WarrentyExpiredDateToDisplay = response[0].WarrentyExpiredDate;
                 $scope.LoadedWarrentyCommentsData = response;
                 $scope.SoldPrice = response[0].SoldPrice;
+                $scope.WarrentyStatus = response[0].WarrentyStatus;
+                $scope.ShowExpiredDetailsBtn($scope.WarrentyStatus);
                 $scope.ClearFormOne();
                  
             })
@@ -58,12 +60,25 @@
             })
     }
 
-    $scope.ClearFormOne = function () {
+
+
+    $scope.ShowExpiredDetailsBtn = function (x) {
         debugger
+        if (x === 'Expired') {
+            $scope.showExpiredDetails = true;
+        } else {
+            $scope.showExpiredDetails = false;
+        }
+
+    }
+
+
+   // $scope.ClearFormOne = function () {
+       // debugger
         //$scope.SerialNumber = undefined;
         //$scope.ContactNumber = undefined;
 
-    }
+   // }
 
     $scope.WarrExtndCal = function (x) {
         $scope.ExtendPrice = 0;
@@ -79,24 +94,10 @@
     }
 
 
-
-    //$scope.Save = function (x) {
-     
-    //    if (x === "1") {
-    //        $scope.ExtendPrice = ($scope.SoldPrice / 100 * 10) * 12;
-    //    } else if (x === "2") {
-    //        $scope.ExtendPrice = ($scope.SoldPrice / 100 * 8) * 24;
-    //    } else if (x === "3") {
-    //        $scope.ExtendPrice = ($scope.SoldPrice / 100 * 6) * 36;
-    //    }
-    //    return $scope.ExtendPtice;
-    //}
-
-
     $scope.PageLoad = function () {
          
         $scope.SearchWarrentyBySerial($("#serialNumberId").val())
-        
+
 
     } 
 
