@@ -32,8 +32,6 @@ namespace PeojectTWI.Controllers
         }
 
 
-
-
         public ActionResult AddTicket()
         {
             return View();
