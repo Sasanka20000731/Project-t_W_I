@@ -32,14 +32,37 @@ namespace PeojectTWI.Controllers
         }
 
 
-
-
         public ActionResult AddTicket()
         {
             return View();
         }
 
 
+        public ActionResult AssignTicket()
+        {
+            var tickets = db.tblTickets;
+            return View(tickets);
+        }
+
+
+
+
+        public ActionResult AssignTicketTolevel(int Ticketid)
+        {
+      
+            var result = _ticketService.GetTicketDetailsToassign(Ticketid).FirstOrDefault();
+
+            return View(result);
+        }
+
+
+
+        public JsonResult GetTicketHandlers()
+        {
+            var result = _ticketService.GetTicketHandlers();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

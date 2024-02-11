@@ -18,6 +18,8 @@ namespace PeojectTWI.Data
         public tblUser()
         {
             this.tblInventoryHistories = new HashSet<tblInventoryHistory>();
+            this.tblTicketTaskAssigns = new HashSet<tblTicketTaskAssign>();
+            this.tblTicketTaskAssigns1 = new HashSet<tblTicketTaskAssign>();
         }
     
         public int UserId { get; set; }
@@ -31,9 +33,15 @@ namespace PeojectTWI.Data
         public Nullable<bool> Active { get; set; }
         public string Password { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> AssignedTicketSequnceGroup { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblInventoryHistory> tblInventoryHistories { get; set; }
+        public virtual tblMasterTicketSequnce tblMasterTicketSequnce { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblTicketTaskAssign> tblTicketTaskAssigns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblTicketTaskAssign> tblTicketTaskAssigns1 { get; set; }
         public virtual tblUserlLevel tblUserlLevel { get; set; }
     }
 }

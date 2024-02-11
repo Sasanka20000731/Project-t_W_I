@@ -82,6 +82,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterTicketSequnces">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblMasterTicketSequnce">
+        <MappingFragment StoreEntitySet="tblMasterTicketSequnces">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="SequnceName" ColumnName="SequnceName" />
+          <ScalarProperty Name="SequanceIndexID" ColumnName="SequanceIndexID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblMasterWarrenties">
       <EntityTypeMapping TypeName="ProjectDBModel.tblMasterWarrenty">
         <MappingFragment StoreEntitySet="tblMasterWarrenty">
@@ -146,14 +155,47 @@
           <ScalarProperty Name="CommentedBy" ColumnName="CommentedBy" />
           <ScalarProperty Name="CommentedDate" ColumnName="CommentedDate" />
           <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="mTicketID" ColumnName="mTicketID" />
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
           <ScalarProperty Name="ticketCommentID" ColumnName="ticketCommentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTicketProjectDtls">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblTicketProjectDtl">
+        <MappingFragment StoreEntitySet="tblTicketProjectDtl">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CurrentSeqence" ColumnName="CurrentSeqence" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="TicketProjectId" ColumnName="TicketProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTicketStatus">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblTicketStatu">
+        <MappingFragment StoreEntitySet="tblTicketStatus">
+          <ScalarProperty Name="TicketStatus" ColumnName="TicketStatus" />
+          <ScalarProperty Name="TicketStatusId" ColumnName="TicketStatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTicketTaskAssigns">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblTicketTaskAssign">
+        <MappingFragment StoreEntitySet="tblTicketTaskAssign">
+          <ScalarProperty Name="StatustId" ColumnName="StatustId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="AssignedFrom" ColumnName="AssignedFrom" />
+          <ScalarProperty Name="ticketProjectId" ColumnName="ticketProjectId" />
+          <ScalarProperty Name="TaslAssignId" ColumnName="TaslAssignId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblUsers">
       <EntityTypeMapping TypeName="ProjectDBModel.tblUser">
         <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="AssignedTicketSequnceGroup" ColumnName="AssignedTicketSequnceGroup" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Active" ColumnName="Active" />

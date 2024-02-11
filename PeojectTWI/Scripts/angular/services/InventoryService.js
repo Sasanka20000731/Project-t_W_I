@@ -89,7 +89,7 @@
     }
 
     $scope.ClearWHManageForm = function () {
-        debugger;
+        //debugger;
         $scope.RadioValue = undefined;
         $scope.SerialNumber = undefined;
        // $("#droproductCategory").val() =;

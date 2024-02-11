@@ -1,0 +1,63 @@
+﻿@model PeojectTWI.Models.Ticket
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="PageLoad()">
+
+    <input type="hidden" id="serialNumberId"  ng-model="SerialNum" />
+    <div class="product-form col-12">
+
+        <div class="form-group">
+            <label for="droproductCategory">Serial Number</label>
+
+            <select class="form-control" id="DropSerialNumbersListID" name="droproductCategory" ng-model="DropSerialNumbersList">
+                <option value="">Select Product Category</option>
+                <option ng-repeat="item in SerialNumbers" value="{{item.InventoryId}}">{{item.SerialNumber}}</option>
+            </select>
+        </div>
+
+
+
+        <div class="form-group">
+            <label>Comment :</label>
+            <input type="text" class="form-control" ng-model="ticketTemark" required>
+        </div>
+        <button type="button" class="btn btn-google" id="BtnAddTicketId" style="height:25px;padding-top:0px;" ng-click="AddTicket()">
+            Add Ticket
+        </button>
+
+    </div>
+</div>
+
+
+<style>
+    .td {
+        font-size: 8px;
+    }
+
+    .containerBlock {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .row {
+        margin-bottom: 20px;
+    }
+
+    button {
+        color: black;
+        padding: 10px 30%;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        button:hover {
+            background-color: #45a049;
+        }
+</style>
