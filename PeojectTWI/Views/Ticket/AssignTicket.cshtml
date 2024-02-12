@@ -21,9 +21,6 @@
         <th>
             Status
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.IsClosed)
-            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.OpenedDate)
         </th>
@@ -63,14 +60,23 @@
                 }
 
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.IsClosed)
-                </td>*@
+
             <td>
+                @if(item.OpenedDate == null){
+                <text>Not Opened</text>
+                }else{
                 @Html.DisplayFor(modelItem => item.OpenedDate)
+                }
             </td>
             <td>
+                @if (item.ClosedDate == null)
+                {
+                    <text>Not Closed</text>
+                }
+                else
+                {
                 @Html.DisplayFor(modelItem => item.ClosedDate)
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.tblCoustomerDetail.CoustomerName)

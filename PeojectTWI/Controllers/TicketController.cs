@@ -73,5 +73,14 @@ namespace PeojectTWI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult AssignTicketToHandler(int TicketID, int AssignToUsrer)
+        {
+            var LoggedUser = Session["LoggedUserID"];
+            var result = _ticketService.AssignTicketToHandler(TicketID, AssignToUsrer,Convert.ToInt32(LoggedUser));
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        
+
     }
 }

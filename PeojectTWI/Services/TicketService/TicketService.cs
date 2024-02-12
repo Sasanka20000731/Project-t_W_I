@@ -54,7 +54,6 @@ namespace PeojectTWI.Services.TicketService
             return result;
         }
 
-
         public List<user> GetTicketHandlers()
         {
             var result = (from a in db.tblUsers
@@ -68,7 +67,30 @@ namespace PeojectTWI.Services.TicketService
             return result;
         }
 
-
+        public int AssignTicketToHandler(int ticketID, int assignToUsrer, int LoggedUserID)
+        {
+            using (var context = new ProjectDBEntities())
+            {
+                using (var cmd = context.Database.Connection.CreateCommand())
+                {
+                    cmd.CommandText = "sp_AssignTicket";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@@TicketID", ticketID));
+                    cmd.Parameters.Add(new SqlParameter("@@AssignedTo", assignToUsrer));
+                    cmd.Parameters.Add(new SqlParameter("@@UserID", LoggedUserID));
+                    context.Database.Connection.Open();
+                    var result = cmd.ExecuteScalar();
+                    if (result != null && int.TryParse(result.ToString(), out int spResult))
+                    {
+                        return spResult;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
 
     }
 }

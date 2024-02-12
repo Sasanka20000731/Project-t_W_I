@@ -25,11 +25,6 @@
     }
 
     $scope.LoadTicketHandlers = function () {
-            //data = {
-            //    params: {
-            //        SerialNumber: x
-            //    }
-            //};
         debugger;
         $http.get('/Ticket/GetTicketHandlers')
             .success(function (response) {
