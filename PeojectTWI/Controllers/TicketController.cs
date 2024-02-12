@@ -37,7 +37,41 @@ namespace PeojectTWI.Controllers
             return View();
         }
 
+        public JsonResult InsertTicket(string SerialNumber, string TicketRemark)
+        {
+            var LoggedUser = Session["LoggedUserID"];
 
+            var result = _ticketService.AddTicket(SerialNumber, TicketRemark, Convert.ToInt32(LoggedUser));
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult AssignTicket()
+        {
+            var tickets = db.tblTickets;
+            return View(tickets);
+        }
+
+
+
+
+        public ActionResult AssignTicketTolevel(int Ticketid)
+        {
+      
+            var result = _ticketService.GetTicketDetailsToassign(Ticketid).FirstOrDefault();
+
+            return View(result);
+        }
+
+
+
+        public JsonResult GetTicketHandlers()
+        {
+            var result = _ticketService.GetTicketHandlers();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

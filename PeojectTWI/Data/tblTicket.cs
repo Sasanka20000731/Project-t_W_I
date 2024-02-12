@@ -18,6 +18,8 @@ namespace PeojectTWI.Data
         public tblTicket()
         {
             this.tblMasterTicketDetails = new HashSet<tblMasterTicketDetail>();
+            this.tblTicketComments = new HashSet<tblTicketComment>();
+            this.tblTicketProjectDtls = new HashSet<tblTicketProjectDtl>();
         }
     
         public int TicketId { get; set; }
@@ -30,8 +32,13 @@ namespace PeojectTWI.Data
         public Nullable<System.DateTime> OpenedDate { get; set; }
         public Nullable<System.DateTime> ClosedDate { get; set; }
     
+        public virtual tblCoustomerDetail tblCoustomerDetail { get; set; }
         public virtual tblInventoryData tblInventoryData { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMasterTicketDetail> tblMasterTicketDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblTicketComment> tblTicketComments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblTicketProjectDtl> tblTicketProjectDtls { get; set; }
     }
 }

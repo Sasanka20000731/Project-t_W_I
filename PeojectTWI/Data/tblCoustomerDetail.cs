@@ -18,6 +18,7 @@ namespace PeojectTWI.Data
         public tblCoustomerDetail()
         {
             this.tblSalesDetails = new HashSet<tblSalesDetail>();
+            this.tblTickets = new HashSet<tblTicket>();
         }
     
         public int CoustomerId { get; set; }
@@ -32,5 +33,7 @@ namespace PeojectTWI.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblSalesDetail> tblSalesDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblTicket> tblTickets { get; set; }
     }
 }

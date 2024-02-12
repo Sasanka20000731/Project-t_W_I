@@ -166,6 +166,9 @@
     <Compile Include="Data\tblMasterTicketDetail.cs">
       <DependentUpon>ModelProjectTWI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\tblMasterTicketSequnce.cs">
+      <DependentUpon>ModelProjectTWI.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\tblMasterWarrenty.cs">
       <DependentUpon>ModelProjectTWI.tt</DependentUpon>
     </Compile>
@@ -179,6 +182,15 @@
       <DependentUpon>ModelProjectTWI.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\tblTicketComment.cs">
+      <DependentUpon>ModelProjectTWI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\tblTicketProjectDtl.cs">
+      <DependentUpon>ModelProjectTWI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\tblTicketStatu.cs">
+      <DependentUpon>ModelProjectTWI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\tblTicketTaskAssign.cs">
       <DependentUpon>ModelProjectTWI.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\tblUser.cs">
@@ -200,6 +212,7 @@
     <Compile Include="Models\masterStore.cs" />
     <Compile Include="Models\productCategory.cs" />
     <Compile Include="Models\saleItem.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\user.cs" />
     <Compile Include="Models\Warrenty.cs" />
     <Compile Include="Models\WHmanage.cs" />
@@ -540,6 +553,7 @@
     <Content Include="Scripts\angular\services\app.js" />
     <Content Include="Scripts\angular\services\InventoryService.js" />
     <Content Include="Scripts\angular\services\SaleServices.js" />
+    <Content Include="Scripts\angular\services\TicketService.js" />
     <Content Include="Scripts\angular\services\WarrentyService.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-1.3.2.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-1.3.2.min.js" />
@@ -1674,10 +1688,12 @@
     <Content Include="Views\Sale\RejectSaleItem.cshtml" />
     <Content Include="Views\Warrenty\CheckWarrenty.cshtml" />
     <Content Include="Views\Warrenty\ExtendWarrenty.cshtml" />
+    <Content Include="Views\Ticket\AddTicket.cshtml" />
+    <Content Include="Views\Ticket\AssignTicket.cshtml" />
+    <Content Include="Views\Ticket\AssignTicketTolevel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Ticket\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

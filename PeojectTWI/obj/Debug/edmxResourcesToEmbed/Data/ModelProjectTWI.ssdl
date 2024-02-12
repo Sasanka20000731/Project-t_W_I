@@ -6,7 +6,7 @@
     </Key>
     <Property Name="CoustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CoustomerName" Type="nvarchar(max)" />
-    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" />
     <Property Name="Email" Type="nvarchar" MaxLength="80" />
     <Property Name="ContactNumber" Type="nchar" MaxLength="13" />
     <Property Name="UserName" Type="nvarchar" MaxLength="10" />
@@ -59,6 +59,14 @@
     <Property Name="AssignedDate" Type="datetime" />
     <Property Name="AssignedTo" Type="int" />
     <Property Name="IsAccepted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMasterTicketSequnces">
+    <Key>
+      <PropertyRef Name="SequanceIndexID" />
+    </Key>
+    <Property Name="SequanceIndexID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SequnceName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
   </EntityType>
   <EntityType Name="tblMasterWarrenty">
     <Key>
@@ -119,10 +127,39 @@
       <PropertyRef Name="ticketCommentID" />
     </Key>
     <Property Name="ticketCommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="mTicketID" Type="int" />
+    <Property Name="TicketID" Type="int" />
     <Property Name="Comment" Type="nvarchar(max)" />
     <Property Name="CommentedDate" Type="datetime" />
     <Property Name="CommentedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="tblTicketProjectDtl">
+    <Key>
+      <PropertyRef Name="TicketProjectId" />
+    </Key>
+    <Property Name="TicketProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TicketId" Type="int" />
+    <Property Name="CurrentSeqence" Type="int" />
+    <Property Name="Active" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblTicketStatus">
+    <Key>
+      <PropertyRef Name="TicketStatusId" />
+    </Key>
+    <Property Name="TicketStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TicketStatus" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblTicketTaskAssign">
+    <Key>
+      <PropertyRef Name="TaslAssignId" />
+    </Key>
+    <Property Name="TaslAssignId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ticketProjectId" Type="int" />
+    <Property Name="AssignedFrom" Type="int" />
+    <Property Name="AssignedTo" Type="int" />
+    <Property Name="AssignedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="StatustId" Type="int" />
   </EntityType>
   <EntityType Name="tblUser">
     <Key>
@@ -139,6 +176,7 @@
     <Property Name="Active" Type="bit" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="AssignedTicketSequnceGroup" Type="int" />
   </EntityType>
   <EntityType Name="tblUserlLevel">
     <Key>
@@ -269,6 +307,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tblTicket_tblCoustomerDetails">
+    <End Role="tblCoustomerDetails" Type="Self.tblCoustomerDetails" Multiplicity="0..1" />
+    <End Role="tblTicket" Type="Self.tblTicket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCoustomerDetails">
+        <PropertyRef Name="CoustomerId" />
+      </Principal>
+      <Dependent Role="tblTicket">
+        <PropertyRef Name="CoustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblTicket_tblInventoryData">
     <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="0..1" />
     <End Role="tblTicket" Type="Self.tblTicket" Multiplicity="*" />
@@ -282,14 +332,98 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_tblTicketComment_tblMasterTicketDetails">
-    <End Role="tblMasterTicketDetails" Type="Self.tblMasterTicketDetails" Multiplicity="0..1" />
+    <End Role="tblTicket" Type="Self.tblTicket" Multiplicity="0..1" />
     <End Role="tblTicketComment" Type="Self.tblTicketComment" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="tblMasterTicketDetails">
-        <PropertyRef Name="mTicketID" />
+      <Principal Role="tblTicket">
+        <PropertyRef Name="TicketId" />
       </Principal>
       <Dependent Role="tblTicketComment">
-        <PropertyRef Name="mTicketID" />
+        <PropertyRef Name="TicketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTicketProjectDtl_tblTicket">
+    <End Role="tblTicket" Type="Self.tblTicket" Multiplicity="0..1" />
+    <End Role="tblTicketProjectDtl" Type="Self.tblTicketProjectDtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTicket">
+        <PropertyRef Name="TicketId" />
+      </Principal>
+      <Dependent Role="tblTicketProjectDtl">
+        <PropertyRef Name="TicketId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTicketStatus_tblTicketStatus">
+    <End Role="tblTicketStatus" Type="Self.tblTicketStatus" Multiplicity="1" />
+    <End Role="tblTicketStatus1" Type="Self.tblTicketStatus" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblTicketStatus">
+        <PropertyRef Name="TicketStatusId" />
+      </Principal>
+      <Dependent Role="tblTicketStatus1">
+        <PropertyRef Name="TicketStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTicketTaskAssign_tblTicketProjectDtl">
+    <End Role="tblTicketProjectDtl" Type="Self.tblTicketProjectDtl" Multiplicity="0..1" />
+    <End Role="tblTicketTaskAssign" Type="Self.tblTicketTaskAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTicketProjectDtl">
+        <PropertyRef Name="TicketProjectId" />
+      </Principal>
+      <Dependent Role="tblTicketTaskAssign">
+        <PropertyRef Name="ticketProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTicketTaskAssign_tblTicketStatus">
+    <End Role="tblTicketStatus" Type="Self.tblTicketStatus" Multiplicity="0..1" />
+    <End Role="tblTicketTaskAssign" Type="Self.tblTicketTaskAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTicketStatus">
+        <PropertyRef Name="TicketStatusId" />
+      </Principal>
+      <Dependent Role="tblTicketTaskAssign">
+        <PropertyRef Name="StatustId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTicketTaskAssign_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblTicketTaskAssign" Type="Self.tblTicketTaskAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblTicketTaskAssign">
+        <PropertyRef Name="AssignedTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTicketTaskAssign_tblUser1">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblTicketTaskAssign" Type="Self.tblTicketTaskAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblTicketTaskAssign">
+        <PropertyRef Name="AssignedFrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser_tblMasterTicketSequnces">
+    <End Role="tblMasterTicketSequnces" Type="Self.tblMasterTicketSequnces" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMasterTicketSequnces">
+        <PropertyRef Name="SequanceIndexID" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="AssignedTicketSequnceGroup" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -339,11 +473,15 @@
     <EntitySet Name="tblInventoryHistory" EntityType="Self.tblInventoryHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblMasterStore" EntityType="Self.tblMasterStore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblMasterTicketDetails" EntityType="Self.tblMasterTicketDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMasterTicketSequnces" EntityType="Self.tblMasterTicketSequnces" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblMasterWarrenty" EntityType="Self.tblMasterWarrenty" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProductCategories" EntityType="Self.tblProductCategories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblSalesDetails" EntityType="Self.tblSalesDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTicket" EntityType="Self.tblTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTicketComment" EntityType="Self.tblTicketComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTicketProjectDtl" EntityType="Self.tblTicketProjectDtl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTicketStatus" EntityType="Self.tblTicketStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTicketTaskAssign" EntityType="Self.tblTicketTaskAssign" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUserlLevel" EntityType="Self.tblUserlLevel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblWarrentyExtendedDate" EntityType="Self.tblWarrentyExtendedDate" Schema="dbo" store:Type="Tables" />
@@ -380,13 +518,45 @@
       <End Role="tblInventoryData" EntitySet="tblInventoryData" />
       <End Role="tblSalesDetails" EntitySet="tblSalesDetails" />
     </AssociationSet>
+    <AssociationSet Name="FK_tblTicket_tblCoustomerDetails" Association="Self.FK_tblTicket_tblCoustomerDetails">
+      <End Role="tblCoustomerDetails" EntitySet="tblCoustomerDetails" />
+      <End Role="tblTicket" EntitySet="tblTicket" />
+    </AssociationSet>
     <AssociationSet Name="FK_tblTicket_tblInventoryData" Association="Self.FK_tblTicket_tblInventoryData">
       <End Role="tblInventoryData" EntitySet="tblInventoryData" />
       <End Role="tblTicket" EntitySet="tblTicket" />
     </AssociationSet>
     <AssociationSet Name="FK_tblTicketComment_tblMasterTicketDetails" Association="Self.FK_tblTicketComment_tblMasterTicketDetails">
-      <End Role="tblMasterTicketDetails" EntitySet="tblMasterTicketDetails" />
+      <End Role="tblTicket" EntitySet="tblTicket" />
       <End Role="tblTicketComment" EntitySet="tblTicketComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTicketProjectDtl_tblTicket" Association="Self.FK_tblTicketProjectDtl_tblTicket">
+      <End Role="tblTicket" EntitySet="tblTicket" />
+      <End Role="tblTicketProjectDtl" EntitySet="tblTicketProjectDtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTicketStatus_tblTicketStatus" Association="Self.FK_tblTicketStatus_tblTicketStatus">
+      <End Role="tblTicketStatus" EntitySet="tblTicketStatus" />
+      <End Role="tblTicketStatus1" EntitySet="tblTicketStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTicketTaskAssign_tblTicketProjectDtl" Association="Self.FK_tblTicketTaskAssign_tblTicketProjectDtl">
+      <End Role="tblTicketProjectDtl" EntitySet="tblTicketProjectDtl" />
+      <End Role="tblTicketTaskAssign" EntitySet="tblTicketTaskAssign" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTicketTaskAssign_tblTicketStatus" Association="Self.FK_tblTicketTaskAssign_tblTicketStatus">
+      <End Role="tblTicketStatus" EntitySet="tblTicketStatus" />
+      <End Role="tblTicketTaskAssign" EntitySet="tblTicketTaskAssign" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTicketTaskAssign_tblUser" Association="Self.FK_tblTicketTaskAssign_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblTicketTaskAssign" EntitySet="tblTicketTaskAssign" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTicketTaskAssign_tblUser1" Association="Self.FK_tblTicketTaskAssign_tblUser1">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblTicketTaskAssign" EntitySet="tblTicketTaskAssign" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser_tblMasterTicketSequnces" Association="Self.FK_tblUser_tblMasterTicketSequnces">
+      <End Role="tblMasterTicketSequnces" EntitySet="tblMasterTicketSequnces" />
+      <End Role="tblUser" EntitySet="tblUser" />
     </AssociationSet>
     <AssociationSet Name="FK_tblUser_tblUserlLevel" Association="Self.FK_tblUser_tblUserlLevel">
       <End Role="tblUserlLevel" EntitySet="tblUserlLevel" />

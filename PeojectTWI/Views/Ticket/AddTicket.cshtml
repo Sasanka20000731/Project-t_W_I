@@ -1,0 +1,83 @@
+﻿@model PeojectTWI.Models.Ticket
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="PageLoad()">
+
+    <input type="hidden" id="serialNumberId" ng-model="SerialNum" />
+    <div class="product-form col-12">
+
+        <div class="form-group">
+            <label for="droproductCategory">Serial Number</label>
+
+            <select class="form-control" id="DropSerialNumbersListID" name="droproductCategory" ng-model="SerialNumber">
+                    <option value="">Select Product Category</option>
+                    <option ng-repeat="item in SerialNumbers" value="{{item.InventoryId}}">{{item.SerialNumber}}</option>
+                </select>
+
+            <input type="text" id="txtSerialNumberID" class="form-control" ng-model="SerialNumber" required>
+        </div>
+
+
+
+        <div class="form-group">
+            <label>Comment :</label>
+            <input type="text" class="form-control" ng-model="ticketTemark" required>
+        </div>
+        <button type="button" class="btn btn-google" id="BtnAddTicketId" style="height:25px;padding-top:0px;" ng-click="AddTicket()">
+            Add Ticket
+        </button>
+
+    </div>
+</div>
+
+
+<style>
+    .td {
+        font-size: 8px;
+    }
+
+    .containerBlock {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .row {
+        margin-bottom: 20px;
+    }
+
+    button {
+        color: black;
+        padding: 10px 30%;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        button:hover {
+            background-color: #45a049;
+        }
+</style>
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/TicketService.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
