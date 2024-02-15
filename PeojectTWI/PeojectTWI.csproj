@@ -1691,6 +1691,8 @@
     <Content Include="Views\Ticket\AddTicket.cshtml" />
     <Content Include="Views\Ticket\AssignTicket.cshtml" />
     <Content Include="Views\Ticket\AssignTicketTolevel.cshtml" />
+    <Content Include="Views\Ticket\ManageTicket.cshtml" />
+    <Content Include="Views\Ticket\getTicketDetailsPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

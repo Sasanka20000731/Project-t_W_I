@@ -80,7 +80,64 @@ namespace PeojectTWI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        
+        public ActionResult ManageTicket()
+        {
+            return View();
+        }
+
+        //public ActionResult DownloadPipelineReport(string MasterId, int regionId, string selectedDateandYear)
+        //{
+        //    DateTime Selecteddate = Convert.ToDateTime(selectedDateandYear);
+        //    string[] array = MasterId.Split('_');
+
+        //    DataSet PipelineReportDataset = Selecteddate.Day == DateTime.Today.Day ? _pipelineService.DownloadReportCurrentMonth(array[0].ToString(), regionId, Convert.ToInt32(array[1])) :
+        //    _pipelineService.DownloadReport(array[0].ToString(), regionId, Convert.ToInt32(array[1]), Selecteddate.Day, Selecteddate.Month, Selecteddate.Year);
+
+        //    string rptTypeSummary = MasterId != "00000_0" ? "Report of : " + PipelineReportDataset.Tables["Table1"].Rows[0]["Branch"].ToString()
+        //    : regionId != 0 ? "Report of " + PipelineReportDataset.Tables["Table1"].Rows[0]["Region"].ToString() : "All";
+
+        //    string rptMonth = Selecteddate.Day == DateTime.Today.Day ? DateTime.Today.Month.ToString() + "/" + DateTime.Today.Day.ToString() + "/" + DateTime.Today.Year.ToString()
+        //        : Selecteddate.Month + "/" + Selecteddate.Day + "/" + Selecteddate.Year;
+
+        //    var a = PipelineReportDataset;
+        //    ReportDocument rd = new ReportDocument();
+        //    rd.Load(Path.Combine(Server.MapPath("~/Rpt/CrystalReport/PipelineReport.rpt")));
+        //    rd.SetDataSource(PipelineReportDataset.Tables["Table1"]);
+        //    rd.SetParameterValue(0, rptMonth);
+        //    rd.SetParameterValue(1, rptTypeSummary);
+        //    Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+        //    stream.Seek(0, SeekOrigin.Begin);
+        //    return File(stream, "application/pdf", "PrinterListReport.pdf");
+        //}
+
+        public JsonResult LogadPendingTickets()
+        {
+            var LoggedUser = Session["LoggedUserID"];
+            var result = _ticketService.LogadPendingTickets(5);
+
+           // var result = _ticketService.LogadPendingTickets(Convert.ToInt32(LoggedUser));
+            
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getTicketDetailsPage(int ticketID)
+        {
+            ViewBag.ticketID = ticketID;
+            return View();
+        }
+
+        public JsonResult LoadTicketdetailsToManage(int TicketId)
+        {
+            var result = _ticketService.LogadPendingTickets(5);
+
+            // var result = _ticketService.LogadPendingTickets(Convert.ToInt32(LoggedUser));
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
 
     }
 }

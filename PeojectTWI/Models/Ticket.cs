@@ -14,10 +14,12 @@ namespace PeojectTWI.Models
         public string CoustomerContact { get; set; }
         public string CoustomerEmail { get; set; }
         public string TicketDiscription { get; set; }
+        public string CurrentStatus { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<bool> IsOpen { get; set; }
         public Nullable<bool> IsClosed { get; set; }
         public Nullable<System.DateTime> OpenedDate { get; set; }
         public Nullable<System.DateTime> ClosedDate { get; set; }
+        public Nullable<System.DateTime> AssignDate { get; set; }
     }
 }

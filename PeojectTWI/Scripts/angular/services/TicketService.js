@@ -1,4 +1,6 @@
-﻿myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $uibModalStack, $rootScope) {
+﻿const { data } = require("jquery");
+
+myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $uibModalStack, $rootScope) {
 
 
     // 8746GSFGGSWGSXH45
@@ -59,6 +61,58 @@
 
 
     }
+
+
+    $scope.LogadPendingTicketss = function () {
+        debugger;
+        $http.get('/Ticket/LogadPendingTickets')
+            .success(function (response) {
+                debugger
+                $scope.PendingTicketResult = response;
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+    }
+
+    $scope.LogadPendingTickets = function () {
+        debugger;
+        $http.get('/Ticket/LogadPendingTickets')
+            .success(function (response) {
+                debugger
+                $scope.PendingTicketResult = response;
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+    }
+
+
+    $scope.getTicketDetailsPage = function (ticketID) {
+        debugger;
+        var extendUrl = '/Ticket/getTicketDetailsPage?ticketID=' + ticketID;
+        window.location.href = extendUrl;
+    }
+
+    //$scope.LoadTicketdetailsToManage = function () {
+
+
+ 
+    //    data = {
+    //        params: {
+    //            TicketId: $("#TicketId").val();
+    //        }
+    //    };
+    //    debugger;
+    //    $http.get('/Ticket/LoadTicketdetailsToManage', data)
+    //        .success(function (response) {
+    //            debugger
+                
+    //        })
+    //        .error(function (xhr) {
+    //            console.log(xhr.error);
+    //        })
+    //}
 
 
 });

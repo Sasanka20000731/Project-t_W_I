@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "getTicketDetailsPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ticket Details</h2>
+
+<input type="hidden" id="TicketId" value="@ViewBag.ticketID" ng-model="ticketID" />
+<div class="col-md-12 col-lg-12 col-sm-12 " ng-app="myapp" ng-controller="MyController" ng-init="LoadTicketdetailsToManage()">
+
+   
+
+    <div class="col-md-12 col-lg-12 col-sm-12 containerstyle mt-0">
+
+        <div class="col-md-12 col-sm-12 fs-l bb-color ">
+            <div class="col-md-6 col-sm-12 form-group">
+                <span class="pr-15 ">Ticket Number :</span>
+                <strong>: {{ TicketId }} </strong>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group text-right">
+                <span class="pr-15">Assigned Date </span>
+                <strong>: {{AssignedDate}} </strong>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-lg-12 pt-10">
+
+            <div class="col-md-12 col-sm-12 collg-12 fs-l pb-5">
+                <div class="col-lg-6 col-md-4 col-sm-12 paddingH-0">
+                    Sequence Details
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-12 overlay">
+                <div class="col-md-12 col-lg-12 col-sm-12 containerstyle">
+                    <div class="col-md-5 col-sm-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                            <strong>Sequence</strong>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 progressbar">
+                            <ul ng-repeat="data in sequenceData" class="progressbar" id="progressbarNarration">
+                                <li ng-if="data.Index > CurrentSequence">{{data.Sequence}}</li>
+                                <li class="active" ng-if="data.Index < CurrentSequence">{{data.Sequence}}</li>
+                                <li class="active" ng-if="data.Index == CurrentSequence && Active == false">{{data.Sequence}}</li>
+                                <li class="activeCurrent" ng-if="data.Index == CurrentSequence && Active == true">{{data.Sequence}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    @*<div class="col-md-6 col-sm-12 align-middle hidden-sm">
+                            <img ng-show="sequenceData.length > 9" src="~/Images/listnew.png" class="img-fluid" alt="" style="width:100%; height:auto; align-items:center">
+                            <div ng-show="sequenceData.length == 9 || sequenceData.length == 8 " class="col-md-12 col-sm-12" style="height:40px"> </div>
+                            <img ng-show="sequenceData.length <= 9" src="~/Images/list.png" class="img-fluid" alt="" style="width:100%; height:auto; align-items:center">
+                        </div>*@
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12 form-group table-responsive pt-10">
+            Ticket History
+            <table class="table table-bordered">
+                <thead style="font-size: 11px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgb(204, 204, 204);">
+                    <tr style="background-color: #142127; color: #fff;">
+                        <th class="text-center">Date & Time</th>
+                        <th class="text-center">Comment</th>
+                        <th class="text-center">Comment By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="repeat in commentDataFacility | itemsPerPage: pageSize" pagination-id="paginate2" current-page="currentPage" style="font-size: 12px; padding-top: 1px;" ng-class-odd="{'info':repeat}">
+                        <td class="text-center" ng-bind="repeat.CommentDate"></td>
+                        <td class="text-center" ng-bind="repeat.TicketComment"></td>
+                        <td class="text-center" ng-bind="repeat.CommentBy"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/TicketService.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />

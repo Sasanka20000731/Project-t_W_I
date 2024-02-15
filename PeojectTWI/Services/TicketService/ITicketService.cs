@@ -15,5 +15,6 @@ namespace PeojectTWI.Services.TicketService
 
         List<user> GetTicketHandlers();
         int AssignTicketToHandler(int ticketID, int assignToUsrer, int LoggedUserID);
+        List<Ticket> LogadPendingTickets(int LoggedUser);
     }
 }
