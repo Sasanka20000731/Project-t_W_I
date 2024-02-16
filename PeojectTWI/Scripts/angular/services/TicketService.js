@@ -1,5 +1,6 @@
-﻿myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $uibModalStack, $rootScope) {
+﻿//const { data } = require("jquery");
 
+myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $uibModalStack, $rootScope) {
 
     // 8746GSFGGSWGSXH45
     $scope.AddTicket = function () {
@@ -43,10 +44,8 @@
                 AssignToUsrer: $scope.DropTicketHandlersList
             }
         };
-        debugger;
         $http.get('/Ticket/AssignTicketToHandler',data)
             .success(function (response) {
-                debugger
                 if (response == 1) {
                     alertify.success('Successfully Assigned', 3000);
                 } else {
@@ -56,8 +55,49 @@
             .error(function (xhr) {
                 console.log(xhr.error);
             })
+    }
 
+    $scope.LogadPendingTickets = function () {
+        $http.get('/Ticket/LogadPendingTickets')
+            .success(function (response) {
+                $scope.PendingTicketResult = response;
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+    }
 
+    $scope.getTicketDetailsPage = function (ticketID) {
+        var extendUrl = '/Ticket/getTicketDetailsPage?ticketID=' + ticketID;
+        window.location.href = extendUrl;
+    }
+
+    $scope.LoadTicketdetailsToManage = function () {
+        data = {
+            params: {
+                TicketId: $("#TicketId").val()
+            }
+        };
+        $http.get('/Ticket/LoadTicketdetailsToManage', data)
+            .success(function (response) {
+
+                $scope.TicketNumber = response[0].TicketId;
+                $scope.TicketDescription = response[0].TicketDiscription;
+                $scope.TicketDate = response[0].TicketDate;
+                $scope.CurrentSequnceIndex = response[0].CurrentSequnceIndex;
+                $scope.CurrentSequence = response[0].CurrentSequnce;
+                $scope.AssignedFrom = response[0].AssignedFrom;
+                $scope.SerialNumber = response[0].SerialNumber;
+                $scope.TicketStatus = response[0].TicketStatus;
+               // debugger
+                $scope.TicketComment = response;
+                $scope.SequenceData = response;
+                $scope.nextUserList = response;
+
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
     }
 
 
