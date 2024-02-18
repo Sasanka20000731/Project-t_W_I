@@ -14,38 +14,73 @@
     <div class="row containerstyle mt-0 bb-color">
 
         <div class="col-6">
-            <div class="col-md-12  form-group bb-color">
+            <div class="row form-group bb-color">
                 <strong>Ticket Details </strong>
             </div>
-            <div class="col-md-12  form-group text-left">
-                <span class="pr-15 ">Ticket Number :</span>
-                <strong>: {{ TicketNumber }} </strong>
-            </div>
-            <div class="col-md-12 form-group text-left">
-                <span class="pr-15">Ticket Date </span>
-                <strong>: {{TicketDate}} </strong>
-            </div>
-            <div class="col-md-12 form-group text-left">
-                <span class="pr-15">Ticket Description </span>
-                <strong>: {{TicketDescription}} </strong>
-            </div>
-            <div class="col-md-12 form-group text-left">
-                <span class="pr-15">Current Level</span>
-                <strong>: {{CurrentSequence}} </strong>
-            </div>
-            <div class="col-md-12 form-group text-left">
-                <span class="pr-15">Assigned From</span>
-                <strong>: {{AssignedFrom}} </strong>
-            </div>
-            <div class="col-md-12 form-group text-left">
-                <span class="pr-15">Serial Number</span>
-                <strong>: {{SerialNumber}} </strong>
-            </div>
-            <div class="col-md-12 form-group text-left">
-                <span class="pr-15">Ticket Current Status</span>
-                <strong>: {{TicketStatus}} </strong>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15 ">Ticket Number</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{ TicketNumber }} </strong>
+                </div>
+
             </div>
 
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Ticket Date </span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{TicketDate}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Ticket Description </span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{TicketDescription}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Current Level</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{CurrentSequence}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Assigned From</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{AssignedFrom}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Serial Number</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{SerialNumber}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Ticket Current Status</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{TicketStatus}} </strong>
+                </div>
+            </div>
 
         </div>
 
@@ -56,13 +91,13 @@
 
             <div class="row">
                 <div class="col-md-12 form-group">
-                    <button class="custom-button" ng-click="manageTicket(2)">Accept</button>
+                    <button class="custom-button" ng-click="ManageTicket(2)">Accept</button>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-5">
-                    <button class="custom-button" ng-click="manageTicket(2)">Submit</button>
+                    <button class="custom-button" ng-click="ManageTicket(3)">Submit</button>
                 </div>
                 <div class="col-md-7">
                     <select id="dropNextSubmitUsers" name="dropNextSubmitUsers" class="form-control" ng-model="dropNextSubmitUsers" style=" width:100%; border-radius: 10px;">
@@ -78,9 +113,12 @@
                 </div>
             </div>
 
-            <div class="col-md-12 form-group">
-                <input type="text" style=" border-radius: 10px;" class="form-control" placeholder="Comment" ng-model="manageTicketComment" />
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <input type="text" style=" border-radius: 10px; margin:10px" class="form-control" placeholder="Comment" ng-model="manageTicketComment" />
+                </div>
             </div>
+
 
         </div>
     </div>

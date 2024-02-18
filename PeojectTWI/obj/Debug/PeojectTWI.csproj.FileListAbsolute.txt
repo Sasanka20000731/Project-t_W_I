@@ -493,7 +493,6 @@ F:\Projects\20240102FinalYearProject\Project-t_W_I\PeojectTWI\obj\Debug\PeojectT
 F:\Projects\20240102FinalYearProject\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.csproj.CopyComplete
 F:\Projects\20240102FinalYearProject\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.dll
 F:\Projects\20240102FinalYearProject\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.pdb
-F:\Projects\20240102FinalYearProject\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.csproj.AssemblyReference.cache
 E:\Personal\Personal Projects\Project\Project-t_W_I\PeojectTWI\bin\PeojectTWI.dll.config
 E:\Personal\Personal Projects\Project\Project-t_W_I\PeojectTWI\bin\PeojectTWI.dll
 E:\Personal\Personal Projects\Project\Project-t_W_I\PeojectTWI\bin\PeojectTWI.pdb
@@ -576,3 +575,4 @@ E:\Personal\Personal Projects\Project\Project-t_W_I\PeojectTWI\obj\Debug\Peoject
 E:\Personal\Personal Projects\Project\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.csproj.CopyComplete
 E:\Personal\Personal Projects\Project\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.dll
 E:\Personal\Personal Projects\Project\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.pdb
+F:\Projects\20240102FinalYearProject\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.csproj.AssemblyReference.cache

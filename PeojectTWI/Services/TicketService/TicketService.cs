@@ -332,5 +332,31 @@ namespace PeojectTWI.Services.TicketService
 
 
         }
+
+
+        public int ManageTicketLevelToLevel(int TicketId, int StatusID, int? AssignTo) 
+        {
+            using (var context = new ProjectDBEntities())
+            {
+                using (var cmd = context.Database.Connection.CreateCommand())
+                {
+                    cmd.CommandText = "sp_ManageTicketLevelToLevel";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@@TicketID", TicketId));
+                    cmd.Parameters.Add(new SqlParameter("@@StatusID", StatusID));
+                    cmd.Parameters.Add(new SqlParameter("@@AssignedTo", AssignTo));
+                    context.Database.Connection.Open();
+                    var result = cmd.ExecuteScalar();
+                    if (result != null && int.TryParse(result.ToString(), out int spResult))
+                    {
+                        return spResult;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
     }
 }

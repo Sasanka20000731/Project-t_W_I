@@ -31,21 +31,73 @@ namespace PeojectTWI.Controllers
             _warrentyService = new WarrentyService();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public JsonResult VerifyUser(string UserName)
+        {
+            var user = _userService.checkValidUser(UserName);
+            return Json(user, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult loginUser(string UserName, string Password)
+        {
+            var logUser = _userService.loginUser(UserName, Password);
+
+            if (logUser == 1)
+            {
+                var a = _userService.GetLoggedUsers(UserName, Password);
+                Session["LoggedUserID"] = a[0].UserId;
+                return Json(logUser, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(logUser, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login", "Home"); // Redirect to the home page after logout
+     
+        }
+
+
+
         public ActionResult Index()
         {
-            var a = _userService.GetLoggedUsers("Admin");
-             Session["LoggedUserID"] = a[0].UserId;
+            var aa = Session["LoggedUserID"];
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
         public ActionResult addUser()
         {
+            var aa = Session["LoggedUserID"];
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult addUser(user user)
         {
+            var aa = Session["LoggedUserID"];
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             _userService.addUser(user.UserName, user.FirstName, user.LastName, user.UserLevel, user.MobileNumber, user.Email, user.DOB);
             ModelState.Clear();
             return View("addUser", user);
@@ -53,12 +105,26 @@ namespace PeojectTWI.Controllers
 
         public ActionResult viewUser()
         {
+            var aa = Session["LoggedUserID"];
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
+
             var user = db.tblUsers;
             return View(user);
         }
 
         public ActionResult updateUser(user u)
         {
+            var aa = Session["LoggedUserID"];
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
+
             var id = Request["uid"];
             int uid = Convert.ToInt32(id);
             tblUser TU = db.tblUsers.SingleOrDefault(x => x.UserId == uid);
@@ -75,6 +141,12 @@ namespace PeojectTWI.Controllers
         [HttpPost]
         public ActionResult updateUsers(user user)
         {
+
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             try
             {
                 var a = _userService.updateUser(user.UserId, user.UserName, user.FirstName, user.LastName, user.UserLevel, user.MobileNumber, user.Email, user.DOB);
@@ -89,6 +161,11 @@ namespace PeojectTWI.Controllers
 
         public ActionResult userAccountStatus(user uAD)
         {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             var id = Request["uid_Status"];
             int uid = Convert.ToInt32(id);
             tblUser TU = db.tblUsers.SingleOrDefault(x => x.UserId == uid);
@@ -106,6 +183,11 @@ namespace PeojectTWI.Controllers
         [HttpPost]
         public ActionResult userAccountStatusChange(user user)
         {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
             try
             {
                 var a = _userService.changeUserStatus(user.UserId, user.Active);

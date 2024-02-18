@@ -31,13 +31,19 @@ namespace PeojectTWI.Controllers
             _saleService = new SaleService();
         }
 
+
         public ActionResult AddTicket()
         {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
         public JsonResult InsertTicket(string SerialNumber, string TicketRemark)
         {
+            
             var LoggedUser = Session["LoggedUserID"];
             if (LoggedUser != null || Convert.ToInt32(LoggedUser) != 0)
             {
@@ -54,24 +60,33 @@ namespace PeojectTWI.Controllers
 
         public ActionResult AssignTicket()
         {
-            var tickets = db.tblTickets;
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var tickets = db.tblTickets.Where(x =>  x.IsOpen == null);
             return View(tickets);
         }
 
         public ActionResult AssignTicketTolevel(int Ticketid)
         {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var result = _ticketService.GetTicketDetailsToassign(Ticketid).FirstOrDefault();
             return View(result);
         }
 
         public JsonResult GetTicketHandlers()
         {
-            var result = _ticketService.GetTicketHandlers();
+             var result = _ticketService.GetTicketHandlers();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult AssignTicketToHandler(int TicketID, int AssignToUsrer)
         {
+         
             var LoggedUser = Session["LoggedUserID"];
            
             if (LoggedUser != null || Convert.ToInt32(LoggedUser) != 0)
@@ -88,6 +103,10 @@ namespace PeojectTWI.Controllers
 
         public ActionResult ManageTicket()
         {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -118,25 +137,35 @@ namespace PeojectTWI.Controllers
 
         public JsonResult LogadPendingTickets()
         {
+           
             var LoggedUser = Session["LoggedUserID"];
-            var result = _ticketService.LogadPendingTickets(4);
+            var result = _ticketService.LogadPendingTickets(Convert.ToInt32(LoggedUser));
            // var result = _ticketService.LogadPendingTickets(Convert.ToInt32(LoggedUser));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult getTicketDetailsPage(int ticketID)
         {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             ViewBag.ticketID = ticketID;
             return View();
         }
 
         public JsonResult LoadTicketdetailsToManage(int TicketId)
         {
+           
             var result = _ticketService.LoadTicketdetailsToManage(TicketId); 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        public JsonResult ManageTicketLevelToLevel(int TicketId, int StatusID, int? AssignTo)
+        {
+            var result = _ticketService.ManageTicketLevelToLevel(TicketId,StatusID,AssignTo);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
 
 

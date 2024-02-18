@@ -27,50 +27,49 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <div class="col-6">
-                    <label for="droproductCategory">Product Categories</label>
 
-                    <select id="droproductCategory" name="droproductCategory" ng-model="droproductCategory">
+            <div class="col-6">
+                <div class="row">
+                    <label for="droproductCategory">Product Categories</label>
+                    <select id="droproductCategory" name="droproductCategory" ng-model="droproductCategory" class="form-control">
                         <option value="">Select Product Category</option>
                         <option ng-repeat="item in TypeChoices" value="{{item.ProductID}}">{{item.ProductName}}</option>
                     </select>
                 </div>
-            </div>
-
-            @*<div class="col-md-6">
-                <div class="col-6">
-                    <label for="droMasterStore">Master Stock</label>
-                    <select id="droMasterStore" name="droMasterStore">
-                        <option value="">Select Master Store</option>
-                        <option ng-repeat="item in TypeChoices2" value="{{item.mStoreId}}">{{item.MasterProductName}}</option>
-                    </select>
+                <div class="row">
+                    <label for="serialNumber">Serial Number:</label>
+                    <input type="text" id="serialNumber" name="serialNumber" ng-model="SerialNumber" ng-change="CheckData()" class="form-control">
                 </div>
-            </div>*@
 
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <label for="serialNumber">Serial Number:</label>
-                <input type="text" id="serialNumber" name="serialNumber" ng-model="SerialNumber" ng-change="CheckData()">
             </div>
+
+
+
+            <div class="col-6" style="align-content:center;">
+
+                <button class="custom-button" id="btnProcess" ng-click="SaveData()" ng-disabled="disableSave">
+                    Save
+                    <i class="fa fa-save" aria-hidden="true"></i> 
+                </button>
+                @*<button class="btn btn-bitbucket" id="btnProcess" ng-click="SaveData()" ng-disabled="disableSave">
+                    save
+                    
+                </button>*@
+
+
+            </div>
+
+
+    
+
         </div>
 
-        <div class="col-md-8">
-            <div class="input-group" >
-                <button class="btn btn-bitbucket" id="btnProcess" ng-click="SaveData()" ng-disabled="disableSave">
-                save
-                <i class="fa fa-save" aria-hidden="true"></i></button>
-            </div>
-        </div>
     </div>
 
 </div>
 
 <style>
     body {
- 
         margin: 20px;
         background: #f4f7f8;
     }
@@ -81,8 +80,7 @@
     }
 
     label {
-        font-family:'Times New Roman', Times, serif
-       font-weight:bold;
+        font-family: 'Times New Roman', Times, serif font-weight:bold;
         display: block;
         margin-top: 10px;
     }
@@ -92,10 +90,36 @@
     }
 
     button {
-        color:bisque;
-        background-color:aquamarine;
+        color: blue;
+        background-color:blueviolet;
         margin-top: 10px;
+        width:100%;
+        font-size:20Px;
+
+        border:medium;
+
     }
+    .custom-button {
+        height: 50px;
+        background-color: #1a2c34;
+        border-radius: 10px;
+        height: 90%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        float: left;
+        border: 0px;
+        color: #fff;
+        width: 100%;
+        -webkit-transition-duration: 0.9s;
+        -webkit-transition-timing-function: linear;
+        box-shadow: 0px 0 0 #2e4f5e inset;
+    }
+
+
+        .custom-button:hover {
+            box-shadow: 900Px 0 0 #2e4f5e inset;
+        }
+
 </style>
 
 <script src="~/Scripts/angular/angular.min.js"></script>

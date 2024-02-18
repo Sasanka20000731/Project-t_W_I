@@ -551,6 +551,7 @@
     <Content Include="Scripts\angular\New\angular-resource.js" />
     <Content Include="Scripts\angular\New\angular.js" />
     <Content Include="Scripts\angular\services\app.js" />
+    <Content Include="Scripts\angular\services\HomeServices.js" />
     <Content Include="Scripts\angular\services\InventoryService.js" />
     <Content Include="Scripts\angular\services\SaleServices.js" />
     <Content Include="Scripts\angular\services\TicketService.js" />
@@ -1693,6 +1694,7 @@
     <Content Include="Views\Ticket\AssignTicketTolevel.cshtml" />
     <Content Include="Views\Ticket\ManageTicket.cshtml" />
     <Content Include="Views\Ticket\getTicketDetailsPage.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

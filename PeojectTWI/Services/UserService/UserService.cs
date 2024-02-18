@@ -18,7 +18,9 @@ namespace PeojectTWI.Services.UserService
         ProjectDBEntities db = new ProjectDBEntities();
         public void addUser(string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob)
         {
-            tblUser tu = new tblUser();
+            try
+            {
+                tblUser tu = new tblUser();
             tu.UserName = userName;
             tu.FirstName = firstName;
             tu.LastName = lastName;
@@ -31,9 +33,13 @@ namespace PeojectTWI.Services.UserService
             tu.DOB = dob;
             db.tblUsers.Add(tu);
             db.SaveChanges();
+            }
+            catch (Exception)
+            {
 
+            }
 
-            throw new NotImplementedException();
+          
         }
 
         public async Task activateUserAsync(int userId, bool status)
@@ -43,12 +49,12 @@ namespace PeojectTWI.Services.UserService
             {
                 var entity = await db.tblUsers.FindAsync(userId);
 
-                if (entity != null && status== false)
+                if (entity != null && status == false)
                 {
                     entity.UserId = userId;
                     entity.Active = false;
                     await db.SaveChangesAsync();
-                  //  return RedirectToAction("user");
+                    //  return RedirectToAction("user");
                 }
                 //ViewBag.Error = "User not found";
                 else if (entity != null && status == true)
@@ -62,7 +68,7 @@ namespace PeojectTWI.Services.UserService
             }
             catch (Exception)
             {
-               // ViewBag.Error = "Error updating user: " + ex.Message;
+                // ViewBag.Error = "Error updating user: " + ex.Message;
             }
 
         }
@@ -72,7 +78,7 @@ namespace PeojectTWI.Services.UserService
             throw new NotImplementedException();
         }
 
-        public async Task updateUser(int userId,string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob)
+        public async Task updateUser(int userId, string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob)
         {
             try
             {
@@ -90,31 +96,28 @@ namespace PeojectTWI.Services.UserService
                     await db.SaveChangesAsync();
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
-               
-            }
-      
-        }
 
+            }
+
+        }
 
         public async Task changeUserStatus(int userId, bool? status)
         {
-                var entity = await db.tblUsers.FindAsync(userId);
-                if (entity != null)
-                {
-                    entity.Active = status;
-                    await db.SaveChangesAsync();
-                }
+            var entity = await db.tblUsers.FindAsync(userId);
+            if (entity != null)
+            {
+                entity.Active = status;
+                await db.SaveChangesAsync();
+            }
             throw new NotImplementedException();
         }
 
-
-
-        public List<loggedUser> GetLoggedUsers(string UserName)
+        public List<loggedUser> GetLoggedUsers(string UserName,string Password)
         {
             return (from p in db.tblUsers
-                    where p.Active == true && p.UserName == UserName
+                    where p.Active == true && p.UserName == UserName && p.Password == Password
                     select new loggedUser
                     {
                         UserId = p.UserId,
@@ -122,6 +125,43 @@ namespace PeojectTWI.Services.UserService
                     }).ToList();
         }
 
+        public int checkValidUser(string UserName)
+        {
+            var user = (from p in db.tblUsers
+                        where p.Active == true && p.UserName == UserName
+                        select new loggedUser
+                        {
+                            UserId = p.UserId
+                        }).FirstOrDefault();
+
+            if (user != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public int loginUser(string UserName,string Password)
+        {
+            var user = (from p in db.tblUsers
+                      where p.Active == true && p.UserName == UserName && p.Password == Password
+                      select new loggedUser
+                      {
+                          UserId = p.UserId
+                      }).FirstOrDefault();
+
+            if (user != null )
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
 
     }

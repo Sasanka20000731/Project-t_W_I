@@ -18,5 +18,8 @@ namespace PeojectTWI.Services.TicketService
         List<Ticket> LogadPendingTickets(int LoggedUser);
 
         List<Ticket> LoadTicketdetailsToManage(int TicketID);
+
+        int ManageTicketLevelToLevel(int TicketId, int StatusID, int? AssignTo);
+
     }
 }

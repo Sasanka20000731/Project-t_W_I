@@ -100,5 +100,41 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
             })
     }
 
+    $scope.ManageTicket = function (Status) {
+
+
+
+        data = {
+            params: {
+                TicketId: $("#TicketId").val(),
+                StatusID: Status,
+                AssignTo: $scope.dropNextSubmitUsers
+            }
+        };
+
+        $http.get('/Ticket/ManageTicketLevelToLevel', data)
+            .success(function (response) {
+                if (response == 2) {
+                    alertify.success('Accepted', 3000);
+                } else if (response == 3) {
+                    alertify.success('Successfully Submitted', 3000);
+                } else if (response == 4) {
+                    alertify.success('Successfully Rejected', 3000);
+                } else if (response == 5) {
+                    alertify.success('Successfully Closed Ticket', 3000);
+                }else {
+                    alertify.error('Error', 5000);
+                }
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+
+    }
+
+
+
+
+
 
 });

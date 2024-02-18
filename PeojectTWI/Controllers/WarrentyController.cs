@@ -27,32 +27,45 @@ namespace PeojectTWI.Controllers
             _inventoryService = new InventoryService();
             _warrentyService = new WarrentyService();
         }
-    
+
         public ActionResult ViewAllWerrenty()
         {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var warrenty = db.tblMasterWarrenties;
             return View(warrenty);
         }
  
         public ActionResult CheckWarrenty() 
         {
-
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
         public JsonResult GetWarrentyList(string ContactNumber)
         {
+            
             var WarrentyList = _warrentyService.GetWarrentyList(ContactNumber);
             return Json(WarrentyList, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetWarrentyCommentList(string SerialNumber)
         {
+     
             var WarrentyCommentList = _warrentyService.GetWarrentyComments(SerialNumber);
             return Json(WarrentyCommentList, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ExtendWarrenty(string SerialNumber)
         {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             ViewBag.SerialNumber = SerialNumber;
             return View();
         }
@@ -60,6 +73,7 @@ namespace PeojectTWI.Controllers
 
         public JsonResult SaveExtenWarrenty(string SerialNumber,int Warrenty, decimal ExtendCost)
         {
+        
             int warranty = (Warrenty == 1) ? 12 : (Warrenty == 2) ? 24 : (Warrenty == 3) ? 36 : 0;
 
 

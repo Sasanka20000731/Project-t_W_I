@@ -29,7 +29,8 @@
                         <td>{{ repeat.CurrentStatus }}</td>
                         <td>
                             <button type="button" class="btn btn-google" id="btnGetDetailsID" style="height:25px;padding-top:0px;" ng-click="getTicketDetailsPage(repeat.TicketId)">
-                                <i class="fa fa-trash-o" aria-hidden="true" style="vertical-align: super; padding-top: 5px;"></i>
+                                
+                                <i class="fa fa-file-text-o" aria-hidden="true" style="vertical-align:super; padding-top:5px;"></i>
                             </button>
                         </td>
                     </tr>
@@ -38,6 +39,35 @@
         </div>
     </div>
 </div>
+
+<style>
+    .btn.btn-google {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn.btn-google:hover:after {
+            content: "";
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .btn.btn-google:hover {
+            color: #fff;
+            background-color: #142127;
+        }
+
+            .btn.btn-google:hover:after {
+                transform: scale(1);
+            }
+</style>
 
 
 

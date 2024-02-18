@@ -19,6 +19,8 @@ namespace PeojectTWI.Services.UserService
 
         Task changeUserStatus(int userId, bool? status);
 
-        List<loggedUser> GetLoggedUsers(string UserName);
+        List<loggedUser> GetLoggedUsers(string UserName,string Password);
+        int checkValidUser(string UserName);
+        int loginUser(string UserName, string Password);
     }
 }
