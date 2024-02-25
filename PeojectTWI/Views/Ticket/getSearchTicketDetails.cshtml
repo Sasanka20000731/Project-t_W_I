@@ -1,0 +1,242 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ticket Details</h2>
+
+
+<input type="hidden" id="TicketId" value="@ViewBag.ticketID" />
+<div class="col-md-12 col-lg-12 col-sm-12 " ng-app="myapp" ng-controller="MyController" ng-init="LoadTicketdetailsToManage()">
+
+
+
+    <div class="row containerstyle mt-0 bb-color">
+
+        <div class="col-6">
+            <div class="row form-group bb-color">
+                <strong>Ticket Details </strong>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15 ">Ticket Number</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{ TicketNumber }} </strong>
+                </div>
+
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Ticket Date </span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{TicketDate}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Ticket Description </span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{TicketDescription}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Current Level</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{CurrentSequence}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Assigned From</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{AssignedFrom}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Serial Number</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{SerialNumber}} </strong>
+                </div>
+            </div>
+
+            <div class="row  form-group text-left">
+                <div class="col-3">
+                    <span class="pr-15">Ticket Current Status</span>
+                </div>
+                <div class="col-9">
+                    <strong>: {{TicketStatus}} </strong>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-6 ">
+            <div class="col-md-12 form-group bb-color">
+                <strong>Options</strong>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <button class="custom-button" ng-click="ManageTicket(2)">Accept</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <button class="custom-button" ng-click="ManageTicket(3)">Submit</button>
+                </div>
+                <div class="col-md-7">
+                    <select id="dropNextSubmitUsers" name="dropNextSubmitUsers" class="form-control" ng-model="dropNextSubmitUsers" style=" width:100%; border-radius: 10px;">
+                        <option value="">Select Next Level User</option>
+                        <option ng-repeat="item in nextUserList" ng-if="item.nextUserList !== null" value="{{item.nextUserList.NextLevelUserId}}">{{item.nextUserList.NextLevelUserName}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <button class="custom-button" ng-click="manageTicket(4)">Reject</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <input type="text" style=" border-radius: 10px; margin:10px" class="form-control" placeholder="Comment" ng-model="manageTicketComment" />
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="row-cols-md-12 row-cols-lg-12 row-cols-sm-12 containerstyle mt-0" style="padding-top: 20px; padding-bottom: 20px;">
+
+        <div class="col-md-12 col-sm-12 collg-12 fs-l pb-5">
+            <div class="col-lg-6 col-md-4 col-sm-12 paddingH-0">
+                <strong>  Sequence Details</strong>
+
+
+            </div>
+        </div>
+
+        <div class="col-md-12 col-lg-12 overlay">
+            <div class="col-md-12 col-lg-12 col-sm-12 containerstyle">
+                <div class="col-md-12 col-sm-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12 progressbar">
+                        <ul ng-repeat="data in SequenceData" class="progressbar" id="progressbarNarration">
+                            <li ng-class="{ 'bold-item' : CurrentSequnceIndex>
+                                data.SequenceLists.SequenceIndexId,
+                                'Strong-item': CurrentSequnceIndex === data.SequenceLists.SequenceIndexId,
+                                'normal-item': !(CurrentSequnceIndex > data.SequenceLists.SequenceIndexId) && !(CurrentSequence === data.SequenceLists.SequenceName)
+                                }">
+                                {{data.SequenceLists.SequenceName}}
+                            </li>
+                        </ul>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row-cols-md-12 row-cols-lg-12 row-cols-sm-12 containerstyle mt-0">
+        <div class="form-group table-responsive ">
+            <strong>Ticket History</strong>
+            <table class="table table-bordered" style="margin-bottom:20px;">
+                <thead style="font-size: 8px; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgb(204, 204, 204);">
+                    <tr style="background-color: #1a2c34;color: #fff; width:100%">
+                        <th class="text-center">Comment Date</th>
+                        <th class="text-center">Comment</th>
+                        <th class="text-center">Comment By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="repeat in TicketComment | orderBy : '-Id'" ng-class-odd="{'gray': datatable}">
+                        <td class="text-center" ng-if="repeat.TicketComment !== null" ng-bind="repeat.TicketComment.CommentedDate"></td>
+                        <td class="text-center" ng-if="repeat.TicketComment !== null" ng-bind="repeat.TicketComment.Comment"></td>
+                        <td class="text-center" ng-if="repeat.TicketComment !== null" ng-bind="repeat.TicketComment.CommentedBy"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+<style>
+    .bold-item {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .Strong-item {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .normal-item {
+        font-size: 18px;
+    }
+
+    .custom-button {
+        height: 50px;
+        background-color: #1a2c34;
+        border-radius: 10px;
+        margin: 5px;
+        float: left;
+        border: 0px;
+        color: #fff;
+        width: 100%;
+        -webkit-transition-duration: 0.9s;
+        -webkit-transition-timing-function: linear;
+        box-shadow: 0px 0 0 #2e4f5e inset;
+    }
+
+        .custom-button:hover {
+            box-shadow: 700Px 0 0 #2e4f5e inset;
+        }
+</style>
+
+
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/TicketService.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />

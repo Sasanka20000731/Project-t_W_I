@@ -20,6 +20,7 @@ namespace PeojectTWI.Services.TicketService
         List<Ticket> LoadTicketdetailsToManage(int TicketID);
 
         int ManageTicketLevelToLevel(int TicketId, int StatusID, int? AssignTo);
+        List<Ticket> SerchTickeList(int? TicketId, string customerContact = null);
 
     }
 }

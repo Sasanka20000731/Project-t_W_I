@@ -89,6 +89,13 @@ namespace PeojectTWI.Controllers
             return View();
         }
 
+        public JsonResult getUserLlevels()
+        {
+            var aa = _userService.getUserlevels();
+            return Json(aa, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpPost]
         public ActionResult addUser(user user)
         {

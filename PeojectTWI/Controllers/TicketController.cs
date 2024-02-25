@@ -168,6 +168,31 @@ namespace PeojectTWI.Controllers
         }
 
 
+        public ActionResult TicketSearch()
+        {
+            return View();
+        }
+
+        public JsonResult SerchTickeList(int? TicketId, string customerContact =null)
+        {
+            
+            var result = _ticketService.SerchTickeList(TicketId, customerContact);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        
+        public ActionResult getSearchTicketDetails(int ticketID)
+        {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            ViewBag.ticketID = ticketID;
+            return View();
+        }
+
 
 
     }

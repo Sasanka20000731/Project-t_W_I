@@ -22,5 +22,7 @@ namespace PeojectTWI.Services.UserService
         List<loggedUser> GetLoggedUsers(string UserName,string Password);
         int checkValidUser(string UserName);
         int loginUser(string UserName, string Password);
+
+        List<Usergroup> getUserlevels();
     }
 }

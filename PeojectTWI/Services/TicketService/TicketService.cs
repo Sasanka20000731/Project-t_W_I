@@ -358,5 +358,36 @@ namespace PeojectTWI.Services.TicketService
                 }
             }
         }
+
+        public List<Ticket> SerchTickeList(int? TicketId,string customerContact = null)
+        {
+            var resultA = (from a in db.tblTickets
+                          where a.TicketId == TicketId
+                          select new Ticket
+                          {
+                              TicketId = a.TicketId,
+                              TicketDate = a.CreatedDate.ToString(),
+                              Coustomername = a.tblCoustomerDetail.CoustomerName,
+                              CoustomerContact = a.tblCoustomerDetail.ContactNumber,
+                              CoustomerEmail = a.tblCoustomerDetail.Email
+                          }).ToList();
+
+
+            var resultB = (from a in db.tblTickets
+                          where a.tblCoustomerDetail.ContactNumber == customerContact
+                          select new Ticket
+                          {
+                              TicketId = a.TicketId,
+                              TicketDate = a.CreatedDate.ToString(),
+                              Coustomername = a.tblCoustomerDetail.CoustomerName,
+                              CoustomerContact = a.tblCoustomerDetail.ContactNumber,
+                              CoustomerEmail = a.tblCoustomerDetail.Email
+                          }).ToList();
+
+            var combinedResult = resultA.Concat(resultB).ToList();
+
+            return combinedResult;
+
+        }
     }
 }

@@ -133,7 +133,34 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
     }
 
 
+    $scope.SearchTicketLists = function () {
+        debugger;
+        data = {
+            params: {
+                TicketId: $scope.TicketNumber,
+                customerContact: $scope.TicketCustomerContactNumber
+            }
+        };
+        $http.get('/Ticket/SerchTickeList', data)
+            .success(function (response) {
 
+                $scope.SearchTicketList = response;
+                $scope.TicketNumber = null;
+                $scope.TicketCustomerContactNumber = null;
+                $scope.$apply();
+                debugger;
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+    }
+
+    $scope.getAllTicketDetails = function (ticketID) {
+
+        var extendUrl = '/Ticket/getSearchTicketDetails?ticketID=' + ticketID;
+        window.location.href = extendUrl;
+
+    }
 
 
 

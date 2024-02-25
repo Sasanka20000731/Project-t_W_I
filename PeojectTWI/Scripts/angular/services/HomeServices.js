@@ -58,6 +58,18 @@
         window.location.href = extendUrl;
     }
 
+    //Implement to login page
+    //$scope.LoadPageData = function () {
+
+    //    $http.get('/Home/getUserLlevels')
+    //        .success(function (response) {
+    //            $scope.UserLevelList = response;
+    //        }).error(function (xhr) {
+    //            console.log(xhr.error);
+    //            alertify.success("Error", 3000);
+    //        })
+
+    //}
 
 
 });

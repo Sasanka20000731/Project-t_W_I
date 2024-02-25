@@ -164,5 +164,17 @@ namespace PeojectTWI.Services.UserService
         }
 
 
+        public List<Usergroup> getUserlevels()
+        {
+            return  (from a in db.tblUserlLevels
+                    where a.Active == true
+                    select new Usergroup
+                    {
+                        userlevelId = a.UserlevelID,
+                        UserlevelName = a.UserLevel
+                    }).ToList();
+        
+        }
+
     }
 }
