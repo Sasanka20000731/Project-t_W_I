@@ -6,6 +6,7 @@
 <h2>Ticket Details</h2>
 
 
+
 <input type="hidden" id="TicketId" value="@ViewBag.ticketID" />
 <div class="col-md-12 col-lg-12 col-sm-12 " ng-app="myapp" ng-controller="MyController" ng-init="LoadTicketdetailsToManage()">
 
@@ -85,80 +86,45 @@
         </div>
 
         <div class="col-6 ">
-            <div class="col-md-12 form-group bb-color">
-                <strong>Options</strong>
-            </div>
+            <div class="col-md-12 col-sm-12 collg-12 fs-l pb-5">
+                <div class="col-lg-12 col-md-4 col-sm-12 paddingH-0">
+                    <div style="align-content:center">
+                        <h2>  Sequence Details</h2>
+                    </div>
+                   
 
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <button class="custom-button" ng-click="ManageTicket(2)">Accept</button>
+
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-5">
-                    <button class="custom-button" ng-click="ManageTicket(3)">Submit</button>
-                </div>
-                <div class="col-md-7">
-                    <select id="dropNextSubmitUsers" name="dropNextSubmitUsers" class="form-control" ng-model="dropNextSubmitUsers" style=" width:100%; border-radius: 10px;">
-                        <option value="">Select Next Level User</option>
-                        <option ng-repeat="item in nextUserList" ng-if="item.nextUserList !== null" value="{{item.nextUserList.NextLevelUserId}}">{{item.nextUserList.NextLevelUserName}}</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <button class="custom-button" ng-click="manageTicket(4)">Reject</button>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <input type="text" style=" border-radius: 10px; margin:10px" class="form-control" placeholder="Comment" ng-model="manageTicketComment" />
-                </div>
-            </div>
+            <div class="col-md-12 col-lg-12 overlay">
+                <div class="col-md-12 col-lg-12 col-sm-12 containerstyle">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12 progressbar">
+                            <ul ng-repeat="data in SequenceData" class="progressbar" id="progressbarNarration">
+                                <li ng-class="{ 'bold-item' : CurrentSequnceIndex>
+                                    data.SequenceLists.SequenceIndexId,
+                                    'Strong-item': CurrentSequnceIndex === data.SequenceLists.SequenceIndexId,
+                                    'normal-item': !(CurrentSequnceIndex > data.SequenceLists.SequenceIndexId) && !(CurrentSequence === data.SequenceLists.SequenceName)
+                                    }">
+                                    {{data.SequenceLists.SequenceName}}
+                                </li>
+                            </ul>
 
 
-        </div>
-    </div>
-
-
-
-
-
-    <div class="row-cols-md-12 row-cols-lg-12 row-cols-sm-12 containerstyle mt-0" style="padding-top: 20px; padding-bottom: 20px;">
-
-        <div class="col-md-12 col-sm-12 collg-12 fs-l pb-5">
-            <div class="col-lg-6 col-md-4 col-sm-12 paddingH-0">
-                <strong>  Sequence Details</strong>
-
-
-            </div>
-        </div>
-
-        <div class="col-md-12 col-lg-12 overlay">
-            <div class="col-md-12 col-lg-12 col-sm-12 containerstyle">
-                <div class="col-md-12 col-sm-12">
-                    <div class="col-md-12 col-sm-12 col-xs-12 progressbar">
-                        <ul ng-repeat="data in SequenceData" class="progressbar" id="progressbarNarration">
-                            <li ng-class="{ 'bold-item' : CurrentSequnceIndex>
-                                data.SequenceLists.SequenceIndexId,
-                                'Strong-item': CurrentSequnceIndex === data.SequenceLists.SequenceIndexId,
-                                'normal-item': !(CurrentSequnceIndex > data.SequenceLists.SequenceIndexId) && !(CurrentSequence === data.SequenceLists.SequenceName)
-                                }">
-                                {{data.SequenceLists.SequenceName}}
-                            </li>
-                        </ul>
-
+                        </div>
 
                     </div>
 
                 </div>
-
             </div>
+
+
         </div>
     </div>
+
+
+
 
     <div class="row-cols-md-12 row-cols-lg-12 row-cols-sm-12 containerstyle mt-0">
         <div class="form-group table-responsive ">

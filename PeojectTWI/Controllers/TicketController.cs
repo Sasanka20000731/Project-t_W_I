@@ -190,6 +190,8 @@ namespace PeojectTWI.Controllers
                 return RedirectToAction("Login", "Home");
             }
             ViewBag.ticketID = ticketID;
+
+         
             return View();
         }
 

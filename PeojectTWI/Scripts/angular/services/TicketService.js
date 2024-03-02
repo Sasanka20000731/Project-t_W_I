@@ -78,6 +78,7 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
                 TicketId: $("#TicketId").val()
             }
         };
+        //debugger
         $http.get('/Ticket/LoadTicketdetailsToManage', data)
             .success(function (response) {
 
@@ -134,7 +135,7 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
 
 
     $scope.SearchTicketLists = function () {
-        debugger;
+        //debugger;
         data = {
             params: {
                 TicketId: $scope.TicketNumber,
