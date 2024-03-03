@@ -66,8 +66,6 @@ namespace PeojectTWI.Controllers
      
         }
 
-
-
         public ActionResult Index()
         {
             var aa = Session["LoggedUserID"];
@@ -95,19 +93,11 @@ namespace PeojectTWI.Controllers
             return Json(aa, JsonRequestBehavior.AllowGet);
         }
 
-
-        [HttpPost]
-        public ActionResult addUser(user user)
+        public JsonResult saveUser(string UserName, string FirstName, string LastName,DateTime DOB,string Email,string MobileNumber,int UserLevel)
         {
-            var aa = Session["LoggedUserID"];
-            if (Session["LoggedUserID"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-
-            }
-            _userService.addUser(user.UserName, user.FirstName, user.LastName, user.UserLevel, user.MobileNumber, user.Email, user.DOB);
-            ModelState.Clear();
-            return View("addUser", user);
+            var result =   _userService.addUser(UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB);
+            return Json(result, JsonRequestBehavior.AllowGet);
+           
         }
 
         public ActionResult viewUser()
@@ -123,7 +113,7 @@ namespace PeojectTWI.Controllers
             return View(user);
         }
 
-        public ActionResult updateUser(user u)
+        public ActionResult updateUser()
         {
             var aa = Session["LoggedUserID"];
             if (Session["LoggedUserID"] == null)
@@ -131,22 +121,23 @@ namespace PeojectTWI.Controllers
                 return RedirectToAction("Login", "Home");
 
             }
-
             var id = Request["uid"];
-            int uid = Convert.ToInt32(id);
-            tblUser TU = db.tblUsers.SingleOrDefault(x => x.UserId == uid);
-            u.UserId = TU.UserId;
-            u.UserName = TU.UserName;
-            u.FirstName = TU.FirstName;
-            u.LastName = TU.LastName;
-            u.MobileNumber = TU.MobileNumber;
-            u.UserLevel = TU.UserLevel;
-            u.DOB = TU.DOB;
-            return View("updateUser", u);
+            ViewBag.UserId = id;
+            return View();
         }
 
-        [HttpPost]
-        public ActionResult updateUsers(user user)
+
+        public JsonResult getselectedUserDetails(int UserId)
+        {
+            var result = _userService.getselectedUserDetails(UserId);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+        
+        public ActionResult updateUsers(int UserId, string UserName, string FirstName, string LastName, DateTime DOB,string Email, string MobileNumber, int UserLevel, bool Active)
         {
 
             if (Session["LoggedUserID"] == null)
@@ -154,9 +145,10 @@ namespace PeojectTWI.Controllers
                 return RedirectToAction("Login", "Home");
 
             }
+
             try
             {
-                var a = _userService.updateUser(user.UserId, user.UserName, user.FirstName, user.LastName, user.UserLevel, user.MobileNumber, user.Email, user.DOB);
+                var a = _userService.updateUser(UserId, UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB);
                 return RedirectToAction("viewUser");
             }
             catch (Exception ex)

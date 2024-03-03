@@ -13,7 +13,7 @@ namespace PeojectTWI.Services.UserService
        // void addUser(string username, string firstname, string lastname, string password, int userlevel, int mobilenumber);
 
         void viewUser(string username);
-        void addUser(string userName, string firstName, string lastName,  int? userLevel, string mobileNumber, string email, DateTime? dob);
+        int addUser(string userName, string firstName, string lastName,  int? userLevel, string mobileNumber, string email, DateTime? dob);
         Task activateUserAsync(int userId, bool stataus);
         Task updateUser(int userId,string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob);
 
@@ -24,5 +24,8 @@ namespace PeojectTWI.Services.UserService
         int loginUser(string UserName, string Password);
 
         List<Usergroup> getUserlevels();
+
+        List<user> getselectedUserDetails(int UserId);
+
     }
 }

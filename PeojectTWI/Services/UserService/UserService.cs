@@ -16,7 +16,7 @@ namespace PeojectTWI.Services.UserService
     public class UserService : IUserService
     {
         ProjectDBEntities db = new ProjectDBEntities();
-        public void addUser(string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob)
+        public int addUser(string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob)
         {
             try
             {
@@ -33,10 +33,11 @@ namespace PeojectTWI.Services.UserService
             tu.DOB = dob;
             db.tblUsers.Add(tu);
             db.SaveChanges();
+                return 1;
             }
             catch (Exception)
             {
-
+                return 0;
             }
 
           
@@ -175,6 +176,25 @@ namespace PeojectTWI.Services.UserService
                     }).ToList();
         
         }
+
+        public List<user> getselectedUserDetails(int UserId)
+        { 
+            var result = (from a in db.tblUsers
+                          where a.UserId == UserId && a.Active == true
+                          select new user
+                          {
+                              UserName = a.UserName,
+                              FirstName = a.FirstName,
+                              LastName = a.LastName,
+                              UserLevel = a.UserLevel,
+                              MobileNumber= a.MobileNumber,
+                              Email = a.Email,
+                              DOB = a.DOB
+                             
+                          }).ToList();
+            return result;
+        }
+
 
     }
 }
