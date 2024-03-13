@@ -14,19 +14,27 @@ namespace PeojectTWI.Services.InventoryService
     public class InventoryService : IInventoryService
     {
         ProjectDBEntities db = new ProjectDBEntities();
-        public void insertProductCategory(string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName)
+        public int insertProductCategory(string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName)
         {
-            tblProductCategory tpc = new tblProductCategory();
-            tpc.BrandName = brandName;
-            tpc.VendorContact = vendorContact;
-            tpc.VendorName = vendorName;
-            tpc.VendorAddress = vendorAddress;
-            tpc.VendorEmail = vendorEmail;
-            tpc.ProductName = productName;
-            tpc.CreateDate = DateTime.Now;
-            tpc.Active = true;
-            db.tblProductCategories.Add(tpc);
-            db.SaveChanges();
+            try
+            {
+                tblProductCategory tpc = new tblProductCategory();
+                tpc.BrandName = brandName;
+                tpc.VendorContact = vendorContact;
+                tpc.VendorName = vendorName;
+                tpc.VendorAddress = vendorAddress;
+                tpc.VendorEmail = vendorEmail;
+                tpc.ProductName = productName;
+                tpc.CreateDate = DateTime.Now;
+                tpc.Active = true;
+                db.tblProductCategories.Add(tpc);
+                db.SaveChanges();
+                return 1;
+            }
+            catch {
+                return 0;
+            }
+
         }
 
 
@@ -37,23 +45,27 @@ namespace PeojectTWI.Services.InventoryService
         }
 
 
-        public productCategory getProductCategoryDetails(int pid)
+        public List <productCategory> getProductCategoryDetails(int pid)
         {
-            productCategory pd = new productCategory();
+           var result = (from a in  db.tblProductCategories 
+                         where a.ProductID == pid
+                select new productCategory
+                {
+                    ProductID = a.ProductID,
+                    BrandName = a.BrandName,
+                    VendorName = a.VendorName,
+                    VendorContact = a.VendorContact,
+                    VendorAddress = a.VendorAddress,
+                    VendorEmail = a.VendorEmail,
+                    ProductName = a.ProductName,
+                    Active = a.Active
 
-            tblProductCategory TPC = db.tblProductCategories.SingleOrDefault(x => x.ProductID == pid);
-            pd.ProductID = TPC.ProductID;
-            pd.BrandName = TPC.BrandName;
-            pd.VendorName = TPC.VendorName;
-            pd.VendorContact = TPC.VendorContact;
-            pd.VendorAddress = TPC.VendorAddress;
-            pd.VendorEmail = TPC.VendorEmail;
-            pd.ProductName = TPC.ProductName;
+                }).ToList();
 
-            return (pd);
+            return result;
         }
 
-        public async Task updateProductCategory(int productCategoryId, string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, bool Active, string productName)
+        public async Task updateProductCategory(int productCategoryId, string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, Nullable<bool> Active, string productName)
         {
             var entity = await db.tblProductCategories.FindAsync(productCategoryId);
 
@@ -76,7 +88,8 @@ namespace PeojectTWI.Services.InventoryService
             var entity = await db.tblProductCategories.FindAsync(productId);
             if (entity != null)
             {
-                db.tblProductCategories.Remove(entity);
+                entity.Active = false;
+               // db.tblProductCategories.Remove(entity);
                 db.SaveChanges();
                 await db.SaveChangesAsync();
             }
@@ -113,21 +126,24 @@ namespace PeojectTWI.Services.InventoryService
             ms.perchesedCount = tms.perchesedCount;
             ms.unitPrice = tms.unitPrice;
             ms.PerchesedDate = tms.PerchesedDate;
+            ms.RecoredEnterdBy = tms.RecoredEnterdBy;
+            ms.createdDate = tms.createdDate;
+
             return (ms);
         }
 
-        public async Task updateMasterStore(int mStoreId, int? productId, int? perchesedCount, decimal? unitPrice, DateTime? perchesedDate, int? recoredEnterdBy)
+        public async Task updateMasterStore(int mStoreId,  int? perchesedCount, decimal? unitPrice, DateTime? perchesedDate)
         {
             var entity = await db.tblMasterStores.FindAsync(mStoreId);
 
             if (entity != null)
             {
-                entity.ProductId = productId;
+                //entity.ProductId = productId;
                 entity.perchesedCount = perchesedCount;
                 entity.unitPrice = (decimal?)unitPrice;
                 entity.PerchesedDate = perchesedDate;
-                entity.perchesedCount = perchesedCount;
-                entity.RecoredEnterdBy = recoredEnterdBy;
+               // entity.RecoredEnterdBy = recoredEnterdBy;
+
                 await db.SaveChangesAsync();
             }
             throw new NotImplementedException();

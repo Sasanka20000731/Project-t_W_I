@@ -38,15 +38,17 @@ namespace PeojectTWI.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult insertProductCategory(productCategory pd)
+
+
+
+
+
+        public JsonResult SaveProductCategory(string ProductName,string BrandName, string VendorName,string VendorContact,string VendorAddress,string VendorEmail)
         {
-            if (Session["LoggedUserID"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            _inventoryService.insertProductCategory( pd.BrandName, pd.VendorName, pd.VendorContact, pd.VendorEmail, pd.VendorAddress, pd.ProductName);
-            return View();
+           var result = _inventoryService.insertProductCategory( BrandName, VendorName, VendorContact, VendorEmail, VendorAddress, ProductName);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+       
         }
 
         public ActionResult viewProductCategories()
@@ -67,14 +69,20 @@ namespace PeojectTWI.Controllers
                 return RedirectToAction("Login", "Home");
             }
             var id = Request["pid"];
-            int pid = Convert.ToInt32(id);
-            var a = _inventoryService.getProductCategoryDetails(pid);
-
-            return View(a);
+            ViewBag.ProductID = id;
+            return View();
         }
 
-        [HttpPost]
-        public ActionResult updateProductCategory(productCategory pdc)
+
+        public JsonResult getselectedProductCategoryDetails(int ProductID)
+        {
+            var result = _inventoryService.getProductCategoryDetails(ProductID);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult EditProductCategorys(int ProductID,string BrandName, string VendorName, string VendorContact, string VendorEmail, string VendorAddress, bool Active, string ProductName)
         {
             if (Session["LoggedUserID"] == null)
             {
@@ -82,7 +90,7 @@ namespace PeojectTWI.Controllers
             }
             try
             {
-                _inventoryService.updateProductCategory(pdc.ProductID, pdc.BrandName, pdc.VendorName, pdc.VendorContact, pdc.VendorEmail, pdc.VendorAddress, pdc.Active, pdc.ProductName);
+                _inventoryService.updateProductCategory(ProductID, BrandName, VendorName, VendorContact,VendorEmail, VendorAddress, Active, ProductName);
             }
             catch (Exception ex)
             {
@@ -101,7 +109,7 @@ namespace PeojectTWI.Controllers
             }
             var id = Request["pidDelete"];
             int pid = Convert.ToInt32(id);
-            var a = _inventoryService.getProductCategoryDetails(pid);
+            var a = _inventoryService.getProductCategoryDetails(pid)[0];
 
             return View(a);
         }
@@ -116,7 +124,8 @@ namespace PeojectTWI.Controllers
             int pid = Convert.ToInt32(id);
              _inventoryService.deleteProductCategory(pid);
 
-            return View("viewProductCategories");
+          //  return View("viewProductCategories");
+            return RedirectToAction("viewProductCategories", "Inventory");
 
         }
 
@@ -147,6 +156,8 @@ namespace PeojectTWI.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+
+         //   DateTime? ss = ms.PerchesedDate;
             _inventoryService.insertMasterStore(ms.ProductId, ms.perchesedCount, ms.unitPrice, ms.PerchesedDate);
             masterStore mss = new masterStore();
             using (var context = new ProjectDBEntities())
@@ -159,9 +170,8 @@ namespace PeojectTWI.Controllers
                     ProductName = m.ProductName
                 }).ToList();
             }
- 
 
-
+            ModelState.Clear();
             return View(mss);
         }
 
@@ -197,7 +207,7 @@ namespace PeojectTWI.Controllers
             }
             try
             {
-                _inventoryService.updateMasterStore(ms.mStoreId, ms.ProductId, ms.perchesedCount, ms.unitPrice, ms.PerchesedDate, ms.RecoredEnterdBy);
+                _inventoryService.updateMasterStore(ms.mStoreId, ms.perchesedCount, ms.unitPrice, ms.PerchesedDate);
             }
             catch (Exception ex)
             {

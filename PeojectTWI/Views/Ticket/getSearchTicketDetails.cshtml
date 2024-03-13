@@ -16,7 +16,7 @@
 
         <div class="col-6">
             <div class="row form-group bb-color">
-                <strong>Ticket Details </strong>
+                @*<strong>Ticket Details </strong>*@
             </div>
 
             <div class="row  form-group text-left">
@@ -85,41 +85,35 @@
 
         </div>
 
-        <div class="col-6 ">
-            <div class="col-md-12 col-sm-12 collg-12 fs-l pb-5">
-                <div class="col-lg-12 col-md-4 col-sm-12 paddingH-0">
-                    <div style="align-content:center">
-                        <h2>  Sequence Details</h2>
-                    </div>
-                   
-
-
-                </div>
-            </div>
-
-            <div class="col-md-12 col-lg-12 overlay">
-                <div class="col-md-12 col-lg-12 col-sm-12 containerstyle">
-                    <div class="col-md-12 col-sm-12">
-                        <div class="col-md-12 col-sm-12 col-xs-12 progressbar">
-                            <ul ng-repeat="data in SequenceData" class="progressbar" id="progressbarNarration">
-                                <li ng-class="{ 'bold-item' : CurrentSequnceIndex>
-                                    data.SequenceLists.SequenceIndexId,
-                                    'Strong-item': CurrentSequnceIndex === data.SequenceLists.SequenceIndexId,
-                                    'normal-item': !(CurrentSequnceIndex > data.SequenceLists.SequenceIndexId) && !(CurrentSequence === data.SequenceLists.SequenceName)
-                                    }">
-                                    {{data.SequenceLists.SequenceName}}
-                                </li>
-                            </ul>
-
-
+        <div class="col-6  ">
+            <div class="row" style="text-align:center;">
+                <div class="col-md-12 col-sm-12 collg-12 fs-l pb-5">
+                    <div class="col-lg-12 col-md-4 col-sm-12 paddingH-0">
+                        <div style="align-content:center">
+                            <h2>  Sequence Details</h2>
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
-
+            <div class="row" style="text-align:center;">
+                <div class="col-md-12 col-lg-12 overlay">
+                    <div class="col-md-12 col-lg-12 col-sm-12 containerstyle">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12 progressbar">
+                                <ul ng-repeat="data in SequenceData" class="progressbar" id="progressbarNarration">
+                                    <li ng-class="{ 'bold-item' : CurrentSequnceIndex>
+                                        data.SequenceLists.SequenceIndexId,
+                                        'Strong-item': CurrentSequnceIndex === data.SequenceLists.SequenceIndexId,
+                                        'normal-item': !(CurrentSequnceIndex > data.SequenceLists.SequenceIndexId) && !(CurrentSequence === data.SequenceLists.SequenceName)
+                                        }">
+                                        {{data.SequenceLists.SequenceName}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -10,14 +10,13 @@ namespace PeojectTWI.Services.InventoryService
 {
     interface IInventoryService
     {
-
-        void insertProductCategory( string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName);
+        int insertProductCategory( string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName);
 
         System.Data.Entity.DbSet<tblProductCategory> viewProductCategories();
 
-        productCategory getProductCategoryDetails(int pid);
+        List <productCategory> getProductCategoryDetails(int pid);
 
-        Task updateProductCategory(int productCategoryId,string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, bool Active, string productName);
+        Task updateProductCategory(int productCategoryId,string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, Nullable<bool> Active, string productName);
 
         Task deleteProductCategory(int productId);
 
@@ -27,7 +26,7 @@ namespace PeojectTWI.Services.InventoryService
 
         masterStore getMasterStoreDetails(int mid);
 
-        Task updateMasterStore(int mStoreId, int? productId, int? perchesedCount, decimal? unitPrice, DateTime? perchesedDate, int? recoredEnterdBy);
+        Task updateMasterStore(int mStoreId, int? perchesedCount, decimal? unitPrice, DateTime? perchesedDate);
 
         Task deleteMasterData(int msID);
 

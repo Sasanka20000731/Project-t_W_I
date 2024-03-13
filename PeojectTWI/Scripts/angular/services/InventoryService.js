@@ -1,5 +1,6 @@
 ﻿myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalStack, $rootScope) {
 
+    $scope.Active = false;
 
     $scope.PageLoad = function () {
         $http.get('/Inventory/GetProductCategoryValues')
@@ -97,6 +98,154 @@
         $scope.droproductCategory = '';
 
     }
+
+    $scope.SaveProductCategory = function () {
+        data = {
+            params: {
+                ProductName: $scope.ProductName,
+                BrandName: $scope.BrandName,
+                VendorName: $scope.VendorName,
+                VendorContact: $scope.VendorContact,
+                VendorAddress: $scope.VendorAddress,
+                VendorEmail: $scope.VendorEmail
+            }
+        };
+        debugger;
+        $http.get('/Inventory/SaveProductCategory', data)
+            .success(function (response) {
+                if (response == 1) {
+                    alertify.success("Successfully Saved Product Category", 3000);
+                    $scope.ClearProductCategory();
+                } else {
+                    alertify.error("Error", 3000);
+                }
+            }).error(function (xhr) {
+                alertify.error("Error", 3000);
+                console.log(xhr.error);
+            })
+    }
+
+
+    $scope.ClearProductCategory = function () {
+        $scope.ProductName = undefined;
+        $scope.BrandName = undefined;
+        $scope.VendorName = undefined;
+        $scope.VendorContact = undefined;
+        $scope.VendorAddress = undefined;
+        $scope.VendorEmail = undefined;
+
+    }
+
+
+    $scope.validateMobileNumber = function () {
+        if (($scope.VendorContact && $scope.VendorContact.length === 10 && /^\d+$/.test($scope.VendorContact) && $scope.VendorContact.startsWith('0')) || ($scope.VendorContact === undefined) || ($scope.VendorContact === "")) {
+            $scope.mobileNumberAsyncError = false;
+            $scope.mobileNumberAsyncErrorMessage = "";
+        } else {
+
+            $scope.mobileNumberAsyncError = true;
+            $scope.mobileNumberAsyncErrorMessage = "Mobile number should be 10 digits and valid mobile number!!!";
+        }
+
+    };
+
+    $scope.validateEmail = function () {
+       
+        if (!$scope.VendorEmail || $scope.VendorEmail.trim() === "") {
+            $scope.EmailAsyncError = true;
+            $scope.EmailAsyncErrorMessage = "Enter Valid Email Address!!!";
+        } else {
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            if (emailPattern.test($scope.VendorEmail)) {
+                $scope.EmailAsyncError = false;
+                $scope.EmailAsyncErrorMessage = "";
+            } else {
+                $scope.EmailAsyncError = true;
+                $scope.EmailAsyncErrorMessage = "Enter a Valid Email Address!!!";
+            }
+        }
+    };
+
+    $scope.loadProductCategoryDetails = function () {
+       
+        data = {
+            params: {
+                ProductID: $("#ProductID").val()
+            }
+        };
+        //debugger
+        $http.get('/Inventory/getselectedProductCategoryDetails', data)
+            .success(function (response) {
+                //debugger;
+                $scope.ProductName = response[0].ProductName;
+                $scope.BrandName = response[0].BrandName;
+                $scope.VendorName = response[0].VendorName;
+                $scope.VendorContact = response[0].VendorContact;
+                $scope.VendorAddress = response[0].VendorAddress;
+                $scope.VendorEmail = response[0].VendorEmail;
+                $scope.Active = response[0].Active;
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+
+    }
+
+    //$scope.UpdateProductCategory = function () {
+
+    //    data = {
+    //        params: {
+    //            ProductID: $("#ProductID").val(),
+    //            ProductName: $scope.ProductName,
+    //            BrandName: $scope.BrandName,
+    //            VendorName: $scope.VendorName,
+    //            VendorContact: $scope.VendorContact,
+    //            VendorAddress: $scope.VendorAddress,
+    //            VendorEmail: $scope.VendorEmail,
+    //            Active: true//$scope.Active
+    //        }
+    //    };
+
+    //    $http.get('/Inventory/EditProductCategorys', data)
+    //        .success(function (response) {
+    //            debugger
+    //            if (response == 1) {
+    //                alertify.success("Successfully Updated Product Category", 3000);
+    //                $scope.ClearProductCategory();
+    //            } else {
+    //                alertify.error("Error", 3000);
+    //            }
+    //        })
+    //        .error(function (xhr) {
+    //            console.log(xhr.error);
+    //        })
+
+    //}
+
+
+    $scope.UpdateProductCategory = function () {
+        $scope.Active;
+        if ($scope.Active == undefined) {
+            $scope.Active = false;
+        }
+        //debugger
+            var extendUrl = '/Inventory/EditProductCategorys?' +
+                'ProductID=' + $("#ProductID").val() +
+                '&BrandName=' + $scope.BrandName +
+                '&VendorName=' + $scope.VendorName +
+                '&VendorContact=' + $scope.VendorContact +
+                '&VendorEmail=' + $scope.VendorEmail +
+                '&VendorAddress=' + $scope.VendorAddress +
+                '&Active=' + $scope.Active +
+                '&ProductName=' + $scope.ProductName;
+        //debugger;
+        //'&Active=' + $scope.Active;
+        //debugger;
+        window.location.href = extendUrl;
+    }
+
+
 
 });
 

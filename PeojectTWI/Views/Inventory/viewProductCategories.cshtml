@@ -16,6 +16,9 @@
             @Html.DisplayNameFor(model => model.BrandName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.VendorName)
         </th>
         <th>
@@ -44,6 +47,9 @@
                 @Html.DisplayFor(modelItem => item.BrandName)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.VendorName)
             </td>
             <td>
@@ -59,7 +65,15 @@
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Active)
+                @if (item.Active == true)
+                {
+                    <text>Active</text>
+                }
+                else
+                {
+                    <text>Deactivated</text>
+                }
+
             </td>
             <td>
                 @Html.ActionLink("Edit", "editProductCategory", new { pid = item.ProductID }, new { @class = "Edit-User-link" })|
@@ -69,3 +83,5 @@
     }
 
 </table>
+
+

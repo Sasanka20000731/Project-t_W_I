@@ -6,73 +6,123 @@
 
 <h2>Insert Product Category</h2>
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.BrandName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BrandName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BrandName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.VendorName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.VendorName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.VendorName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.VendorContact, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.VendorContact, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.VendorContact, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.VendorAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.VendorAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.VendorAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.VendorEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.VendorEmail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.VendorEmail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="form-horizontal" ng-app="myapp" ng-controller="MyController" style="margin-bottom:100px;">
+    <hr />
+    <div class="form-group">
+        <lable>Product Name</lable>
+        <div class="col-md-10">
+            <input type="text" id="ProductName" name="ProductName" ng-model="ProductName" class="form-control" required />
         </div>
     </div>
-}
+    <div class="form-group">
+        <lable>Brand Name</lable>
+        <div class="col-md-10">
+            <input type="text" id="BrandName" name="BrandName" ng-model="BrandName" class="form-control" required />
+        </div>
+    </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="form-group">
+        <lable>Vendor Name</lable>
+        <div class="col-md-10">
+            <input type="text" id="VendorName" name="VendorName" ng-model="VendorName" class="form-control" required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable>Vendor Contact</lable>
+        <div class="col-md-10">
+            <input type="text" id="VendorContact" name="VendorContact" ng-model="VendorContact" ng-change="validateMobileNumber()" class="form-control" required />
+            <span class="text-danger" ng-show="mobileNumberAsyncError">
+                {{ mobileNumberAsyncErrorMessage }}
+            </span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable>Vendor Address</lable>
+        <div class="col-md-10">
+            <input type="text" id="VendorAddress" name="VendorAddress" ng-model="VendorAddress" class="form-control" required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable>Vendor Email</lable>
+        <div class="col-md-10">
+            <input type="text" id="VendorEmail" name="VendorEmail" ng-model="VendorEmail" ng-change="validateEmail()"  class="form-control" required />
+            <span class="text-danger" ng-show="EmailAsyncError">
+                {{ EmailAsyncErrorMessage }}
+            </span>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5">
+            <button class="custom-button" ng-click="SaveProductCategory()">Save</button>
+        </div>
+
+        <div class="col-5">
+            <button class="custom-button" ng-click="ClearProductCategory()">Clear</button>
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
 </div>
+
+
+
+<style>
+    .bold-item {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .Strong-item {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .normal-item {
+        font-size: 18px;
+    }
+
+    .custom-button {
+        height: 50px;
+        background-color: #1a2c34;
+        border-radius: 10px;
+        float: left;
+        border: 0px;
+        color: #fff;
+        width: 100%;
+        -webkit-transition-duration: 0.9s;
+        -webkit-transition-timing-function: linear;
+        box-shadow: 0px 0 0 #2e4f5e inset;
+    }
+
+        .custom-button:hover {
+            box-shadow: 1200Px 0 0 #2e4f5e inset;
+        }
+</style>
+
+
+
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/InventoryService.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
 
