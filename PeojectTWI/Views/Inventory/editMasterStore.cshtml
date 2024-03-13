@@ -1,51 +1,69 @@
 ﻿@model PeojectTWI.Models.masterStore
 
 @{
-    ViewBag.Title = "editMasterStore";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>editMasterStore</h2>
+<h2>Update Master Store</h2>
 
-@using (Html.BeginForm("updateMasterStore","Inventory")) 
+@using (Html.BeginForm("updateMasterStore", "Inventory"))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>masterStore</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    
+
         @Html.HiddenFor(model => model.mStoreId, new { htmlAttributes = new { @class = "form-control" } })
-  
+
 
         <div class="form-group">
-            @Html.LabelFor(model => model.perchesedCount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.perchesedCount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.perchesedCount, "", new { @class = "text-danger" })
+            <lable>Perchesed Count</lable>
+            <div class="row">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.perchesedCount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.perchesedCount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <lable>Unit Price</lable>
+            <div class="row">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.unitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.unitPrice, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.unitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.unitPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.unitPrice, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="col-5">
+                    <lable>Previous Perchesed Date</lable>
+                </div>
+                <div class="col-5">
+                    <lable>Updated Date</lable>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-5">
+                    @Html.EditorFor(model => model.PerchesedDate, new { htmlAttributes = new { @class = "form-control" , @readonly="true" } })
+                    @Html.ValidationMessageFor(model => model.PerchesedDate, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-5">
+                    <input type="date" style="width:100%;" name="PerchesedDate" , id="PerchesedDate" class="form-control" required />
+                </div>
+            </div>
+
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PerchesedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PerchesedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PerchesedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Updates " class="btn btn-default" />
+            <div class=" col-md-10">
+                <input type="submit" value="Update Master Store" class="btn btn-default" />
             </div>
         </div>
     </div>

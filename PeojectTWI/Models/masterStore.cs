@@ -12,6 +12,7 @@ namespace PeojectTWI.Models
         public Nullable<int> perchesedCount { get; set; }
         public Nullable<decimal> unitPrice { get; set; }
         public Nullable<System.DateTime> PerchesedDate { get; set; }
+        public string PerchesedDateString { get; set; }
         public Nullable<int> RecoredEnterdBy { get; set; }
         public Nullable<System.DateTime> createdDate { get; set; }
         public string MasterProductName { get; set; }
