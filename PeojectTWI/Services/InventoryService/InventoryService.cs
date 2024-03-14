@@ -125,7 +125,11 @@ namespace PeojectTWI.Services.InventoryService
             ms.ProductId = tms.ProductId;
             ms.perchesedCount = tms.perchesedCount;
             ms.unitPrice = tms.unitPrice;
+
+
+            ms.PerchesedDateString= Convert.ToDateTime(tms.PerchesedDate).ToString("dd/MM/yyyy");             //.ToString("dd/MM/yyyy");
             ms.PerchesedDate = tms.PerchesedDate;
+
             ms.RecoredEnterdBy = tms.RecoredEnterdBy;
             ms.createdDate = tms.createdDate;
 
@@ -168,7 +172,7 @@ namespace PeojectTWI.Services.InventoryService
                           select new productCategory
                           {
                               ProductID = a.ProductID,
-                              ProductName = a.ProductName
+                              ProductName = a.ProductName+" ("+a.BrandName+") "+ b.PerchesedDate
                           }).ToList();
             return result;
         }

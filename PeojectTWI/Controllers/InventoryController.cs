@@ -207,7 +207,8 @@ namespace PeojectTWI.Controllers
             }
             try
             {
-                _inventoryService.updateMasterStore(ms.mStoreId, ms.perchesedCount, ms.unitPrice, ms.PerchesedDate);
+                DateTime? PerchesedDate = ms.PerchesedDate == null ? Convert.ToDateTime(ms.PerchesedDateString) : ms.PerchesedDate;
+                _inventoryService.updateMasterStore(ms.mStoreId, ms.perchesedCount, ms.unitPrice, PerchesedDate);
             }
             catch (Exception ex)
             {
@@ -273,7 +274,6 @@ namespace PeojectTWI.Controllers
             return Json(ExsistReslut, JsonRequestBehavior.AllowGet);
         }
 
-
         public JsonResult ManageWareHouseData(int dataType,int ProductCategory,  string SerialNo)
         {
 
@@ -281,8 +281,6 @@ namespace PeojectTWI.Controllers
 
             return Json(whmanageReslut, JsonRequestBehavior.AllowGet);
         }
-
-
 
         public ActionResult ViewWareHouse()
         {
@@ -295,7 +293,6 @@ namespace PeojectTWI.Controllers
 
         public JsonResult ViewWareHousedata(DateTime? FromDate = null, DateTime? Todate = null)
         {
-
             List<WHmanage> WHList = _inventoryService.ViewWareHousedata(FromDate, Todate);
             return Json(WHList,JsonRequestBehavior.AllowGet);        
         }

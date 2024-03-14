@@ -51,11 +51,11 @@
             </div>
             <div class="row">
                 <div class="col-5">
-                    @Html.EditorFor(model => model.PerchesedDate, new { htmlAttributes = new { @class = "form-control" , @readonly="true" } })
-                    @Html.ValidationMessageFor(model => model.PerchesedDate, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.PerchesedDateString, new { htmlAttributes = new { @class = "form-control" , @readonly="true" } })
+                    @Html.ValidationMessageFor(model => model.PerchesedDateString, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-5">
-                    <input type="date" style="width:100%;" name="PerchesedDate" , id="PerchesedDate" class="form-control" required />
+                    <input type="date" style="width:100%;" name="PerchesedDate" , id="PerchesedDate" class="form-control" />
                 </div>
             </div>
 

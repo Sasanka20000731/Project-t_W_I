@@ -4,34 +4,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>MasterStore</h2>
+<h2>Master Store</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "insertMasterStore")
 </p>
 <table class="table">
     <tr>
         <th>
             <label>Brand Name</label>
-            @*@Html.DisplayNameFor(model => model.tblProductCategory.BrandName)*@
         </th>
         <th>
             <label>Product Name</label>
-            @*@Html.DisplayNameFor(model => model.tblProductCategory.ProductName)*@
         </th>
         <th>
             <label>Perchesed Count</label>
-            @*@Html.DisplayNameFor(model => model.perchesedCount)*@
         </th>
         <th>
             <label>Unit Price</label>
-            @*@Html.DisplayNameFor(model => model.unitPrice)*@
         </th>
         <th>
             <label>Perchesed Date</label>
-            @*@Html.DisplayNameFor(model => model.PerchesedDate)*@
         </th>
-
         <th></th>
     </tr>
 
@@ -51,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.unitPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PerchesedDate)
+                @Convert.ToDateTime(item.PerchesedDate).ToString("dd/MM/yyyy")
             </td>
             <td>
                 @Html.ActionLink("Edit", "editMasterStore", new { msid = item.mStoreId }, new { @class = "Edit-User-link" })|
