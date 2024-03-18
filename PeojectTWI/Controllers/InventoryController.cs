@@ -135,17 +135,23 @@ namespace PeojectTWI.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+
             masterStore mss = new masterStore();
             using (var context = new ProjectDBEntities())
             {
+                var excludedProductIds = context.tblMasterStores.Select(ms => ms.ProductId).ToList();
+
                 mss.ProductList = context.tblProductCategories
-                .Where(m => m.Active == true)
-                .Select(m => new Product
-                {
-                    ProductCategoryID = m.ProductID,
-                    ProductName = m.ProductName
-                }).ToList();
+                    .Where(m => m.Active == true && !excludedProductIds.Contains(m.ProductID))
+                    .Select(m => new Product
+                    {
+                        ProductCategoryID = m.ProductID,
+                        ProductName = m.ProductName
+                    })
+                    .ToList();
             }
+
+
             return View(mss);
         }
 
@@ -213,7 +219,7 @@ namespace PeojectTWI.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = "Error updating user: " + ex.Message;
-                return RedirectToAction("viewtMasterStore");
+                return RedirectToAction("editMasterStore");
             }
             return RedirectToAction("viewtMasterStore");
 
@@ -296,6 +302,26 @@ namespace PeojectTWI.Controllers
             List<WHmanage> WHList = _inventoryService.ViewWareHousedata(FromDate, Todate);
             return Json(WHList,JsonRequestBehavior.AllowGet);        
         }
+
+
+        public ActionResult SearchSerial()
+        {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            return View();
+        }
+
+
+
+        public JsonResult GetSearchSerialDetails (string SerialNumberToSearch) 
+        {
+            var result = _inventoryService.GetSearchSerialDetails(SerialNumberToSearch);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

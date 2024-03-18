@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\WarrentyController.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Models\masterStore.cs" />
     <Compile Include="Models\productCategory.cs" />
     <Compile Include="Models\saleItem.cs" />
+    <Compile Include="Models\SerialItem.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\user.cs" />
     <Compile Include="Models\Warrenty.cs" />
@@ -219,6 +221,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\InventoryService\IInventoryService.cs" />
     <Compile Include="Services\InventoryService\InventoryService.cs" />
+    <Compile Include="Services\ReportService\IReportService.cs" />
+    <Compile Include="Services\ReportService\ReportService.cs" />
     <Compile Include="Services\SaleService\ISaleService.cs" />
     <Compile Include="Services\SaleService\SaleService.cs" />
     <Compile Include="Services\TicketService\ITicketService.cs" />
@@ -553,6 +557,7 @@
     <Content Include="Scripts\angular\services\app.js" />
     <Content Include="Scripts\angular\services\HomeServices.js" />
     <Content Include="Scripts\angular\services\InventoryService.js" />
+    <Content Include="Scripts\angular\services\ReportServices.js" />
     <Content Include="Scripts\angular\services\SaleServices.js" />
     <Content Include="Scripts\angular\services\TicketService.js" />
     <Content Include="Scripts\angular\services\WarrentyService.js" />
@@ -1697,6 +1702,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Ticket\TicketSearch.cshtml" />
     <Content Include="Views\Ticket\getSearchTicketDetails.cshtml" />
+    <Content Include="Views\Inventory\SearchSerial.cshtml" />
+    <Content Include="Views\Report\UserManagementReportForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -299,19 +299,30 @@ namespace PeojectTWI.Services.InventoryService
         }
 
 
+        public List<SerialItem> GetSearchSerialDetails(string SerialNumberToSearch)
+        {
+            var result = (from a in db.tblInventoryDatas 
+                          join b in db.tblProductCategories on a.ProductCategoryId equals b.ProductID
+                        //  join c in db.tblMasterStores on a.MasterId equals c.mStoreId
+                          where a.SerialNumber == SerialNumberToSearch
+                          select new SerialItem
+                          { 
+                            BrandName = b.BrandName,
+                            ProductName = b.ProductName,
+                            VendorName = b.VendorName,
+                            VendorEmail = b.VendorEmail,
+                            VendorContact = b.VendorContact,
+                            InOrOutDateStr = (a.ToTheStore == true ? a.InsertedDate.ToString() : a.OutedDateFromStore.ToString()),
+                            //OutToTheStoreDateStr = a.OutedDateFromStore.ToString(),
+                            CurrentLocation = (a.ToTheStore == true ? "In Store" : "Not In the Store")
+
+                          }).ToList();
 
 
 
+            return result;
 
-
-
-
-
-
-
-
-
-
+        }
 
         //public List<Branches> GetUnitBranch()
         //{

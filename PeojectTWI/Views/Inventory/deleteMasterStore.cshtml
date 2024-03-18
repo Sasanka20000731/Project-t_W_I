@@ -48,7 +48,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PerchesedDate)
+            @* @Html.DisplayFor(model => model.PerchesedDate)*@
+           @* @Convert.ToDateTime(model.PerchesedDate).ToString("dd/MM/yyyy")*@
+            @Convert.ToDateTime(Model.PerchesedDate).ToString("dd/MM/yyyy")
         </dd>
 
         <dt>
@@ -64,7 +66,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.createdDate)
+            @Convert.ToDateTime(Model.createdDate).ToString("dd/MM/yyyy")
+            @*@Html.DisplayFor(model => model.createdDate)*@
         </dd>
 
     </dl>

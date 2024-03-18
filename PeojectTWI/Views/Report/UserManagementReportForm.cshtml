@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "UserManagementReportForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Management Report Form</h2>
+
+
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadData()">
+
+    <div class="row containerBlock">
+        <div class="col-4">
+            <label>From</label>
+            <input type="date" name="UserReportFormDate" id="UserReportFormDate" />
+        </div>
+        <div class="col-4">
+            <label>To</label>
+            <input type="date" name="UserReportToDate" id="UserReportToDate" />
+        </div>
+        <div class="col-4">
+            <label for="droReportType" class="col-md-2 control-label">Report Type</label>
+            <select id="droReportType" name="droReportType" ng-model="droReportType" class="form-control" required>
+                <option value="">Select User Level</option>
+                <option ng-repeat="item in droReportTypeList" value="{{item.ReportTypeId}}">{{item.ReportType}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row  containerBlock">
+        <div>
+            <button class="custom-button" style="width:100%" ng-click="Search">Search</button>
+        </div>
+        <div>
+            <button class="custom-button" style="width:100%" ng-click="Dewonload()">Download</button>
+        </div>
+
+    </div>
+
+    @*<div class="row">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Column 1</th>
+                        <th>Column 2</th>
+                        <th>Column 3</th>
+                        <th>Column 4</th>
+                        <th>Column 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>*@
+
+
+
+
+</div>
+
+<style>
+    .bold-item {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .Strong-item {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .normal-item {
+        font-size: 18px;
+    }
+
+    .custom-button {
+        height: 90%;
+        background-color: #1a2c34;
+        border-radius: 10px;
+        float: left;
+        border: 0px;
+        color: #fff;
+        width: 100%;
+        -webkit-transition-duration: 0.9s;
+        -webkit-transition-timing-function: linear;
+        box-shadow: 0px 0 0 #2e4f5e inset;
+    }
+
+        .custom-button:hover {
+            box-shadow: 700Px 0 0 #2e4f5e inset;
+        }
+</style>
+
+
+
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/ReportServices.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />

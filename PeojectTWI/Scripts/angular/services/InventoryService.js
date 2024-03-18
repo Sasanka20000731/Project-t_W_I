@@ -245,6 +245,37 @@
         window.location.href = extendUrl;
     }
 
+    $scope.SearchSerialNumber = function () {
+
+        data = {
+            params: {
+                SerialNumberToSearch: $scope.SerialNumberToSearch
+            }
+        };
+        $http.get('/Inventory/GetSearchSerialDetails', data)
+            .success(function (response) {
+
+                if (response.length != 0) {
+                    $scope.SearchedItemDetails = response[0];
+                } else {
+                    alertify.success("No Records Available For This Serial Number !!!", 6000);
+                }
+                
+        })
+        .error(function (xhr) {
+            console.log(xhr.error);
+        })
+
+
+    }
+
+
+
+    $scope.ClearSearchInventory = function () {
+        $scope.SerialNumberToSearch = undefined;
+        $scope.SearchedItemDetails = undefined;
+    }
+
 
 
 });

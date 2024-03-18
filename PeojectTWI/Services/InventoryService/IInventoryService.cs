@@ -39,6 +39,9 @@ namespace PeojectTWI.Services.InventoryService
 
 
         List <WHmanage> ViewWareHousedata(DateTime? FromDate,DateTime? Todate);
+        List<SerialItem> GetSearchSerialDetails(string SerialNumberToSearch);
+
+  
 
     }
 

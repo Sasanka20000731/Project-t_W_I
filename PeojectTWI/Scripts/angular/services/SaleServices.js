@@ -112,7 +112,7 @@
             $scope.HideValidationDiscount(2);
         } else {
             $scope.HideValidationDiscount(1);
-            $scope.Price = $scope.Price - $scope.Discount;
+            $scope.Price = $scope.originalValue - $scope.Discount;
         }
     }
 
