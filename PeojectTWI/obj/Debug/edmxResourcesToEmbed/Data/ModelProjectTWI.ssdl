@@ -96,6 +96,26 @@
     <Property Name="Active" Type="bit" />
     <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="tblReportCategory">
+    <Key>
+      <PropertyRef Name="ReportCategoryId" />
+    </Key>
+    <Property Name="ReportCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReportCategoryName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblReportType">
+    <Key>
+      <PropertyRef Name="ReportTypeID" />
+    </Key>
+    <Property Name="ReportTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReportCategoryId" Type="int" />
+    <Property Name="ReportTypeValue" Type="int" />
+    <Property Name="ReportTypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="tblSalesDetails">
     <Key>
       <PropertyRef Name="InvoiceID" />
@@ -280,6 +300,18 @@
       </Principal>
       <Dependent Role="tblMasterWarrenty">
         <PropertyRef Name="inventoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblReportType_tblReportCategory">
+    <End Role="tblReportCategory" Type="Self.tblReportCategory" Multiplicity="0..1" />
+    <End Role="tblReportType" Type="Self.tblReportType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblReportCategory">
+        <PropertyRef Name="ReportCategoryId" />
+      </Principal>
+      <Dependent Role="tblReportType">
+        <PropertyRef Name="ReportCategoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -476,6 +508,8 @@
     <EntitySet Name="tblMasterTicketSequnces" EntityType="Self.tblMasterTicketSequnces" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblMasterWarrenty" EntityType="Self.tblMasterWarrenty" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProductCategories" EntityType="Self.tblProductCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReportCategory" EntityType="Self.tblReportCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReportType" EntityType="Self.tblReportType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblSalesDetails" EntityType="Self.tblSalesDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTicket" EntityType="Self.tblTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTicketComment" EntityType="Self.tblTicketComment" Schema="dbo" store:Type="Tables" />
@@ -509,6 +543,10 @@
     <AssociationSet Name="FK_tblMasterWarrenty_tblInventoryData" Association="Self.FK_tblMasterWarrenty_tblInventoryData">
       <End Role="tblInventoryData" EntitySet="tblInventoryData" />
       <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblReportType_tblReportCategory" Association="Self.FK_tblReportType_tblReportCategory">
+      <End Role="tblReportCategory" EntitySet="tblReportCategory" />
+      <End Role="tblReportType" EntitySet="tblReportType" />
     </AssociationSet>
     <AssociationSet Name="FK_tblSalesDetails_tblCoustomerDetails" Association="Self.FK_tblSalesDetails_tblCoustomerDetails">
       <End Role="tblCoustomerDetails" EntitySet="tblCoustomerDetails" />

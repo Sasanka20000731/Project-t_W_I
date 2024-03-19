@@ -101,6 +101,26 @@
           <Property Name="Active" Type="bit" />
           <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="tblReportCategory">
+          <Key>
+            <PropertyRef Name="ReportCategoryId" />
+          </Key>
+          <Property Name="ReportCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportCategoryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblReportType">
+          <Key>
+            <PropertyRef Name="ReportTypeID" />
+          </Key>
+          <Property Name="ReportTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportCategoryId" Type="int" />
+          <Property Name="ReportTypeValue" Type="int" />
+          <Property Name="ReportTypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="tblSalesDetails">
           <Key>
             <PropertyRef Name="InvoiceID" />
@@ -285,6 +305,18 @@
             </Principal>
             <Dependent Role="tblMasterWarrenty">
               <PropertyRef Name="inventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReportType_tblReportCategory">
+          <End Role="tblReportCategory" Type="Self.tblReportCategory" Multiplicity="0..1" />
+          <End Role="tblReportType" Type="Self.tblReportType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblReportCategory">
+              <PropertyRef Name="ReportCategoryId" />
+            </Principal>
+            <Dependent Role="tblReportType">
+              <PropertyRef Name="ReportCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -481,6 +513,8 @@
           <EntitySet Name="tblMasterTicketSequnces" EntityType="Self.tblMasterTicketSequnces" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMasterWarrenty" EntityType="Self.tblMasterWarrenty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProductCategories" EntityType="Self.tblProductCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReportCategory" EntityType="Self.tblReportCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReportType" EntityType="Self.tblReportType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSalesDetails" EntityType="Self.tblSalesDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTicket" EntityType="Self.tblTicket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTicketComment" EntityType="Self.tblTicketComment" Schema="dbo" store:Type="Tables" />
@@ -514,6 +548,10 @@
           <AssociationSet Name="FK_tblMasterWarrenty_tblInventoryData" Association="Self.FK_tblMasterWarrenty_tblInventoryData">
             <End Role="tblInventoryData" EntitySet="tblInventoryData" />
             <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReportType_tblReportCategory" Association="Self.FK_tblReportType_tblReportCategory">
+            <End Role="tblReportCategory" EntitySet="tblReportCategory" />
+            <End Role="tblReportType" EntitySet="tblReportType" />
           </AssociationSet>
           <AssociationSet Name="FK_tblSalesDetails_tblCoustomerDetails" Association="Self.FK_tblSalesDetails_tblCoustomerDetails">
             <End Role="tblCoustomerDetails" EntitySet="tblCoustomerDetails" />
@@ -686,6 +724,12 @@
           <AssociationSet Name="FK_tblUser_tblUserlLevel" Association="ProjectDBModel.FK_tblUser_tblUserlLevel">
             <End Role="tblUserlLevel" EntitySet="tblUserlLevels" />
             <End Role="tblUser" EntitySet="tblUsers" />
+          </AssociationSet>
+          <EntitySet Name="tblReportCategories" EntityType="ProjectDBModel.tblReportCategory" />
+          <EntitySet Name="tblReportTypes" EntityType="ProjectDBModel.tblReportType" />
+          <AssociationSet Name="FK_tblReportType_tblReportCategory" Association="ProjectDBModel.FK_tblReportType_tblReportCategory">
+            <End Role="tblReportCategory" EntitySet="tblReportCategories" />
+            <End Role="tblReportType" EntitySet="tblReportTypes" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_ViewAllInventoryData_Result">
@@ -1205,6 +1249,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblReportCategory">
+          <Key>
+            <PropertyRef Name="ReportCategoryId" />
+          </Key>
+          <Property Name="ReportCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblReportTypes" Relationship="ProjectDBModel.FK_tblReportType_tblReportCategory" FromRole="tblReportCategory" ToRole="tblReportType" />
+        </EntityType>
+        <EntityType Name="tblReportType">
+          <Key>
+            <PropertyRef Name="ReportTypeID" />
+          </Key>
+          <Property Name="ReportTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportCategoryId" Type="Int32" />
+          <Property Name="ReportTypeValue" Type="Int32" />
+          <Property Name="ReportTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblReportCategory" Relationship="ProjectDBModel.FK_tblReportType_tblReportCategory" FromRole="tblReportType" ToRole="tblReportCategory" />
+        </EntityType>
+        <Association Name="FK_tblReportType_tblReportCategory">
+          <End Type="ProjectDBModel.tblReportCategory" Role="tblReportCategory" Multiplicity="0..1" />
+          <End Type="ProjectDBModel.tblReportType" Role="tblReportType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblReportCategory">
+              <PropertyRef Name="ReportCategoryId" />
+            </Principal>
+            <Dependent Role="tblReportType">
+              <PropertyRef Name="ReportCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1453,6 +1531,28 @@
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="mWarrentyId" ColumnName="mWarrentyId" />
                 <ScalarProperty Name="whId" ColumnName="whId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReportCategories">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblReportCategory">
+              <MappingFragment StoreEntitySet="tblReportCategory">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ReportCategoryName" ColumnName="ReportCategoryName" />
+                <ScalarProperty Name="ReportCategoryId" ColumnName="ReportCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReportTypes">
+            <EntityTypeMapping TypeName="ProjectDBModel.tblReportType">
+              <MappingFragment StoreEntitySet="tblReportType">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ReportTypeName" ColumnName="ReportTypeName" />
+                <ScalarProperty Name="ReportTypeValue" ColumnName="ReportTypeValue" />
+                <ScalarProperty Name="ReportCategoryId" ColumnName="ReportCategoryId" />
+                <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace PeojectTWI.Services.ReportService
 {
-    public class IReportService
+    interface IReportService
     {
+
+        List<ReportList> LoadUserManagementReportData(int ReportCategory);
+
+        List<ReportList> SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType);
 
     }
 }

@@ -176,6 +176,12 @@
     <Compile Include="Data\tblProductCategory.cs">
       <DependentUpon>ModelProjectTWI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\tblReportCategory.cs">
+      <DependentUpon>ModelProjectTWI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\tblReportType.cs">
+      <DependentUpon>ModelProjectTWI.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\tblSalesDetail.cs">
       <DependentUpon>ModelProjectTWI.tt</DependentUpon>
     </Compile>
@@ -212,6 +218,7 @@
     <Compile Include="Models\loggedUser.cs" />
     <Compile Include="Models\masterStore.cs" />
     <Compile Include="Models\productCategory.cs" />
+    <Compile Include="Models\ReportList.cs" />
     <Compile Include="Models\saleItem.cs" />
     <Compile Include="Models\SerialItem.cs" />
     <Compile Include="Models\Ticket.cs" />

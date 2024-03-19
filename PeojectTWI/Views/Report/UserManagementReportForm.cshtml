@@ -7,7 +7,7 @@
 <h2>User Management Report Form</h2>
 
 
-<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadData()" style="margin-bottom:10Px;">
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadUserManagementReportData()" style="margin-bottom:10Px;">
 
 
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
@@ -27,35 +27,35 @@
     </div>
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" />
+            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="UserReportFormDate" />
         </div>
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" />
+            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="UserReportToDate" />
         </div>
         <div class="col-3">
             <select id="droReportType" name="droReportType" ng-model="droReportType" class="form-control" required>
                 <option value="">Select Report Type</option>
-                <option ng-repeat="item in droReportTypeList" value="{{item.ReportTypeId}}">{{item.ReportType}}</option>
+                <option ng-repeat="item in droReportTypeList" value="{{item.Value}}">{{item.Name}}</option>
             </select>
         </div>
         <div class="col-2">
-            <button class="custom-button" style="width:100%" ng-click="Search"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <button class="custom-button" style="width:100%" ng-click="SearchUserManagementReport()"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
         <div class="col-2">
-             <button class="custom-button" style="width:100%" ng-click="Dewonload()"><i class="fa fa-download" aria-hidden="true"></i></button>
+             <button class="custom-button" style="width:100%" ng-click="DewonloadUserManagementReport()"><i class="fa fa-download" aria-hidden="true"></i></button>
         </div>
     </div>
 
-    <div class="row" style="width:100%; margin-left:5%;  margin-right:5%; border-top-color:#1a2c34; border-style:solid; border-top-width:2px; " >
+    <div class="row" style="width:100%; margin-left:5%;  margin-right:5%; padding-top:15px; " >
        
             <table  style="width:100%;">
                 <thead>
                     <tr>
-                        <th>Column 1</th>
-                        <th>Column 2</th>
-                        <th>Column 3</th>
-                        <th>Column 4</th>
-                        <th>Column 5</th>
+                        <th>Index</th>
+                        <th>Name</th>
+                        <th>Created Date</th>
+                        <th>Status</th>
+                        <th>Registerd By</th>
                     </tr>
                 </thead>
                 <tbody>

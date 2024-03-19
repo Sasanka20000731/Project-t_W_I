@@ -43,6 +43,32 @@ namespace PeojectTWI.Controllers
             }
             return View();
         }
+
+
+        public JsonResult LoadReportDropDownData(int ReportCategory)
+        {
+            var result = _reportService.LoadUserManagementReportData(ReportCategory);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        public JsonResult SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
+        {
+            var result = _reportService.SearchUserManagementReport(FromDate,ToDate, ReportCategory, ReportType);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+
+
+
+
+
         public ActionResult InventoryManagementReportForm()
         {
             if (Session["LoggedUserID"] == null)

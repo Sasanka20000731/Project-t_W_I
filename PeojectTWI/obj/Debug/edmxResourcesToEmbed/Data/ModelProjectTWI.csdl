@@ -107,6 +107,12 @@
       <End Role="tblUserlLevel" EntitySet="tblUserlLevels" />
       <End Role="tblUser" EntitySet="tblUsers" />
     </AssociationSet>
+    <EntitySet Name="tblReportCategories" EntityType="ProjectDBModel.tblReportCategory" />
+    <EntitySet Name="tblReportTypes" EntityType="ProjectDBModel.tblReportType" />
+    <AssociationSet Name="FK_tblReportType_tblReportCategory" Association="ProjectDBModel.FK_tblReportType_tblReportCategory">
+      <End Role="tblReportCategory" EntitySet="tblReportCategories" />
+      <End Role="tblReportType" EntitySet="tblReportTypes" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_ViewAllInventoryData_Result">
     <Property Type="String" Name="BrandName" Nullable="true" MaxLength="30" />
@@ -622,6 +628,40 @@
       </Principal>
       <Dependent Role="tblUser">
         <PropertyRef Name="UserLevel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblReportCategory">
+    <Key>
+      <PropertyRef Name="ReportCategoryId" />
+    </Key>
+    <Property Name="ReportCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReportCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblReportTypes" Relationship="ProjectDBModel.FK_tblReportType_tblReportCategory" FromRole="tblReportCategory" ToRole="tblReportType" />
+  </EntityType>
+  <EntityType Name="tblReportType">
+    <Key>
+      <PropertyRef Name="ReportTypeID" />
+    </Key>
+    <Property Name="ReportTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReportCategoryId" Type="Int32" />
+    <Property Name="ReportTypeValue" Type="Int32" />
+    <Property Name="ReportTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblReportCategory" Relationship="ProjectDBModel.FK_tblReportType_tblReportCategory" FromRole="tblReportType" ToRole="tblReportCategory" />
+  </EntityType>
+  <Association Name="FK_tblReportType_tblReportCategory">
+    <End Type="ProjectDBModel.tblReportCategory" Role="tblReportCategory" Multiplicity="0..1" />
+    <End Type="ProjectDBModel.tblReportType" Role="tblReportType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblReportCategory">
+        <PropertyRef Name="ReportCategoryId" />
+      </Principal>
+      <Dependent Role="tblReportType">
+        <PropertyRef Name="ReportCategoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

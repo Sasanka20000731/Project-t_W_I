@@ -246,5 +246,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblReportCategories">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblReportCategory">
+        <MappingFragment StoreEntitySet="tblReportCategory">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ReportCategoryName" ColumnName="ReportCategoryName" />
+          <ScalarProperty Name="ReportCategoryId" ColumnName="ReportCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReportTypes">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblReportType">
+        <MappingFragment StoreEntitySet="tblReportType">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ReportTypeName" ColumnName="ReportTypeName" />
+          <ScalarProperty Name="ReportTypeValue" ColumnName="ReportTypeValue" />
+          <ScalarProperty Name="ReportCategoryId" ColumnName="ReportCategoryId" />
+          <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

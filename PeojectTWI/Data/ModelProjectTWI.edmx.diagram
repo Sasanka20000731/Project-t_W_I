@@ -44,6 +44,9 @@
         <AssociationConnector Association="ProjectDBModel.FK_tblTicketTaskAssign_tblUser" />
         <AssociationConnector Association="ProjectDBModel.FK_tblTicketTaskAssign_tblUser1" />
         <AssociationConnector Association="ProjectDBModel.FK_tblUser_tblUserlLevel" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblReportCategory" Width="1.5" PointX="10.375" PointY="1.125" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblReportType" Width="1.5" PointX="12.625" PointY="1" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblReportType_tblReportCategory" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
