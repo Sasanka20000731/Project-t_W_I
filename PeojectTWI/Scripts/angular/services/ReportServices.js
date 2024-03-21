@@ -41,6 +41,22 @@
 
     }
 
+    
+    $scope.LoadInventoryManagementReportData = function () {
+        data = {
+            params: {
+                ReportCategory: 2
+            }
+        };
+        $http.get('/Report/LoadReportDropDownData', data)
+            .success(function (response) {
+                $scope.droReportTypeList = response;
+            }).error(function (xhr) {
+                alertify.error("Error", 3000);
+                console.log(xhr.error);
+            })
+
+    }
 
 
 

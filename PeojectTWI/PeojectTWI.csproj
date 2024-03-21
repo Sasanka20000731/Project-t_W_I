@@ -1711,9 +1711,12 @@
     <Content Include="Views\Ticket\getSearchTicketDetails.cshtml" />
     <Content Include="Views\Inventory\SearchSerial.cshtml" />
     <Content Include="Views\Report\UserManagementReportForm.cshtml" />
+    <Content Include="Views\Report\InventoryManagementReportForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Reports\Crystal_Reports\" />
+    <Folder Include="Reports\DataSets\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
