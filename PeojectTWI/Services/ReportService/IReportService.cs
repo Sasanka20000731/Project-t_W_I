@@ -13,7 +13,9 @@ namespace PeojectTWI.Services.ReportService
 
         List<ReportList> LoadUserManagementReportData(int ReportCategory);
 
-        List<ReportList> SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType);
+        List<CommonReport> SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType);
+
+        List<CommonReport> InventoryManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType);
 
     }
 }

@@ -51,6 +51,7 @@
         $http.get('/Report/LoadReportDropDownData', data)
             .success(function (response) {
                 $scope.droReportTypeList = response;
+                debugger;
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
                 console.log(xhr.error);
@@ -58,6 +59,29 @@
 
     }
 
+
+
+    $scope.SearchInventoryManagementReportData = function () {
+        data = {
+            params: {
+                FromDate: InventoryReportFormDate,
+                ToDate: InventoryReportToDate,
+                ReportCategory: 2,
+                ReportType: $("#droReportType").val()
+            }
+        };
+        debugger
+        $http.get('/Report/SearchInventoryManagementReport', data)
+
+            .success(function (response) {
+                $scope.InventoryReport = response;
+
+            }).error(function (xhr) {
+                alertify.error("Error", 3000);
+                console.log(xhr.error);
+            })
+
+    }
 
 
 });

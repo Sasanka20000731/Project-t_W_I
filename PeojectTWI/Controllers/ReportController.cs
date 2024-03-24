@@ -62,11 +62,7 @@ namespace PeojectTWI.Controllers
 
         }
 
-
-
-
-
-
+       
 
 
         public ActionResult InventoryManagementReportForm()
@@ -77,6 +73,14 @@ namespace PeojectTWI.Controllers
             }
             return View();
         }
+        public JsonResult SearchInventoryManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
+        {
+            var result = _reportService.InventoryManagementReport(FromDate,ToDate,ReportCategory,ReportType);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
         public ActionResult TicketManagementReportForm()
         {
             if (Session["LoggedUserID"] == null)

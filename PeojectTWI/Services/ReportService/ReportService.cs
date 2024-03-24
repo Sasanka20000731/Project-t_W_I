@@ -29,9 +29,17 @@ namespace PeojectTWI.Services.ReportService
             return result;
         }
 
-        public List<ReportList> SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
+        public List<CommonReport> SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
             throw new NotImplementedException();
         }
+
+        public List<CommonReport> InventoryManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
+        {
+
+
+            throw new NotImplementedException();
+        }
+
     }
 }
