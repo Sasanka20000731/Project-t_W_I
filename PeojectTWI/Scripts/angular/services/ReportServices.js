@@ -23,12 +23,13 @@
 
         data = {
             params: {
-                FromDate: UserReportFormDate,
-                ToDate: UserReportToDate,
-                ReportCategory:1,
+                FromDate: $scope.UserReportFormDate,
+                ToDate: $scope.UserReportToDate,
+                ReportCategory: 1,
                 ReportType: $("#droReportType").val()
             }
         };
+        //debugger;
         $http.get('/Report/SearchUserManagementReport', data)
 
             .success(function (response) {

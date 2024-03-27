@@ -19,13 +19,21 @@ namespace PeojectTWI.Models
         public Nullable<bool> Active { get; set; }
         public string Password { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string Status { get; set; }
+        public string FullName { get; set; }
+        public string CreateDateString { get; set; }
+        public string StatusString { get; set; }
+        public string UserLevelString { get; set; }
+        public string Remark { get; set; }
+
+
 
         public Usergroup usergroup { get; set; }
- 
+
 
     }
 
-    public class Usergroup 
+    public class Usergroup
     {
         public int userlevelId { get; set; }
 
