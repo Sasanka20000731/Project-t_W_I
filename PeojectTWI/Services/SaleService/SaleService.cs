@@ -86,6 +86,9 @@ namespace PeojectTWI.Services.SaleService
                           {
                               SerialNumber = x.SerialNumber,
                               SoldDate = x.SoldDate.HasValue ? x.SoldDate.Value.ToString() : null
+
+                              ,
+                              CreatedDate = x.SoldDate
                           }).ToList();
 
             return result;
