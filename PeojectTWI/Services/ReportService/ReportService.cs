@@ -36,9 +36,39 @@ namespace PeojectTWI.Services.ReportService
 
         public List<CommonReport> InventoryManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
+            List<CommonReport> reports = new List<CommonReport>();
 
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable1 = new DataTable();
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = "EXEC sp_InventoryManagementReport @FromDate, @ToDate, @ReportCategory, @ReportType";
+                    command.Parameters.Add(new SqlParameter("@FromDate", FromDate));
+                    command.Parameters.Add(new SqlParameter("@ToDate", ToDate));
+                    command.Parameters.Add(new SqlParameter("@ReportCategory", ReportCategory));
+                    command.Parameters.Add(new SqlParameter("@ReportType", ReportType));
 
-            throw new NotImplementedException();
+                    context.Database.Connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        DataTable1.Load(reader);
+                    }
+                }
+                foreach (DataRow row in DataTable1.Rows)
+                {
+                    CommonReport report = new CommonReport
+                    {
+                        COL1 = row["COL1"].ToString(),
+                        COL2 = row["COL2"].ToString(),
+                        COL3 = row["COL3"].ToString(),
+                        COL4 = row["COL4"].ToString(),
+                        COL5 = row["COL5"].ToString()
+                    };
+                    reports.Add(report);
+                }
+            }
+            return reports;
         }
 
     }
