@@ -89,6 +89,16 @@ namespace PeojectTWI.Controllers
             }
             return View();
         }
+
+        public JsonResult SearchTicketManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
+        {
+            var result = _reportService.SearchTicketManagementReport(FromDate, ToDate, ReportCategory, ReportType);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
         public ActionResult WarrentyManagementReportForm()
         {
             if (Session["LoggedUserID"] == null)

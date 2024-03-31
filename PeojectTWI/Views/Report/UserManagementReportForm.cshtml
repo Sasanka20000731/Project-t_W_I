@@ -14,14 +14,14 @@
         <div class="col-2" style="text-align: center;">
             <label>From</label>
         </div>
-        <div class="col-2"  style="text-align: center;">
-            <label >To</label>
+        <div class="col-2" style="text-align: center;">
+            <label>To</label>
         </div>
-        <div class="col-3"  style="text-align: center;" >
-            <label >Report Type</label>
+        <div class="col-3" style="text-align: center;">
+            <label>Report Type</label>
         </div>
         <div class="col-4">
-           
+
         </div>
 
     </div>
@@ -42,42 +42,46 @@
             <button class="custom-button" style="width:100%" ng-click="SearchUserManagementReport()"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
         <div class="col-2">
-             <button class="custom-button" style="width:100%" ng-click="DewonloadUserManagementReport()"><i class="fa fa-download" aria-hidden="true"></i></button>
+            <button class="custom-button" style="width:100%" ng-click="DewonloadUserManagementReport()"><i class="fa fa-download" aria-hidden="true"></i></button>
         </div>
     </div>
 
-    <div class="row" style="width:100%; margin-left:5%;  margin-right:5%; padding-top:15px; " >
-       
-            <table  style="width:100%;">
-                <thead>
-                    <tr>
-                        <th>Index</th>
-                        <th>Name</th>
-                        <th>Created Date</th>
-                        <th>Status</th>
-                        <th>Registerd By</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Data 1</td>
-                        <td>Data 2</td>
-                        <td>Data 3</td>
-                        <td>Data 4</td>
-                        <td>Data 5</td>
-                    </tr>
-                </tbody>
-            </table>
-
-     
-       
-    </div>
+    <div class="row" style="width:100%; margin-left:5%;  margin-right:5%; padding-top:15px; ">
 
 
+        <table width="100%" style="margin-bottom:20px;">
+            <thead style=" border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgb(204, 204, 204);">
+                <tr>
+                    <th class="text-left">Index</th>
+                    <th class="text-left">Name</th>
+                    <th class="text-left">Created Date</th>
+                    <th class="text-left">Status</th>
+                    <th class="text-left">Registerd By</th>
+                    <th class="text-left" style="width:7px !important;">Remark</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="repeat in UserReport  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
+                    <td class="text-left">{{$index + 1}}</td>
+                    <td class="text-left" ng-bind="repeat.FullName"></td>
+                    <td class="text-left" ng-bind="repeat.CreateDateString"></td>
+                    <td class="text-left" ng-bind="repeat.StatusString"></td>
+                    <td class="text-left" ng-bind="repeat.UserLevelString"></td>
+                    <td class="text-left" ng-bind="repeat.Remark"></td>
+
+                </tr>
+            </tbody>
+        </table>
 
 
 
     </div>
+
+
+
+
+
+</div>
 
 <style>
     .bold-item {

@@ -29,16 +29,141 @@ namespace PeojectTWI.Services.ReportService
             return result;
         }
 
-        public List<CommonReport> SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
+        public List<user> SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
-            throw new NotImplementedException();
+            List<user> UserManageReportList = new List<user>();
+
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable1 = new DataTable();
+
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = "exec [sp_UserManageReport] @@FromDate,@@ToDate, @@ReportCategory,@@ReportType";
+                    command.Parameters.Add(new SqlParameter("@@FromDate", (object)FromDate ?? DBNull.Value));
+                    command.Parameters.Add(new SqlParameter("@@ToDate", (object)ToDate ?? DBNull.Value));
+                    command.Parameters.Add(new SqlParameter("@@ReportCategory", (object)ReportCategory ?? DBNull.Value));
+                    command.Parameters.Add(new SqlParameter("@@ReportType", (object)ReportType ?? DBNull.Value));
+                    context.Database.Connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        DataTable1.Load(reader);
+                    }
+                }
+
+                foreach (DataRow row in DataTable1.Rows)
+                {
+                    user UserManageReport = new user
+                    {
+                        FullName = row["FullName"].ToString(),
+                        CreateDateString = row["CreateDate"].ToString(),
+                        StatusString = row["Status"].ToString(),
+                        UserLevelString = row["UserLevel"].ToString(),
+                        Remark = row["Remark"].ToString()
+                    };
+
+                    UserManageReportList.Add(UserManageReport);
+                }
+            }
+
+            return UserManageReportList.ToList();
+
+        }
+
+        public DataSet DownloadUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
+        {
+            using (var context = new ProjectDBEntities())
+            {
+                var UserManagementReportDT = new DataTable();
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = "exec [sp_UserManageReport] @@FromDate,@@ToDate, @@ReportCategory,@@ReportType";
+                    command.Parameters.Add(new SqlParameter("@@FromDate", (object)FromDate ?? DBNull.Value));
+                    command.Parameters.Add(new SqlParameter("@@ToDate", (object)ToDate ?? DBNull.Value));
+                    command.Parameters.Add(new SqlParameter("@@ReportCategory", (object)ReportCategory ?? DBNull.Value));
+                    command.Parameters.Add(new SqlParameter("@@ReportType", (object)ReportType ?? DBNull.Value));
+                    using (var adapter = new SqlDataAdapter((SqlCommand)command))
+                    {
+                        adapter.Fill(UserManagementReportDT);
+                    }
+                }
+                var UserManagementReportDS = new DataSet();
+                UserManagementReportDS.Tables.Add(UserManagementReportDT);
+                return UserManagementReportDS;
+            }
         }
 
         public List<CommonReport> InventoryManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
+            List<CommonReport> reports = new List<CommonReport>();
 
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable1 = new DataTable();
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = "EXEC sp_InventoryManagementReport @FromDate, @ToDate, @ReportCategory, @ReportType";
+                    command.Parameters.Add(new SqlParameter("@FromDate", FromDate));
+                    command.Parameters.Add(new SqlParameter("@ToDate", ToDate));
+                    command.Parameters.Add(new SqlParameter("@ReportCategory", ReportCategory));
+                    command.Parameters.Add(new SqlParameter("@ReportType", ReportType));
 
-            throw new NotImplementedException();
+                    context.Database.Connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        DataTable1.Load(reader);
+                    }
+                }
+                foreach (DataRow row in DataTable1.Rows)
+                {
+                    CommonReport report = new CommonReport
+                    {
+                        COL1 = row["COL1"].ToString(),
+                        COL2 = row["COL2"].ToString(),
+                        COL3 = row["COL3"].ToString(),
+                        COL4 = row["COL4"].ToString()
+                    };
+                    reports.Add(report);
+                }
+            }
+            return reports;
+        }
+
+        public List<CommonReport> SearchTicketManagementReport(DateTime fromDate, DateTime toDate, int reportCategory, int reportType)
+        {
+            List<CommonReport> reports = new List<CommonReport>();
+
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable1 = new DataTable();
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = "EXEC sp_TicketManagementReport @FromDate, @ToDate, @ReportCategory, @ReportType";
+                    command.Parameters.Add(new SqlParameter("@FromDate", fromDate));
+                    command.Parameters.Add(new SqlParameter("@ToDate", toDate));
+                    command.Parameters.Add(new SqlParameter("@ReportCategory", reportCategory));
+                    command.Parameters.Add(new SqlParameter("@ReportType", reportType));
+
+                    context.Database.Connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        DataTable1.Load(reader);
+                    }
+                }
+                foreach (DataRow row in DataTable1.Rows)
+                {
+                    CommonReport report = new CommonReport
+                    {
+                        COL1 = row["COL1"].ToString(),
+                        COL2 = row["COL2"].ToString(),
+                        COL3 = row["COL3"].ToString(),
+                        COL4 = row["COL4"].ToString()
+                    };
+                    reports.Add(report);
+                }
+            }
+            return reports;
         }
 
     }

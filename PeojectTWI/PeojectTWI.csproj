@@ -1713,6 +1713,7 @@
     <Content Include="Views\Inventory\SearchSerial.cshtml" />
     <Content Include="Views\Report\UserManagementReportForm.cshtml" />
     <Content Include="Views\Report\InventoryManagementReportForm.cshtml" />
+    <Content Include="Views\Report\TicketManagementReportForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

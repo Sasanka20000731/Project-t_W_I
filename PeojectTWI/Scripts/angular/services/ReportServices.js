@@ -1,6 +1,5 @@
 ﻿myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalStack, $rootScope) {
 
-
     $scope.LoadUserManagementReportData = function () {
         data = {
             params: {
@@ -17,18 +16,17 @@
 
     }
 
-
-
     $scope.SearchUserManagementReport = function () {
 
         data = {
             params: {
-                FromDate: UserReportFormDate,
-                ToDate: UserReportToDate,
-                ReportCategory:1,
+                FromDate: $scope.UserReportFormDate,
+                ToDate: $scope.UserReportToDate,
+                ReportCategory: 1,
                 ReportType: $("#droReportType").val()
             }
         };
+        //debugger;
         $http.get('/Report/SearchUserManagementReport', data)
 
             .success(function (response) {
@@ -41,7 +39,6 @@
 
     }
 
-    
     $scope.LoadInventoryManagementReportData = function () {
         data = {
             params: {
@@ -59,13 +56,12 @@
 
     }
 
-
-
     $scope.SearchInventoryManagementReportData = function () {
+        debugger
         data = {
             params: {
-                FromDate: InventoryReportFormDate,
-                ToDate: InventoryReportToDate,
+                FromDate: $scope.InventoryReportFormDate,
+                ToDate: $scope.InventoryReportToDate,
                 ReportCategory: 2,
                 ReportType: $("#droReportType").val()
             }
@@ -75,7 +71,7 @@
 
             .success(function (response) {
                 $scope.InventoryReport = response;
-
+                debugger;
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
                 console.log(xhr.error);
@@ -83,5 +79,44 @@
 
     }
 
+    $scope.LoadTicketManagementReportData = function () {
+        data = {
+            params: {
+                ReportCategory: 3
+            }
+        };
+        $http.get('/Report/LoadReportDropDownData', data)
+            .success(function (response) {
+                $scope.droReportTypeList = response;
+                debugger;
+            }).error(function (xhr) {
+                alertify.error("Error", 3000);
+                console.log(xhr.error);
+            })
+
+    }
+
+    $scope.SearchTicketManagementReportData = function () {
+        debugger
+        data = {
+            params: {
+                FromDate: $scope.InventoryReportFormDate,
+                ToDate: $scope.InventoryReportToDate,
+                ReportCategory: 2,
+                ReportType: $("#droReportType").val()
+            }
+        };
+        debugger
+        $http.get('/Report/SearchTicketManagementReport', data)
+
+            .success(function (response) {
+                $scope.TicketReport = response;
+                debugger;
+            }).error(function (xhr) {
+                alertify.error("Error", 3000);
+                console.log(xhr.error);
+            })
+
+    }
 
 });

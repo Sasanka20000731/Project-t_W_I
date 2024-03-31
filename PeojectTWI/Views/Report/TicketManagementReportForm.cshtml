@@ -3,12 +3,8 @@
     ViewBag.Title = "UserManagementReportForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Inventory Management Report Form</h2>
-
-
-<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadInventoryManagementReportData()" style="margin-bottom:10Px;">
-
+<h2>Tiker Management Report Form</h2>
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadTicketManagementReportData()" style="margin-bottom:10Px;">
 
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
         <div class="col-2" style="text-align: center;">
@@ -21,16 +17,14 @@
             <label>Report Type</label>
         </div>
         <div class="col-4">
-
         </div>
-
     </div>
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="InventoryReportFormDate" />
+            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="UserReportFormDate" />
         </div>
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="InventoryReportToDate" />
+            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="UserReportToDate" />
         </div>
         <div class="col-3">
             <select id="droReportType" name="droReportType" ng-model="droReportType" class="form-control" required>
@@ -39,15 +33,14 @@
             </select>
         </div>
         <div class="col-2">
-            <button class="custom-button" style="width:100%" ng-click="SearchInventoryManagementReportData()"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <button class="custom-button" style="width:100%" ng-click="SearchTicketManagementReportData()"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
         <div class="col-2">
-            <button class="custom-button" style="width:100%" ng-click="DewonloadInventoryManagementReport()"><i class="fa fa-download" aria-hidden="true"></i></button>
+            <button class="custom-button" style="width:100%" ng-click="DewonloadTiketManagementReport()"><i class="fa fa-download" aria-hidden="true"></i></button>
         </div>
     </div>
 
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%; padding-top:15px; ">
-
         <table width="100%" style="margin-bottom:20px;">
             <thead style=" border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgb(204, 204, 204);">
                 <tr>
@@ -59,7 +52,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="repeat in InventoryReport  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
+                <tr ng-repeat="repeat in TiketReport  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
                     <td class="text-left">{{$index + 1}}</td>
                     <td class="text-left" ng-bind="repeat.COL1"></td>
                     <td class="text-left" ng-bind="repeat.COL2"></td>
@@ -69,15 +62,7 @@
                 </tr>
             </tbody>
         </table>
-
-
-
     </div>
-
-
-
-
-
 </div>
 
 <style>
