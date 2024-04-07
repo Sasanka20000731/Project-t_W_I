@@ -28,7 +28,6 @@ namespace PeojectTWI.Services.ReportService
 
             return result;
         }
-
         public List<user> SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
             List<user> UserManageReportList = new List<user>();
@@ -70,7 +69,6 @@ namespace PeojectTWI.Services.ReportService
             return UserManageReportList.ToList();
 
         }
-
         public DataSet DownloadUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
             using (var context = new ProjectDBEntities())
@@ -93,7 +91,6 @@ namespace PeojectTWI.Services.ReportService
                 return UserManagementReportDS;
             }
         }
-
         public List<CommonReport> InventoryManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
             List<CommonReport> reports = new List<CommonReport>();
@@ -129,7 +126,6 @@ namespace PeojectTWI.Services.ReportService
             }
             return reports;
         }
-
         public List<CommonReport> SearchTicketManagementReport(DateTime fromDate, DateTime toDate, int reportCategory, int reportType)
         {
             List<CommonReport> reports = new List<CommonReport>();
@@ -155,10 +151,10 @@ namespace PeojectTWI.Services.ReportService
                 {
                     CommonReport report = new CommonReport
                     {
-                        COL1 = row["COL1"].ToString(),
-                        COL2 = row["COL2"].ToString(),
-                        COL3 = row["COL3"].ToString(),
-                        COL4 = row["COL4"].ToString()
+                        COL1 = row["COL1"] == DBNull.Value ? string.Empty : row["COL1"].ToString(),
+                        COL2 = row["COL2"] == DBNull.Value ? string.Empty : row["COL2"].ToString(),
+                        COL3 = row["COL3"] == DBNull.Value ? string.Empty : row["COL3"].ToString(),
+                        COL4 = row["COL4"] == DBNull.Value ? string.Empty : row["COL4"].ToString()
                     };
                     reports.Add(report);
                 }

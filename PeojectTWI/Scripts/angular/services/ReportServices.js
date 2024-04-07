@@ -88,7 +88,6 @@
         $http.get('/Report/LoadReportDropDownData', data)
             .success(function (response) {
                 $scope.droReportTypeList = response;
-                debugger;
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
                 console.log(xhr.error);
@@ -97,21 +96,18 @@
     }
 
     $scope.SearchTicketManagementReportData = function () {
-        debugger
         data = {
             params: {
-                FromDate: $scope.InventoryReportFormDate,
-                ToDate: $scope.InventoryReportToDate,
-                ReportCategory: 2,
+                FromDate: $scope.TicketReportFormDate,
+                ToDate: $scope.TicketReportToDate,
+                ReportCategory: 3,
                 ReportType: $("#droReportType").val()
             }
         };
-        debugger
         $http.get('/Report/SearchTicketManagementReport', data)
 
             .success(function (response) {
-                $scope.TicketReport = response;
-                debugger;
+                $scope.TiketReportlist = response;
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
                 console.log(xhr.error);

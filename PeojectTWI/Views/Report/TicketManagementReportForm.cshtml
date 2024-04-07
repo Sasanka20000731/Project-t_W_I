@@ -21,10 +21,10 @@
     </div>
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="UserReportFormDate" />
+            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="TicketReportFormDate" />
         </div>
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="UserReportToDate" />
+            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="TicketReportToDate" />
         </div>
         <div class="col-3">
             <select id="droReportType" name="droReportType" ng-model="droReportType" class="form-control" required>
@@ -44,7 +44,7 @@
         <table width="100%" style="margin-bottom:20px;">
             <thead style=" border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgb(204, 204, 204);">
                 <tr>
-                    <th class="text-left">Index</th>
+                    <th class="text-left"></th>
                     <th class="text-left"></th>
                     <th class="text-left"></th>
                     <th class="text-left"></th>
@@ -52,13 +52,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="repeat in TiketReport  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
+                <tr ng-repeat="repeat in TiketReportlist  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
                     <td class="text-left">{{$index + 1}}</td>
                     <td class="text-left" ng-bind="repeat.COL1"></td>
                     <td class="text-left" ng-bind="repeat.COL2"></td>
                     <td class="text-left" ng-bind="repeat.COL3"></td>
                     <td class="text-left" ng-bind="repeat.COL4"></td>
-
                 </tr>
             </tbody>
         </table>
