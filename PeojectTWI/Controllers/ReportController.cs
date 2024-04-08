@@ -95,6 +95,15 @@ namespace PeojectTWI.Controllers
             }
             return View();
         }
+
+        public JsonResult SearchWarrentyManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
+        {
+            var result = _reportService.SearchWarrentyManagementReport(FromDate, ToDate, ReportCategory, ReportType);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
         public ActionResult OtherReportForm()
         {
             if (Session["LoggedUserID"] == null)

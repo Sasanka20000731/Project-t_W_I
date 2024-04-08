@@ -1,10 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "UserManagementReportForm";
+    ViewBag.Title = "WarrentyManagementReportForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Tiket Management Report Form</h2>
-<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadTicketManagementReportData()" style="margin-bottom:10Px;">
+
+<h2>Warrenty Management Report Form</h2>
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadWarrentyManagementReportData()" style="margin-bottom:10Px;">
 
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
         <div class="col-2" style="text-align: center;">
@@ -21,10 +22,10 @@
     </div>
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="TicketReportFormDate" />
+            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="WarrentyReportFormDate" />
         </div>
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="TicketReportToDate" />
+            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="WarrentyReportToDate" />
         </div>
         <div class="col-3">
             <select id="droReportType" name="droReportType" ng-model="droReportType" class="form-control" required>
@@ -33,10 +34,10 @@
             </select>
         </div>
         <div class="col-2">
-            <button class="custom-button" style="width:100%" ng-click="SearchTicketManagementReportData()"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <button class="custom-button" style="width:100%" ng-click="SearchWarrentyManagementReportData()"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
         <div class="col-2">
-            <button class="custom-button" style="width:100%" ng-click="DewonloadTiketManagementReport()"><i class="fa fa-download" aria-hidden="true"></i></button>
+            <button class="custom-button" style="width:100%" ng-click="DewonloadWarrentyManagementReport()"><i class="fa fa-download" aria-hidden="true"></i></button>
         </div>
     </div>
 
@@ -52,7 +53,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="repeat in TiketReportlist  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
+                <tr ng-repeat="repeat in WarrentyReportlist  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
                     <td class="text-left">{{$index + 1}}</td>
                     <td class="text-left" ng-bind="repeat.COL1"></td>
                     <td class="text-left" ng-bind="repeat.COL2"></td>

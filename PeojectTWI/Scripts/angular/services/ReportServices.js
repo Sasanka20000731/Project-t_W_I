@@ -115,4 +115,38 @@
 
     }
 
+    $scope.LoadWarrentyManagementReportData = function () {
+        data = {
+            params: {
+                ReportCategory: 4
+            }
+        };
+        $http.get('/Report/LoadReportDropDownData', data)
+            .success(function (response) {
+                $scope.droReportTypeList = response;
+            }).error(function (xhr) {
+                alertify.error("Error", 3000);
+                console.log(xhr.error);
+            })
+    }
+
+    $scope.SearchWarrentyManagementReportData = function () {
+        data = {
+            params: {
+                FromDate: $scope.WarrentyReportFormDate,
+                ToDate: $scope.WarrentyReportToDate,
+                ReportCategory: 4,
+                ReportType: $("#droReportType").val()
+            }
+        };
+        $http.get('/Report/SearchWarrentyManagementReport', data)
+            .success(function (response) {
+                $scope.WarrentyReportlist = response;
+            }).error(function (xhr) {
+                alertify.error("Error", 3000);
+                console.log(xhr.error);
+            })
+
+    }
+
 });
