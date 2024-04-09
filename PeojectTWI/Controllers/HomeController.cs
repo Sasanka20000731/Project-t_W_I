@@ -44,11 +44,12 @@ namespace PeojectTWI.Controllers
 
         public JsonResult loginUser(string UserName, string Password)
         {
-            var logUser = _userService.loginUser(UserName, Password);
+            string ValidPassword = _userService.EncryptText(Password);
+            var logUser = _userService.loginUser(UserName, ValidPassword);
 
             if (logUser == 1)
             {
-                var a = _userService.GetLoggedUsers(UserName, Password);
+                var a = _userService.GetLoggedUsers(UserName, ValidPassword);
                 Session["LoggedUserID"] = a[0].UserId;
                 return Json(logUser, JsonRequestBehavior.AllowGet);
             }
@@ -97,7 +98,6 @@ namespace PeojectTWI.Controllers
         {
             var result =   _userService.addUser(UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB);
             return Json(result, JsonRequestBehavior.AllowGet);
-           
         }
 
         public ActionResult viewUser()
@@ -126,7 +126,6 @@ namespace PeojectTWI.Controllers
             return View();
         }
 
-
         public JsonResult getselectedUserDetails(int UserId)
         {
             var result = _userService.getselectedUserDetails(UserId);
@@ -134,9 +133,6 @@ namespace PeojectTWI.Controllers
 
         }
 
-
-
-        
         public ActionResult updateUsers(int UserId, string UserName, string FirstName, string LastName, DateTime DOB,string Email, string MobileNumber, int UserLevel, bool Active)
         {
 

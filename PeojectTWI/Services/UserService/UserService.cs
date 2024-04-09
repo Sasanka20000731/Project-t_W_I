@@ -8,14 +8,17 @@ using PeojectTWI.Models;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Mvc;
-
-
+using System.Security.Cryptography;
+using System.Text;
+using System.IO;
 
 namespace PeojectTWI.Services.UserService
 {
     public class UserService : IUserService
     {
         ProjectDBEntities db = new ProjectDBEntities();
+          
+
         public int addUser(string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob)
         {
             try
@@ -24,7 +27,7 @@ namespace PeojectTWI.Services.UserService
             tu.UserName = userName;
             tu.FirstName = firstName;
             tu.LastName = lastName;
-            tu.Password = "123456789";
+            tu.Password = "ADX4VeuwJ0BAoXSOXntYdAjr0CMni4/DuqJUOMeJYRY=";
             tu.UserLevel = userLevel;
             tu.Active = true;
             tu.MobileNumber = mobileNumber;
@@ -195,6 +198,50 @@ namespace PeojectTWI.Services.UserService
             return result;
         }
 
+ 
+        public  string EncryptText(string clearText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
+        }
+
+        public string DecryptText(string cipherText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+        }
 
     }
 }

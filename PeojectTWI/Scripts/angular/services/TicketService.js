@@ -14,6 +14,8 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
         $http.get('/Ticket/InsertTicket', data)
             .success(function (response) {
                 if (response == 1) {
+                    $scope.SerialNumber = undifined;
+                    $scope.ticketTemark = undifined;
                     alertify.success('Ticket Successfully Created', 3000);
                 } else {
                     alertify.error('Error', 5000);
@@ -24,6 +26,8 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
             })
 
     }
+
+
 
     $scope.LoadTicketHandlers = function () {
         debugger;
