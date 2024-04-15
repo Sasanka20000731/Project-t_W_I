@@ -77,16 +77,12 @@ namespace PeojectTWI.Services.UserService
 
         }
 
-        public void viewUser(string username)
-        {
-            throw new NotImplementedException();
-        }
 
-        public async Task updateUser(int userId, string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob)
+        public int UpdateUser(int userId, string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob, bool active)
         {
             try
             {
-                var entity = await db.tblUsers.FindAsync(userId);
+                var entity = db.tblUsers.FindAsync(userId).Result;
                 if (entity != null)
                 {
                     entity.UserName = userName;
@@ -97,26 +93,21 @@ namespace PeojectTWI.Services.UserService
                     entity.Email = email;
                     entity.CreatedDate = DateTime.Now;
                     entity.DOB = dob;
-                    await db.SaveChangesAsync();
+                    entity.Active = active;
+                    db.SaveChangesAsync().Wait();
+                    return 1; // Success
+                }
+                else
+                {
+                    return 0; // User not found
                 }
             }
             catch (Exception)
             {
-
+                return 0; // Exception occurred
             }
-
         }
 
-        public async Task changeUserStatus(int userId, bool? status)
-        {
-            var entity = await db.tblUsers.FindAsync(userId);
-            if (entity != null)
-            {
-                entity.Active = status;
-                await db.SaveChangesAsync();
-            }
-            throw new NotImplementedException();
-        }
 
         public List<loggedUser> GetLoggedUsers(string UserName,string Password)
         {
@@ -192,7 +183,8 @@ namespace PeojectTWI.Services.UserService
                               UserLevel = a.UserLevel,
                               MobileNumber= a.MobileNumber,
                               Email = a.Email,
-                              DOB = a.DOB
+                              DOB = a.DOB,
+                              Active = a.Active
                              
                           }).ToList();
             return result;

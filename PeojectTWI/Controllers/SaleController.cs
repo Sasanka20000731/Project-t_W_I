@@ -31,7 +31,6 @@ namespace PeojectTWI.Controllers
             _saleService = new SaleService();
         }
 
-
         public ActionResult SaleItem()
         {
             if (Session["LoggedUserID"] == null)
@@ -49,7 +48,6 @@ namespace PeojectTWI.Controllers
             }
             return View();
         }
-
 
         public JsonResult GetProductDetailsToSale(string SerialNo)
         {
@@ -87,6 +85,15 @@ namespace PeojectTWI.Controllers
             var result = _saleService.GetSelectedSoldItemData(SerialNo);
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult RejectSale(string SerialNumber)
+        {
+
+            var RejectItemResult = _saleService.RejectSaleItem(SerialNumber);
+
+            return Json(RejectItemResult, JsonRequestBehavior.AllowGet);
         }
 
     }

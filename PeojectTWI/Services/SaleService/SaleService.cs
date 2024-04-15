@@ -77,6 +77,7 @@ namespace PeojectTWI.Services.SaleService
                           join b in db.tblSalesDetails on a.InventoryID equals b.InventoryId
                           join c in db.tblCoustomerDetails on b.CoustomerId equals c.CoustomerId
                           where (a.SerialNumber == SerialNo) || (b.InvoiceID == InvoiceNo) || (c.ContactNumber == ContactNo)
+                          && b.Active == true
                           select new
                           {
                               SerialNumber = a.SerialNumber,
@@ -99,7 +100,7 @@ namespace PeojectTWI.Services.SaleService
             var result = (from a in db.tblInventoryDatas
                           join b in db.tblSalesDetails on a.InventoryID equals b.InventoryId
                           join c in db.tblCoustomerDetails on b.CoustomerId equals c.CoustomerId
-                          where (a.SerialNumber == SerialNo)
+                          where (a.SerialNumber == SerialNo) && b.Active == true
                           select new
                           {
                               SerialNumber = a.SerialNumber,
@@ -118,6 +119,35 @@ namespace PeojectTWI.Services.SaleService
 
             return result;
         }
+
+
+        public int RejectSaleItem(string SerialNumber)
+        {
+            using (var context = new ProjectDBEntities())
+            {
+                using (var cmd = context.Database.Connection.CreateCommand())
+                {
+                    cmd.CommandText = "sp_RejectSaleiItem";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@@SerialNumber", SerialNumber));
+
+                    context.Database.Connection.Open();
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int spResult))
+                    {
+                        return spResult;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+
+
+        }
+
 
     }
 }

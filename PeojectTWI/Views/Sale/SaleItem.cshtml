@@ -20,7 +20,12 @@
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" ng-model="CustomerEmail" required>
+
+                <input type="text" id="email" name="email" ng-model="CustomerEmail" ng-change="CheckEmail(CustomerEmail)" required>
+                <span class="text-danger" ng-show="EmailAsyncError">
+                    {{ EmailAsyncErrorMessage }}
+                </span>
+
             </div>
 
             <div class="form-group">
@@ -81,7 +86,7 @@
         <div class="form-group">
             <label for="discount">Discount Amount(Rs)</label>
             <input type="text" id="discount" name="discount" ng-model="Discount" ng-change="DiscountManageCalculator()">
-            <div class="validation" ng-hide="validationMessageDiscount">discount is more than 10% of cost</div>
+            <div class="validation" ng-hide="validationMessageDiscount">Discount is more than 10% of cost</div>
         </div>
 
             <div class="form-group">

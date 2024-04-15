@@ -1689,7 +1689,6 @@
     <Content Include="Styles\vendors\images\cover.png~" />
     <Content Include="Views\Home\viewUser.cshtml" />
     <Content Include="Views\Home\updateUser.cshtml" />
-    <Content Include="Views\Home\userAccountStatus.cshtml" />
     <Content Include="Views\Inventory\insertProductCategory.cshtml" />
     <Content Include="Views\Inventory\viewProductCategories.cshtml" />
     <Content Include="Views\Inventory\editProductCategory.cshtml" />

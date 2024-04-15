@@ -26,11 +26,13 @@
                 ReportType: $("#droReportType").val()
             }
         };
-        //debugger;
         $http.get('/Report/SearchUserManagementReport', data)
-
             .success(function (response) {
-                $scope.UserReport = response;
+                if (response && response.length !== 0) {
+                    $scope.UserReport = response;
+                } else {
+                    alertify.error("No Records Available !!!", 3000);
+                }
 
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
@@ -68,10 +70,12 @@
         };
         debugger
         $http.get('/Report/SearchInventoryManagementReport', data)
-
             .success(function (response) {
-                $scope.InventoryReport = response;
-                debugger;
+                if (response && response.length !== 0) {
+                    $scope.InventoryReport = response;
+                } else {
+                    alertify.error("No Records Available !!!", 3000);
+                }
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
                 console.log(xhr.error);
@@ -107,7 +111,12 @@
         $http.get('/Report/SearchTicketManagementReport', data)
 
             .success(function (response) {
-                $scope.TiketReportlist = response;
+                if (response && response.length !== 0) {
+                    $scope.TiketReportlist = response;
+                } else {
+                    alertify.error("No Records Available !!!", 3000);
+                }
+
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
                 console.log(xhr.error);
@@ -140,8 +149,12 @@
             }
         };
         $http.get('/Report/SearchWarrentyManagementReport', data)
-            .success(function (response) {
-                $scope.WarrentyReportlist = response;
+            .success(function (response) {           
+                if (response && response.length !== 0) {
+                    $scope.WarrentyReportlist = response;
+                } else {
+                    alertify.error("No Records Available !!!", 3000);
+                }
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
                 console.log(xhr.error);

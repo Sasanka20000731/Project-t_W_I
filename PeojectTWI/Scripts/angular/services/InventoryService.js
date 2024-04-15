@@ -100,31 +100,37 @@
     }
 
     $scope.SaveProductCategory = function () {
-        data = {
-            params: {
-                ProductName: $scope.ProductName,
-                BrandName: $scope.BrandName,
-                VendorName: $scope.VendorName,
-                VendorContact: $scope.VendorContact,
-                VendorAddress: $scope.VendorAddress,
-                VendorEmail: $scope.VendorEmail
-            }
-        };
-        debugger;
-        $http.get('/Inventory/SaveProductCategory', data)
-            .success(function (response) {
-                if (response == 1) {
-                    alertify.success("Successfully Saved Product Category", 3000);
-                    $scope.ClearProductCategory();
-                } else {
-                    alertify.error("Error", 3000);
-                }
-            }).error(function (xhr) {
-                alertify.error("Error", 3000);
-                console.log(xhr.error);
-            })
-    }
 
+        if (($scope.ProductName != null && $scope.BrandName != null && $scope.VendorName != null && $scope.VendorContact != null && $scope.VendorAddress != null && $scope.VendorEmail != null)
+
+            || ($scope.ProductName != undefined && $scope.BrandName != undefined && $scope.VendorName != undefined && $scope.VendorContact != undefined && $scope.VendorAddress != undefined && $scope.VendorEmail != undefined)) {
+            data = {
+                params: {
+                    ProductName: $scope.ProductName,
+                    BrandName: $scope.BrandName,
+                    VendorName: $scope.VendorName,
+                    VendorContact: $scope.VendorContact,
+                    VendorAddress: $scope.VendorAddress,
+                    VendorEmail: $scope.VendorEmail
+                }
+            };
+            debugger;
+            $http.get('/Inventory/SaveProductCategory', data)
+                .success(function (response) {
+                    if (response == 1) {
+                        alertify.success("Successfully Saved Product Category", 3000);
+                        $scope.ClearProductCategory();
+                    } else {
+                        alertify.error("Error", 3000);
+                    }
+                }).error(function (xhr) {
+                    alertify.error("Error", 3000);
+                    console.log(xhr.error);
+                })
+        }else {
+            alertify.error("Fill All Data", 3000);
+        }
+    }
 
     $scope.ClearProductCategory = function () {
         $scope.ProductName = undefined;
@@ -135,7 +141,6 @@
         $scope.VendorEmail = undefined;
 
     }
-
 
     $scope.validateMobileNumber = function () {
         if (($scope.VendorContact && $scope.VendorContact.length === 10 && /^\d+$/.test($scope.VendorContact) && $scope.VendorContact.startsWith('0')) || ($scope.VendorContact === undefined) || ($scope.VendorContact === "")) {
@@ -192,44 +197,16 @@
 
     }
 
-    //$scope.UpdateProductCategory = function () {
-
-    //    data = {
-    //        params: {
-    //            ProductID: $("#ProductID").val(),
-    //            ProductName: $scope.ProductName,
-    //            BrandName: $scope.BrandName,
-    //            VendorName: $scope.VendorName,
-    //            VendorContact: $scope.VendorContact,
-    //            VendorAddress: $scope.VendorAddress,
-    //            VendorEmail: $scope.VendorEmail,
-    //            Active: true//$scope.Active
-    //        }
-    //    };
-
-    //    $http.get('/Inventory/EditProductCategorys', data)
-    //        .success(function (response) {
-    //            debugger
-    //            if (response == 1) {
-    //                alertify.success("Successfully Updated Product Category", 3000);
-    //                $scope.ClearProductCategory();
-    //            } else {
-    //                alertify.error("Error", 3000);
-    //            }
-    //        })
-    //        .error(function (xhr) {
-    //            console.log(xhr.error);
-    //        })
-
-    //}
-
-
     $scope.UpdateProductCategory = function () {
-        $scope.Active;
-        if ($scope.Active == undefined) {
-            $scope.Active = false;
-        }
-        //debugger
+        debugger
+        if (($("#ProductID").val() != null && $scope.BrandName != null && $scope.VendorName != null && $scope.VendorContact != null && $scope.VendorEmail != null && $scope.VendorAddress != null  && $scope.ProductName != null)
+            || ($("#ProductID").val() != undefined && $scope.BrandName != undefined && $scope.VendorName != undefined && $scope.VendorContact != undefined && $scope.VendorEmail != undefined && $scope.VendorAddress != undefined && $scope.ProductName != undefined)) {
+
+            $scope.Active;
+            if ($scope.Active == undefined) {
+                $scope.Active = false;
+            }
+            //debugger
             var extendUrl = '/Inventory/EditProductCategorys?' +
                 'ProductID=' + $("#ProductID").val() +
                 '&BrandName=' + $scope.BrandName +
@@ -239,44 +216,52 @@
                 '&VendorAddress=' + $scope.VendorAddress +
                 '&Active=' + $scope.Active +
                 '&ProductName=' + $scope.ProductName;
-        //debugger;
-        //'&Active=' + $scope.Active;
-        //debugger;
-        window.location.href = extendUrl;
+            //debugger;
+            //'&Active=' + $scope.Active;
+            //debugger;
+            window.location.href = extendUrl;
+        } else {
+            alertify.error("Plese fill all feilds to update", 4000);
+
+        }
+        
     }
 
     $scope.SearchSerialNumber = function () {
 
-        data = {
-            params: {
-                SerialNumberToSearch: $scope.SerialNumberToSearch
-            }
-        };
-        $http.get('/Inventory/GetSearchSerialDetails', data)
-            .success(function (response) {
-
-                if (response.length != 0) {
-                    $scope.SearchedItemDetails = response[0];
-                } else {
-                    alertify.success("No Records Available For This Serial Number !!!", 6000);
+        if ($scope.SerialNumberToSearch != null || $scope.SerialNumberToSearch != undefined) {
+            data = {
+                params: {
+                    SerialNumberToSearch: $scope.SerialNumberToSearch
                 }
-                
-        })
-        .error(function (xhr) {
-            console.log(xhr.error);
-        })
+            };
+            $http.get('/Inventory/GetSearchSerialDetails', data)
+                .success(function (response) {
 
+                    if (response.length != 0) {
+                        $scope.SearchedItemDetails = response[0];
+                    } else {
+                        alertify.success("No Records Available For This Serial Number !!!", 6000);
+                    }
+
+                })
+                .error(function (xhr) {
+                    alertify.success("Error !!!", 3000);
+                    console.log(xhr.error);
+                })
+
+        } else {
+            alertify.success("Plese Enter Serial Number", 4000);
+        }
+
+       
 
     }
-
-
 
     $scope.ClearSearchInventory = function () {
         $scope.SerialNumberToSearch = undefined;
         $scope.SearchedItemDetails = undefined;
     }
-
-
 
 });
 

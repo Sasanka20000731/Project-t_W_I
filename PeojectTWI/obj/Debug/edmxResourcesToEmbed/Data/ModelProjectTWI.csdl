@@ -13,7 +13,6 @@
     <EntitySet Name="tblMasterTicketSequnces" EntityType="ProjectDBModel.tblMasterTicketSequnce" />
     <EntitySet Name="tblMasterWarrenties" EntityType="ProjectDBModel.tblMasterWarrenty" />
     <EntitySet Name="tblProductCategories" EntityType="ProjectDBModel.tblProductCategory" />
-    <EntitySet Name="tblSalesDetails" EntityType="ProjectDBModel.tblSalesDetail" />
     <EntitySet Name="tblTickets" EntityType="ProjectDBModel.tblTicket" />
     <EntitySet Name="tblTicketComments" EntityType="ProjectDBModel.tblTicketComment" />
     <EntitySet Name="tblTicketProjectDtls" EntityType="ProjectDBModel.tblTicketProjectDtl" />
@@ -23,10 +22,6 @@
     <EntitySet Name="tblUserlLevels" EntityType="ProjectDBModel.tblUserlLevel" />
     <EntitySet Name="tblWarrentyExtendedDates" EntityType="ProjectDBModel.tblWarrentyExtendedDate" />
     <EntitySet Name="tblWarrentyhistories" EntityType="ProjectDBModel.tblWarrentyhistory" />
-    <AssociationSet Name="FK_tblSalesDetails_tblCoustomerDetails" Association="ProjectDBModel.FK_tblSalesDetails_tblCoustomerDetails">
-      <End Role="tblCoustomerDetail" EntitySet="tblCoustomerDetails" />
-      <End Role="tblSalesDetail" EntitySet="tblSalesDetails" />
-    </AssociationSet>
     <AssociationSet Name="FK_tblTicket_tblCoustomerDetails" Association="ProjectDBModel.FK_tblTicket_tblCoustomerDetails">
       <End Role="tblCoustomerDetail" EntitySet="tblCoustomerDetails" />
       <End Role="tblTicket" EntitySet="tblTickets" />
@@ -42,10 +37,6 @@
     <AssociationSet Name="FK_tblMasterWarrenty_tblInventoryData" Association="ProjectDBModel.FK_tblMasterWarrenty_tblInventoryData">
       <End Role="tblInventoryData" EntitySet="tblInventoryDatas" />
       <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenties" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tblSalesDetails_tblInventoryData" Association="ProjectDBModel.FK_tblSalesDetails_tblInventoryData">
-      <End Role="tblInventoryData" EntitySet="tblInventoryDatas" />
-      <End Role="tblSalesDetail" EntitySet="tblSalesDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_tblTicket_tblInventoryData" Association="ProjectDBModel.FK_tblTicket_tblInventoryData">
       <End Role="tblInventoryData" EntitySet="tblInventoryDatas" />
@@ -113,6 +104,15 @@
       <End Role="tblReportCategory" EntitySet="tblReportCategories" />
       <End Role="tblReportType" EntitySet="tblReportTypes" />
     </AssociationSet>
+    <EntitySet Name="tblSalesDetails" EntityType="ProjectDBModel.tblSalesDetail" />
+    <AssociationSet Name="FK_tblSalesDetails_tblCoustomerDetails" Association="ProjectDBModel.FK_tblSalesDetails_tblCoustomerDetails">
+      <End Role="tblCoustomerDetail" EntitySet="tblCoustomerDetails" />
+      <End Role="tblSalesDetail" EntitySet="tblSalesDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSalesDetails_tblInventoryData" Association="ProjectDBModel.FK_tblSalesDetails_tblInventoryData">
+      <End Role="tblInventoryData" EntitySet="tblInventoryDatas" />
+      <End Role="tblSalesDetail" EntitySet="tblSalesDetails" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_ViewAllInventoryData_Result">
     <Property Type="String" Name="BrandName" Nullable="true" MaxLength="30" />
@@ -139,8 +139,8 @@
     <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Active" Type="Boolean" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="tblSalesDetails" Relationship="ProjectDBModel.FK_tblSalesDetails_tblCoustomerDetails" FromRole="tblCoustomerDetail" ToRole="tblSalesDetail" />
     <NavigationProperty Name="tblTickets" Relationship="ProjectDBModel.FK_tblTicket_tblCoustomerDetails" FromRole="tblCoustomerDetail" ToRole="tblTicket" />
+    <NavigationProperty Name="tblSalesDetails" Relationship="ProjectDBModel.FK_tblSalesDetails_tblCoustomerDetails" FromRole="tblCoustomerDetail" ToRole="tblSalesDetail" />
   </EntityType>
   <EntityType Name="tblInventoryData">
     <Key>
@@ -157,8 +157,8 @@
     <NavigationProperty Name="tblMasterStore" Relationship="ProjectDBModel.FK_tblInventoryData_tblMasterStore" FromRole="tblInventoryData" ToRole="tblMasterStore" />
     <NavigationProperty Name="tblInventoryHistories" Relationship="ProjectDBModel.FK_tblInventoryHistory_tblInventoryData" FromRole="tblInventoryData" ToRole="tblInventoryHistory" />
     <NavigationProperty Name="tblMasterWarrenties" Relationship="ProjectDBModel.FK_tblMasterWarrenty_tblInventoryData" FromRole="tblInventoryData" ToRole="tblMasterWarrenty" />
-    <NavigationProperty Name="tblSalesDetails" Relationship="ProjectDBModel.FK_tblSalesDetails_tblInventoryData" FromRole="tblInventoryData" ToRole="tblSalesDetail" />
     <NavigationProperty Name="tblTickets" Relationship="ProjectDBModel.FK_tblTicket_tblInventoryData" FromRole="tblInventoryData" ToRole="tblTicket" />
+    <NavigationProperty Name="tblSalesDetails" Relationship="ProjectDBModel.FK_tblSalesDetails_tblInventoryData" FromRole="tblInventoryData" ToRole="tblSalesDetail" />
   </EntityType>
   <EntityType Name="tblInventoryHistory">
     <Key>
@@ -238,20 +238,6 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tblMasterStores" Relationship="ProjectDBModel.FK_tblMasterStore_tblProductCategories" FromRole="tblProductCategory" ToRole="tblMasterStore" />
-  </EntityType>
-  <EntityType Name="tblSalesDetail">
-    <Key>
-      <PropertyRef Name="InvoiceID" />
-    </Key>
-    <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="InventoryId" Type="Int32" />
-    <Property Name="CoustomerId" Type="Int32" />
-    <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="SoldPrice" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="ExtendPrice" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="tblCoustomerDetail" Relationship="ProjectDBModel.FK_tblSalesDetails_tblCoustomerDetails" FromRole="tblSalesDetail" ToRole="tblCoustomerDetail" />
-    <NavigationProperty Name="tblInventoryData" Relationship="ProjectDBModel.FK_tblSalesDetails_tblInventoryData" FromRole="tblSalesDetail" ToRole="tblInventoryData" />
   </EntityType>
   <EntityType Name="tblTicket">
     <Key>
@@ -379,18 +365,6 @@
     <Property Name="Active" Type="Boolean" />
     <NavigationProperty Name="tblMasterWarrenty" Relationship="ProjectDBModel.FK_tblWarrentyhistory_tblMasterWarrenty" FromRole="tblWarrentyhistory" ToRole="tblMasterWarrenty" />
   </EntityType>
-  <Association Name="FK_tblSalesDetails_tblCoustomerDetails">
-    <End Type="ProjectDBModel.tblCoustomerDetail" Role="tblCoustomerDetail" Multiplicity="0..1" />
-    <End Type="ProjectDBModel.tblSalesDetail" Role="tblSalesDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tblCoustomerDetail">
-        <PropertyRef Name="CoustomerId" />
-      </Principal>
-      <Dependent Role="tblSalesDetail">
-        <PropertyRef Name="CoustomerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_tblTicket_tblCoustomerDetails">
     <End Type="ProjectDBModel.tblCoustomerDetail" Role="tblCoustomerDetail" Multiplicity="0..1" />
     <End Type="ProjectDBModel.tblTicket" Role="tblTicket" Multiplicity="*" />
@@ -436,18 +410,6 @@
       </Principal>
       <Dependent Role="tblMasterWarrenty">
         <PropertyRef Name="inventoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tblSalesDetails_tblInventoryData">
-    <End Type="ProjectDBModel.tblInventoryData" Role="tblInventoryData" Multiplicity="0..1" />
-    <End Type="ProjectDBModel.tblSalesDetail" Role="tblSalesDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tblInventoryData">
-        <PropertyRef Name="InventoryID" />
-      </Principal>
-      <Dependent Role="tblSalesDetail">
-        <PropertyRef Name="InventoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -662,6 +624,45 @@
       </Principal>
       <Dependent Role="tblReportType">
         <PropertyRef Name="ReportCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblSalesDetail">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InventoryId" Type="Int32" />
+    <Property Name="CoustomerId" Type="Int32" />
+    <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SoldPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ExtendPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="tblCoustomerDetail" Relationship="ProjectDBModel.FK_tblSalesDetails_tblCoustomerDetails" FromRole="tblSalesDetail" ToRole="tblCoustomerDetail" />
+    <NavigationProperty Name="tblInventoryData" Relationship="ProjectDBModel.FK_tblSalesDetails_tblInventoryData" FromRole="tblSalesDetail" ToRole="tblInventoryData" />
+  </EntityType>
+  <Association Name="FK_tblSalesDetails_tblCoustomerDetails">
+    <End Type="ProjectDBModel.tblCoustomerDetail" Role="tblCoustomerDetail" Multiplicity="0..1" />
+    <End Type="ProjectDBModel.tblSalesDetail" Role="tblSalesDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCoustomerDetail">
+        <PropertyRef Name="CoustomerId" />
+      </Principal>
+      <Dependent Role="tblSalesDetail">
+        <PropertyRef Name="CoustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSalesDetails_tblInventoryData">
+    <End Type="ProjectDBModel.tblInventoryData" Role="tblInventoryData" Multiplicity="0..1" />
+    <End Type="ProjectDBModel.tblSalesDetail" Role="tblSalesDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInventoryData">
+        <PropertyRef Name="InventoryID" />
+      </Principal>
+      <Dependent Role="tblSalesDetail">
+        <PropertyRef Name="InventoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

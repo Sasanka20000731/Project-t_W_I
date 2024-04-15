@@ -75,7 +75,15 @@
                 @Html.DisplayFor(modelItem => item.tblUserlLevel.UserLevel)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Active)
+      
+                @if (item.Active == true)
+                {
+                    <text>Active</text>
+                }
+                else
+                {
+                    <text>Deactivated</text>
+                }
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.Password)
@@ -84,8 +92,8 @@
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "updateUser", new { uid = item.UserId }, new { @class = "Edit-User-link" })|
-                @Html.ActionLink("Status", "userAccountStatus", new { uid_Status = item.UserId }, new { @class = "Edit-User-link" })
+                @Html.ActionLink("Edit", "updateUser", new { uid = item.UserId }, new { @class = "Edit-User-link" })
+               
             </td>
         </tr>
     }

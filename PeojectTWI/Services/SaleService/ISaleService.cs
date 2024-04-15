@@ -18,5 +18,8 @@ namespace PeojectTWI.Services.SaleService
 
         List<saleItem> GetSoldItemData(string SerialNo = null, Nullable<int> InvoiceNo = null, string ContactNo = null);
         List<saleItem> GetSelectedSoldItemData(string SerialNo);
+
+        int RejectSaleItem(string SerialNumber);
+
     }
 }

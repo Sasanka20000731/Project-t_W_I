@@ -988,3 +988,4 @@ G:\Personal\20240408\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.csprojAssembl
 G:\Personal\20240408\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.csproj.CopyComplete
 G:\Personal\20240408\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.dll
 G:\Personal\20240408\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.pdb
+F:\Projects\FinalYearProject\Project-t_W_I\PeojectTWI\bin\QuickMailer.dll

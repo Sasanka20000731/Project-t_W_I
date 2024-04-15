@@ -1,6 +1,5 @@
 ﻿myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalStack, $rootScope) {
 
-    //Variable with default value
     $scope.mobileNumberAsyncError = false;
 
     $scope.CheckUserName = function () {
@@ -28,29 +27,35 @@
     }
 
     $scope.login = function () {
-        data = {
-            params: {
-                UserName: $scope.UserName,
-                Password: $scope.Passowrd
-            }
-        };
-        $http.get('/Home/loginUser', data)
-            .success(function (response) {
 
-                if (response === 1) {
-
-                    $scope.LoadDashbord();
-
-                } else {
-                    $scope.InvalidUser = true;
-
+        if (($scope.UserName != null && $scope.Passowrd != null) || ($scope.UserName != undefined && $scope.Passowrd != undefined)) {
+            data = {
+                params: {
+                    UserName: $scope.UserName,
+                    Password: $scope.Passowrd
                 }
+            };
+            $http.get('/Home/loginUser', data)
+                .success(function (response) {
 
-            }).error(function (xhr) {
-                console.log(xhr.error);
-                alertify.success("Error", 3000);
-            })
+                    if (response === 1) {
 
+                        $scope.LoadDashbord();
+
+                    } else {
+                        $scope.InvalidUser = true;
+
+                    }
+
+                }).error(function (xhr) {
+                    console.log(xhr.error);
+                    alertify.success("Error", 3000);
+                })
+
+        } else {
+            debugger
+            alertify.success("Fill User Name and Password !!!", 3000);
+        }
     }
 
     $scope.LoadDashbord = function () {
@@ -161,10 +166,10 @@
 
                 // Create a new Date object using the timestamp
                 $scope.DOB = new Date(parseInt(timestamp));
-               // $scope.DOB = new Date(Date.parse(response[0].DOB));  //response[0].DOB;
                 $scope.Email = response[0].Email;
                 $scope.MobileNumber = response[0].MobileNumber;
                 $scope.droUserLevels = response[0].UserLevel;
+                $scope.Active = response[0].Active;
                 debugger
             })
             .error(function (xhr) {
@@ -172,7 +177,12 @@
             })
     }
 
-    $scope.UpdateUser = function (){
+    $scope.UpdateUser = function () {
+
+        $scope.Active;
+        if ($scope.Active == undefined) {
+            $scope.Active = false;
+        }
 
         data = {
             params: {
@@ -183,14 +193,19 @@
                 DOB: $scope.DOB,
                 Email: $scope.Email,
                 MobileNumber: $scope.MobileNumber,
-                UserLevel: $("#droUserLevels").val(),
-                Active: true//$scope.Active
+                UserLevel: $scope.droUserLevels,
+                Active: $scope.Active//$scope.Active
             }
         };
-
+        debugger;
         $http.get('/Home/updateUsers', data)
             .success(function (response) {
-
+                if (response === 1) {
+                    debugger;
+                    window.location.href = "/Home/viewUser";
+                } else {
+                    alertify.error("Error", 3000);
+                }
                 debugger
             })
             .error(function (xhr) {
@@ -198,22 +213,5 @@
             })
 
     }
-
-    //$scope.UpdateUser = function () {
-    //    var extendUrl = '/Home/updateUsers?' +
-    //        'UserId=' + $("#UserId").val() +
-    //        '&UserName=' + $scope.UserName +
-    //        '&FirstName=' + $scope.FirstName +
-    //        '&LastName=' + $scope.LastName +
-    //        '&DOB=' + $scope.DOB +
-    //        '&Email=' + $scope.Email +
-    //        '&MobileNumber=' + $scope.MobileNumber +
-    //        '&UserLevel=' + $("#droUserLevels").val() +
-    //        '&Active=' + true;
-    //    //'&Active=' + $scope.Active;
-    //    debugger;
-    //    window.location.href = extendUrl;
-    //}
-  
 
 });

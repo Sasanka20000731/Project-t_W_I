@@ -11,6 +11,7 @@ using PeojectTWI.Services.UserService;
 using PeojectTWI.Services.TicketService;
 using PeojectTWI.Services.InventoryService;
 using PeojectTWI.Services.WarrentyService;
+using QuickMailer;
 
 namespace PeojectTWI.Controllers
 {
@@ -96,7 +97,10 @@ namespace PeojectTWI.Controllers
 
         public JsonResult saveUser(string UserName, string FirstName, string LastName,DateTime DOB,string Email,string MobileNumber,int UserLevel)
         {
+            
             var result =   _userService.addUser(UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB);
+            //var zresult = CommenEmail(Email, "sasankabuddhi@gmail.com", "SAsanka@123", "User Login", "Dear " + FirstName + ", your account user name is : (" + UserName + ")  and Password is " + 123456789 + ".");
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -133,73 +137,44 @@ namespace PeojectTWI.Controllers
 
         }
 
-        public ActionResult updateUsers(int UserId, string UserName, string FirstName, string LastName, DateTime DOB,string Email, string MobileNumber, int UserLevel, bool Active)
+        public JsonResult updateUsers(string UserId, string UserName, string FirstName, string LastName, DateTime DOB,string Email, string MobileNumber, int UserLevel, bool Active)
         {
 
-            if (Session["LoggedUserID"] == null)
-            {
-                return RedirectToAction("Login", "Home");
 
-            }
-
-            try
-            {
-                var a = _userService.updateUser(UserId, UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB);
-                return RedirectToAction("viewUser");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = "Error updating user: " + ex.Message;
-                return View("viewUser");
-            }
+      
+                var result = _userService.UpdateUser(Convert.ToInt32(UserId), UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB, Active);
+                return Json(result, JsonRequestBehavior.AllowGet);
+     
         }
 
-        public ActionResult userAccountStatus(user uAD)
+        public bool CommonEmail(string toMail,string fromMail, string password,string subject,string body) 
         {
-            if (Session["LoggedUserID"] == null)
-            {
-                return RedirectToAction("Login", "Home");
+            //try
+            //{
+                //From mail Password "schqmfidfvgsjcru"
+                //HO@vfplc
+                //From Mail = testingbranchuser@gmail.com
+                // var toMail = "sasankabuddhi@gmail.com";
+                Email email = new Email();
+                email.SendEmail(toMail,fromMail,password,subject,body);
 
-            }
-            var id = Request["uid_Status"];
-            int uid = Convert.ToInt32(id);
-            tblUser TU = db.tblUsers.SingleOrDefault(x => x.UserId == uid);
-            uAD.UserId = TU.UserId;
-            uAD.UserName = TU.UserName;
-            uAD.FirstName = TU.FirstName;
-            uAD.LastName = TU.LastName;
-            uAD.MobileNumber = TU.MobileNumber;
-            uAD.UserLevel = TU.UserLevel;
-            uAD.DOB = TU.DOB;
-            return View("userAccountStatus", uAD);
+                return true;
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //    return false;
+            //}
 
         }
 
-        [HttpPost]
-        public ActionResult userAccountStatusChange(user user)
+        public bool CheckValidEmail(string EmailAddress)
         {
-            if (Session["LoggedUserID"] == null)
-            {
-                return RedirectToAction("Login", "Home");
+            Email email = new Email();
+         bool result =  email.IsValidEmail(EmailAddress);
 
-            }
-            try
-            {
-                var a = _userService.changeUserStatus(user.UserId, user.Active);
-                return RedirectToAction("Index");
-
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = "Error updating user: " + ex.Message;
-                return View();
-            }
-
+            return result;
         }
-
-
-
-
 
 
     }
