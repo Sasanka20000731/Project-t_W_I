@@ -1717,6 +1717,7 @@
     <Content Include="Views\Report\InventoryManagementReportForm.cshtml" />
     <Content Include="Views\Report\TicketManagementReportForm.cshtml" />
     <Content Include="Views\Report\WarrentyManagementReportForm.cshtml" />
+    <Content Include="Views\Home\ViewProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

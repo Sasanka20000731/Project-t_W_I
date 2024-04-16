@@ -18,26 +18,35 @@
 
     $scope.SearchUserManagementReport = function () {
 
-        data = {
-            params: {
-                FromDate: $scope.UserReportFormDate,
-                ToDate: $scope.UserReportToDate,
-                ReportCategory: 1,
-                ReportType: $("#droReportType").val()
-            }
-        };
-        $http.get('/Report/SearchUserManagementReport', data)
-            .success(function (response) {
-                if (response && response.length !== 0) {
-                    $scope.UserReport = response;
-                } else {
-                    alertify.error("No Records Available !!!", 3000);
-                }
+        if (($scope.UserReportFormDate != null && $scope.UserReportToDate != null && $scope.droReportType != null) || ($scope.UserReportFormDate != undefined && $scope.UserReportToDate != undefined && $scope.droReportType != undefined)) {
 
-            }).error(function (xhr) {
-                alertify.error("Error", 3000);
-                console.log(xhr.error);
-            })
+            data = {
+                params: {
+                    FromDate: $scope.UserReportFormDate,
+                    ToDate: $scope.UserReportToDate,
+                    ReportCategory: 1,
+                    ReportType: $("#droReportType").val()
+                }
+            };
+
+            $http.get('/Report/SearchUserManagementReport', data)
+                .success(function (response) {
+                    if (response && response.length !== 0) {
+                        $scope.UserReport = response;
+                    } else {
+                        alertify.error("No Records Available !!!", 3000);
+                    }
+
+                }).error(function (xhr) {
+                    alertify.error("Error", 3000);
+                    console.log(xhr.error);
+                })
+
+        } else {
+
+            alertify.error("Please Fill All Required Feilds !!!", 3000);
+        }
+       
 
     }
 
@@ -60,26 +69,34 @@
 
     $scope.SearchInventoryManagementReportData = function () {
         debugger
-        data = {
-            params: {
-                FromDate: $scope.InventoryReportFormDate,
-                ToDate: $scope.InventoryReportToDate,
-                ReportCategory: 2,
-                ReportType: $("#droReportType").val()
-            }
-        };
-        debugger
-        $http.get('/Report/SearchInventoryManagementReport', data)
-            .success(function (response) {
-                if (response && response.length !== 0) {
-                    $scope.InventoryReport = response;
-                } else {
-                    alertify.error("No Records Available !!!", 3000);
+        if (($scope.InventoryReportFormDate != null && $scope.InventoryReportToDate != null && $scope.droReportType != null) || ($scope.InventoryReportFormDate != undefined && $scope.InventoryReportToDate != undefined && $scope.droReportType != undefined)) {
+            data = {
+                params: {
+                    FromDate: $scope.InventoryReportFormDate,
+                    ToDate: $scope.InventoryReportToDate,
+                    ReportCategory: 2,
+                    ReportType: $("#droReportType").val()
                 }
-            }).error(function (xhr) {
-                alertify.error("Error", 3000);
-                console.log(xhr.error);
-            })
+            };
+            debugger
+            $http.get('/Report/SearchInventoryManagementReport', data)
+                .success(function (response) {
+                    if (response && response.length !== 0) {
+                        $scope.InventoryReport = response;
+                    } else {
+                        alertify.error("No Records Available !!!", 3000);
+                    }
+                }).error(function (xhr) {
+                    alertify.error("Error", 3000);
+                    console.log(xhr.error);
+                })
+
+
+        } else {
+            alertify.error("Please Fill All Required Feilds !!!", 3000);
+
+        }
+        
 
     }
 
@@ -100,27 +117,33 @@
     }
 
     $scope.SearchTicketManagementReportData = function () {
-        data = {
-            params: {
-                FromDate: $scope.TicketReportFormDate,
-                ToDate: $scope.TicketReportToDate,
-                ReportCategory: 3,
-                ReportType: $("#droReportType").val()
-            }
-        };
-        $http.get('/Report/SearchTicketManagementReport', data)
 
-            .success(function (response) {
-                if (response && response.length !== 0) {
-                    $scope.TiketReportlist = response;
-                } else {
-                    alertify.error("No Records Available !!!", 3000);
+        if (($scope.TicketReportFormDate != null && $scope.TicketReportToDate != null && $scope.droReportType != null) || ($scope.TicketReportFormDate != undefined && $scope.TicketReportToDate != undefined && $scope.droReportType != undefined)) {
+            data = {
+                params: {
+                    FromDate: $scope.TicketReportFormDate,
+                    ToDate: $scope.TicketReportToDate,
+                    ReportCategory: 3,
+                    ReportType: $("#droReportType").val()
                 }
+            };
+            $http.get('/Report/SearchTicketManagementReport', data)
 
-            }).error(function (xhr) {
-                alertify.error("Error", 3000);
-                console.log(xhr.error);
-            })
+                .success(function (response) {
+                    if (response && response.length !== 0) {
+                        $scope.TiketReportlist = response;
+                    } else {
+                        alertify.error("No Records Available !!!", 3000);
+                    }
+
+                }).error(function (xhr) {
+                    alertify.error("Error", 3000);
+                    console.log(xhr.error);
+                })
+        } else {
+            alertify.error("Please Fill All Required Feilds !!!", 3000);
+        }
+        
 
     }
 
@@ -140,25 +163,33 @@
     }
 
     $scope.SearchWarrentyManagementReportData = function () {
-        data = {
-            params: {
-                FromDate: $scope.WarrentyReportFormDate,
-                ToDate: $scope.WarrentyReportToDate,
-                ReportCategory: 4,
-                ReportType: $("#droReportType").val()
-            }
-        };
-        $http.get('/Report/SearchWarrentyManagementReport', data)
-            .success(function (response) {           
-                if (response && response.length !== 0) {
-                    $scope.WarrentyReportlist = response;
-                } else {
-                    alertify.error("No Records Available !!!", 3000);
+
+        if (($scope.WarrentyReportFormDate != null && $scope.WarrentyReportToDate != null && $scope.droReportType != null) || ($scope.WarrentyReportFormDate != undefined && $scope.WarrentyReportToDate != undefined && $scope.droReportType != undefined)) {
+            data = {
+                params: {
+                    FromDate: $scope.WarrentyReportFormDate,
+                    ToDate: $scope.WarrentyReportToDate,
+                    ReportCategory: 4,
+                    ReportType: $("#droReportType").val()
                 }
-            }).error(function (xhr) {
-                alertify.error("Error", 3000);
-                console.log(xhr.error);
-            })
+            };
+            $http.get('/Report/SearchWarrentyManagementReport', data)
+                .success(function (response) {
+                    if (response && response.length !== 0) {
+                        $scope.WarrentyReportlist = response;
+                    } else {
+                        alertify.error("No Records Available !!!", 3000);
+                    }
+                }).error(function (xhr) {
+                    alertify.error("Error", 3000);
+                    console.log(xhr.error);
+                })
+
+        } else {
+            alertify.error("Please Fill All Required Feilds !!!", 3000);
+        }
+
+        
 
     }
 

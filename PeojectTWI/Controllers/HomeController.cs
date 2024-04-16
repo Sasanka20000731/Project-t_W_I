@@ -171,11 +171,16 @@ namespace PeojectTWI.Controllers
         public bool CheckValidEmail(string EmailAddress)
         {
             Email email = new Email();
-         bool result =  email.IsValidEmail(EmailAddress);
+            bool result =  email.IsValidEmail(EmailAddress);
 
             return result;
         }
 
+        public ActionResult ViewProfile()
+        {
+            return View();
+
+        }
 
     }
 }
