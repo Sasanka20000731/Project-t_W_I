@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    @*<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">*@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="~/Styles/vendors/styles/core.css">
     <link rel="stylesheet" type="text/css" href="~/Styles/vendors/styles/icon-font.min.css">
@@ -23,7 +23,7 @@
     <link rel="stylesheet" type="text/css" href="~/Styles/vendors/styles/style.css">
     <link href="~/Styles/src/styles/style.css" rel="stylesheet" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    @*<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>*@
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -268,7 +268,6 @@
                         </a>
                         <ul class="submenu">
                             <li><a href="~/Warrenty/CheckWarrenty" id="CheckWarrentyId">Check Warrenty Detail</a></li>
-                            @*<li><a href="~/Warrenty/ExtendWarrenty" id="ExtendWarrentyId">Extend Warrenty</a></li>*@
                         </ul>
                     </li>
 
@@ -280,7 +279,6 @@
                             <li><a href="~/Ticket/AddTicket" id="AddTicketID">Add Ticket</a></li>
                             <li><a href="~/Ticket/AssignTicket" id="AssignTicketID">Assign Tickets</a></li>
                             <li><a href="~/Ticket/ManageTicket" id="AssignTicketID">Manage Tickets</a></li>
-                           @* <li><a href="~/Ticket/TicketStatus" id="TicketStatusID">Ticket Status</a></li>*@
                             <li><a href="~/Ticket/TicketSearch" id="SearchTicketID">Search Tickets</a></li>
                         </ul>
                     </li>
@@ -293,8 +291,6 @@
                             <li><a href="~/Report/InventoryManagementReportForm">Inventory Management Report</a></li>
                             <li><a href="~/Report/TicketManagementReportForm">Ticket Management Report</a></li>
                             <li><a href="~/Report/WarrentyManagementReportForm">Warrenty Management Report</a></li>
-                            <li><a href="~/Report/OtherReportForm">Other Report</a></li>
-                            <li><a href="~/Report/AuditTrialReportForm">Audit Trial Report</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -310,8 +306,7 @@
                             <i class="micon fa fa-file-text-o" aria-hidden="true"></i><span class="mtext">Audit Trail</span>
                         </a>
                         <ul class="submenu">
-                            <li><a href="~/Home/ViewAudiTrail">Audit Trail table</a></li>
-                            <li><a href="~/Report/AuditTrailFunction">Generate Report</a></li>
+                            <li><a href="~/Home/ViewAudiTrail">Audit Trail Details</a></li>
                         </ul>
                     </li>
                 </ul>
