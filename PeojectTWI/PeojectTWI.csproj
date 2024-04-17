@@ -232,6 +232,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\InventoryService\IInventoryService.cs" />
     <Compile Include="Services\InventoryService\InventoryService.cs" />
+    <Compile Include="Services\OtherServices\IOtherServices.cs" />
+    <Compile Include="Services\OtherServices\OtherServices.cs" />
     <Compile Include="Services\ReportService\IReportService.cs" />
     <Compile Include="Services\ReportService\ReportService.cs" />
     <Compile Include="Services\SaleService\ISaleService.cs" />

@@ -11,6 +11,7 @@ using PeojectTWI.Services.UserService;
 using PeojectTWI.Services.TicketService;
 using PeojectTWI.Services.InventoryService;
 using PeojectTWI.Services.WarrentyService;
+using PeojectTWI.Services.OtherServices;
 using QuickMailer;
 
 namespace PeojectTWI.Controllers
@@ -23,6 +24,7 @@ namespace PeojectTWI.Controllers
         private ITicketService _ticketService;
         private IInventoryService _inventoryService;
         private IWarrentyService _warrentyService;
+        private IOtherServices _otherServices;
 
         public HomeController()
         {
@@ -30,6 +32,7 @@ namespace PeojectTWI.Controllers
             _ticketService = new TicketService();
             _inventoryService = new InventoryService();
             _warrentyService = new WarrentyService();
+            _otherServices = new OtherServices();
         }
 
         public ActionResult Login()
@@ -52,6 +55,8 @@ namespace PeojectTWI.Controllers
             {
                 var a = _userService.GetLoggedUsers(UserName, ValidPassword);
                 Session["LoggedUserID"] = a[0].UserId;
+
+                _otherServices.InsertAuditTrial(5, "Logged In User " + UserName, Convert.ToInt32(Session["LoggedUserID"]));
                 return Json(logUser, JsonRequestBehavior.AllowGet);
             }
             else

@@ -6,6 +6,7 @@ using PeojectTWI.Services.TicketService;
 using PeojectTWI.Services.UserService;
 using PeojectTWI.Services.WarrentyService;
 using PeojectTWI.Services.ReportService;
+using PeojectTWI.Services.OtherServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace PeojectTWI.Controllers
         private IWarrentyService _warrentyService;
         private ISaleService _saleService;
         private IReportService _reportService;
-        
+        private IOtherServices _otherServices;
+
         public ReportController()
         {
             _userService = new UserService();
@@ -33,6 +35,7 @@ namespace PeojectTWI.Controllers
             _warrentyService = new WarrentyService();
             _saleService = new SaleService();
             _reportService = new ReportService();
+            _otherServices = new OtherServices();
         }
 
         public ActionResult UserManagementReportForm()
