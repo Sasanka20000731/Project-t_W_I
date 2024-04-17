@@ -269,5 +269,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblAuditTrials">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblAuditTrial">
+        <MappingFragment StoreEntitySet="tblAuditTrial">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AuditTrialType" ColumnName="AuditTrialType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAuditTrialTypes">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblAuditTrialType">
+        <MappingFragment StoreEntitySet="tblAuditTrialTypes">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="AuditTrialType" ColumnName="AuditTrialType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

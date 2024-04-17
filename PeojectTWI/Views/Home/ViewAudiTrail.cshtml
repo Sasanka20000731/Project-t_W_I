@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "ViewAudiTrail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Audi Trail</h2>
+
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadAuditTrialTypes()" style="margin-bottom:10Px;">
+
+    <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
+        <div class="col-2" style="text-align: center;">
+            <label>From</label>
+        </div>
+        <div class="col-2" style="text-align: center;">
+            <label>To</label>
+        </div>
+        <div class="col-3" style="text-align: center;">
+            <label>Report Type</label>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
+        <div class="col-2">
+            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="TicketReportFormDate" />
+        </div>
+        <div class="col-2">
+            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="TicketReportToDate" />
+        </div>
+        <div class="col-3">
+            <select id="droReportType" name="droReportType" ng-model="droAuditTrialType" class="form-control" required>
+                <option value="">Select Report Type</option>
+                <option ng-repeat="item in dropAudiTrialTypes" value="{{item.Value}}">{{item.Name}}</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <button class="custom-button" style="width:100%" ng-click="SearchAuditTrialData()"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+        <div class="col-2">
+            <button class="custom-button" style="width:100%" ng-click="DewonloadAuditTrialData()"><i class="fa fa-download" aria-hidden="true"></i></button>
+        </div>
+    </div>
+
+    <div class="row" style="width:100%; margin-left:5%;  margin-right:5%; padding-top:15px; ">
+        <table width="100%" style="margin-bottom:20px;">
+            <thead style=" border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgb(204, 204, 204);">
+                <tr>
+                    <th class="text-left"></th>
+                    <th class="text-left"></th>
+                    <th class="text-left"></th>
+                    <th class="text-left"></th>
+                    <th class="text-left"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="repeat in AuditTrialtlist  | orderBy : '-Id'" ng-class-odd="{'gray ':datatable}">
+                    <td class="text-left">{{$index + 1}}</td>
+                    <td class="text-left" ng-bind="repeat.COL1"></td>
+                    <td class="text-left" ng-bind="repeat.COL2"></td>
+                    <td class="text-left" ng-bind="repeat.COL3"></td>
+                    <td class="text-left" ng-bind="repeat.COL4"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<style>
+    .bold-item {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .Strong-item {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .normal-item {
+        font-size: 18px;
+    }
+
+    .custom-button {
+        height: 90%;
+        background-color: #1a2c34;
+        border-radius: 10px;
+        float: left;
+        border: 0px;
+        color: #fff;
+        width: 100%;
+        -webkit-transition-duration: 0.9s;
+        -webkit-transition-timing-function: linear;
+        box-shadow: 0px 0 0 #2e4f5e inset;
+    }
+
+        .custom-button:hover {
+            box-shadow: 700Px 0 0 #2e4f5e inset;
+        }
+</style>
+
+
+
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/ReportServices.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+

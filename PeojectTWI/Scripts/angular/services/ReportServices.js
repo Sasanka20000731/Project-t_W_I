@@ -1,4 +1,6 @@
-﻿myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalStack, $rootScope) {
+﻿const { debug } = require("console");
+
+myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalStack, $rootScope) {
 
     $scope.LoadUserManagementReportData = function () {
         data = {
@@ -190,6 +192,20 @@
         }
 
         
+
+    }
+
+
+    $scope.LoadAuditTrialTypes = function () {
+        debugger
+        $http.get('/Report/LoadAuditTrialTypes', data)
+            .success(function (response) {
+                debugger
+                $scope.dropAudiTrialTypes = response;
+            }).error(function (xhr) {
+                alertify.error("Error", 3000);
+                console.log(xhr.error);
+            })
 
     }
 

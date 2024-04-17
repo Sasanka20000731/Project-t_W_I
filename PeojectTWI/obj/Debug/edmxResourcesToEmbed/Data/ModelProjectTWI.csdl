@@ -113,6 +113,16 @@
       <End Role="tblInventoryData" EntitySet="tblInventoryDatas" />
       <End Role="tblSalesDetail" EntitySet="tblSalesDetails" />
     </AssociationSet>
+    <EntitySet Name="tblAuditTrials" EntityType="ProjectDBModel.tblAuditTrial" />
+    <EntitySet Name="tblAuditTrialTypes" EntityType="ProjectDBModel.tblAuditTrialType" />
+    <AssociationSet Name="FK_tblAuditTrial_tblAuditTrialTypes" Association="ProjectDBModel.FK_tblAuditTrial_tblAuditTrialTypes">
+      <End Role="tblAuditTrialType" EntitySet="tblAuditTrialTypes" />
+      <End Role="tblAuditTrial" EntitySet="tblAuditTrials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAuditTrial_tblUser" Association="ProjectDBModel.FK_tblAuditTrial_tblUser">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblAuditTrial" EntitySet="tblAuditTrials" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_ViewAllInventoryData_Result">
     <Property Type="String" Name="BrandName" Nullable="true" MaxLength="30" />
@@ -328,6 +338,7 @@
     <NavigationProperty Name="tblTicketTaskAssigns" Relationship="ProjectDBModel.FK_tblTicketTaskAssign_tblUser" FromRole="tblUser" ToRole="tblTicketTaskAssign" />
     <NavigationProperty Name="tblTicketTaskAssigns1" Relationship="ProjectDBModel.FK_tblTicketTaskAssign_tblUser1" FromRole="tblUser" ToRole="tblTicketTaskAssign" />
     <NavigationProperty Name="tblUserlLevel" Relationship="ProjectDBModel.FK_tblUser_tblUserlLevel" FromRole="tblUser" ToRole="tblUserlLevel" />
+    <NavigationProperty Name="tblAuditTrials" Relationship="ProjectDBModel.FK_tblAuditTrial_tblUser" FromRole="tblUser" ToRole="tblAuditTrial" />
   </EntityType>
   <EntityType Name="tblUserlLevel">
     <Key>
@@ -663,6 +674,52 @@
       </Principal>
       <Dependent Role="tblSalesDetail">
         <PropertyRef Name="InventoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblAuditTrial">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuditTrialType" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblAuditTrialType" Relationship="ProjectDBModel.FK_tblAuditTrial_tblAuditTrialTypes" FromRole="tblAuditTrial" ToRole="tblAuditTrialType" />
+    <NavigationProperty Name="tblUser" Relationship="ProjectDBModel.FK_tblAuditTrial_tblUser" FromRole="tblAuditTrial" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblAuditTrialType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuditTrialType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblAuditTrials" Relationship="ProjectDBModel.FK_tblAuditTrial_tblAuditTrialTypes" FromRole="tblAuditTrialType" ToRole="tblAuditTrial" />
+  </EntityType>
+  <Association Name="FK_tblAuditTrial_tblAuditTrialTypes">
+    <End Type="ProjectDBModel.tblAuditTrialType" Role="tblAuditTrialType" Multiplicity="0..1" />
+    <End Type="ProjectDBModel.tblAuditTrial" Role="tblAuditTrial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAuditTrialType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblAuditTrial">
+        <PropertyRef Name="AuditTrialType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAuditTrial_tblUser">
+    <End Type="ProjectDBModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+    <End Type="ProjectDBModel.tblAuditTrial" Role="tblAuditTrial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblAuditTrial">
+        <PropertyRef Name="CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

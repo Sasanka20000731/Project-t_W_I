@@ -197,6 +197,18 @@ namespace PeojectTWI.Services.ReportService
             return reports;
         }
 
+        public List<ReportList> LoadAuditTrialTypes()
+        {
+            var result = (from a in db.tblAuditTrialTypes
+                          where a.Active == true
+                          select new ReportList
+                          {
+                              Value = a.Id,
+                              Name = a.AuditTrialType
+                          }).ToList();
 
+
+            return result;
+        }
     }
 }

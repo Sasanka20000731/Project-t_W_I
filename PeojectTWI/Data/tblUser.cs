@@ -20,6 +20,7 @@ namespace PeojectTWI.Data
             this.tblInventoryHistories = new HashSet<tblInventoryHistory>();
             this.tblTicketTaskAssigns = new HashSet<tblTicketTaskAssign>();
             this.tblTicketTaskAssigns1 = new HashSet<tblTicketTaskAssign>();
+            this.tblAuditTrials = new HashSet<tblAuditTrial>();
         }
     
         public int UserId { get; set; }
@@ -43,5 +44,7 @@ namespace PeojectTWI.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblTicketTaskAssign> tblTicketTaskAssigns1 { get; set; }
         public virtual tblUserlLevel tblUserlLevel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblAuditTrial> tblAuditTrials { get; set; }
     }
 }

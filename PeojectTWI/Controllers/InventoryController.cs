@@ -4,6 +4,7 @@ using PeojectTWI.Services.InventoryService;
 using PeojectTWI.Services.TicketService;
 using PeojectTWI.Services.UserService;
 using PeojectTWI.Services.WarrentyService;
+using PeojectTWI.Services.OtherServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace PeojectTWI.Controllers
         private ITicketService _ticketService;
         private IInventoryService _inventoryService;
         private IWarrentyService _warrentyService;
+        private IOtherServices _otherServices;
 
         public InventoryController()
         {
@@ -26,6 +28,7 @@ namespace PeojectTWI.Controllers
             _ticketService = new TicketService();
             _inventoryService = new InventoryService();
             _warrentyService = new WarrentyService();
+            _otherServices = new OtherServices();
         }
 
 

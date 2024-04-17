@@ -1,5 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblAuditTrial">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuditTrialType" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblAuditTrialTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuditTrialType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="tblCoustomerDetails">
     <Key>
       <PropertyRef Name="CoustomerId" />
@@ -232,6 +251,30 @@
     <Property Name="createdDate" Type="datetime" />
     <Property Name="Active" Type="bit" />
   </EntityType>
+  <Association Name="FK_tblAuditTrial_tblAuditTrialTypes">
+    <End Role="tblAuditTrialTypes" Type="Self.tblAuditTrialTypes" Multiplicity="0..1" />
+    <End Role="tblAuditTrial" Type="Self.tblAuditTrial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAuditTrialTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblAuditTrial">
+        <PropertyRef Name="AuditTrialType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAuditTrial_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblAuditTrial" Type="Self.tblAuditTrial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblAuditTrial">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblInventoryData_tblMasterStore">
     <End Role="tblMasterStore" Type="Self.tblMasterStore" Multiplicity="0..1" />
     <End Role="tblInventoryData" Type="Self.tblInventoryData" Multiplicity="*" />
@@ -501,6 +544,8 @@
     <Parameter Name="ToDATE" Type="datetime" Mode="In" />
   </Function>
   <EntityContainer Name="ProjectDBModelStoreContainer">
+    <EntitySet Name="tblAuditTrial" EntityType="Self.tblAuditTrial" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAuditTrialTypes" EntityType="Self.tblAuditTrialTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblCoustomerDetails" EntityType="Self.tblCoustomerDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblInventoryData" EntityType="Self.tblInventoryData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblInventoryHistory" EntityType="Self.tblInventoryHistory" Schema="dbo" store:Type="Tables" />
@@ -521,6 +566,14 @@
     <EntitySet Name="tblUserlLevel" EntityType="Self.tblUserlLevel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblWarrentyExtendedDate" EntityType="Self.tblWarrentyExtendedDate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblWarrentyhistory" EntityType="Self.tblWarrentyhistory" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblAuditTrial_tblAuditTrialTypes" Association="Self.FK_tblAuditTrial_tblAuditTrialTypes">
+      <End Role="tblAuditTrialTypes" EntitySet="tblAuditTrialTypes" />
+      <End Role="tblAuditTrial" EntitySet="tblAuditTrial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAuditTrial_tblUser" Association="Self.FK_tblAuditTrial_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblAuditTrial" EntitySet="tblAuditTrial" />
+    </AssociationSet>
     <AssociationSet Name="FK_tblInventoryData_tblMasterStore" Association="Self.FK_tblInventoryData_tblMasterStore">
       <End Role="tblMasterStore" EntitySet="tblMasterStore" />
       <End Role="tblInventoryData" EntitySet="tblInventoryData" />

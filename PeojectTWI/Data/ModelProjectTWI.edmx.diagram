@@ -47,6 +47,10 @@
         <EntityTypeShape EntityType="ProjectDBModel.tblSalesDetail" Width="1.5" PointX="8.25" PointY="16.375" />
         <AssociationConnector Association="ProjectDBModel.FK_tblSalesDetails_tblCoustomerDetails" />
         <AssociationConnector Association="ProjectDBModel.FK_tblSalesDetails_tblInventoryData" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblAuditTrial" Width="1.5" PointX="5.25" PointY="0.875" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblAuditTrialType" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblAuditTrial_tblAuditTrialTypes" />
+        <AssociationConnector Association="ProjectDBModel.FK_tblAuditTrial_tblUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

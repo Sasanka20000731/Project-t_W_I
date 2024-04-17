@@ -11,6 +11,7 @@ using PeojectTWI.Services.UserService;
 using PeojectTWI.Services.TicketService;
 using PeojectTWI.Services.InventoryService;
 using PeojectTWI.Services.WarrentyService;
+using PeojectTWI.Services.OtherServices;
 using QuickMailer;
 
 namespace PeojectTWI.Controllers
@@ -23,6 +24,7 @@ namespace PeojectTWI.Controllers
         private ITicketService _ticketService;
         private IInventoryService _inventoryService;
         private IWarrentyService _warrentyService;
+        private IOtherServices _otherServices;
 
         public HomeController()
         {
@@ -30,6 +32,7 @@ namespace PeojectTWI.Controllers
             _ticketService = new TicketService();
             _inventoryService = new InventoryService();
             _warrentyService = new WarrentyService();
+            _otherServices = new OtherServices();
         }
 
         public ActionResult Login()
@@ -52,6 +55,8 @@ namespace PeojectTWI.Controllers
             {
                 var a = _userService.GetLoggedUsers(UserName, ValidPassword);
                 Session["LoggedUserID"] = a[0].UserId;
+
+                _otherServices.InsertAuditTrial(5, "Logged In User " + UserName, Convert.ToInt32(Session["LoggedUserID"]));
                 return Json(logUser, JsonRequestBehavior.AllowGet);
             }
             else
@@ -62,6 +67,7 @@ namespace PeojectTWI.Controllers
 
         public ActionResult LogOut()
         {
+            _otherServices.InsertAuditTrial(5, "Log Out User.", Convert.ToInt32(Session["LoggedUserID"]));
             Session.Clear();
             Session.Abandon();
             return RedirectToAction("Login", "Home"); // Redirect to the home page after logout
@@ -86,6 +92,8 @@ namespace PeojectTWI.Controllers
                 return RedirectToAction("Login", "Home");
 
             }
+
+            _otherServices.InsertAuditTrial(4, "Load User Creation Page", Convert.ToInt32(Session["LoggedUserID"]));
             return View();
         }
 
@@ -100,7 +108,7 @@ namespace PeojectTWI.Controllers
             
             var result =   _userService.addUser(UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB);
             //var zresult = CommenEmail(Email, "sasankabuddhi@gmail.com", "SAsanka@123", "User Login", "Dear " + FirstName + ", your account user name is : (" + UserName + ")  and Password is " + 123456789 + ".");
-
+            _otherServices.InsertAuditTrial(1, "Inseted New User ("+UserName+")", Convert.ToInt32(Session["LoggedUserID"]));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -112,7 +120,7 @@ namespace PeojectTWI.Controllers
                 return RedirectToAction("Login", "Home");
 
             }
-
+            _otherServices.InsertAuditTrial(4, "Load View Users Page", Convert.ToInt32(Session["LoggedUserID"]));
             var user = db.tblUsers;
             return View(user);
         }
@@ -127,6 +135,8 @@ namespace PeojectTWI.Controllers
             }
             var id = Request["uid"];
             ViewBag.UserId = id;
+
+            _otherServices.InsertAuditTrial(4, "Load Update User Page", Convert.ToInt32(Session["LoggedUserID"]));
             return View();
         }
 
@@ -142,8 +152,9 @@ namespace PeojectTWI.Controllers
 
 
       
-                var result = _userService.UpdateUser(Convert.ToInt32(UserId), UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB, Active);
-                return Json(result, JsonRequestBehavior.AllowGet);
+            var result = _userService.UpdateUser(Convert.ToInt32(UserId), UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB, Active);
+            _otherServices.InsertAuditTrial(2, "Updated User ("+UserName+")", Convert.ToInt32(Session["LoggedUserID"]));
+            return Json(result, JsonRequestBehavior.AllowGet);
      
         }
 
@@ -178,9 +189,31 @@ namespace PeojectTWI.Controllers
 
         public ActionResult ViewProfile()
         {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
+            _otherServices.InsertAuditTrial(4, "View User Profile", Convert.ToInt32(Session["LoggedUserID"]));
             return View();
 
         }
+
+
+        public ActionResult ViewAudiTrail()
+        {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+
+            }
+            _otherServices.InsertAuditTrial(4, "View Audit Trial Page", Convert.ToInt32(Session["LoggedUserID"]));
+
+            return View();
+
+        }
+
+
 
     }
 }
