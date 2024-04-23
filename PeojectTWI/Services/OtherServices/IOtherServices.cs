@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PeojectTWI.Models;
 
 namespace PeojectTWI.Services.OtherServices
 {
@@ -10,5 +11,7 @@ namespace PeojectTWI.Services.OtherServices
     {
         void InsertAuditTrial(int AuditTrialType, string Description, int CreatedBy);
 
+        List<Dashbord> LoadDashbord(int UserId);
+        List<Dashbord> LoadDashbordChart();
     }
 }

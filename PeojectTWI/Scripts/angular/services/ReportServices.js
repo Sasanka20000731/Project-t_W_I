@@ -1,4 +1,4 @@
-﻿const { debug } = require("console");
+﻿
 
 myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalStack, $rootScope) {
 
@@ -195,18 +195,51 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
     }
 
+    $scope.LoadAuditTrialdata = function () {
 
-    $scope.LoadAuditTrialTypes = function () {
-        debugger
-        $http.get('/Report/LoadAuditTrialTypes', data)
+        $http.get('/Report/LoadAuditTrialTypes')
             .success(function (response) {
-                debugger
-                $scope.dropAudiTrialTypes = response;
+              
+                $scope.dropAudiTrialList = response;
+                $scope.showReportTable = false;
+
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
                 console.log(xhr.error);
             })
 
     }
+
+    $scope.SearchAuditTrialData = function () {
+       
+        if (($scope.AuditTrialReportFormDate != null && $scope.AuditTrialReportToDate != null && $scope.droAuditTrialType != null)
+            || ($scope.AuditTrialReportFormDate != undefined && $scope.AuditTrialReportToDate != undefined && $scope.droAuditTrialType != undefined)) {
+            data = {
+                params: {
+                    FromDate: $scope.AuditTrialReportFormDate,
+                    ToDate: $scope.AuditTrialReportToDate,
+                    ReportType: $("#droReportType").val()
+                }
+            };
+
+            $http.get('/Report/SearchAuditTrialReport', data)
+                .success(function (response) {
+                    if (response && response.length !== 0) {
+                        $scope.AuditTrialtlist = response;
+                        $scope.showReportTable = true;
+                    } else {
+                        alertify.error("No Records Available !!!", 3000);
+                    }
+                }).error(function (xhr) {
+                    alertify.error("Error", 3000);
+                    console.log(xhr.error);
+                })
+
+        } else {
+            alertify.error("Please Fill All Required Feilds !!!", 3000);
+        }
+
+    }
+
 
 });

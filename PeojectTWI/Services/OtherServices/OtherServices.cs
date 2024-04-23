@@ -1,4 +1,5 @@
 ﻿using PeojectTWI.Data;
+using PeojectTWI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,5 +28,69 @@ namespace PeojectTWI.Services.OtherServices
                 }
             }
         }
+
+        public List<Dashbord> LoadDashbord(int UserId)
+        {
+            List<Dashbord> dashbords = new List<Dashbord>();
+
+            using (var context = new ProjectDBEntities())
+            {
+                var dataTable = new DataTable();
+                using (var cmd = context.Database.Connection.CreateCommand())
+                {
+                    cmd.CommandText = "sp_GetDashbordDetails";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@@UserId", UserId));
+
+                    using (var adapter = new SqlDataAdapter((SqlCommand)cmd))
+                    {
+                        adapter.Fill(dataTable);
+                    }
+                }
+
+                var dataset = new DataSet();
+                dataset.Tables.Add(dataTable);
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    Dashbord dashbord = new Dashbord
+                    {
+                        PendingTickets = Convert.ToInt32(row["PendingTickets"]),
+                        OpenedTickets = Convert.ToInt32(row["OpenedTickets"]),
+                        ClosedTickets = Convert.ToInt32(row["ClosedTickets"])
+                    };
+                    dashbords.Add(dashbord);
+                }
+            }
+            return dashbords;
+
+        }
+
+
+        public List<Dashbord> LoadDashbordChart()
+        {
+            List<Dashbord> dashbords = new List<Dashbord>();
+
+            Dashbord dashbord1 = new Dashbord();
+            dashbord1.TicketCount = 15;
+            dashbord1.TicketDate = new DateTime(2024, 1, 1);
+            dashbords.Add(dashbord1);
+
+            Dashbord dashbord2 = new Dashbord();
+            dashbord2.TicketCount = 24;
+            dashbord2.TicketDate = new DateTime(2024, 4, 1);
+            dashbords.Add(dashbord2);
+
+
+            Dashbord dashbord3 = new Dashbord();
+            dashbord3.TicketCount = 24;
+            dashbord3.TicketDate = new DateTime(2024, 4, 1);
+            dashbords.Add(dashbord3);
+
+
+            return dashbords;
+        }
+
+
     }
 }

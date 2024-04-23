@@ -196,7 +196,6 @@ namespace PeojectTWI.Services.ReportService
             }
             return reports;
         }
-
         public List<ReportList> LoadAuditTrialTypes()
         {
             var result = (from a in db.tblAuditTrialTypes
@@ -210,5 +209,26 @@ namespace PeojectTWI.Services.ReportService
 
             return result;
         }
+        public List<CommonReport> SearchAuditTrialReport(DateTime FromDate, DateTime ToDate, int ReportType)
+        {
+            DateTime todate = ToDate.AddHours(23).AddMinutes(59);
+
+            var result = (from a in db.tblAuditTrials
+                          join b in db.tblAuditTrialTypes on a.AuditTrialType equals b.Id
+                          join c in db.tblUsers on a.CreatedBy equals c.UserId
+                          where a.CreatedDate > FromDate && a.CreatedDate < todate && a.AuditTrialType == ReportType
+                          select new CommonReport
+                          {
+                              COL1 = b.AuditTrialType,
+                              COL2 =a.Description,
+                              COL3 = c.FirstName +" "+c.LastName,
+                              COL4 = a.CreatedDate.ToString()
+                          }).ToList();
+
+
+            return result;
+
+        }
+
     }
 }

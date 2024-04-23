@@ -2,6 +2,100 @@
 
     $scope.mobileNumberAsyncError = false;
 
+    $scope.LoadDashbordData = function () {
+
+        $http.get('/Home/loadDashbordDetails')
+            .success(function (response) {
+                $scope.PendingTickets = response[0].PendingTickets;
+                $scope.OpenedTickets = response[0].OpenedTickets;
+                $scope.ClosedTickets = response[0].ClosedTickets;
+                $scope.CurrentDate = response[0].CurrentDate;
+            }).error(function (xhr) {
+                console.log(xhr.error);
+                alertify.success("error", 3000);
+            })
+
+
+        $scope.LoadDashbordData();
+    }
+
+    $scope.LoadDashbordData = function () {
+        $scope.chartLoading = true; // Show loading animation
+        $http.get('/Home/loadDashbordChart')
+            .then(function (response) {
+                var data = response.data;
+
+                // Extracting data for the chart
+                var ticketCounts = data.map(function (item) {
+                    return item.TicketCount;
+                });
+                var ticketDates = data.map(function (item) {
+                    return item.TicketDate;
+                });
+
+                // Chart.js code to create a chart
+                var ctx = document.getElementById('myAreaChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ticketDates,
+                        datasets: [{
+                            label: 'Ticket Count',
+                            data: ticketCounts,
+                            backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                            borderColor: 'rgba(78, 115, 223, 1)',
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            xAxes: [{
+                                type: 'time',
+                                time: {
+                                    unit: 'day'
+                                },
+                                distribution: 'series',
+                                ticks: {
+                                    source: 'data'
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value) {
+                                        if (Number.isInteger(value)) {
+                                            return value;
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: true
+                        },
+                        animation: {
+                            onComplete: function () {
+                                $scope.$apply(function () {
+                                    $scope.chartLoading = false; // Hide loading animation
+                                });
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+                alertify.error("Error occurred while loading dashboard data.");
+                $scope.chartLoading = false; // Hide loading animation in case of error
+            });
+    }
+
+
+
+
+
+
     $scope.CheckUserName = function () {
         data = {
             params: {

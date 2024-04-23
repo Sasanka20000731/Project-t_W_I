@@ -84,6 +84,24 @@ namespace PeojectTWI.Controllers
             return View();
         }
 
+        public JsonResult loadDashbordDetails()
+        {
+            var result = _otherServices.LoadDashbord(Convert.ToInt32(Session["LoggedUserID"]));
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        public JsonResult loadDashbordChart()
+        {
+            var result = _otherServices.LoadDashbordChart();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
         public ActionResult addUser()
         {
             var aa = Session["LoggedUserID"];

@@ -23,6 +23,7 @@ namespace PeojectTWI.Services.ReportService
         List<CommonReport> SearchWarrentyManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType);
 
         List<ReportList> LoadAuditTrialTypes();
+        List<CommonReport> SearchAuditTrialReport(DateTime FromDate, DateTime ToDate, int ReportType);
 
     }
 }

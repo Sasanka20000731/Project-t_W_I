@@ -6,7 +6,7 @@
 
 <h2>Audi Trail</h2>
 
-<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadAuditTrialTypes()" style="margin-bottom:10Px;">
+<div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="LoadAuditTrialdata()" style="margin-bottom:10Px;">
 
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
         <div class="col-2" style="text-align: center;">
@@ -23,15 +23,15 @@
     </div>
     <div class="row" style="width:100%; margin-left:5%;  margin-right:5%;">
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="TicketReportFormDate" />
+            <input type="date" class="form-control" name="UserReportFormDate" id="UserReportFormDate" ng-model="AuditTrialReportFormDate" />
         </div>
         <div class="col-2">
-            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="TicketReportToDate" />
+            <input type="date" class="form-control" name="UserReportToDate" id="UserReportToDate" ng-model="AuditTrialReportToDate" />
         </div>
         <div class="col-3">
             <select id="droReportType" name="droReportType" ng-model="droAuditTrialType" class="form-control" required>
                 <option value="">Select Report Type</option>
-                <option ng-repeat="item in dropAudiTrialTypes" value="{{item.Value}}">{{item.Name}}</option>
+                <option ng-repeat="item in dropAudiTrialList" value="{{item.Value}}">{{item.Name}}</option>
             </select>
         </div>
         <div class="col-2">
@@ -42,15 +42,15 @@
         </div>
     </div>
 
-    <div class="row" style="width:100%; margin-left:5%;  margin-right:5%; padding-top:15px; ">
+    <div class="row" ng-show="showReportTable" style="width:100%; margin-left:5%;  margin-right:5%; padding-top:15px;  ">
         <table width="100%" style="margin-bottom:20px;">
             <thead style=" border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgb(204, 204, 204);">
                 <tr>
                     <th class="text-left"></th>
-                    <th class="text-left"></th>
-                    <th class="text-left"></th>
-                    <th class="text-left"></th>
-                    <th class="text-left"></th>
+                    <th class="text-left">Type</th>
+                    <th class="text-left">Description</th>
+                    <th class="text-left">Action User</th>
+                    <th class="text-left">Date</th>
                 </tr>
             </thead>
             <tbody>

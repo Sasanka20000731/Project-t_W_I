@@ -118,14 +118,21 @@ namespace PeojectTWI.Controllers
                 return RedirectToAction("Login", "Home");
             }
             return View();
-        }
+        }        
 
-        
         public JsonResult LoadAuditTrialTypes()
         {
             var result = _reportService.LoadAuditTrialTypes();
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+        public JsonResult SearchAuditTrialReport(DateTime FromDate, DateTime ToDate, int ReportType)
+        {
+            var result = _reportService.SearchAuditTrialReport(FromDate, ToDate, ReportType);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
     }
 }
