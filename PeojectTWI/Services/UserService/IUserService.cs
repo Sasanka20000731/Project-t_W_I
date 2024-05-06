@@ -19,5 +19,8 @@ namespace PeojectTWI.Services.UserService
         List<user> getselectedUserDetails(int UserId);
         string EncryptText(string openText);
         string DecryptText(string encryptedText);
+
+        List<user> loggedUserDetails(int UserId);
+
     }
 }

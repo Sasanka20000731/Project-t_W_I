@@ -12,7 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
 
 namespace PeojectTWI.Controllers
 {
@@ -60,6 +61,28 @@ namespace PeojectTWI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+
+        public ActionResult DownloadUserManagementReport(string FromDate, string ToDate, int ReportCategory, string ReportType)
+        {
+            DateTime fromDate = DateTime.Parse(FromDate);
+            DateTime toDate = DateTime.Parse(ToDate);
+            var userReportDs = _reportService.DownloadUserManagementReport(fromDate, toDate, ReportCategory, Convert.ToInt32(ReportType));
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/Crystal_Reports/RptUserManagement.rpt")));
+            rd.SetDataSource(userReportDs.Tables["UserManagementDataTable"]);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "UserManagementReport.pdf");
+
+        }
+
+
         public ActionResult InventoryManagementReportForm()
         {
             if (Session["LoggedUserID"] == null)
@@ -75,6 +98,30 @@ namespace PeojectTWI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+
+        public ActionResult DownloadInventoryManagementReport(string FromDate, string ToDate, int ReportCategory, string ReportType)
+        {
+            DateTime fromDate = DateTime.Parse(FromDate);
+            DateTime toDate = DateTime.Parse(ToDate);
+            var inventoryReportDs = _reportService.DownloadCommonManagementReport(fromDate, toDate, ReportCategory, Convert.ToInt32(ReportType));
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/Crystal_Reports/RptInventoryManagement.rpt")));
+            rd.SetDataSource(inventoryReportDs.Tables["CommonDataTable"]);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "InventoryManagementReport.pdf");
+
+        }
+
+
+
+
         public ActionResult TicketManagementReportForm()
         {
             if (Session["LoggedUserID"] == null)
@@ -89,6 +136,30 @@ namespace PeojectTWI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+
+        public ActionResult DownloadTicketManagementReport(string FromDate, string ToDate, int ReportCategory, string ReportType)
+        {
+            DateTime fromDate = DateTime.Parse(FromDate);
+            DateTime toDate = DateTime.Parse(ToDate);
+            var inventoryReportDs = _reportService.DownloadCommonManagementReport(fromDate, toDate, ReportCategory, Convert.ToInt32(ReportType));
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/Crystal_Reports/RptTicketManagement.rpt")));
+            rd.SetDataSource(inventoryReportDs.Tables["CommonDataTable"]);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "TicketManagementReport.pdf");
+
+        }
+
+
+
+
         public ActionResult WarrentyManagementReportForm()
         {
             if (Session["LoggedUserID"] == null)

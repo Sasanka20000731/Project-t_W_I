@@ -73,7 +73,7 @@ namespace PeojectTWI.Services.ReportService
         {
             using (var context = new ProjectDBEntities())
             {
-                var UserManagementReportDT = new DataTable();
+                var UserManagementReportDT = new DataTable("UserManagementDataTable"); 
                 using (var command = context.Database.Connection.CreateCommand())
                 {
                     command.CommandText = "exec [sp_UserManageReport] @@FromDate,@@ToDate, @@ReportCategory,@@ReportType";
@@ -86,7 +86,7 @@ namespace PeojectTWI.Services.ReportService
                         adapter.Fill(UserManagementReportDT);
                     }
                 }
-                var UserManagementReportDS = new DataSet();
+                var UserManagementReportDS = new DataSet("UserManagemenrDataset");
                 UserManagementReportDS.Tables.Add(UserManagementReportDT);
                 return UserManagementReportDS;
             }
@@ -126,6 +126,40 @@ namespace PeojectTWI.Services.ReportService
             }
             return reports;
         }
+        
+        public DataSet DownloadCommonManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
+        {
+            var DataSet = new DataSet("CommonDataSet");
+
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable = new DataTable("CommonDataTable");
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = "EXEC sp_InventoryManagementReport @FromDate, @ToDate, @ReportCategory, @ReportType";
+                    command.Parameters.Add(new SqlParameter("@FromDate", FromDate));
+                    command.Parameters.Add(new SqlParameter("@ToDate", ToDate));
+                    command.Parameters.Add(new SqlParameter("@ReportCategory", ReportCategory));
+                    command.Parameters.Add(new SqlParameter("@ReportType", ReportType));
+
+                    context.Database.Connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        DataTable.Load(reader);
+                    }
+                }
+
+
+                    DataSet.Tables.Add(DataTable);
+                
+            }
+            return DataSet;
+        }
+
+
+
+
+
         public List<CommonReport> SearchTicketManagementReport(DateTime fromDate, DateTime toDate, int reportCategory, int reportType)
         {
             List<CommonReport> reports = new List<CommonReport>();
@@ -229,6 +263,8 @@ namespace PeojectTWI.Services.ReportService
             return result;
 
         }
+
+
 
     }
 }

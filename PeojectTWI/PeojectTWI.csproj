@@ -240,11 +240,27 @@
     <Compile Include="Models\Warrenty.cs" />
     <Compile Include="Models\WHmanage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Crystal_Reports\RptInventoryManagement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptInventoryManagement.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Crystal_Reports\RptUserManagement.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptUserManagement.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DataSets\CommonDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DataSets\UserManagemenrDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserManagemenrDataset.xsd</DependentUpon>
     </Compile>
     <Compile Include="Services\InventoryService\IInventoryService.cs" />
     <Compile Include="Services\InventoryService\InventoryService.cs" />
@@ -1061,6 +1077,28 @@
     <Content Include="Content\bold-reports\office-365\icons\ejicons.eot" />
     <Content Include="Content\bold-reports\office-365\icons\ejicons.ttf" />
     <Content Include="Content\bold-reports\office-365\icons\ejicons.woff" />
+    <Content Include="Reports\DataSets\UserManagemenrDataset.xsc">
+      <DependentUpon>UserManagemenrDataset.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DataSets\CommonDataSet.xsc">
+      <DependentUpon>CommonDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSets\CommonDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CommonDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSets\CommonDataSet.xss">
+      <DependentUpon>CommonDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSets\UserManagemenrDataset.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>UserManagemenrDataset.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSets\UserManagemenrDataset.xss">
+      <DependentUpon>UserManagemenrDataset.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jqueryval\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.7.1-vsdoc.js" />
@@ -1740,7 +1778,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Reports\DataSets\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -1751,6 +1788,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Crystal_Reports\RptInventoryManagement.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptInventoryManagement.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Crystal_Reports\RptUserManagement.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptUserManagement.cs</LastGenOutput>

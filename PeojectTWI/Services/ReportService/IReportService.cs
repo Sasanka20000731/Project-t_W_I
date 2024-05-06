@@ -18,8 +18,16 @@ namespace PeojectTWI.Services.ReportService
 
         List<CommonReport> InventoryManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType);
 
+        DataSet DownloadCommonManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType);
+
         DataSet DownloadUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType);
+        
+        
+
         List<CommonReport> SearchTicketManagementReport(DateTime fromDate, DateTime toDate, int reportCategory, int reportType);
+       
+        
+        
         List<CommonReport> SearchWarrentyManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType);
 
         List<ReportList> LoadAuditTrialTypes();

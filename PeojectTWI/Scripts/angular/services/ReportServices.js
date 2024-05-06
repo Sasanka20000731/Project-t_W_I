@@ -52,6 +52,17 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
     }
 
+    $scope.DownloadUserManagementReport = function () {
+        var fromDate = $scope.UserReportFormDate;
+        var toDate = $scope.UserReportToDate;
+        var reportType = $("#droReportType").val();
+        debugger
+        var url = '/Report/DownloadUserManagementReport?FromDate=' + fromDate.toISOString() + '&ToDate=' + toDate.toISOString() + '&ReportCategory=1&ReportType=' + reportType;
+
+        window.open(url, '_blank');
+    }
+
+
     $scope.LoadInventoryManagementReportData = function () {
         data = {
             params: {
@@ -61,7 +72,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
         $http.get('/Report/LoadReportDropDownData', data)
             .success(function (response) {
                 $scope.droReportTypeList = response;
-                debugger;
+          
             }).error(function (xhr) {
                 alertify.error("Error", 3000);
                 console.log(xhr.error);
@@ -101,6 +112,18 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
         
 
     }
+
+    $scope.DownloadInventoryManagementReport = function () {
+        debugger
+        var fromDate = $scope.InventoryReportFormDate;
+        var toDate = $scope.InventoryReportToDate;
+        var reportType = $("#droReportType").val();
+        debugger
+        var url = '/Report/DownloadInventoryManagementReport?FromDate=' + fromDate.toISOString() + '&ToDate=' + toDate.toISOString() + '&ReportCategory=2&ReportType=' + reportType;
+
+        window.open(url, '_blank');
+    }
+
 
     $scope.LoadTicketManagementReportData = function () {
         data = {
@@ -148,6 +171,19 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
         
 
     }
+
+    
+    $scope.DownloadTicketManagementReport = function () {
+        debugger
+        var fromDate = $scope.TicketReportFormDate;
+        var toDate = $scope.TicketReportToDate;
+        var reportType = $("#droReportType").val();
+        debugger
+        var url = '/Report/DownloadTicketManagementReport?FromDate=' + fromDate.toISOString() + '&ToDate=' + toDate.toISOString() + '&ReportCategory=3&ReportType=' + reportType;
+
+        window.open(url, '_blank');
+    }
+
 
     $scope.LoadWarrentyManagementReportData = function () {
         data = {

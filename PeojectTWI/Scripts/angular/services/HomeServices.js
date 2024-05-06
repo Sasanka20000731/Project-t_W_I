@@ -16,10 +16,10 @@
             })
 
 
-        $scope.LoadDashbordData();
+        $scope.LoadDashbordChartData();
     }
 
-    $scope.LoadDashbordData = function () {
+    $scope.LoadDashbordChartData = function () {
         $scope.chartLoading = true; // Show loading animation
         $http.get('/Home/loadDashbordChart')
             .then(function (response) {
@@ -90,11 +90,6 @@
                 $scope.chartLoading = false; // Hide loading animation in case of error
             });
     }
-
-
-
-
-
 
     $scope.CheckUserName = function () {
         data = {
@@ -307,5 +302,20 @@
             })
 
     }
+
+    $scope.loadUserProfile = function () {
+        debugger
+        //loadUserProfileDetails
+        $http.get('/Home/loadUserProfileDetails')
+            .success(function (response) {
+               
+                debugger
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+    }
+
+
 
 });

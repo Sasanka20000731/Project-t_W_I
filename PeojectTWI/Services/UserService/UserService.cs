@@ -235,5 +235,27 @@ namespace PeojectTWI.Services.UserService
             return cipherText;
         }
 
+
+        public List<user> loggedUserDetails(int UserId)
+        {
+            var result = (from a in db.tblUsers 
+                          where a.UserId == UserId && a.Active == true
+                          select new user
+                          {
+                              UserName = a.UserName,
+                              FirstName = a.FirstName,
+                              LastName = a.LastName,
+                              UserLevelString = a.tblUserlLevel.UserLevel,
+                              MobileNumber = a.MobileNumber,
+                              Email = a.Email,
+                              DOB = a.DOB,
+                              Password = a.Password
+                          }).ToList();
+
+            return result;
+        }
+
+
+
     }
 }

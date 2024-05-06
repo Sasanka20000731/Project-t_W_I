@@ -92,7 +92,6 @@ namespace PeojectTWI.Controllers
 
         }
 
-
         public JsonResult loadDashbordChart()
         {
             var result = _otherServices.LoadDashbordChart();
@@ -100,7 +99,6 @@ namespace PeojectTWI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
-
 
         public ActionResult addUser()
         {
@@ -217,7 +215,6 @@ namespace PeojectTWI.Controllers
 
         }
 
-
         public ActionResult ViewAudiTrail()
         {
             if (Session["LoggedUserID"] == null)
@@ -231,7 +228,12 @@ namespace PeojectTWI.Controllers
 
         }
 
+        public JsonResult loadUserProfileDetails()
+        {
+            var result = _userService.loggedUserDetails(Convert.ToInt32(Session["LoggedUserID"]));
+            return Json(result, JsonRequestBehavior.AllowGet);
 
+        }
 
     }
 }
