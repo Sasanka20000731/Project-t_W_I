@@ -136,7 +136,18 @@ namespace PeojectTWI.Services.ReportService
                 var DataTable = new DataTable("CommonDataTable");
                 using (var command = context.Database.Connection.CreateCommand())
                 {
-                    command.CommandText = "EXEC sp_InventoryManagementReport @FromDate, @ToDate, @ReportCategory, @ReportType";
+                    if (ReportCategory == 2)
+                    {
+                        command.CommandText = "EXEC sp_InventoryManagementReport @FromDate, @ToDate, @ReportCategory, @ReportType";
+                    }
+                    else if (ReportCategory == 3)
+                    {
+                        command.CommandText = "EXEC sp_TicketManagementReport @FromDate, @ToDate, @ReportCategory, @ReportType";
+                    }
+                    else {
+                        command.CommandText = "EXEC sp_WarrentyManagementReport @FromDate, @ToDate, @ReportCategory, @ReportType";
+                    }
+                   
                     command.Parameters.Add(new SqlParameter("@FromDate", FromDate));
                     command.Parameters.Add(new SqlParameter("@ToDate", ToDate));
                     command.Parameters.Add(new SqlParameter("@ReportCategory", ReportCategory));

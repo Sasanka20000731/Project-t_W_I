@@ -174,6 +174,29 @@ namespace PeojectTWI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+
+        public ActionResult DownloadWarrentyManagementReport(string FromDate, string ToDate, int ReportCategory, string ReportType)
+        {
+            DateTime fromDate = DateTime.Parse(FromDate);
+            DateTime toDate = DateTime.Parse(ToDate);
+            var WarrentyReportDs = _reportService.DownloadCommonManagementReport(fromDate, toDate, ReportCategory, Convert.ToInt32(ReportType));
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/Crystal_Reports/RptWarrentyManagement.rpt")));
+            rd.SetDataSource(WarrentyReportDs.Tables["CommonDataTable"]);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "InventoryManagementReport.pdf");
+
+        }
+
+
+
         public ActionResult OtherReportForm()
         {
             if (Session["LoggedUserID"] == null)

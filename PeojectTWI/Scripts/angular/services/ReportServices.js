@@ -231,6 +231,20 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
     }
 
+
+    
+    $scope.DewonloadWarrentyManagementReport = function () {
+        debugger
+        var fromDate = $scope.WarrentyReportFormDate;
+        var toDate = $scope.WarrentyReportToDate;
+        var reportType = $("#droReportType").val();
+        debugger
+        var url = '/Report/DownloadWarrentyManagementReport?FromDate=' + fromDate.toISOString() + '&ToDate=' + toDate.toISOString() + '&ReportCategory=4&ReportType=' + reportType;
+
+        window.open(url, '_blank');
+    }
+
+
     $scope.LoadAuditTrialdata = function () {
 
         $http.get('/Report/LoadAuditTrialTypes')
