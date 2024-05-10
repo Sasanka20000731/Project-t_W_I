@@ -21,6 +21,7 @@ namespace PeojectTWI.Services.UserService
         string DecryptText(string encryptedText);
 
         List<user> loggedUserDetails(int UserId);
+        int UpdateUserProfile(int UserID, string FirstName, string LastName);
 
     }
 }

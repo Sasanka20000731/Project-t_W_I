@@ -231,9 +231,24 @@ namespace PeojectTWI.Controllers
         public JsonResult loadUserProfileDetails()
         {
             var result = _userService.loggedUserDetails(Convert.ToInt32(Session["LoggedUserID"]));
+
+            result[0].stringDOB = Convert.ToDateTime(result[0].DOB).ToString("MM/dd/yyyy");
+
+
+            result[0].Password = _userService.DecryptText(result[0].Password);
+
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+
+        public JsonResult UpdateUserProfile(string FirstName, string LastName)
+        {
+            var result = _userService.UpdateUserProfile(Convert.ToInt32(Session["LoggedUserID"]), FirstName, LastName);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
 
     }
 }

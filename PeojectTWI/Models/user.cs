@@ -13,11 +13,15 @@ namespace PeojectTWI.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
+        public string stringDOB { get; set; }
+        
+
         public string Email { get; set; }
         public string MobileNumber { get; set; }
         public Nullable<int> UserLevel { get; set; }
         public Nullable<bool> Active { get; set; }
         public string Password { get; set; }
+
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string Status { get; set; }
         public string FullName { get; set; }

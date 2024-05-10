@@ -255,7 +255,31 @@ namespace PeojectTWI.Services.UserService
             return result;
         }
 
+        public int UpdateUserProfile(int UserID, string FirstName, string LastName)
+        {
+            try
+            {
+                var entity = db.tblUsers.FindAsync(UserID).Result;
+                if (entity != null)
+                {
+                    entity.FirstName = FirstName;
+                    entity.LastName = LastName;
 
+                    db.SaveChangesAsync().Wait();
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+
+        }
 
     }
 }

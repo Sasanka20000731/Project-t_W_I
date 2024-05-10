@@ -304,16 +304,93 @@
     }
 
     $scope.loadUserProfile = function () {
-        debugger
+        //debugger
         //loadUserProfileDetails
+        $scope.ShowForm = false;
+        $scope.FirstNameTxtBox = undefined;
+        $scope.LastNameTxtBox = undefined;
         $http.get('/Home/loadUserProfileDetails')
             .success(function (response) {
-               
-                debugger
+                
+                $scope.UserName = response[0].UserName;
+                $scope.FullName = response[0].FirstName + ' ' + response[0].LastName;
+           
+                $scope.UserLevelString = response[0].UserLevelString;
+                $scope.MobileNumber= response[0].MobileNumber;
+                $scope.Email = response[0].Email;
+
+                $scope.DOB = response[0].stringDOB;
+
+                $scope.Password = response[0].Password;
+                //debugger
             })
             .error(function (xhr) {
                 console.log(xhr.error);
             })
+    }
+
+    $scope.ViewUserUpdateForm = function ()
+    {
+        $scope.ShowForm = true;
+    }
+
+
+    $scope.UpdateUser = function () {
+        if ($scope.FirstNameTxtBox != undefined && $scope.LastNameTxtBox != undefined) {
+            data = {
+                params: {
+                    FirstName: $scope.FirstNameTxtBox,
+                    LastName: $scope.LastNameTxtBox
+                }
+            };
+            debugger;
+            $http.get('/Home/UpdateUserProfile', data)
+                .success(function (response) {
+                    if (response === 1) {
+                        debugger;
+                        alertify.success("Successfully Updated", 3000);
+                        $scope.loadUserProfile();
+                    } else {
+                        alertify.error("Error", 3000);
+                    }
+
+                })
+                .error(function (xhr) {
+                    console.log(xhr.error);
+                })
+        } else {
+            alertify.error("Fill all form", 3000);
+        }
+
+    }
+
+
+    $scope.CheckPassword = function (Password) {
+
+        data = {
+            params: {
+                Password: Password
+            }
+        };
+        debugger;
+        $http.get('/Home/CheckCurrentPassowrd', data)
+            .success(function (response) {
+                if (response === 1) {
+                    debugger
+
+     
+                } else {
+                    debugger
+                    
+
+                }
+
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+
+
     }
 
 
