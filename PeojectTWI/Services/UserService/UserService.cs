@@ -281,5 +281,24 @@ namespace PeojectTWI.Services.UserService
 
         }
 
+        public List<AccessForm> loadAccessForms()
+        {
+            var result = (from a in db.tblAccessForms
+                         
+                          select new AccessForm
+                          {
+                              Id = a.Id,
+                             ControllerName = a.ControllerName,
+                              ActionName = a.ActionName,
+                              ShowingName = a.ShowingName,
+                              MenuCategory = a.MenuCategory
+
+                          }).ToList();
+
+            return result;
+
+        }
+
+
     }
 }

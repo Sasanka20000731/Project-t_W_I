@@ -33,6 +33,9 @@ namespace PeojectTWI.Controllers
             _inventoryService = new InventoryService();
             _warrentyService = new WarrentyService();
             _otherServices = new OtherServices();
+
+            var accessForms = _userService.loadAccessForms();
+            ViewBag.AccessForms = accessForms;
         }
 
         public ActionResult Login()
@@ -81,6 +84,9 @@ namespace PeojectTWI.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+
+       
+
             return View();
         }
 

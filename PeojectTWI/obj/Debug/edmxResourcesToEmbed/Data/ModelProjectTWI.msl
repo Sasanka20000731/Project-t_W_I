@@ -290,5 +290,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblAccessForms">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblAccessForm">
+        <MappingFragment StoreEntitySet="tblAccessForms">
+          <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
+          <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
+          <ScalarProperty Name="ShowingName" ColumnName="ShowingName" />
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

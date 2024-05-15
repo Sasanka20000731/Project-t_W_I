@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblAccessForms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ControllerName" Type="nvarchar(max)" />
+    <Property Name="ActionName" Type="nvarchar(max)" />
+    <Property Name="ShowingName" Type="nvarchar(max)" />
+    <Property Name="MenuCategory" Type="nvarchar(max)" />
+    <Property Name="UserLevel" Type="int" />
+  </EntityType>
   <EntityType Name="tblAuditTrial">
     <Key>
       <PropertyRef Name="Id" />
@@ -544,6 +555,7 @@
     <Parameter Name="ToDATE" Type="datetime" Mode="In" />
   </Function>
   <EntityContainer Name="ProjectDBModelStoreContainer">
+    <EntitySet Name="tblAccessForms" EntityType="Self.tblAccessForms" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblAuditTrial" EntityType="Self.tblAuditTrial" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblAuditTrialTypes" EntityType="Self.tblAuditTrialTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblCoustomerDetails" EntityType="Self.tblCoustomerDetails" Schema="dbo" store:Type="Tables" />

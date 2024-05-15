@@ -37,6 +37,10 @@ namespace PeojectTWI.Controllers
             _saleService = new SaleService();
             _reportService = new ReportService();
             _otherServices = new OtherServices();
+
+
+            var accessForms = _userService.loadAccessForms();
+            ViewBag.AccessForms = accessForms;
         }
 
         public ActionResult UserManagementReportForm()

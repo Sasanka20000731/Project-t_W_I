@@ -49,6 +49,7 @@ namespace PeojectTWI.Data
         public virtual DbSet<tblSalesDetail> tblSalesDetails { get; set; }
         public virtual DbSet<tblAuditTrial> tblAuditTrials { get; set; }
         public virtual DbSet<tblAuditTrialType> tblAuditTrialTypes { get; set; }
+        public virtual DbSet<tblAccessForm> tblAccessForms { get; set; }
     
         public virtual ObjectResult<sp_ViewAllInventoryData_Result> sp_ViewAllInventoryData(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDATE)
         {

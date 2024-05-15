@@ -158,6 +158,9 @@
     <Compile Include="Data\sp_ViewAllInventoryData_Result.cs">
       <DependentUpon>ModelProjectTWI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\tblAccessForm.cs">
+      <DependentUpon>ModelProjectTWI.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\tblAuditTrial.cs">
       <DependentUpon>ModelProjectTWI.tt</DependentUpon>
     </Compile>
@@ -227,6 +230,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccessForm.cs" />
     <Compile Include="Models\CommonReport.cs" />
     <Compile Include="Models\Dashbord.cs" />
     <Compile Include="Models\loggedUser.cs" />

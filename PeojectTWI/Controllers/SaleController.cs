@@ -32,6 +32,10 @@ namespace PeojectTWI.Controllers
             _warrentyService = new WarrentyService();
             _saleService = new SaleService();
             _otherServices = new OtherServices();
+
+
+            var accessForms = _userService.loadAccessForms();
+            ViewBag.AccessForms = accessForms;
         }
 
         public ActionResult SaleItem()

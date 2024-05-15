@@ -123,6 +123,7 @@
       <End Role="tblUser" EntitySet="tblUsers" />
       <End Role="tblAuditTrial" EntitySet="tblAuditTrials" />
     </AssociationSet>
+    <EntitySet Name="tblAccessForms" EntityType="ProjectDBModel.tblAccessForm" />
   </EntityContainer>
   <ComplexType Name="sp_ViewAllInventoryData_Result">
     <Property Type="String" Name="BrandName" Nullable="true" MaxLength="30" />
@@ -723,4 +724,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="tblAccessForm">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ControllerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ActionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShowingName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MenuCategory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserLevel" Type="Int32" />
+  </EntityType>
 </Schema>

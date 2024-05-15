@@ -22,6 +22,6 @@ namespace PeojectTWI.Services.UserService
 
         List<user> loggedUserDetails(int UserId);
         int UpdateUserProfile(int UserID, string FirstName, string LastName);
-
+        List<AccessForm> loadAccessForms();
     }
 }

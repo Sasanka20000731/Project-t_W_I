@@ -1,6 +1,4 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
+﻿
     <!-- Basic Page Info -->
     <meta charset="utf-8">
     <title>PWI System</title>
@@ -31,23 +29,8 @@
 
         gtag('config', 'UA-119386393-1');
     </script>
-</head>
-<body>
-    @*loadinng function*@
-    <!--<div class="pre-loader">
-        <div class="pre-loader-box">
-            <div class="loader-logo">-->
-                @*<img src="~/Styles/vendors/images/logo-icon.png" alt="">*@
-            <!--</div>
-            <div class='loader-progress' id="progress_div">
-                <div class='bar' id='bar1'></div>
-            </div>
-            <div class='percent' id='percent1'>0%</div>
-            <div class="loading-text">
-                Loading...
-            </div>
-        </div>
-    </div>-->
+
+
 
     <div class="header">
         <div class="header-left">
@@ -210,11 +193,47 @@
         </div>
     </div>
 
+
+    @{
+        var accessForms = ViewBag.AccessForms as List<PeojectTWI.Models.AccessForm>;
+        var groupedForms = accessForms.GroupBy(a => a.MenuCategory); // Group by category if needed
+    }
     <div class="left-side-bar">
         <div class="brand-logo">
             <a href="~/Home/Index">
                 @*<img src="~/Styles/vendors/images/deskapp-logo-white-svg.png" alt="" class="light-logo">*@
             </a>
+            <div class="close-sidebar" data-toggle="left-sidebar-close">
+                <i class="ion-close-round"></i>
+            </div>
+        </div>
+        <div class="menu-block customscroll">
+            <div class="sidebar-menu">
+                <ul id="accordion-menu">
+                    @foreach (var category in groupedForms)
+                    {
+                        <li class="dropdown" id="@category.Key">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon dw dw-@category.First().ControllerName.ToLower()"></span><span class="mtext">@category.Key</span>
+                            </a>
+                            <ul class="submenu">
+                                @foreach (var form in category)
+                                {
+                                    <li><a href="~/@form.ControllerName/@form.ActionName">@form.ShowingName</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="left-side-bar">
+        <div class="brand-logo">
+            <a href="~/Home/Index">-->
+    @*<img src="~/Styles/vendors/images/deskapp-logo-white-svg.png" alt="" class="light-logo">*@
+    <!--</a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>
             </div>
@@ -312,19 +331,19 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <div class="mobile-menu-overlay"></div>
 
     <div class="main-container">
-            <div class="xs-pd-20-10 pd-ltr-20">
-                @RenderBody()
-                <div class="footer-wrap pd-20 mb-20 card-box">
+        <div class="xs-pd-20-10 pd-ltr-20">
+            @RenderBody()
+            <div class="footer-wrap pd-20 mb-20 card-box">
 
-                </div>
             </div>
+        </div>
     </div>
-  
+
     <script>
 
     </script>
@@ -340,5 +359,3 @@
     <script src="~/Styles/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
     <script src="~/Styles/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
     <script src="~/Styles/vendors/scripts/dashboard3.js"></script>
-</body>
-</html>

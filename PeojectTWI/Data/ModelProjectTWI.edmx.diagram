@@ -51,6 +51,7 @@
         <EntityTypeShape EntityType="ProjectDBModel.tblAuditTrialType" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="ProjectDBModel.FK_tblAuditTrial_tblAuditTrialTypes" />
         <AssociationConnector Association="ProjectDBModel.FK_tblAuditTrial_tblUser" />
+        <EntityTypeShape EntityType="ProjectDBModel.tblAccessForm" Width="1.5" PointX="10.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
