@@ -239,6 +239,7 @@
     <Compile Include="Models\ReportList.cs" />
     <Compile Include="Models\saleItem.cs" />
     <Compile Include="Models\SerialItem.cs" />
+    <Compile Include="Models\StaticManageClass.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\user.cs" />
     <Compile Include="Models\Warrenty.cs" />

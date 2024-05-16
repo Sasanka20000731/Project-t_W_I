@@ -281,10 +281,13 @@ namespace PeojectTWI.Services.UserService
 
         }
 
-        public List<AccessForm> loadAccessForms()
+        public List<AccessForm> loadAccessForms( int loggedUser)
         {
-            var result = (from a in db.tblAccessForms
-                         
+            
+
+            var result = (from a in db.tblAccessForms 
+                          join b in db.tblUsers on a.UserLevel equals b.UserLevel
+                         where b.UserId == loggedUser
                           select new AccessForm
                           {
                               Id = a.Id,

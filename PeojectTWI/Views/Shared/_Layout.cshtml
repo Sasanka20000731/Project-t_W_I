@@ -195,7 +195,7 @@
 
 
     @{
-        var accessForms = ViewBag.AccessForms as List<PeojectTWI.Models.AccessForm>;
+        var accessForms = PeojectTWI.Models.StaticManageClass.PermissionForm as List<PeojectTWI.Models.AccessForm>;
         var groupedForms = accessForms.GroupBy(a => a.MenuCategory); // Group by category if needed
     }
     <div class="left-side-bar">

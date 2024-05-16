@@ -34,8 +34,7 @@ namespace PeojectTWI.Controllers
             _warrentyService = new WarrentyService();
             _otherServices = new OtherServices();
 
-            var accessForms = _userService.loadAccessForms();
-            ViewBag.AccessForms = accessForms;
+        
         }
 
         public ActionResult Login()
@@ -58,6 +57,11 @@ namespace PeojectTWI.Controllers
             {
                 var a = _userService.GetLoggedUsers(UserName, ValidPassword);
                 Session["LoggedUserID"] = a[0].UserId;
+
+                var accessForms = _userService.loadAccessForms(Convert.ToInt32(Session["LoggedUserID"]));
+                HttpContext.Session["AccessForm"] = accessForms;
+                ViewBag.AccessForms = accessForms;
+
 
                 _otherServices.InsertAuditTrial(5, "Logged In User " + UserName, Convert.ToInt32(Session["LoggedUserID"]));
                 return Json(logUser, JsonRequestBehavior.AllowGet);

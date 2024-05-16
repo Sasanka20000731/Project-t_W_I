@@ -33,8 +33,8 @@ namespace PeojectTWI.Controllers
             _saleService = new SaleService();
             _otherServices = new OtherServices();
 
-            var accessForms = _userService.loadAccessForms();
-            ViewBag.AccessForms = accessForms;
+            //var accessForms = _userService.loadAccessForms();
+            //ViewBag.AccessForms = accessForms;
         }
 
 
