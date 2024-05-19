@@ -15,6 +15,7 @@
           <Property Name="ShowingName" Type="nvarchar(max)" />
           <Property Name="MenuCategory" Type="nvarchar(max)" />
           <Property Name="UserLevel" Type="int" />
+          <Property Name="CategoryIcon" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tblAuditTrial">
           <Key>
@@ -1418,6 +1419,7 @@
           <Property Name="ShowingName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MenuCategory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserLevel" Type="Int32" />
+          <Property Name="CategoryIcon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1717,6 +1719,7 @@
           <EntitySetMapping Name="tblAccessForms">
             <EntityTypeMapping TypeName="ProjectDBModel.tblAccessForm">
               <MappingFragment StoreEntitySet="tblAccessForms">
+                <ScalarProperty Name="CategoryIcon" ColumnName="CategoryIcon" />
                 <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
                 <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
                 <ScalarProperty Name="ShowingName" ColumnName="ShowingName" />

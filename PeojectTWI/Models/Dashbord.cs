@@ -22,7 +22,7 @@ namespace PeojectTWI.Models
 
         public int TicketCount { get; set; }
 
-        public DateTime TicketDate { get; set; }
+        public string TicketDate { get; set; }
 
 
     }

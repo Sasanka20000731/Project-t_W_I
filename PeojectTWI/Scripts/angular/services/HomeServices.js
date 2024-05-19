@@ -24,8 +24,7 @@
         $http.get('/Home/loadDashbordChart')
             .then(function (response) {
                 var data = response.data;
-
-                // Extracting data for the chart
+                               // Extracting data for the chart
                 var ticketCounts = data.map(function (item) {
                     return item.TicketCount;
                 });
@@ -259,7 +258,7 @@
                 $scope.MobileNumber = response[0].MobileNumber;
                 $scope.droUserLevels = response[0].UserLevel;
                 $scope.Active = response[0].Active;
-                debugger
+                //debugger
             })
             .error(function (xhr) {
                 console.log(xhr.error);
@@ -267,7 +266,7 @@
     }
 
     $scope.UpdateUser = function () {
-
+        debugger
         $scope.Active;
         if ($scope.Active == undefined) {
             $scope.Active = false;
@@ -335,7 +334,9 @@
     }
 
 
-    $scope.UpdateUser = function () {
+    $scope.UpdateUserProfile = function () {
+
+        debugger
         if ($scope.FirstNameTxtBox != undefined && $scope.LastNameTxtBox != undefined) {
             data = {
                 params: {

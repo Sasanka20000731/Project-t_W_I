@@ -281,4 +281,16 @@
 
     }
 
+    $scope.validateMobileNumber = function () {
+        if (($scope.CoustomerContact && $scope.CoustomerContact.length === 10 && /^\d+$/.test($scope.CoustomerContact) && $scope.CoustomerContact.startsWith('0')) || ($scope.CoustomerContact === undefined) || ($scope.CoustomerContact === "")) {
+            $scope.mobileNumberAsyncError = false;
+            $scope.mobileNumberAsyncErrorMessage = "";
+        } else {
+
+            $scope.mobileNumberAsyncError = true;
+            $scope.mobileNumberAsyncErrorMessage = "Mobile number should be 10 digits and valid mobile number!!!";
+        }
+
+    };
+
 });

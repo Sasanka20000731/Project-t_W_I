@@ -293,6 +293,7 @@
     <EntitySetMapping Name="tblAccessForms">
       <EntityTypeMapping TypeName="ProjectDBModel.tblAccessForm">
         <MappingFragment StoreEntitySet="tblAccessForms">
+          <ScalarProperty Name="CategoryIcon" ColumnName="CategoryIcon" />
           <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
           <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
           <ScalarProperty Name="ShowingName" ColumnName="ShowingName" />

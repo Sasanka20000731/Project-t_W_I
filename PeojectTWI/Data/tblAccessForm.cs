@@ -20,5 +20,6 @@ namespace PeojectTWI.Data
         public string ShowingName { get; set; }
         public string MenuCategory { get; set; }
         public Nullable<int> UserLevel { get; set; }
+        public string CategoryIcon { get; set; }
     }
 }

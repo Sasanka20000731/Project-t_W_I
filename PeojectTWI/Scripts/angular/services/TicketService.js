@@ -2,6 +2,7 @@
 
 myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $uibModalStack, $rootScope) {
 
+    $scope.validationMessage = true;
     // 8746GSFGGSWGSXH45
     $scope.AddTicket = function () {
         data = {
@@ -10,13 +11,14 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
                 TicketRemark: $scope.ticketTemark
             }
         };
-        debugger;
+        //debugger;
         $http.get('/Ticket/InsertTicket', data)
             .success(function (response) {
+                debugger
                 if (response == 1) {
-                    $scope.SerialNumber = undifined;
-                    $scope.ticketTemark = undifined;
+                   
                     alertify.success('Ticket Successfully Created', 3000);
+                    $scope.ClearTicketForm();
                 } else {
                     alertify.error('Error', 5000);
                 }
@@ -27,13 +29,52 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
 
     }
 
+    $scope.GetProductDetails = function () {
+        data = {
+            params: {
+                SerialNo: $scope.SerialNumber
+            }
+        };
+        $http.get('/Ticket/GetSerialDetailsToTicket', data)
+            .success(function (response) {
+               //debugger
+                if (response.length > 0) {
+                   $scope.HideValidation(1)
+                } else {
+                    $scope.HideValidation(2)
+                }
+
+            }).error(function (xhr) {
+                console.log(xhr.error);
+
+                alertify.success($scope.popMessage, 3000);
+            })
+    }
+
+    $scope.HideValidation = function (x) {
+        if (x == 1) {
+            $scope.validationMessage = true;
+
+        } else {
+            $scope.validationMessage = false;
+
+        }
+
+    }
+
+    $scope.ClearTicketForm = function()
+    {
+
+        $scope.SerialNumber = undefined;
+        $scope.ticketTemark = undefined;
+    }
 
 
     $scope.LoadTicketHandlers = function () {
-        debugger;
+       //debugger;
         $http.get('/Ticket/GetTicketHandlers')
             .success(function (response) {
-                debugger
+                //debugger
                 $scope.TicketHandlers = response;
             })
             .error(function (xhr) {
@@ -130,6 +171,8 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
                 }else {
                     alertify.error('Error', 5000);
                 }
+
+                $scope.LoadTicketdetailsToManage();
             })
             .error(function (xhr) {
                 console.log(xhr.error);

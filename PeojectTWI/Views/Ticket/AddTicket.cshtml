@@ -12,12 +12,9 @@
         <div class="form-group">
             <label for="droproductCategory">Serial Number</label>
 
-            @*<select class="form-control" id="DropSerialNumbersListID" name="droproductCategory" ng-model="SerialNumber">
-                    <option value="">Select Product Category</option>
-                    <option ng-repeat="item in SerialNumbers" value="{{item.InventoryId}}">{{item.SerialNumber}}</option>
-                </select>*@
 
-            <input type="text" id="txtSerialNumberID" class="form-control" ng-model="SerialNumber" required>
+            <input type="text" id="txtSerialNumberID" class="form-control" ng-model="SerialNumber" ng-change="GetProductDetails()" required>
+            <div class="validation" ng-hide="validationMessage">Enter valid number</div>
         </div>
 
 
@@ -28,6 +25,11 @@
         </div>
         <button type="button" class="btn btn-google" id="BtnAddTicketId" style="height:25px;padding-top:0px;" ng-click="AddTicket()">
             Add Ticket
+        </button>
+        
+
+        <button type="button" class="btn btn-google" id="BtnClearTicketFormId" style="height:25px;padding-top:0px;" ng-click="ClearTicketForm()">
+            Clear Ticket
         </button>
 
     </div>

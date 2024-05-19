@@ -734,5 +734,6 @@
     <Property Name="ShowingName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="MenuCategory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserLevel" Type="Int32" />
+    <Property Name="CategoryIcon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

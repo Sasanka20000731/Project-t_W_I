@@ -12,5 +12,6 @@ namespace PeojectTWI.Models
         public string ActionName { get; set; }
         public string ShowingName { get; set; }
         public string MenuCategory { get; set; }
+        public string CategoryIcon { get; set; }
     }
 }

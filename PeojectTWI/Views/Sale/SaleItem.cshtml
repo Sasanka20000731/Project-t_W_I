@@ -15,7 +15,10 @@
 
             <div class="form-group">
                 <label for="number">Phone Number:</label>
-                <input type="tel" id="number" name="number" ng-model="CoustomerContact" required>
+                <input type="tel" id="number" name="number" ng-model="CoustomerContact" ng-change="validateMobileNumber()" maxlength="10" required>
+                <span class="text-danger" ng-show="mobileNumberAsyncError">
+                    {{ mobileNumberAsyncErrorMessage }}
+                </span>
             </div>
 
             <div class="form-group">

@@ -13,27 +13,41 @@ namespace PeojectTWI.Services.TicketService
     {
         ProjectDBEntities db = new ProjectDBEntities();
 
+
+
+
         public int AddTicket(string SerialNumber, string TicketRemark, int User)
         {
-            using (var context = new ProjectDBEntities())
+            var Exsist = (from a in db.tblInventoryDatas
+                          where a.SerialNumber == SerialNumber
+                          select a).ToList();
+
+            if (Exsist.Count != 0)
             {
-                using (var cmd = context.Database.Connection.CreateCommand())
+                using (var context = new ProjectDBEntities())
                 {
-                    cmd.CommandText = "sp_AddTicket";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@@SerialNumber", SerialNumber));
-                    cmd.Parameters.Add(new SqlParameter("@@TicketRemark", TicketRemark));
-                    context.Database.Connection.Open();
-                    var result = cmd.ExecuteScalar();
-                    if (result != null && int.TryParse(result.ToString(), out int spResult))
+                    using (var cmd = context.Database.Connection.CreateCommand())
                     {
-                        return spResult;
-                    }
-                    else
-                    {
-                        return 0;
+                        cmd.CommandText = "sp_AddTicket";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("@@SerialNumber", SerialNumber));
+                        cmd.Parameters.Add(new SqlParameter("@@TicketRemark", TicketRemark));
+                        context.Database.Connection.Open();
+                        var result = cmd.ExecuteScalar();
+                        if (result != null && int.TryParse(result.ToString(), out int spResult))
+                        {
+                            return spResult;
+                        }
+                        else
+                        {
+                            return 0;
+                        }
                     }
                 }
+            }
+            else
+            {
+                return 0;
             }
         }
 

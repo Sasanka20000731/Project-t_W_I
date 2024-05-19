@@ -21,8 +21,18 @@ namespace PeojectTWI.Services.UserService
 
         public int addUser(string userName, string firstName, string lastName, int? userLevel, string mobileNumber, string email, DateTime? dob)
         {
+
+
+
             try
             {
+
+                int? Group = userLevel == null ? (int?)null
+                           : userLevel == 3 ? 1
+                           : userLevel == 4 ? 2
+                           : userLevel == 2 ? 3
+                           : (int?)null;
+
                 tblUser tu = new tblUser();
             tu.UserName = userName;
             tu.FirstName = firstName;
@@ -34,6 +44,7 @@ namespace PeojectTWI.Services.UserService
             tu.Email = email;
             tu.CreatedDate = DateTime.Now;
             tu.DOB = dob;
+                tu.AssignedTicketSequnceGroup = Group;
             db.tblUsers.Add(tu);
             db.SaveChanges();
                 return 1;
@@ -291,11 +302,12 @@ namespace PeojectTWI.Services.UserService
                           select new AccessForm
                           {
                               Id = a.Id,
-                             ControllerName = a.ControllerName,
+                              ControllerName = a.ControllerName,
                               ActionName = a.ActionName,
                               ShowingName = a.ShowingName,
-                              MenuCategory = a.MenuCategory
-
+                              MenuCategory = a.MenuCategory,
+                              CategoryIcon = a.CategoryIcon
+                             
                           }).ToList();
 
             return result;

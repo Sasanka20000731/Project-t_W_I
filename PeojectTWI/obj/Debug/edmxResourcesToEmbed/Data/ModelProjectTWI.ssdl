@@ -10,6 +10,7 @@
     <Property Name="ShowingName" Type="nvarchar(max)" />
     <Property Name="MenuCategory" Type="nvarchar(max)" />
     <Property Name="UserLevel" Type="int" />
+    <Property Name="CategoryIcon" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="tblAuditTrial">
     <Key>

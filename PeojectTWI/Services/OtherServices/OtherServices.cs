@@ -11,6 +11,8 @@ namespace PeojectTWI.Services.OtherServices
 {
     public class OtherServices : IOtherServices
     {
+        ProjectDBEntities db = new ProjectDBEntities();
+
         public void InsertAuditTrial(int AuditTrialType, string Description, int CreatedBy)
         {
             //-----------------un comment this function
@@ -67,29 +69,75 @@ namespace PeojectTWI.Services.OtherServices
         }
 
 
+        //public List<Dashbord> LoadDashbordChart()
+        //{
+        //    List<Dashbord> dashbords = new List<Dashbord>();
+
+
+        //    Dashbord dashbord1 = new Dashbord();
+        //    dashbord1.TicketCount = 15;
+        //    dashbord1.TicketDate = "2024, 1, 1";
+        //    dashbords.Add(dashbord1);
+
+        //    Dashbord dashbord2 = new Dashbord();
+        //    dashbord2.TicketCount = 24;
+        //    dashbord2.TicketDate = "2024, 4, 1";
+        //    dashbords.Add(dashbord2);
+
+
+        //    Dashbord dashbord3 = new Dashbord();
+        //    dashbord3.TicketCount = 24;
+        //    dashbord3.TicketDate = "2024, 4, 1";
+        //    dashbords.Add(dashbord3);
+
+
+        //    return dashbords;
+        //}
+
         public List<Dashbord> LoadDashbordChart()
         {
             List<Dashbord> dashbords = new List<Dashbord>();
 
-            Dashbord dashbord1 = new Dashbord();
-            dashbord1.TicketCount = 15;
-            dashbord1.TicketDate = new DateTime(2024, 1, 1);
-            dashbords.Add(dashbord1);
+            var rawTickets = (from a in db.tblTickets
+                              select new
+                              {
+                                  a.TicketId,
+                                  a.CreatedDate
+                              }).ToList();
 
-            Dashbord dashbord2 = new Dashbord();
-            dashbord2.TicketCount = 24;
-            dashbord2.TicketDate = new DateTime(2024, 4, 1);
-            dashbords.Add(dashbord2);
+           
+            var ticketList = rawTickets.Select(a => new Ticket
+            {
+                TicketId = a.TicketId,
+                TicketDate = a.CreatedDate.HasValue
+                             ? a.CreatedDate.Value.ToString("yyyy-MM-dd")
+                             : null
+            }).ToList();
+
+            var groupedTickets = ticketList
+                                .GroupBy(t => t.TicketDate)
+                                .Select(g => new
+                                {
+                                    TicketDate = g.Key,
+                                    TicketCount = g.Count()
+                                }).ToList();
 
 
-            Dashbord dashbord3 = new Dashbord();
-            dashbord3.TicketCount = 24;
-            dashbord3.TicketDate = new DateTime(2024, 4, 1);
-            dashbords.Add(dashbord3);
-
+            foreach (var item in groupedTickets)
+            {
+                Dashbord dashbord = new Dashbord
+                {
+                    TicketCount = item.TicketCount,
+                    TicketDate = item.TicketDate
+                };
+                dashbords.Add(dashbord);
+            }
 
             return dashbords;
+
+
         }
+
 
 
     }

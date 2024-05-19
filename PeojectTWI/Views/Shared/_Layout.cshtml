@@ -196,7 +196,8 @@
 
     @{
         var accessForms = PeojectTWI.Models.StaticManageClass.PermissionForm as List<PeojectTWI.Models.AccessForm>;
-        var groupedForms = accessForms.GroupBy(a => a.MenuCategory); // Group by category if needed
+      //  var groupedForms = accessForms.GroupBy(a => a.MenuCategory); // Group by category if needed
+        var groupedForms = accessForms.GroupBy(a => new { a.MenuCategory, a.CategoryIcon });
     }
     <div class="left-side-bar">
         <div class="brand-logo">
@@ -214,124 +215,42 @@
                     {
                         <li class="dropdown" id="@category.Key">
                             <a href="javascript:;" class="dropdown-toggle">
-                                <span class="micon dw dw-@category.First().ControllerName.ToLower()"></span><span class="mtext">@category.Key</span>
+                                <span class="@category.Key.CategoryIcon.ToLower()"></span><span class="mtext">@category.Key.MenuCategory</span>
                             </a>
                             <ul class="submenu">
                                 @foreach (var form in category)
                                 {
                                     <li><a href="~/@form.ControllerName/@form.ActionName">@form.ShowingName</a></li>
+
                                 }
                             </ul>
                         </li>
                     }
+
+
+
+                    @*<li class="dropdown" id="AllocationID">
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <i class="micon fa fa-hand-pointer-o" aria-hidden="true"></i>
+
+                            <i class="micon fa fa-ticket" aria-hidden="true"></i><span class="mtext">Ticket Managemt</span>
+
+                        </a>
+                   
+                    </li>*@
+
+
+
+
                 </ul>
             </div>
+
+
+
         </div>
     </div>
 
-    <!--<div class="left-side-bar">
-        <div class="brand-logo">
-            <a href="~/Home/Index">-->
-    @*<img src="~/Styles/vendors/images/deskapp-logo-white-svg.png" alt="" class="light-logo">*@
-    <!--</a>
-            <div class="close-sidebar" data-toggle="left-sidebar-close">
-                <i class="ion-close-round"></i>
-            </div>
-        </div>
-        <div class="menu-block customscroll">
-            <div class="sidebar-menu">
-                <ul id="accordion-menu">
-                    <li class="dropdown">
-                        <a href="~/Home/Index" class="dropdown-toggle no-arrow">
-                            <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
-                        </a>
-                    </li>
-                    <li class="dropdown" id="InventoryManagementIs">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-print"></span><span class="mtext">Inventory</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="~/Inventory/insertProductCategory" id="AddProductCategoryId">Add Product Category</a></li>
-                            <li><a href="~/Inventory/viewProductCategories">View Product Category</a></li>
-                            <li><a href="~/Inventory/insertMasterStore">Add Master Store Items</a></li>
-                            <li><a href="~/Inventory/viewtMasterStore">View Master Store</a></li>
-                            <li><a href="~/Inventory/WarehouseManage">Warehouse Manage</a></li>
-                            <li><a href="~/Inventory/ViewWareHouse">View Full WareHouse</a></li>
-                            <li><a href="~/Inventory/SearchSerial">Search In WareHouse</a></li>
-
-                        </ul>
-                    </li>
-                    <li class="dropdown" id="SaleManagementID">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-money"></span><span class="mtext">Sale</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="~/Sale/SaleItem" id="SaleItemId">Sale Item</a></li>
-                            <li><a href="~/Sale/RejectSaleItem" id="RejectSaleItemId">Reject Sale Item</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown" id="UserManagementID">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-user"></span><span class="mtext">User Management</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="~/Home/addUser" id="AddUserID">Add User</a></li>
-                            <li><a href="~/Home/viewUser" id="ViewUserId">View Users</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown" id="AllocationID">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <i class="micon fa fa-hand-pointer-o" aria-hidden="true"></i>
-                            <span class="mtext"> Warrenty Management </span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="~/Warrenty/CheckWarrenty" id="CheckWarrentyId">Check Warrenty Detail</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <i class="micon fa fa-ticket" aria-hidden="true"></i><span class="mtext">Ticket Managemt</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="~/Ticket/AddTicket" id="AddTicketID">Add Ticket</a></li>
-                            <li><a href="~/Ticket/AssignTicket" id="AssignTicketID">Assign Tickets</a></li>
-                            <li><a href="~/Ticket/ManageTicket" id="AssignTicketID">Manage Tickets</a></li>
-                            <li><a href="~/Ticket/TicketSearch" id="SearchTicketID">Search Tickets</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown" id="ReportID">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-analytics-21"></span><span class="mtext">Reports</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="~/Report/UserManagementReportForm" id="">User Managemet Report</a></li>
-                            <li><a href="~/Report/InventoryManagementReportForm">Inventory Management Report</a></li>
-                            <li><a href="~/Report/TicketManagementReportForm">Ticket Management Report</a></li>
-                            <li><a href="~/Report/WarrentyManagementReportForm">Warrenty Management Report</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <i class="micon fa fa-envelope-o" aria-hidden="true"></i><span class="mtext">Contact US</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="~/Home/ContactUs">Contact From Email</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown" id="AudiTrailID">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <i class="micon fa fa-file-text-o" aria-hidden="true"></i><span class="mtext">Audit Trail</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="~/Home/ViewAudiTrail">Audit Trail Details</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>-->
+   
 
     <div class="mobile-menu-overlay"></div>
 

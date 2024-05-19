@@ -47,6 +47,12 @@ namespace PeojectTWI.Controllers
             return View();
         }
 
+        public JsonResult GetSerialDetailsToTicket(string SerialNo)
+        {
+            var result = _inventoryService.GetSearchSerialDetails(SerialNo);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult InsertTicket(string SerialNumber, string TicketRemark)
         {
             
