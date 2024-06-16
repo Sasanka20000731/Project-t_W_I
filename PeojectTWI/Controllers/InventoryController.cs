@@ -21,7 +21,7 @@ namespace PeojectTWI.Controllers
         private IInventoryService _inventoryService;
         private IWarrentyService _warrentyService;
         private IOtherServices _otherServices;
-
+        Email email = new Email();
         public InventoryController()
         {
             _userService = new UserService();
@@ -54,6 +54,8 @@ namespace PeojectTWI.Controllers
         public JsonResult SaveProductCategory(string ProductName,string BrandName, string VendorName,string VendorContact,string VendorAddress,string VendorEmail)
         {
            var result = _inventoryService.insertProductCategory( BrandName, VendorName, VendorContact, VendorEmail, VendorAddress, ProductName);
+            var resultU = _userService.addUser(VendorName, VendorName, BrandName, 6, VendorContact, VendorEmail,null );
+            email.SendEmail(VendorEmail, "testingbranchuser@gmail.com", "xclczwvfajxxpzeo", "User Login", "Dear " + VendorName + ". Your User Name is : " + VendorName + " and Password is : 123456789");
 
             return Json(result, JsonRequestBehavior.AllowGet);
        

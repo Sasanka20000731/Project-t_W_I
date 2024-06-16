@@ -1248,7 +1248,6 @@ F:\Projects\FinalYearProject\10_05_2024\Project-t_W_I\PeojectTWI\bin\EntityFrame
 F:\Projects\FinalYearProject\10_05_2024\Project-t_W_I\PeojectTWI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 F:\Projects\FinalYearProject\10_05_2024\Project-t_W_I\PeojectTWI\bin\Microsoft.Web.Infrastructure.dll
 F:\Projects\FinalYearProject\10_05_2024\Project-t_W_I\PeojectTWI\bin\Newtonsoft.Json.dll
-F:\Projects\FinalYearProject\10_05_2024\Project-t_W_I\PeojectTWI\bin\QuickMailer.dll
 F:\Projects\FinalYearProject\10_05_2024\Project-t_W_I\PeojectTWI\bin\System.Web.Helpers.dll
 F:\Projects\FinalYearProject\10_05_2024\Project-t_W_I\PeojectTWI\bin\System.Web.Mvc.dll
 F:\Projects\FinalYearProject\10_05_2024\Project-t_W_I\PeojectTWI\bin\System.Web.Optimization.dll

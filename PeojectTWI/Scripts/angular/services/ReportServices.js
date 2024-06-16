@@ -81,7 +81,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
     }
 
     $scope.SearchInventoryManagementReportData = function () {
-        debugger
+        //debugger
         if (($scope.InventoryReportFormDate != null && $scope.InventoryReportToDate != null && $scope.droReportType != null) || ($scope.InventoryReportFormDate != undefined && $scope.InventoryReportToDate != undefined && $scope.droReportType != undefined)) {
             data = {
                 params: {
@@ -91,7 +91,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
                     ReportType: $("#droReportType").val()
                 }
             };
-            debugger
+            //debugger
             $http.get('/Report/SearchInventoryManagementReport', data)
                 .success(function (response) {
                     if (response && response.length !== 0) {
@@ -114,11 +114,11 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
     }
 
     $scope.DownloadInventoryManagementReport = function () {
-        debugger
+        //debugger
         var fromDate = $scope.InventoryReportFormDate;
         var toDate = $scope.InventoryReportToDate;
         var reportType = $("#droReportType").val();
-        debugger
+        //debugger
         var url = '/Report/DownloadInventoryManagementReport?FromDate=' + fromDate.toISOString() + '&ToDate=' + toDate.toISOString() + '&ReportCategory=2&ReportType=' + reportType;
 
         window.open(url, '_blank');
@@ -234,11 +234,11 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
     
     $scope.DewonloadWarrentyManagementReport = function () {
-        debugger
+        //debugger
         var fromDate = $scope.WarrentyReportFormDate;
         var toDate = $scope.WarrentyReportToDate;
         var reportType = $("#droReportType").val();
-        debugger
+        //debugger
         var url = '/Report/DownloadWarrentyManagementReport?FromDate=' + fromDate.toISOString() + '&ToDate=' + toDate.toISOString() + '&ReportCategory=4&ReportType=' + reportType;
 
         window.open(url, '_blank');

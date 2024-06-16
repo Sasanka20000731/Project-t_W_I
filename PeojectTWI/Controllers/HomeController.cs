@@ -12,7 +12,7 @@ using PeojectTWI.Services.TicketService;
 using PeojectTWI.Services.InventoryService;
 using PeojectTWI.Services.WarrentyService;
 using PeojectTWI.Services.OtherServices;
-using QuickMailer;
+
 
 namespace PeojectTWI.Controllers
 {
@@ -116,7 +116,7 @@ namespace PeojectTWI.Controllers
                 return RedirectToAction("Login", "Home");
 
             }
-
+        
             _otherServices.InsertAuditTrial(4, "Load User Creation Page", Convert.ToInt32(Session["LoggedUserID"]));
             return View();
         }
@@ -131,7 +131,7 @@ namespace PeojectTWI.Controllers
         {
             
             var result =   _userService.addUser(UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB);
-            //var zresult = CommenEmail(Email, "sasankabuddhi@gmail.com", "SAsanka@123", "User Login", "Dear " + FirstName + ", your account user name is : (" + UserName + ")  and Password is " + 123456789 + ".");
+            var zresult = CommonEmail(Email, "testingbranchuser@gmail.com", "xclczwvfajxxpzeo", "User Login", "Dear "+FirstName+" "+LastName+". Your User Name is : "+UserName+" and Password is : 123456789");
             _otherServices.InsertAuditTrial(1, "Inseted New User ("+UserName+")", Convert.ToInt32(Session["LoggedUserID"]));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -186,11 +186,11 @@ namespace PeojectTWI.Controllers
         {
             //try
             //{
-                //From mail Password "schqmfidfvgsjcru"
-                //HO@vfplc
-                //From Mail = testingbranchuser@gmail.com
-                // var toMail = "sasankabuddhi@gmail.com";
-                Email email = new Email();
+            //From mail Password "xclczwvfajxxpzeo"
+            //HO@vfplc
+            //From Mail = testingbranchuser@gmail.com
+            // var toMail = "sasankabuddhi@gmail.com";
+            Email email = new Email();
                 email.SendEmail(toMail,fromMail,password,subject,body);
 
                 return true;

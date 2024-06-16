@@ -55,9 +55,6 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="QuickMailer, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\QuickMailer.1.0.0.1\lib\net461\QuickMailer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -233,6 +230,7 @@
     <Compile Include="Models\AccessForm.cs" />
     <Compile Include="Models\CommonReport.cs" />
     <Compile Include="Models\Dashbord.cs" />
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\loggedUser.cs" />
     <Compile Include="Models\masterStore.cs" />
     <Compile Include="Models\productCategory.cs" />

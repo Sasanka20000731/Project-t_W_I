@@ -14,7 +14,7 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
         //debugger;
         $http.get('/Ticket/InsertTicket', data)
             .success(function (response) {
-                debugger
+                //debugger
                 if (response == 1) {
                    
                     alertify.success('Ticket Successfully Created', 3000);

@@ -115,21 +115,21 @@ p {
 .pre-loader .loader-logo{
 	padding-bottom: 15px;
 }
-.pre-loader .loader-progress{
-	height: 8px;
-	border-radius: 15px;
-	max-width: 200px;
-	margin: 0 auto;
-	display: block;
-	background: #ecf0f4;
-	overflow: hidden;
-}
-.pre-loader .bar{
-	width: 0%;
-	height: 8px;
-	display: block;
-	background: #1b00ff;
-}
+	.pre-loader .loader-progress {
+		height: 8px;
+		border-radius: 15px;
+		max-width: 200px;
+		margin: 0 auto;
+		display: block;
+		background: #142127;
+		overflow: hidden;
+	}
+	.pre-loader .bar {
+		width: 0%;
+		height: 8px;
+		display: block;
+		background: #b9b1ff;
+	}
 .pre-loader .percent{
 	text-align: center;
 	font-size: 24px;

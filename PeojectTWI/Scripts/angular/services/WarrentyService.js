@@ -3,7 +3,7 @@
 
 
     $scope.SearchWarrentyList = function () {
-        debugger
+        //debugger
        // $scope.SearchWarrentyBySerial($scope.SerialNumber);
        // $scope.SearchWarrentyByContactNumber($scope.ContactNumber);
 
@@ -63,7 +63,7 @@
 
 
     $scope.ShowExpiredDetailsBtn = function (x) {
-        debugger
+        //debugger
         if (x === 'Expired') {
             $scope.showExpiredDetails = true;
         } else {

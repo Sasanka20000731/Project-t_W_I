@@ -24,6 +24,7 @@
         $http.get('/Home/loadDashbordChart')
             .then(function (response) {
                 var data = response.data;
+                //debugger
                                // Extracting data for the chart
                 var ticketCounts = data.map(function (item) {
                     return item.TicketCount;
