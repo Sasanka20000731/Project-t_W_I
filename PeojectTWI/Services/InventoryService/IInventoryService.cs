@@ -10,7 +10,7 @@ namespace PeojectTWI.Services.InventoryService
 {
     interface IInventoryService
     {
-        int insertProductCategory( string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName);
+        int insertProductCategory( string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName, int UserId);
 
         System.Data.Entity.DbSet<tblProductCategory> viewProductCategories();
 
@@ -41,7 +41,10 @@ namespace PeojectTWI.Services.InventoryService
         List <WHmanage> ViewWareHousedata(DateTime? FromDate,DateTime? Todate);
         List<SerialItem> GetSearchSerialDetails(string SerialNumberToSearch);
 
-  
+        List<WHmanage> LoadRemainigStockbyVendor(int VendorID);
+   
+
+
 
     }
 

@@ -1790,6 +1790,7 @@
     <Content Include="Views\Report\WarrentyManagementReportForm.cshtml" />
     <Content Include="Views\Home\ViewProfile.cshtml" />
     <Content Include="Views\Home\ViewAudiTrail.cshtml" />
+    <Content Include="Views\Inventory\RemainingStock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

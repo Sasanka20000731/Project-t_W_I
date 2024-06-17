@@ -10,6 +10,7 @@ namespace PeojectTWI.Models
         public string BrandName { get; set; }
         public string VendorName { get; set; }
         public string VendorContact { get; set; }
+        public string VendorAddress { get; set; }
         public string VendorEmail { get; set; }
         public int PerchesedCount { get; set; }
         public decimal UnitPrice { get; set; }
@@ -18,5 +19,6 @@ namespace PeojectTWI.Models
         public int NotInAnyStore { get; set; }
         public int RemainingCount { get; set; }
         public string ProductName { get; set; }
+        public Nullable<DateTime> CreatedDate { get; set; }
     }
 }

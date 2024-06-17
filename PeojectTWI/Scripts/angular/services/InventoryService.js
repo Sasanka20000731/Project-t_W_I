@@ -263,5 +263,20 @@
         $scope.SearchedItemDetails = undefined;
     }
 
+    $scope.LoadRemainigStock = function () {
+        debugger
+        $http.get('/Inventory/LoadRemainigStock')
+            .success(function (response) {
+             debugger
+
+            })
+            .error(function (xhr) {
+                alertify.success("Error !!!", 3000);
+                console.log(xhr.error);
+            })
+
+    }
+
+
 });
 
