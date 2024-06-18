@@ -349,10 +349,9 @@ namespace PeojectTWI.Controllers
 
         public JsonResult LoadRemainigStock()
         {
-
+            int a = _inventoryService.LoadVendorStock(Convert.ToInt32(Session["LoggedUserID"]));
             var result = _inventoryService.LoadRemainigStockbyVendor(Convert.ToInt32(Session["LoggedUserID"]));
             return Json(result, JsonRequestBehavior.AllowGet);
-
         }
 
 

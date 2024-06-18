@@ -345,7 +345,35 @@ namespace PeojectTWI.Services.InventoryService
         }
 
 
+        public int LoadVendorStock(int VendorID)
+        {
 
+            var sql = "SELECT A.BrandName,A.ProductName, A.VendorName, A.VendorContact, A.VendorEmail,B.perchesedCount,B.unitPrice, (b.perchesedCount * b.unitPrice),(select count(ToTheStore) from tblInventoryData where ToTheStore = 1 and ProductCategoryId = a.ProductID and MasterId = b.mStoreId ), (select count(ToTheOutside) from tblInventoryData where ToTheOutside = 1 and ProductCategoryId = a.ProductID and MasterId = b.mStoreId ), (B.perchesedCount - ((select COUNT(ToTheOutside) from tblInventoryData where ToTheOutside = 1 AND ProductCategoryId = a.ProductID and MasterId = b.mStoreId)+(select COUNT(ToTheStore) from tblInventoryData where ToTheStore = 1 and ProductCategoryId = a.ProductID and MasterId = b.mStoreId))) FROM tblProductCategories A LEFT JOIN tblMasterStore B ON A.ProductID = B.ProductId  LEFT JOIN tblInventoryData C ON B.mStoreId = C.MasterId And B.ProductId = A.ProductID WHERE A.ProductID = 2013";
+   
+
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable1 = new DataTable();
+
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+  
+                    context.Database.Connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        DataTable1.Load(reader);
+                    }
+                }
+
+                
+            }
+
+            return 1;
+
+
+        }
 
 
 
