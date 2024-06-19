@@ -6,40 +6,10 @@
 
 <h2>RemainingStock</h2>
 
-<div class="form-horizontal" ng-app="myapp" ng-controller="MyController" ng-init="LoadRemainigStock()" style="margin-bottom:100px;">
+<div class="form-horizontal" ng-app="myapp" ng-controller="MyController" ng-init="LoadStockData()" style="margin-bottom:100px;">
 
 
-    <div class="form-group">
-        <label for="VendorName" class="col-md-2 control-label">Vendor Name</label>
-        <div class="col-md-10">
-            <input type="text" id="VendorName" name="VendorName" ng-model="VendorName" class="form-control" required />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="ProductName" class="col-md-2 control-label">Product Name</label>
-        <div class="col-md-10">
-            <input type="text" id="ProductName" name="ProductName" ng-model="ProductName" class="form-control" required />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="BrandName" class="col-md-2 control-label">Brand Name</label>
-        <div class="col-md-10">
-            <input type="text" id="BrandName" name="BrandName" ng-model="BrandName" class="form-control" required />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="VendorContact" class="col-md-2 control-label">Contact No</label>
-        <div class="col-md-10">
-            <input type="text" id="VendorContact" name="VendorContact" ng-model="VendorContact" class="form-control" required />
-        </div>
-        <div class="col-md-10">
-            <input type="text" id="VendorContact" name="VendorContact" ng-model="VendorContact" class="form-control" required />
-        </div>
-    </div>
-
+   
     <div class="wrapper">
 
 
@@ -55,12 +25,12 @@
                         <div class="row g-2">
 
                             <div class="mb-3 col-md-6">
-                                <h1>gfgfgf</h1>
+                                <h1>Brand : {{BrandName}}</h1>
 
 
                             </div>
                             <div class="mb-3 col-md-6">
-                                <h1>gfgfgf</h1>
+                                <h1>Product : {{ProductName}}</h1>
                             </div>
                         </div>
                         <div class="card">
@@ -81,7 +51,7 @@
                                                             <label for="example-palaceholder" class="form-label">Vender Name:</label>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
-                                                            <label for="example-palaceholder" class="form-label">Saaaaaaa</label>
+                                                            <label for="example-palaceholder" class="form-label">{{VendorName}}</label>
 
                                                         </div>
                                                     </div>
@@ -89,10 +59,10 @@
                                                 <div class="mb-3 col-md-6">
                                                     <div class="row g-2">
                                                         <div class="mb-1 col-md-3">
-                                                            <label for="example-palaceholder" class="form-label">Vender Name:</label>
+                                                            <label for="example-palaceholder" class="form-label">Vender Contact:</label>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
-                                                            <label for="example-palaceholder" class="form-label">Saaaaaaa</label>
+                                                            <label for="example-palaceholder" class="form-label">{{VendorContact}}</label>
 
                                                         </div>
                                                     </div>
@@ -103,10 +73,10 @@
                                                 <div class="mb-3 col-md-6">
                                                     <div class="row g-2">
                                                         <div class="mb-1 col-md-3">
-                                                            <label for="example-palaceholder" class="form-label">Vender Name:</label>
+                                                            <label for="example-palaceholder" class="form-label">Vender Address</label>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
-                                                            <label for="example-palaceholder" class="form-label">Saaaaaaa</label>
+                                                            <label for="example-palaceholder" class="form-label">{{VendorAddress}}</label>
 
                                                         </div>
                                                     </div>
@@ -114,17 +84,17 @@
                                                 <div class="mb-3 col-md-6">
                                                     <div class="row g-2">
                                                         <div class="mb-1 col-md-3">
-                                                            <label for="example-palaceholder" class="form-label">Vender Name:</label>
+                                                            <label for="example-palaceholder" class="form-label">Registered Date</label>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
-                                                            <label for="example-palaceholder" class="form-label">Saaaaaaa</label>
+                                                            <label for="example-palaceholder" class="form-label">{{RegisteredDate}}</label>
 
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="row g-2">
+                                            @*<div class="row g-2">
 
                                                 <div class="mb-3 col-md-6">
                                                     <div class="row g-2">
@@ -148,28 +118,22 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>*@
 
 
 
 
 
                                         </form>
-                                    </div> <!-- end preview-->
+                                    </div> 
+                                </div>
 
-
-
-                                </div> <!-- end tab-content-->
-
-                            </div> <!-- end card-body -->
-                        </div> <!-- end card-->
-                    </div> <!-- end col -->
+                            </div>
+                        </div> 
+                    </div>
                 </div>
-
-
-
-
             </div>
+
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -181,25 +145,22 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Order ID</th>
-                                            <th>Product ID</th>
-                                            <th>Buyer Name</th>
-                                            <th>Quantity</th>
-
-
-
-
+                                            <th>Brand Name </th>
+                                            <th>Product Name</th>
+                                            <th>Vendot Name</th>
+                                            <th>PerchesedCount</th>
+                                            <th>RemainingCount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <td>No.</td>
-                                    <td>No.</td>
-                                    <td>No.</td>
-                                    <td>No.</td>
-                                    <td>No.</td>
-
-
-
+                                        <tr ng-repeat="item in Result">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{ item.BrandName }}</td>
+                                            <td>{{ item.ProductName }}</td>
+                                            <td>{{ item.VendorName }}</td>
+                                            <td>{{ item.PerchesedCount }}</td>
+                                            <td>{{ item.RemainingCount }}</td>
+                                        </tr>
 
                                     </tbody>
                                 </table>
@@ -258,9 +219,10 @@
         box-shadow: 0px 0 0 #2e4f5e inset;
     }
 
-        .custom-button:hover {
-            box-shadow: 1200Px 0 0 #2e4f5e inset;
-        }
+    .custom-button:hover {
+        box-shadow: 1200Px 0 0 #2e4f5e inset;
+    }
+
 </style>
 
 

@@ -44,7 +44,7 @@ namespace PeojectTWI.Services.InventoryService
 
         List<WHmanage> LoadRemainigStockbyVendor(int VendorID);
 
-        int LoadVendorStock(int VendorID);
+        List<WHmanage> LoadVendorStock(int VendorID);
 
 
 
