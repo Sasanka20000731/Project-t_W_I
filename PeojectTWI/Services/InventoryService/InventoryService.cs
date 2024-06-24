@@ -345,7 +345,59 @@ namespace PeojectTWI.Services.InventoryService
         }
 
 
+        public List<WHmanage> LoadVendorStock(int VendorID)
+        {
 
+            var sql = "SELECT A.BrandName,A.ProductName, A.VendorName, A.VendorContact, A.VendorEmail,B.perchesedCount,B.unitPrice, (b.perchesedCount * b.unitPrice) AS TotalCost ,(select count(ToTheStore) from tblInventoryData where ToTheStore = 1 and ProductCategoryId = a.ProductID and MasterId = b.mStoreId ) AS InSaleInventory , (select count(ToTheOutside) from tblInventoryData where ToTheOutside = 1 and ProductCategoryId = a.ProductID and MasterId = b.mStoreId ) AS NotInAnyStore, (B.perchesedCount - ((select COUNT(ToTheOutside) from tblInventoryData where ToTheOutside = 1 AND ProductCategoryId = a.ProductID and MasterId = b.mStoreId)+(select COUNT(ToTheStore) from tblInventoryData where ToTheStore = 1 and ProductCategoryId = a.ProductID and MasterId = b.mStoreId))) AS RemainingCount FROM tblProductCategories A LEFT JOIN tblMasterStore B ON A.ProductID = B.ProductId  LEFT JOIN tblInventoryData C ON B.mStoreId = C.MasterId And B.ProductId = A.ProductID WHERE A.UserID = " + VendorID+"";
+
+            List<WHmanage> whmanageList = new List<WHmanage>();
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable1 = new DataTable();
+
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+  
+                    context.Database.Connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        DataTable1.Load(reader);
+                    }
+                }
+                foreach (DataRow row in DataTable1.Rows)
+                {
+                    WHmanage wHmanage = new WHmanage
+                    {
+                        BrandName = row["BrandName"].ToString(),
+                        ProductName = row["ProductName"].ToString(),
+                        VendorName = row["VendorName"].ToString(),
+                        VendorContact = row["VendorContact"].ToString(),
+                        VendorEmail = row["VendorEmail"].ToString(),
+                        PerchesedCount = row["PerchesedCount"] == DBNull.Value ? 0 : Convert.ToInt32(row["PerchesedCount"]),
+                        UnitPrice = row["UnitPrice"] == DBNull.Value ? 0 :  Convert.ToDecimal(row["UnitPrice"]),
+                        TotalCost = row["TotalCost"] == DBNull.Value ? 0 : Convert.ToDecimal(row["TotalCost"]),
+                        InSaleInventory = Convert.ToInt32(row["InSaleInventory"]),
+                        NotInAnyStore = Convert.ToInt32(row["NotInAnyStore"]),
+                        RemainingCount = row["RemainingCount"] == DBNull.Value ? 0 :  Convert.ToInt32(row["RemainingCount"]),
+                       
+                    };
+
+                    whmanageList.Add(wHmanage);
+                }
+
+            }
+
+
+
+            //             COL1 = row["COL1"] == DBNull.Value ? string.Empty : row["COL1"].ToString(),
+
+
+            return whmanageList;
+
+
+        }
 
 
 

@@ -277,15 +277,9 @@ namespace PeojectTWI.Controllers
 
         public JsonResult GetProductCategoryValues()
         {
-
             var ProdcutCategory = _inventoryService.GetProductCategoryValues();
             return Json(ProdcutCategory, JsonRequestBehavior.AllowGet);
         }
-        //public JsonResult GetmasterStoreValues()
-        //{
-        //    var MasterStore = _inventoryService.GetmasterStoreValues();
-        //    return Json(MasterStore, JsonRequestBehavior.AllowGet);
-        //}
 
         public JsonResult CheckExist(int dataType, int ProductCategory, string SerialNo)
         {
@@ -349,12 +343,15 @@ namespace PeojectTWI.Controllers
 
         public JsonResult LoadRemainigStock()
         {
-
             var result = _inventoryService.LoadRemainigStockbyVendor(Convert.ToInt32(Session["LoggedUserID"]));
             return Json(result, JsonRequestBehavior.AllowGet);
-
         }
 
+        public JsonResult LoadVendorStockDetails()
+        {
+            var result = _inventoryService.LoadVendorStock(Convert.ToInt32(Session["LoggedUserID"]));
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
 
 

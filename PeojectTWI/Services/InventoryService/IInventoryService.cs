@@ -2,6 +2,7 @@
 using PeojectTWI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,8 @@ namespace PeojectTWI.Services.InventoryService
         List<SerialItem> GetSearchSerialDetails(string SerialNumberToSearch);
 
         List<WHmanage> LoadRemainigStockbyVendor(int VendorID);
-   
+
+        List<WHmanage> LoadVendorStock(int VendorID);
 
 
 

@@ -198,7 +198,7 @@
     }
 
     $scope.UpdateProductCategory = function () {
-        debugger
+
         if (($("#ProductID").val() != null && $scope.BrandName != null && $scope.VendorName != null && $scope.VendorContact != null && $scope.VendorEmail != null && $scope.VendorAddress != null  && $scope.ProductName != null)
             || ($("#ProductID").val() != undefined && $scope.BrandName != undefined && $scope.VendorName != undefined && $scope.VendorContact != undefined && $scope.VendorEmail != undefined && $scope.VendorAddress != undefined && $scope.ProductName != undefined)) {
 
@@ -263,11 +263,21 @@
         $scope.SearchedItemDetails = undefined;
     }
 
+    $scope.LoadStockData = function () {
+        $scope.LoadRemainigStock();
+        $scope.LoadVendorStockDetails();
+    }
+
     $scope.LoadRemainigStock = function () {
-        debugger
+        
         $http.get('/Inventory/LoadRemainigStock')
             .success(function (response) {
-             debugger
+                $scope.VendorName = response[0].BrandName;
+                $scope.ProductName = response[0].ProductName;
+                $scope.BrandName = response[0].BrandName;
+                $scope.VendorAddress = response[0].VendorAddress;
+                $scope.RegisteredDate = response[0].CreatedDate;
+                $scope.VendorContact = response[0].VendorContact;
 
             })
             .error(function (xhr) {
@@ -276,6 +286,20 @@
             })
 
     }
+
+    $scope.LoadVendorStockDetails = function () {
+
+        $http.get('/Inventory/LoadVendorStockDetails')
+            .success(function (response) {
+                $scope.Result = response;
+            })
+            .error(function (xhr) {
+                alertify.success("Error !!!", 3000);
+                console.log(xhr.error);
+            })
+
+    }
+
 
 
 });

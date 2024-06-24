@@ -1479,7 +1479,7 @@ G:\Personal\20240617\Project-t_W_I\PeojectTWI\bin\System.Web.WebPages.Razor.xml
 G:\Personal\20240617\Project-t_W_I\PeojectTWI\bin\Newtonsoft.Json.xml
 G:\Personal\20240617\Project-t_W_I\PeojectTWI\bin\Antlr3.Runtime.pdb
 G:\Personal\20240617\Project-t_W_I\PeojectTWI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+G:\Personal\20240617\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.csprojAssemblyReference.cache
 G:\Personal\20240617\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.csproj.CopyComplete
 G:\Personal\20240617\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.dll
 G:\Personal\20240617\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.pdb
-G:\Personal\20240617\Project-t_W_I\PeojectTWI\obj\Debug\PeojectTWI.csprojAssemblyReference.cache
