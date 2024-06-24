@@ -126,6 +126,7 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="Active" Type="bit" />
     <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserID" Type="int" />
   </EntityType>
   <EntityType Name="tblReportCategory">
     <Key>
@@ -356,6 +357,18 @@
       </Principal>
       <Dependent Role="tblMasterWarrenty">
         <PropertyRef Name="inventoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblProductCategories_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblProductCategories" Type="Self.tblProductCategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblProductCategories">
+        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -610,6 +623,10 @@
     <AssociationSet Name="FK_tblMasterWarrenty_tblInventoryData" Association="Self.FK_tblMasterWarrenty_tblInventoryData">
       <End Role="tblInventoryData" EntitySet="tblInventoryData" />
       <End Role="tblMasterWarrenty" EntitySet="tblMasterWarrenty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblProductCategories_tblUser" Association="Self.FK_tblProductCategories_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblProductCategories" EntitySet="tblProductCategories" />
     </AssociationSet>
     <AssociationSet Name="FK_tblReportType_tblReportCategory" Association="Self.FK_tblReportType_tblReportCategory">
       <End Role="tblReportCategory" EntitySet="tblReportCategory" />

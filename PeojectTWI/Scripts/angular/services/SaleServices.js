@@ -278,7 +278,7 @@
         $scope.saleDate = undefined;
         $scope.customerName = undefined;
         $scope.customerNumber = undefined;
-
+        $scope.unitPrice = undefined;
     }
 
     $scope.validateMobileNumber = function () {

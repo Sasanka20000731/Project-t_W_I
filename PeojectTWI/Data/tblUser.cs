@@ -17,10 +17,11 @@ namespace PeojectTWI.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblUser()
         {
+            this.tblAuditTrials = new HashSet<tblAuditTrial>();
             this.tblInventoryHistories = new HashSet<tblInventoryHistory>();
+            this.tblProductCategories = new HashSet<tblProductCategory>();
             this.tblTicketTaskAssigns = new HashSet<tblTicketTaskAssign>();
             this.tblTicketTaskAssigns1 = new HashSet<tblTicketTaskAssign>();
-            this.tblAuditTrials = new HashSet<tblAuditTrial>();
         }
     
         public int UserId { get; set; }
@@ -37,14 +38,16 @@ namespace PeojectTWI.Data
         public Nullable<int> AssignedTicketSequnceGroup { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblAuditTrial> tblAuditTrials { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblInventoryHistory> tblInventoryHistories { get; set; }
         public virtual tblMasterTicketSequnce tblMasterTicketSequnce { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblProductCategory> tblProductCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblTicketTaskAssign> tblTicketTaskAssigns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblTicketTaskAssign> tblTicketTaskAssigns1 { get; set; }
         public virtual tblUserlLevel tblUserlLevel { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblAuditTrial> tblAuditTrials { get; set; }
     }
 }

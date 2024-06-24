@@ -314,6 +314,28 @@ namespace PeojectTWI.Services.UserService
 
         }
 
+        public int getVendorID(string VendorName)
+        {
+
+            var result = (from a in db.tblUsers
+                          where a.UserName == VendorName && a.Active ==true && a.UserLevel == 6
+                          select a).FirstOrDefault();
+
+            return result.UserId;
+
+        }
+
+        public int getCustomerID(string Customer)
+        {
+
+            var result = (from a in db.tblUsers
+                          where a.UserName == Customer && a.Active == true && a.UserLevel == 7
+                          select a).FirstOrDefault();
+
+            return result.UserId;
+
+        }
+
 
     }
 }

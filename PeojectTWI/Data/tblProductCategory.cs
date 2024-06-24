@@ -29,8 +29,10 @@ namespace PeojectTWI.Data
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<bool> Active { get; set; }
         public string ProductName { get; set; }
+        public Nullable<int> UserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMasterStore> tblMasterStores { get; set; }
+        public virtual tblUser tblUser { get; set; }
     }
 }

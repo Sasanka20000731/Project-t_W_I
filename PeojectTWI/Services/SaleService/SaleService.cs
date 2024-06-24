@@ -33,7 +33,7 @@ namespace PeojectTWI.Services.SaleService
             return result;
         }
 
-        public int saveSaleItem(string cName, string cContact, string cEmail, string cAddress, string SerialNo, decimal Discount, decimal Price, int Warrenty)
+        public int saveSaleItem(string cName, string cContact, string cEmail, string cAddress, string SerialNo, decimal Discount, decimal Price, int Warrenty, int UserID)
         {
 
 
@@ -52,6 +52,9 @@ namespace PeojectTWI.Services.SaleService
                     cmd.Parameters.Add(new SqlParameter("@@Discount", Discount));
                     cmd.Parameters.Add(new SqlParameter("@@Price", Price));
                     cmd.Parameters.Add(new SqlParameter("@@Warrenty", Warrenty));
+                    cmd.Parameters.Add(new SqlParameter("@@UserId", UserID));
+
+
 
                     context.Database.Connection.Open();
                     var result = cmd.ExecuteScalar();

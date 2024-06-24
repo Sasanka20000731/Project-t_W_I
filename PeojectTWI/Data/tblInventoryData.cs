@@ -19,8 +19,8 @@ namespace PeojectTWI.Data
         {
             this.tblInventoryHistories = new HashSet<tblInventoryHistory>();
             this.tblMasterWarrenties = new HashSet<tblMasterWarrenty>();
-            this.tblTickets = new HashSet<tblTicket>();
             this.tblSalesDetails = new HashSet<tblSalesDetail>();
+            this.tblTickets = new HashSet<tblTicket>();
         }
     
         public int InventoryID { get; set; }
@@ -38,8 +38,8 @@ namespace PeojectTWI.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMasterWarrenty> tblMasterWarrenties { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblTicket> tblTickets { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblSalesDetail> tblSalesDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblTicket> tblTickets { get; set; }
     }
 }

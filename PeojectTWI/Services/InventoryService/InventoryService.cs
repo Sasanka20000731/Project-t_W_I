@@ -14,7 +14,7 @@ namespace PeojectTWI.Services.InventoryService
     public class InventoryService : IInventoryService
     {
         ProjectDBEntities db = new ProjectDBEntities();
-        public int insertProductCategory(string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName)
+        public int insertProductCategory(string brandName, string vendorName, string vendorContact, string vendorEmail, string vendorAddress, string productName, int UserId)
         {
             try
             {
@@ -27,6 +27,7 @@ namespace PeojectTWI.Services.InventoryService
                 tpc.ProductName = productName;
                 tpc.CreateDate = DateTime.Now;
                 tpc.Active = true;
+                tpc.UserID = UserId;
                 db.tblProductCategories.Add(tpc);
                 db.SaveChanges();
                 return 1;
@@ -323,6 +324,34 @@ namespace PeojectTWI.Services.InventoryService
             return result;
 
         }
+
+        public List<WHmanage> LoadRemainigStockbyVendor(int VendorID)
+        {
+
+            var result = (from a in db.tblProductCategories
+                          where a.UserID == VendorID
+                          select new WHmanage
+                          {
+                              BrandName = a.BrandName,
+                              ProductName = a.ProductName,
+                              VendorName = a.VendorName,
+                              VendorContact = a.VendorContact,
+                              VendorAddress = a.VendorAddress,
+                              CreatedDate = a.CreateDate
+                          }).ToList();
+
+            return result;
+
+        }
+
+
+
+
+
+
+
+
+
 
         //public List<Branches> GetUnitBranch()
         //{

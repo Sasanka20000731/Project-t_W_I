@@ -215,7 +215,7 @@ namespace PeojectTWI.Services.TicketService
                     {
                         TicketId = Convert.ToInt32(row["TicketID"]),
                         TicketDiscription = row["TicketDescription"].ToString(),
-                        AssignDate = Convert.ToDateTime(row["AssignDate"]),
+                        AssignDateStr = Convert.ToString(row["AssignDate"]),
                         CurrentStatus = Convert.ToString(row["CurrentStatus"])
                     };
                     PendingTickets.Add(ticket);

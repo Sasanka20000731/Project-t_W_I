@@ -66,11 +66,15 @@ namespace PeojectTWI.Controllers
 
         public JsonResult SaveSaleItem(string cName, string cContact, string CustomerEmail, string cAddress, string SerialNo, decimal Discount , decimal Price, int Warrenty)
         {
-           
+
+            string[] Names = cName.Split(' ');
+            var user = _userService.addUser(Names[0].ToString(), Names[0].ToString(), Names[1].ToString(), 7,cContact, CustomerEmail, null);
+            int UserId = _userService.getCustomerID(Names[0].ToString());
+
+
+
             int warranty = (Warrenty == 1) ? 12 : (Warrenty == 2) ? 24 : (Warrenty == 3) ? 36 : 0;
-
-
-            var result = _saleService.saveSaleItem(cName,cContact, CustomerEmail, cAddress,SerialNo,Discount,Price, warranty);
+            var result = _saleService.saveSaleItem(cName,cContact, CustomerEmail, cAddress,SerialNo,Discount,Price, warranty,UserId);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

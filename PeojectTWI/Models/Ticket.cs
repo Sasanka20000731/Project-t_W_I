@@ -27,6 +27,7 @@ namespace PeojectTWI.Models
         public Nullable<System.DateTime> OpenedDate { get; set; }
         public Nullable<System.DateTime> ClosedDate { get; set; }
         public Nullable<System.DateTime> AssignDate { get; set; }
+        public string AssignDateStr { get; set; }
 
         public ticketComment TicketComment { get; set; }
         public SequenceList SequenceLists { get; set; }

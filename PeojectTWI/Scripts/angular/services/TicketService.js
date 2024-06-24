@@ -92,7 +92,12 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
         $http.get('/Ticket/AssignTicketToHandler',data)
             .success(function (response) {
                 if (response == 1) {
+                 debugger
                     alertify.success('Successfully Assigned', 3000);
+
+                    var extendUrl = '/Ticket/AssignTicket';
+                    window.location.href = extendUrl;
+
                 } else {
                     alertify.error('Error', 5000);
                 }
@@ -105,6 +110,7 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
     $scope.LogadPendingTickets = function () {
         $http.get('/Ticket/LogadPendingTickets')
             .success(function (response) {
+                debugger
                 $scope.PendingTicketResult = response;
             })
             .error(function (xhr) {

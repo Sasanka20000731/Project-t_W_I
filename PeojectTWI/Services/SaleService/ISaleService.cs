@@ -14,7 +14,7 @@ namespace PeojectTWI.Services.SaleService
     {
         List<saleItem> GetItemDetailsTosale(string SerialNo);
 
-        int saveSaleItem(string cName, string cContact, string cEmail, string cAddress, string SerialNo, decimal Discount, decimal Price, int Warrenty);
+        int saveSaleItem(string cName, string cContact, string cEmail, string cAddress, string SerialNo, decimal Discount, decimal Price, int Warrenty, int UserID);
 
         List<saleItem> GetSoldItemData(string SerialNo = null, Nullable<int> InvoiceNo = null, string ContactNo = null);
         List<saleItem> GetSelectedSoldItemData(string SerialNo);
