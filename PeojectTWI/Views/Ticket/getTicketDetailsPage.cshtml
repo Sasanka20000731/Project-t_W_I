@@ -19,65 +19,66 @@
             </div>
 
             <div class="row  form-group text-left">
-                <div class="col-3">
+                <div class="col-5">
                     <span class="pr-15 ">Ticket Number</span>
                 </div>
-                <div class="col-9">
+
+                <div class="col-7">
                     <strong>: {{ TicketNumber }} </strong>
                 </div>
 
             </div>
 
             <div class="row  form-group text-left">
-                <div class="col-3">
+                <div class="col-5">
                     <span class="pr-15">Ticket Date </span>
                 </div>
-                <div class="col-9">
+                <div class="col-7">
                     <strong>: {{TicketDate}} </strong>
                 </div>
             </div>
 
             <div class="row  form-group text-left">
-                <div class="col-3">
+                <div class="col-5">
                     <span class="pr-15">Ticket Description </span>
                 </div>
-                <div class="col-9">
+                <div class="col-7">
                     <strong>: {{TicketDescription}} </strong>
                 </div>
             </div>
 
             <div class="row  form-group text-left">
-                <div class="col-3">
+                <div class="col-5">
                     <span class="pr-15">Current Level</span>
                 </div>
-                <div class="col-9">
+                <div class="col-7">
                     <strong>: {{CurrentSequence}} </strong>
                 </div>
             </div>
 
             <div class="row  form-group text-left">
-                <div class="col-3">
+                <div class="col-5">
                     <span class="pr-15">Assigned From</span>
                 </div>
-                <div class="col-9">
+                <div class="col-7">
                     <strong>: {{AssignedFrom}} </strong>
                 </div>
             </div>
 
             <div class="row  form-group text-left">
-                <div class="col-3">
+                <div class="col-5">
                     <span class="pr-15">Serial Number</span>
                 </div>
-                <div class="col-9">
+                <div class="col-7">
                     <strong>: {{SerialNumber}} </strong>
                 </div>
             </div>
 
             <div class="row  form-group text-left">
-                <div class="col-3">
+                <div class="col-5">
                     <span class="pr-15">Ticket Current Status</span>
                 </div>
-                <div class="col-9">
+                <div class="col-7">
                     <strong>: {{TicketStatus}} </strong>
                 </div>
             </div>
@@ -90,76 +91,76 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12 form-group">
+                <div class="col-md-12 form-group" ng-show="showAccept">
                     <button class="custom-button" ng-click="ManageTicket(2)">Accept</button>
                 </div>
             </div>
 
+
             <div class="row">
-                <div class="col-md-5">
-                    <button class="custom-button" ng-click="ManageTicket(3)">Submit</button>
-                </div>
-                <div class="col-md-7">
-                    <select id="dropNextSubmitUsers" name="dropNextSubmitUsers" class="form-control" ng-model="dropNextSubmitUsers" style=" width:100%; border-radius: 10px;">
+
+                <div class="col-md-6" ng-show="showDropNextLevel">
+                    <select id="dropNextSubmitUsers" name="dropNextSubmitUsers" class="form-control" ng-model="dropNextSubmitUsers" style=" width:100%; border-radius: 10px;  height: 38px; margin: 5px;">
                         <option value="">Select Next Level User</option>
                         <option ng-repeat="item in nextUserList" ng-if="item.nextUserList !== null" value="{{item.nextUserList.NextLevelUserId}}">{{item.nextUserList.NextLevelUserName}}</option>
                     </select>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 form-group">
+                <div class="col-md-3" ng-show="showSubmit">
+                    <button class="custom-button" ng-click="ManageTicket(3)">Submit</button>
+                </div>
+                <div class="col-md-3 form-group" ng-show="showReject">
                     <button class="custom-button" ng-click="manageTicket(4)">Reject</button>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <input type="text" style=" border-radius: 10px; margin:10px" class="form-control" placeholder="Comment" ng-model="manageTicketComment" />
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-
-
-
-
-    <div class="row-cols-md-12 row-cols-lg-12 row-cols-sm-12 containerstyle mt-0" style="padding-top: 20px; padding-bottom: 20px;">
-
-        <div class="col-md-12 col-sm-12 collg-12 fs-l pb-5">
-            <div class="col-lg-6 col-md-4 col-sm-12 paddingH-0">
-                <strong>  Sequence Details</strong>
-
 
             </div>
-        </div>
 
-        <div class="col-md-12 col-lg-12 overlay">
-            <div class="col-md-12 col-lg-12 col-sm-12 containerstyle">
-                <div class="col-md-12 col-sm-12">
-                    <div class="col-md-12 col-sm-12 col-xs-12 progressbar">
-                        <ul ng-repeat="data in SequenceData" class="progressbar" id="progressbarNarration">
-                            <li ng-class="{ 'bold-item' : CurrentSequnceIndex>
-                                data.SequenceLists.SequenceIndexId,
-                                'Strong-item': CurrentSequnceIndex === data.SequenceLists.SequenceIndexId,
-                                'normal-item': !(CurrentSequnceIndex > data.SequenceLists.SequenceIndexId) && !(CurrentSequence === data.SequenceLists.SequenceName)
-                                }">
-                                {{data.SequenceLists.SequenceName}}
-                            </li>
-                        </ul>
+
+            <div class="row-cols-md-12 row-cols-lg-12 row-cols-sm-12 containerstyle mt-0" style="padding-top: 20px; padding-bottom: 20px;">
+
+                <div class="col-md-12 col-sm-12 collg-12 fs-l pb-5">
+                    <div class="col-lg-12 col-md-12 col-sm-12 paddingH-0 form-group bb-color">
+                        <strong>  Sequence Details</strong>
 
 
                     </div>
-
                 </div>
 
+                <div class="col-md-12 col-lg-12 overlay">
+                    <div class="col-md-12 col-lg-12 col-sm-12 containerstyle">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12 progressbar">
+
+                                <ul ng-repeat="data in SequenceData" class="progressbar"  id="progressbarNarration">
+                                    
+                                    <li ng-class="{ 'bold-item' : CurrentSequnceIndex>
+                                        data.SequenceLists.SequenceIndexId,
+                                        'Strong-item': CurrentSequnceIndex === data.SequenceLists.SequenceIndexId,
+                                        'normal-item': !(CurrentSequnceIndex > data.SequenceLists.SequenceIndexId) && !(CurrentSequence === data.SequenceLists.SequenceName)
+                                        }">*
+                                        {{data.SequenceLists.SequenceName}}
+                                    </li>
+                                </ul>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
+
+
+
+
         </div>
     </div>
 
+
+
+
+
+  
     <div class="row-cols-md-12 row-cols-lg-12 row-cols-sm-12 containerstyle mt-0">
         <div class="form-group table-responsive ">
             <strong>Ticket History</strong>
@@ -191,27 +192,32 @@
     .bold-item {
         font-weight: bold;
         font-size: 18px;
+        opacity:0.3;
+        
     }
 
     .Strong-item {
         font-weight: bold;
-        font-size: 24px;
+        font-size: 18px;
     }
 
     .normal-item {
         font-size: 18px;
+        opacity:0.6;
+        font-weight: bold;
     }
 
     .custom-button {
-        height: 50px;
+        height: 38px;
         background-color: #1a2c34;
         border-radius: 10px;
+        font-size:13px;
         margin: 5px;
         float: left;
         border: 0px;
         color: #fff;
         width: 100%;
-        -webkit-transition-duration: 0.9s;
+        -webkit-transition-duration: 2.00s;
         -webkit-transition-timing-function: linear;
         box-shadow: 0px 0 0 #2e4f5e inset;
     }

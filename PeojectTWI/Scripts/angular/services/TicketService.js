@@ -110,7 +110,7 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
     $scope.LogadPendingTickets = function () {
         $http.get('/Ticket/LogadPendingTickets')
             .success(function (response) {
-                debugger
+                //debugger
                 $scope.PendingTicketResult = response;
             })
             .error(function (xhr) {
@@ -129,10 +129,9 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
                 TicketId: $("#TicketId").val()
             }
         };
-        //debugger
         $http.get('/Ticket/LoadTicketdetailsToManage', data)
             .success(function (response) {
-
+                //debugger
                 $scope.TicketNumber = response[0].TicketId;
                 $scope.TicketDescription = response[0].TicketDiscription;
                 $scope.TicketDate = response[0].TicketDate;
@@ -141,10 +140,31 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
                 $scope.AssignedFrom = response[0].AssignedFrom;
                 $scope.SerialNumber = response[0].SerialNumber;
                 $scope.TicketStatus = response[0].TicketStatus;
-               // debugger
                 $scope.TicketComment = response;
                 $scope.SequenceData = response;
+                debugger
                 $scope.nextUserList = response;
+
+                if (response[0].TicketStatus === "Pending") {
+
+                    $scope.showAccept = true;
+                    $scope.showSubmit = false;
+                    $scope.showReject = false;
+                    $scope.showDropNextLevel = false;
+                } else {
+                    $scope.showAccept = false;
+                    $scope.showSubmit = true;
+                    $scope.showReject = true;
+                    $scope.showDropNextLevel = true;
+
+                }
+
+                if ($scope.CurrentSequnceIndex === 3) {
+                    $scope.showDropNextLevel = false;
+                } else {
+                    $scope.showDropNextLevel = true;
+                }
+
 
             })
             .error(function (xhr) {
@@ -170,10 +190,17 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
                     alertify.success('Accepted', 3000);
                 } else if (response == 3) {
                     alertify.success('Successfully Submitted', 3000);
+                    var extendUrl = '/Ticket/ManageTicket';
+                    window.location.href = extendUrl;
+                    
                 } else if (response == 4) {
                     alertify.success('Successfully Rejected', 3000);
+                    var extendUrl = '/Ticket/ManageTicket';
+                    window.location.href = extendUrl;
                 } else if (response == 5) {
                     alertify.success('Successfully Closed Ticket', 3000);
+                      var extendUrl = '/Ticket/ManageTicket';
+                    window.location.href = extendUrl;
                 }else {
                     alertify.error('Error', 5000);
                 }
@@ -183,6 +210,7 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
             .error(function (xhr) {
                 console.log(xhr.error);
             })
+
 
     }
 
