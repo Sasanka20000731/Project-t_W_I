@@ -142,7 +142,7 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
                 $scope.TicketStatus = response[0].TicketStatus;
                 $scope.TicketComment = response;
                 $scope.SequenceData = response;
-                debugger
+                //debugger
                 $scope.nextUserList = response;
 
                 if (response[0].TicketStatus === "Pending") {

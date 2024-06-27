@@ -56,7 +56,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
         var fromDate = $scope.UserReportFormDate;
         var toDate = $scope.UserReportToDate;
         var reportType = $("#droReportType").val();
-        debugger
+        //debugger
         var url = '/Report/DownloadUserManagementReport?FromDate=' + fromDate.toISOString() + '&ToDate=' + toDate.toISOString() + '&ReportCategory=1&ReportType=' + reportType;
 
         window.open(url, '_blank');
