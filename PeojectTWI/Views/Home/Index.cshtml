@@ -5,85 +5,14 @@
 
 <div class="row" ng-app="myapp" ng-controller="MyController" ng-init="LoadDashbordData()">
 
-    <div class="row col-lg-12">
-        @*<div class="row">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">weekend</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-                            <h4 class="mb-0">$53k</h4>
-                        </div>
-                    </div>
-                    <hr class="dark horizontal my-0">
-                    <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than lask week</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                            <h4 class="mb-0">2,300</h4>
-                        </div>
-                    </div>
-                    <hr class="dark horizontal my-0">
-                    <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than lask month</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                            <h4 class="mb-0">3,462</h4>
-                        </div>
-                    </div>
-                    <hr class="dark horizontal my-0">
-                    <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">weekend</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Sales</p>
-                            <h4 class="mb-0">$103,430</h4>
-                        </div>
-                    </div>
-                    <hr class="dark horizontal my-0">
-                    <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-    </div>
+    
 
     <div class="row col-lg-12">
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2"  style="background-color: #b4dae8" >
-                <i class="fa fa-clock-o" aria-hidden="true" style="position:absolute;     font-size: 111px; opacity:0.2;"></i>
-                <div class="card-body"  style="position:relative">
+            <div class="card border-left-primary shadow h-100 py-2" style="background-color: #b19d80" box-shadow: 10px,11px,black,inset;>
+                <i class="fa fa-clock-o" aria-hidden="true" style="position:absolute; margin: 8%; font-size: 111px; opacity:0.2;"></i>
+                <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
@@ -96,14 +25,17 @@
                         </div>
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>
 
+
+
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2"  style="background-color: #cecece" >
-                <div class="card-body">
+            <div class="card border-left-success shadow h-100 py-2" style="background-color: #cecece">
+                <i class="fa fa-folder-open" aria-hidden="true" style="position:absolute; margin: 8%; font-size: 111px; opacity:0.2;"></i>
+                <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
@@ -121,8 +53,9 @@
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2"  style="background-color: #825899" >
-                <div class="card-body">
+            <div class="card border-left-info shadow h-100 py-2" style="background-color: #b1e76abf">
+                <i class="fa fa-window-close" aria-hidden="true" style="position:absolute; margin: 8%;  font-size: 111px; opacity:0.2;"></i>
+                <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
@@ -139,8 +72,10 @@
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2"  style="background-color:aqua">
-                <div class="card-body">
+            <div class="card border-left-warning shadow h-100 py-2" style="background-color:#ffb6fd">
+
+                <i class="fa fa-calendar" aria-hidden="true" style="position:absolute; margin: 8%; font-size: 111px; opacity:0.2;"></i>
+                <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
@@ -168,7 +103,7 @@
              
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="background-color: #f9dbff" >
+                <div class="card-body" style="background-color: #1ae71700" >
                     <div class="chart-area" ng-hide="chartLoading">
                         <canvas id="myAreaChart"></canvas>
                     </div>
