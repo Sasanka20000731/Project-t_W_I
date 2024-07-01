@@ -233,6 +233,7 @@
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\loggedUser.cs" />
     <Compile Include="Models\masterStore.cs" />
+    <Compile Include="Models\PieChartModel.cs" />
     <Compile Include="Models\productCategory.cs" />
     <Compile Include="Models\ReportList.cs" />
     <Compile Include="Models\saleItem.cs" />

@@ -5,18 +5,16 @@
 
 <div class="row" ng-app="myapp" ng-controller="MyController" ng-init="LoadDashbordData()">
 
-    
-
     <div class="row col-lg-12">
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2" style="background-color: #b19d80" box-shadow: 10px,11px,black,inset;>
+            <div class="card border-left-primary shadow h-100 py-2" style="background-image: linear-gradient(221deg, #e9decf 0%, #bb8496 100%); " box-shadow: 10px,11px,black,inset;>
                 <i class="fa fa-clock-o" aria-hidden="true" style="position:absolute; margin: 8%; font-size: 111px; opacity:0.2;"></i>
                 <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Pending Tickets
+                                <lable style="color: #2d2e54">Pending Tickets</lable>  
                             </div>
                             <div class="h2 mb-0 font-weight-bold text-gray-800">{{PendingTickets}}</div>
                         </div>
@@ -30,10 +28,8 @@
             </div>
         </div>
 
-
-
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2" style="background-color: #cecece">
+            <div class="card border-left-success shadow h-100 py-2" style="background-image: linear-gradient(120deg, #fff1e0 0%, #dcb5e6 100%);">
                 <i class="fa fa-folder-open" aria-hidden="true" style="position:absolute; margin: 8%; font-size: 111px; opacity:0.2;"></i>
                 <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
@@ -53,7 +49,7 @@
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2" style="background-color: #b1e76abf">
+            <div class="card border-left-info shadow h-100 py-2" style="background-image: linear-gradient(209deg, #8cc0d8 0%, #dfffee 100%); ">
                 <i class="fa fa-window-close" aria-hidden="true" style="position:absolute; margin: 8%;  font-size: 111px; opacity:0.2;"></i>
                 <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
@@ -72,14 +68,14 @@
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2" style="background-color:#ffb6fd">
+            <div class="card border-left-warning shadow h-100 py-2" style="background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%); ">
 
                 <i class="fa fa-calendar" aria-hidden="true" style="position:absolute; margin: 8%; font-size: 111px; opacity:0.2;"></i>
                 <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Date
+                            <div class="text-xs font-weight-bold  text-warning text-uppercase mb-1">
+                                <label style="color: #2e2958">Date</label>
                             </div>
                             <div class="h2 mb-0 font-weight-bold text-gray-800">{{CurrentDate}}</div>
                         </div>
@@ -90,20 +86,19 @@
                 </div>
             </div>
         </div>
+
     </div>
-    <div class="row col-lg-12" style="margin-bottom:1%">
-    </div>
+
+    <div class="row col-lg-12" style="margin-bottom:1%"> </div>
+
     <div class="row col-lg-12">
-        <!-- Area Chart -->
+       
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background-color: #f1b2fe"  >
-                    <h6 class="m-0 font-weight-bold text-primary">Ticket Submittion Overview</h6>
-             
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style=" background-image: linear-gradient(356deg, #E3FDF5 0%, #c7c7ee 100%);">
+                    <h6 class="m-0 font-weight-bold text-primary"><lable style="color:black">Ticket Submittion Overview</lable></h6>
                 </div>
-                <!-- Card Body -->
-                <div class="card-body" style="background-color: #1ae71700" >
+                <div class="card-body" style="background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);">
                     <div class="chart-area" ng-hide="chartLoading">
                         <canvas id="myAreaChart"></canvas>
                     </div>
@@ -115,43 +110,30 @@
             </div>
         </div>
 
-
-
-        <!-- Pie Chart -->
         <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Pending Chart</h6>
-                   
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style=" background-image: linear-gradient(356deg, #bfd4ce 0%, #f5f5dc 100%);">
+                    <h6 class="m-0 font-weight-bold text-primary"><lable style="color:black">Pending Chart</lable></h6>
                 </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> xx
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> yy
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> zz
-                        </span>
-                    </div>
+                <div class="card-body" style="background-image: linear-gradient(-225deg, #E3FDF5 0%, #e4acd9 100%);">
+                    <canvas id="myPieChart"></canvas>
                 </div>
             </div>
         </div>
 
     </div>
 
-   
 </div>
 
 <style>
+    .card .fa {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
 
+    .card:hover .fa {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
     header {
         background-color: #000000;
         color: #ffffff;
@@ -175,14 +157,12 @@
         display: inline-block;
     }
 
-     .info-box-icon {
+    .info-box-icon {
         height: 60px;
         width: 70px;
         font-size: 48px;
         line-height: 60px;
     }
-
-
 </style>
 
 <script>
@@ -203,7 +183,6 @@
     });
 
 </script>
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

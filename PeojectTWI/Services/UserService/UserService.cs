@@ -336,6 +336,32 @@ namespace PeojectTWI.Services.UserService
 
         }
 
+        public List<PieChartModel> LoadPieChartData()
+        {
+            var query = from a in db.tblTicketProjectDtls
+                        join b in db.tblMasterTicketSequnces on a.CurrentSeqence equals b.SequanceIndexID
+                        group a by b.SequnceName into g
+                        select new PieChartModel
+                        {
+                            category = g.Key,
+                            value = g.Count()
+                        };
 
+            return query.ToList();
+
+
+            //var query =  db.tblTicketProjectDtls
+            //              .GroupBy(t => t.CurrentSeqence)
+            //              .Select(g => new PieChartModel
+            //              {
+            //                  category = CurrentSeqence,
+            //                  Count = g.Count()
+            //              })
+            //              .ToList();
+
+
+
+          
+        }
     }
 }

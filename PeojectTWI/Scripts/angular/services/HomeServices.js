@@ -17,78 +17,7 @@
 
 
         $scope.LoadDashbordChartData();
-    }
-
-    $scope.LoadDashbordChartData = function () {
-        $scope.chartLoading = true; // Show loading animation
-        $http.get('/Home/loadDashbordChart')
-            .then(function (response) {
-                var data = response.data;
-                //debugger
-                               // Extracting data for the chart
-                var ticketCounts = data.map(function (item) {
-                    return item.TicketCount;
-                });
-                var ticketDates = data.map(function (item) {
-                    return item.TicketDate;
-                });
-
-                // Chart.js code to create a chart
-                var ctx = document.getElementById('myAreaChart').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ticketDates,
-                        datasets: [{
-                            label: 'Ticket Count',
-                            data: ticketCounts,
-                            backgroundColor: 'rgba(78, 115, 223, 0.05)',
-                            borderColor: 'rgba(78, 115, 223, 1)',
-                            borderWidth: 1,
-                        }]
-                    },
-                    options: {
-                        maintainAspectRatio: false,
-                        scales: {
-                            xAxes: [{
-                                type: 'time',
-                                time: {
-                                    unit: 'day'
-                                },
-                                distribution: 'series',
-                                ticks: {
-                                    source: 'data'
-                                }
-                            }],
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true,
-                                    callback: function (value) {
-                                        if (Number.isInteger(value)) {
-                                            return value;
-                                        }
-                                    }
-                                }
-                            }]
-                        },
-                        legend: {
-                            display: true
-                        },
-                        animation: {
-                            onComplete: function () {
-                                $scope.$apply(function () {
-                                    $scope.chartLoading = false; // Hide loading animation
-                                });
-                            }
-                        }
-                    }
-                });
-            })
-            .catch(function (error) {
-                console.log(error);
-                alertify.error("Error occurred while loading dashboard data.");
-                $scope.chartLoading = false; // Hide loading animation in case of error
-            });
+        $scope.fetchData();
     }
 
     $scope.CheckUserName = function () {
@@ -396,5 +325,156 @@
     }
 
 
+
+    $scope.LoadDashbordChartData = function () {
+        $scope.chartLoading = true; // Show loading animation
+        $http.get('/Home/loadDashbordChart')
+            .then(function (response) {
+                var data = response.data;
+                //debugger
+                // Extracting data for the chart
+                var ticketCounts = data.map(function (item) {
+                    return item.TicketCount;
+                });
+                var ticketDates = data.map(function (item) {
+                    return item.TicketDate;
+                });
+
+                // Chart.js code to create a chart
+                var ctx = document.getElementById('myAreaChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ticketDates,
+                        datasets: [{
+                            label: 'Ticket Count',
+                            data: ticketCounts,
+                            backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                            borderColor: 'rgba(78, 115, 223, 1)',
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            xAxes: [{
+                                type: 'time',
+                                time: {
+                                    unit: 'day'
+                                },
+                                distribution: 'series',
+                                ticks: {
+                                    source: 'data'
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value) {
+                                        if (Number.isInteger(value)) {
+                                            return value;
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: true
+                        },
+                        animation: {
+                            onComplete: function () {
+                                $scope.$apply(function () {
+                                    $scope.chartLoading = false; // Hide loading animation
+                                });
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+                alertify.error("Error occurred while loading dashboard data.");
+                $scope.chartLoading = false; // Hide loading animation in case of error
+            });
+    }
+
+
+    $scope.chartData = [];
+
+    // Fetch data from your API
+    $scope.fetchData = function () {
+        //debugger    
+        $http.get('/Home/GetChartData')
+            .success(function (response) {
+                //debugger
+                $scope.chartData = response;
+                $scope.renderChart();
+            });
+
+     
+
+
+    };
+    $scope.renderChart = function () {
+        //debugger;
+        $scope.chartData;
+        //debugger;
+
+       
+        var data = $scope.chartData;
+
+        // Extracting data for the pie chart
+        var pieLabels = data.map(function (item) {
+            return item.category; // Replace 'category' with the appropriate key for your labels
+        });
+        var pieData = data.map(function (item) {
+            return item.value; // Replace 'value' with the appropriate key for your data
+        });
+
+
+        // Get the context of the canvas element we want to select
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+
+        // Clear the previous chart instance if any
+        if ($scope.myPieChart) {
+            $scope.myPieChart.destroy();
+        }
+
+        // Create a new pie chart instance
+        $scope.myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: pieLabels,
+                datasets: [{
+                    data: pieData,
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'], // Add more colors as needed
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'], // Add more colors as needed
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 0, // For a pie chart, set cutoutPercentage to 0
+            }
+        });
+
+        //debugger;
+    };
+
+    // Initial data fetch
+//$scope.fetchData();
 
 });

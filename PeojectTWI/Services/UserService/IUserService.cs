@@ -26,5 +26,7 @@ namespace PeojectTWI.Services.UserService
         int getVendorID(string VendorName);
         int getCustomerID(string Customer);
 
+        List<PieChartModel> LoadPieChartData();
+
     }
 }

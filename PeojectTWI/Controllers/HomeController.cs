@@ -257,6 +257,14 @@ namespace PeojectTWI.Controllers
 
         }
 
+        public ActionResult GetChartData()
+        {
+
+            var result = _userService.LoadPieChartData();
+            
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }
