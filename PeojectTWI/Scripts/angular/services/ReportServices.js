@@ -174,11 +174,11 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
     
     $scope.DownloadTicketManagementReport = function () {
-        debugger
+        //debugger
         var fromDate = $scope.TicketReportFormDate;
         var toDate = $scope.TicketReportToDate;
         var reportType = $("#droReportType").val();
-        debugger
+        //debugger
         var url = '/Report/DownloadTicketManagementReport?FromDate=' + fromDate.toISOString() + '&ToDate=' + toDate.toISOString() + '&ReportCategory=3&ReportType=' + reportType;
 
         window.open(url, '_blank');
@@ -291,5 +291,17 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
     }
 
+
+    $scope.DownloadAudiTrialData = function () {
+
+        var FromDate= $scope.AuditTrialReportFormDate;
+        var ToDate= $scope.AuditTrialReportToDate;
+        var ReportType= $("#droReportType").val();
+        //debugger
+        var url = '/Report/DownloadAuditTrialReport?FromDate=' + FromDate.toISOString() + '&ToDate=' + ToDate.toISOString() + '&ReportType=' + ReportType;
+
+        window.open(url, '_blank');
+        
+    }
 
 });

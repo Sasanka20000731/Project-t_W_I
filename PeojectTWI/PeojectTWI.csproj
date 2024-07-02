@@ -244,6 +244,12 @@
     <Compile Include="Models\Warrenty.cs" />
     <Compile Include="Models\WHmanage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Crystal_Reports\AudiTrail.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AudiTrail.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Crystal_Reports\RptInventoryManagement.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1805,6 +1811,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Crystal_Reports\AudiTrail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AudiTrail.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Crystal_Reports\RptInventoryManagement.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptInventoryManagement.cs</LastGenOutput>
