@@ -71,7 +71,7 @@
                 })
 
         } else {
-            debugger
+            //debugger
             alertify.success("Fill User Name and Password !!!", 3000);
         }
     }
@@ -137,10 +137,10 @@
                 UserLevel: $("#droUserLevels").val()
             }
         };
-       
+
         $http.get('/Home/saveUser', data)
             .success(function (response) {
-               
+
                 if (response == 1) {
                     alertify.success('User Successfully Inserted', 3000);
                     $scope.ClearForm();
@@ -240,12 +240,12 @@
         $scope.LastNameTxtBox = undefined;
         $http.get('/Home/loadUserProfileDetails')
             .success(function (response) {
-                
+
                 $scope.UserName = response[0].UserName;
                 $scope.FullName = response[0].FirstName + ' ' + response[0].LastName;
-           
+
                 $scope.UserLevelString = response[0].UserLevelString;
-                $scope.MobileNumber= response[0].MobileNumber;
+                $scope.MobileNumber = response[0].MobileNumber;
                 $scope.Email = response[0].Email;
 
                 $scope.DOB = response[0].stringDOB;
@@ -258,11 +258,9 @@
             })
     }
 
-    $scope.ViewUserUpdateForm = function ()
-    {
+    $scope.ViewUserUpdateForm = function () {
         $scope.ShowForm = true;
     }
-
 
     $scope.UpdateUserProfile = function () {
 
@@ -295,7 +293,6 @@
 
     }
 
-
     $scope.CheckPassword = function (Password) {
 
         data = {
@@ -309,10 +306,10 @@
                 if (response === 1) {
                     debugger
 
-     
+
                 } else {
                     debugger
-                    
+
 
                 }
 
@@ -323,8 +320,6 @@
 
 
     }
-
-
 
     $scope.LoadDashbordChartData = function () {
         $scope.chartLoading = true; // Show loading animation
@@ -398,7 +393,6 @@
             });
     }
 
-
     $scope.chartData = [];
 
     // Fetch data from your API
@@ -411,16 +405,17 @@
                 $scope.renderChart();
             });
 
-     
+
 
 
     };
+
     $scope.renderChart = function () {
         //debugger;
         $scope.chartData;
         //debugger;
 
-       
+
         var data = $scope.chartData;
 
         // Extracting data for the pie chart
@@ -475,6 +470,6 @@
     };
 
     // Initial data fetch
-//$scope.fetchData();
+    //$scope.fetchData();
 
 });

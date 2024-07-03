@@ -350,17 +350,6 @@ namespace PeojectTWI.Services.UserService
             return query.ToList();
 
 
-            //var query =  db.tblTicketProjectDtls
-            //              .GroupBy(t => t.CurrentSeqence)
-            //              .Select(g => new PieChartModel
-            //              {
-            //                  category = CurrentSeqence,
-            //                  Count = g.Count()
-            //              })
-            //              .ToList();
-
-
-
           
         }
     }

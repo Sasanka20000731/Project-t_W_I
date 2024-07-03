@@ -36,6 +36,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
                     if (response && response.length !== 0) {
                         $scope.UserReport = response;
                     } else {
+                        $scope.UserReport = undefined;
                         alertify.error("No Records Available !!!", 3000);
                     }
 
@@ -61,7 +62,6 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
         window.open(url, '_blank');
     }
-
 
     $scope.LoadInventoryManagementReportData = function () {
         data = {
@@ -97,6 +97,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
                     if (response && response.length !== 0) {
                         $scope.InventoryReport = response;
                     } else {
+                        $scope.InventoryReport = undefined;
                         alertify.error("No Records Available !!!", 3000);
                     }
                 }).error(function (xhr) {
@@ -123,7 +124,6 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
         window.open(url, '_blank');
     }
-
 
     $scope.LoadTicketManagementReportData = function () {
         data = {
@@ -158,6 +158,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
                     if (response && response.length !== 0) {
                         $scope.TiketReportlist = response;
                     } else {
+                        $scope.TiketReportlist = undefined;
                         alertify.error("No Records Available !!!", 3000);
                     }
 
@@ -171,19 +172,17 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
         
 
     }
-
     
     $scope.DownloadTicketManagementReport = function () {
-        debugger
+        //debugger
         var fromDate = $scope.TicketReportFormDate;
         var toDate = $scope.TicketReportToDate;
         var reportType = $("#droReportType").val();
-        debugger
+        //debugger
         var url = '/Report/DownloadTicketManagementReport?FromDate=' + fromDate.toISOString() + '&ToDate=' + toDate.toISOString() + '&ReportCategory=3&ReportType=' + reportType;
 
         window.open(url, '_blank');
     }
-
 
     $scope.LoadWarrentyManagementReportData = function () {
         data = {
@@ -216,6 +215,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
                     if (response && response.length !== 0) {
                         $scope.WarrentyReportlist = response;
                     } else {
+                        $scope.WarrentyReportlist = undefined;
                         alertify.error("No Records Available !!!", 3000);
                     }
                 }).error(function (xhr) {
@@ -231,8 +231,6 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
     }
 
-
-    
     $scope.DewonloadWarrentyManagementReport = function () {
         //debugger
         var fromDate = $scope.WarrentyReportFormDate;
@@ -243,7 +241,6 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
         window.open(url, '_blank');
     }
-
 
     $scope.LoadAuditTrialdata = function () {
 
@@ -278,6 +275,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
                         $scope.AuditTrialtlist = response;
                         $scope.showReportTable = true;
                     } else {
+                        $scope.AuditTrialtlist = undefined;
                         alertify.error("No Records Available !!!", 3000);
                     }
                 }).error(function (xhr) {
@@ -291,5 +289,16 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
     }
 
+    $scope.DownloadAudiTrialData = function () {
+
+        var FromDate= $scope.AuditTrialReportFormDate;
+        var ToDate= $scope.AuditTrialReportToDate;
+        var ReportType= $("#droReportType").val();
+        //debugger
+        var url = '/Report/DownloadAuditTrialReport?FromDate=' + FromDate.toISOString() + '&ToDate=' + ToDate.toISOString() + '&ReportType=' + ReportType;
+
+        window.open(url, '_blank');
+        
+    }
 
 });

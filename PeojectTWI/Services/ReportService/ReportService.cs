@@ -126,7 +126,6 @@ namespace PeojectTWI.Services.ReportService
             }
             return reports;
         }
-        
         public DataSet DownloadCommonManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
             var DataSet = new DataSet("CommonDataSet");
@@ -166,11 +165,6 @@ namespace PeojectTWI.Services.ReportService
             }
             return DataSet;
         }
-
-
-
-
-
         public List<CommonReport> SearchTicketManagementReport(DateTime fromDate, DateTime toDate, int reportCategory, int reportType)
         {
             List<CommonReport> reports = new List<CommonReport>();
@@ -275,6 +269,50 @@ namespace PeojectTWI.Services.ReportService
 
         }
 
+        public DataSet DownloadAuditTrialReport(DateTime FromDate, DateTime ToDate, int ReportType)
+        {
+            DateTime todate = ToDate.AddHours(23).AddMinutes(59);
+
+            var dataList = (from a in db.tblAuditTrials
+                          join b in db.tblAuditTrialTypes on a.AuditTrialType equals b.Id
+                          join c in db.tblUsers on a.CreatedBy equals c.UserId
+                          where a.CreatedDate > FromDate && a.CreatedDate < todate && a.AuditTrialType == ReportType
+                          select new CommonReport
+                          {
+                              COL1 = b.AuditTrialType,
+                              COL2 = a.Description,
+                              COL3 = c.FirstName + " " + c.LastName,
+                              COL4 = a.CreatedDate.ToString()
+                          }).ToList();
+
+
+            DataSet AuditTrialDS = new DataSet("CommonDataSet");
+            DataTable AuditTrialTable = new DataTable("CommonDataTable");
+
+            AuditTrialTable.Columns.Add("COL1", typeof(string)).DefaultValue = null;
+            AuditTrialTable.Columns.Add("COL2", typeof(string)).DefaultValue = null;
+            AuditTrialTable.Columns.Add("COL3", typeof(string)).DefaultValue = null;
+            AuditTrialTable.Columns.Add("COL4", typeof(string)).DefaultValue = null;
+
+
+
+
+            foreach (var audit in dataList)
+            {
+                DataRow row = AuditTrialTable.NewRow();
+                row["COL1"] = audit.COL1;
+                row["COL2"] = audit.COL2;
+                row["COL3"] = audit.COL3;
+                row["COL4"] = audit.COL4;
+
+                AuditTrialTable.Rows.Add(row);
+            }
+
+            AuditTrialDS.Tables.Add(AuditTrialTable);
+            return AuditTrialDS;
+
+
+        }
 
 
     }

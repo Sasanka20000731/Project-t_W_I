@@ -195,7 +195,7 @@ namespace PeojectTWI.Controllers
 
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/pdf", "InventoryManagementReport.pdf");
+            return File(stream, "application/pdf", "Report.pdf");
 
         }
 
@@ -228,6 +228,24 @@ namespace PeojectTWI.Controllers
         {
             var result = _reportService.SearchAuditTrialReport(FromDate, ToDate, ReportType);
             return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        public ActionResult DownloadAuditTrialReport(string FromDate, string ToDate, int ReportType)
+        {
+            var AuditrailDS = _reportService.DownloadAuditTrialReport(Convert.ToDateTime(FromDate), Convert.ToDateTime(ToDate), ReportType);
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/Crystal_Reports/AudiTrail.rpt")));
+            rd.SetDataSource(AuditrailDS.Tables["CommonDataTable"]);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "AudiTrail.pdf");
 
         }
 
