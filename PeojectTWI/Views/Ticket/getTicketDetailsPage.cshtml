@@ -126,28 +126,32 @@
                 </div>
 
                 <div class="col-md-12 col-lg-12 overlay">
-                    <div class="col-md-12 col-lg-12 col-sm-12 containerstyle">
+                    <div class="col-md-6 col-lg-6 col-sm-6 containerstyle">
                         <div class="col-md-12 col-sm-12">
                             <div class="col-md-12 col-sm-12 col-xs-12 progressbar">
 
                                 <ul ng-repeat="data in SequenceData" class="progressbar"  id="progressbarNarration">
-                                    
                                     <li ng-class="{ 'bold-item' : CurrentSequnceIndex>
                                         data.SequenceLists.SequenceIndexId,
                                         'Strong-item': CurrentSequnceIndex === data.SequenceLists.SequenceIndexId,
                                         'normal-item': !(CurrentSequnceIndex > data.SequenceLists.SequenceIndexId) && !(CurrentSequence === data.SequenceLists.SequenceName)
-                                        }">*
+                                        }">
                                         {{data.SequenceLists.SequenceName}}
                                     </li>
                                 </ul>
-
 
                             </div>
 
                         </div>
 
                     </div>
+                    <div>
+                            <img src="~/Styles/vendors/images/list.png" />
+                    </div>
+
                 </div>
+               
+
             </div>
 
 

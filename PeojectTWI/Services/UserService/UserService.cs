@@ -340,6 +340,7 @@ namespace PeojectTWI.Services.UserService
         {
             var query = from a in db.tblTicketProjectDtls
                         join b in db.tblMasterTicketSequnces on a.CurrentSeqence equals b.SequanceIndexID
+                        where a.Active == 1
                         group a by b.SequnceName into g
                         select new PieChartModel
                         {

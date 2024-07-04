@@ -82,6 +82,12 @@
         window.location.href = extendUrl;
     }
 
+    $scope.forgetPassword = function () {
+        //debugger
+        var extendUrl = '/Home/ForgetPasswordPage';
+        window.location.href = extendUrl;
+    }
+
     $scope.LoadUserLevels = function () {
         //debugger
         $http.get('/Home/getUserLlevels')

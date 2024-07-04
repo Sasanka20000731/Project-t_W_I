@@ -33,8 +33,6 @@ namespace PeojectTWI.Controllers
             _inventoryService = new InventoryService();
             _warrentyService = new WarrentyService();
             _otherServices = new OtherServices();
-
-        
         }
 
         public ActionResult Login()
@@ -62,7 +60,6 @@ namespace PeojectTWI.Controllers
                 HttpContext.Session["AccessForm"] = accessForms;
                 ViewBag.AccessForms = accessForms;
 
-
                 _otherServices.InsertAuditTrial(5, "Logged In User " + UserName, Convert.ToInt32(Session["LoggedUserID"]));
                 return Json(logUser, JsonRequestBehavior.AllowGet);
             }
@@ -78,7 +75,6 @@ namespace PeojectTWI.Controllers
             Session.Clear();
             Session.Abandon();
             return RedirectToAction("Login", "Home"); // Redirect to the home page after logout
-     
         }
 
         public ActionResult Index()
@@ -88,22 +84,18 @@ namespace PeojectTWI.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-
             return View();
         }
 
         public JsonResult loadDashbordDetails()
         {
             var result = _otherServices.LoadDashbord(Convert.ToInt32(Session["LoggedUserID"]));
-
             return Json(result, JsonRequestBehavior.AllowGet);
-
         }
 
         public JsonResult loadDashbordChart()
         {
             var result = _otherServices.LoadDashbordChart();
-
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
@@ -114,9 +106,7 @@ namespace PeojectTWI.Controllers
             if (Session["LoggedUserID"] == null)
             {
                 return RedirectToAction("Login", "Home");
-
             }
-        
             _otherServices.InsertAuditTrial(4, "Load User Creation Page", Convert.ToInt32(Session["LoggedUserID"]));
             return View();
         }
@@ -129,7 +119,6 @@ namespace PeojectTWI.Controllers
 
         public JsonResult saveUser(string UserName, string FirstName, string LastName,DateTime DOB,string Email,string MobileNumber,int UserLevel)
         {
-            
             var result =   _userService.addUser(UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB);
             var zresult = CommonEmail(Email, "testingbranchuser@gmail.com", "xclczwvfajxxpzeo", "User Login", "Dear "+FirstName+" "+LastName+". Your User Name is : "+UserName+" and Password is : 123456789");
             _otherServices.InsertAuditTrial(1, "Inseted New User ("+UserName+")", Convert.ToInt32(Session["LoggedUserID"]));
@@ -142,7 +131,6 @@ namespace PeojectTWI.Controllers
             if (Session["LoggedUserID"] == null)
             {
                 return RedirectToAction("Login", "Home");
-
             }
             _otherServices.InsertAuditTrial(4, "Load View Users Page", Convert.ToInt32(Session["LoggedUserID"]));
             var user = db.tblUsers;
@@ -155,11 +143,9 @@ namespace PeojectTWI.Controllers
             if (Session["LoggedUserID"] == null)
             {
                 return RedirectToAction("Login", "Home");
-
             }
             var id = Request["uid"];
             ViewBag.UserId = id;
-
             _otherServices.InsertAuditTrial(4, "Load Update User Page", Convert.ToInt32(Session["LoggedUserID"]));
             return View();
         }
@@ -168,18 +154,13 @@ namespace PeojectTWI.Controllers
         {
             var result = _userService.getselectedUserDetails(UserId);
             return Json(result, JsonRequestBehavior.AllowGet);
-
         }
 
         public JsonResult updateUsers(string UserId, string UserName, string FirstName, string LastName, DateTime DOB,string Email, string MobileNumber, int UserLevel, bool Active)
         {
-
-
-      
             var result = _userService.UpdateUser(Convert.ToInt32(UserId), UserName, FirstName, LastName, UserLevel, MobileNumber, Email, DOB, Active);
             _otherServices.InsertAuditTrial(2, "Updated User ("+UserName+")", Convert.ToInt32(Session["LoggedUserID"]));
             return Json(result, JsonRequestBehavior.AllowGet);
-     
         }
 
         public bool CommonEmail(string toMail,string fromMail, string password,string subject,string body) 
@@ -216,7 +197,6 @@ namespace PeojectTWI.Controllers
             if (Session["LoggedUserID"] == null)
             {
                 return RedirectToAction("Login", "Home");
-
             }
             _otherServices.InsertAuditTrial(4, "View User Profile", Convert.ToInt32(Session["LoggedUserID"]));
             return View();
@@ -228,10 +208,8 @@ namespace PeojectTWI.Controllers
             if (Session["LoggedUserID"] == null)
             {
                 return RedirectToAction("Login", "Home");
-
             }
             _otherServices.InsertAuditTrial(4, "View Audit Trial Page", Convert.ToInt32(Session["LoggedUserID"]));
-
             return View();
 
         }
@@ -239,10 +217,7 @@ namespace PeojectTWI.Controllers
         public JsonResult loadUserProfileDetails()
         {
             var result = _userService.loggedUserDetails(Convert.ToInt32(Session["LoggedUserID"]));
-
             result[0].stringDOB = Convert.ToDateTime(result[0].DOB).ToString("MM/dd/yyyy");
-
-
             result[0].Password = _userService.DecryptText(result[0].Password);
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -252,19 +227,20 @@ namespace PeojectTWI.Controllers
         public JsonResult UpdateUserProfile(string FirstName, string LastName)
         {
             var result = _userService.UpdateUserProfile(Convert.ToInt32(Session["LoggedUserID"]), FirstName, LastName);
-
+            _otherServices.InsertAuditTrial(2, "Updated User Profile", Convert.ToInt32(Session["LoggedUserID"]));
             return Json(result, JsonRequestBehavior.AllowGet);
-
         }
 
         public ActionResult GetChartData()
         {
-
             var result = _userService.LoadPieChartData();
-            
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult ForgetPasswordPage()
+        {
+            return View();
+        } 
 
     }
 }

@@ -1602,6 +1602,8 @@
     <Content Include="Styles\vendors\images\layout\header-white.png" />
     <Content Include="Styles\vendors\images\layout\sidebar-dark.png" />
     <Content Include="Styles\vendors\images\layout\sidebar-white.png" />
+    <Content Include="Styles\vendors\images\list.png" />
+    <Content Include="Styles\vendors\images\list2.png" />
     <Content Include="Styles\vendors\images\login-page-img.png" />
     <Content Include="Styles\vendors\images\logo-icon 0.png" />
     <Content Include="Styles\vendors\images\logo-icon.png" />
@@ -1798,6 +1800,7 @@
     <Content Include="Views\Home\ViewProfile.cshtml" />
     <Content Include="Views\Home\ViewAudiTrail.cshtml" />
     <Content Include="Views\Inventory\RemainingStock.cshtml" />
+    <Content Include="Views\Home\ForgetPasswordPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

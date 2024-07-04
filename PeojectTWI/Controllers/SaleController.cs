@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PeojectTWI.Models;
 
 namespace PeojectTWI.Controllers
 {
@@ -23,7 +24,7 @@ namespace PeojectTWI.Controllers
         private IWarrentyService _warrentyService;
         private ISaleService _saleService;
         private IOtherServices _otherServices;
-
+        Email email = new Email();
         public SaleController()
         {
             _userService = new UserService();
@@ -71,18 +72,15 @@ namespace PeojectTWI.Controllers
             var user = _userService.addUser(Names[0].ToString(), Names[0].ToString(), Names[1].ToString(), 7,cContact, CustomerEmail, null);
             int UserId = _userService.getCustomerID(Names[0].ToString());
 
-
-
             int warranty = (Warrenty == 1) ? 12 : (Warrenty == 2) ? 24 : (Warrenty == 3) ? 36 : 0;
             var result = _saleService.saveSaleItem(cName,cContact, CustomerEmail, cAddress,SerialNo,Discount,Price, warranty,UserId);
-
+            email.SendEmail(CustomerEmail, "testingbranchuser@gmail.com", "xclczwvfajxxpzeo", "User Login", "Dear " + Names[0].ToString() + ". Your User Name is : " + Names[0].ToString() + " and Password is : 123456789");
+           
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
         public JsonResult GetSoldItemDataTable(string SerialNo = null, string InvoiceNo = null, string ContactNo = null)
         {
-          
             var result = SerialNo != null ? _saleService.GetSoldItemData(SerialNo, null, null)
                  : InvoiceNo != null ? _saleService.GetSoldItemData(null, Convert.ToInt32(InvoiceNo), null) :
                   _saleService.GetSoldItemData(null, null, ContactNo);
@@ -92,18 +90,13 @@ namespace PeojectTWI.Controllers
 
         public JsonResult GetSelectedSoldItemData(string SerialNo = null, string InvoiceNo = null, string ContactNo = null)
         {
-            
             var result = _saleService.GetSelectedSoldItemData(SerialNo);
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
         public JsonResult RejectSale(string SerialNumber)
         {
-
             var RejectItemResult = _saleService.RejectSaleItem(SerialNumber);
-
             return Json(RejectItemResult, JsonRequestBehavior.AllowGet);
         }
 

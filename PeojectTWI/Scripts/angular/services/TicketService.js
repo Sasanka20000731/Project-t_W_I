@@ -64,9 +64,9 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
 
     $scope.ClearTicketForm = function()
     {
-
         $scope.SerialNumber = undefined;
         $scope.ticketTemark = undefined;
+        $scope.validationMessage = true;
     }
 
 

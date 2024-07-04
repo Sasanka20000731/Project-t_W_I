@@ -7,14 +7,14 @@
 <div class="row containerBlock" id="form" ng-app="myapp" ng-controller="MyController" ng-init="PageLoad()">
 
     <input type="hidden" id="serialNumberId" ng-model="SerialNum" />
-    <div class="product-form col-12">
+    <div class="product-form col-6">
 
         <div class="form-group">
             <label for="droproductCategory">Serial Number</label>
 
 
             <input type="text" id="txtSerialNumberID" class="form-control" ng-model="SerialNumber" ng-change="GetProductDetails()" required>
-            <div class="validation" ng-hide="validationMessage">Enter valid number</div>
+            <div class="validation" ng-hide="validationMessage"><lable style="color:red">Enter Serial valid number</lable></div>
         </div>
 
 
@@ -23,15 +23,24 @@
             <label>Comment :</label>
             <input type="text" class="form-control" ng-model="ticketTemark" required>
         </div>
-        <button type="button" class="btn btn-google" id="BtnAddTicketId" style="height:25px;padding-top:0px;" ng-click="AddTicket()">
-            Add Ticket
-        </button>
-        
+        <div class="row">
+            <div class="col-md-6">
+                <button class="custom-button" id="BtnAddTicketId" ng-click="AddTicket()">
+                    Add Ticket
+                </button>
+   
+            </div>
+            <div class="col-md-6">
+                <button class="custom-button" id="BtnClearTicketFormId" style="background-color:#878b6c" ng-click="ClearTicketForm()">
+                    Clear Ticket
+                </button>
+            </div>
 
-        <button type="button" class="btn btn-google" id="BtnClearTicketFormId" style="height:25px;padding-top:0px;" ng-click="ClearTicketForm()">
-            Clear Ticket
-        </button>
+        </div>
+    </div>
+    <div>
 
+        <img style="margin-left: 25%;" src="~/Styles/vendors/images/banner-img.png" />
     </div>
 </div>
 
@@ -53,17 +62,46 @@
     .row {
         margin-bottom: 20px;
     }
-
-    button {
-        color: black;
-        padding: 10px 30%;
-        cursor: pointer;
-        font-size: 16px;
+ .bold-item {
+        font-weight: bold;
+        font-size: 18px;
+        opacity:0.3;
+        
     }
 
-        button:hover {
-            background-color: #45a049;
-        }
+    .Strong-item {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .normal-item {
+        font-size: 18px;
+        opacity:0.6;
+        font-weight: bold;
+    }
+
+    .custom-button {
+        height: 38px;
+        background-color: #1a2c34;
+        border-radius: 10px;
+        font-size:13px;
+        margin: 5px;
+        float: left;
+        border: 0px;
+        color: #fff;
+        width: 100%;
+        -webkit-transition-duration: 2.00s;
+        -webkit-transition-timing-function: linear;
+        box-shadow: 0px 0 0 #2e4f5e inset;
+    }
+
+    .custom-button:hover {
+        box-shadow: 700Px 0 0 #2e4f5e inset;
+    }
+
+
+
+
 </style>
 
 <script src="~/Scripts/angular/angular.min.js"></script>
