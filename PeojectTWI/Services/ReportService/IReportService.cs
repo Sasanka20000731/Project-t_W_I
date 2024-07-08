@@ -29,7 +29,8 @@ namespace PeojectTWI.Services.ReportService
         List<ReportList> LoadAuditTrialTypes();
         List<CommonReport> SearchAuditTrialReport(DateTime FromDate, DateTime ToDate, int ReportType);
         DataSet DownloadAuditTrialReport(DateTime FromDate, DateTime ToDate, int ReportType);
-
+        List<PieChartModel> loadTicketPieChartData(DateTime From, DateTime To);
+        DataSet DownloadTicketPieChartData(DateTime From, DateTime To);
 
     }
 }

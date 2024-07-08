@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ChartDataSet" targetNamespace="http://tempuri.org/ChartDataSet.xsd" xmlns:mstns="http://tempuri.org/ChartDataSet.xsd" xmlns="http://tempuri.org/ChartDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ChartDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ChartDataSet" msprop:Generator_UserDSName="ChartDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PieChartDataTable" msprop:Generator_TableClassName="PieChartDataTableDataTable" msprop:Generator_TableVarName="tablePieChartDataTable" msprop:Generator_TablePropName="PieChartDataTable" msprop:Generator_RowDeletingName="PieChartDataTableRowDeleting" msprop:Generator_RowChangingName="PieChartDataTableRowChanging" msprop:Generator_RowEvHandlerName="PieChartDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PieChartDataTableRowDeleted" msprop:Generator_UserTableName="PieChartDataTable" msprop:Generator_RowChangedName="PieChartDataTableRowChanged" msprop:Generator_RowEvArgName="PieChartDataTableRowChangeEvent" msprop:Generator_RowClassName="PieChartDataTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnPropNameInTable="CategoryColumn" msprop:Generator_UserColumnName="Category" type="xs:string" minOccurs="0" />
+              <xs:element name="Value" msprop:Generator_ColumnVarNameInTable="columnValue" msprop:Generator_ColumnPropNameInRow="Value" msprop:Generator_ColumnPropNameInTable="ValueColumn" msprop:Generator_UserColumnName="Value" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

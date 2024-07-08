@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "TicketChart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ticket Chart</h2>
+
+
+<div ng-app="myapp" ng-controller="MyController">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="col-sm-6">
+                <lable>From</lable>
+            </div>
+            <div class="col-sm-6">
+                <input type="date" id="fromDate" ng-model="fromDate" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="col-sm-6">
+                <lable>To</lable>
+            </div>
+            <div class="col-sm-6">
+                <input type="date" id="toDate" ng-model="toDate" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <button ng-click="LoadPieChartData()">
+                Load Chart
+            </button>
+            <button ng-click="DownloadTicketChartData()">
+                Download
+            </button>
+        </div>
+
+    </div>
+
+    <div class="row" style="margin-top:5%">
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style=" background-image: linear-gradient(356deg, #bfd4ce 0%, #f5f5dc 100%);">
+                    <h6 class="m-0 font-weight-bold text-primary"><lable style="color:black">Tickets by Product</lable></h6>
+                </div>
+                <div class="card-body" style="background-image: linear-gradient(-225deg, #E3FDF5 0%, #e4acd9 100%);">
+                    <canvas id="myPieChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Category</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in ticketPieChartData">
+                        <td>{{ $index}}</td>
+                        <td>{{ item.category }}</td>
+                        <td>{{ item.value }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-animate.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="~/Scripts/angular/services/app.js"></script>
+<script src="~/Scripts/waitme/waitMe.js"></script>
+<script src="~/Scripts/waitme/waitMe.min.js"></script>
+<script src="~/Scripts/angular/services/ReportServices.js"></script>
+<script src="~/Scripts/alertify/alertify.js"></script>
+<link href="~/Content/waitMe/waitMe.css" rel="stylesheet" />
+<link href="~/Content/waitMe/waitMe.min.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/AdminLTE/custom.css" rel="stylesheet" />
+<link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryval/jquery.validate.min.js"></script>
+<script src="~/Scripts/jqueryval/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/datepicker/bootstrap-datepicker.min.js"></script>
+<link href="~/Scripts/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />

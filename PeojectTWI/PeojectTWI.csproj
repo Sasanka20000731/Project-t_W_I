@@ -274,6 +274,17 @@
       <DependentUpon>RptWarrentyManagement.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Crystal_Reports\TicketSummaryReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TicketSummaryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DataSets\ChartDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChartDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DataSets\CommonDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1105,6 +1116,17 @@
     <Content Include="Reports\DataSets\CommonDataSet.xsc">
       <DependentUpon>CommonDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Reports\DataSets\ChartDataSet.xsc">
+      <DependentUpon>ChartDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSets\ChartDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ChartDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DataSets\ChartDataSet.xss">
+      <DependentUpon>ChartDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Reports\DataSets\CommonDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -1801,6 +1823,7 @@
     <Content Include="Views\Home\ViewAudiTrail.cshtml" />
     <Content Include="Views\Inventory\RemainingStock.cshtml" />
     <Content Include="Views\Home\ForgetPasswordPage.cshtml" />
+    <Content Include="Views\Report\TicketChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1833,6 +1856,10 @@
     <EmbeddedResource Include="Reports\Crystal_Reports\RptWarrentyManagement.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptWarrentyManagement.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal_Reports\TicketSummaryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TicketSummaryReport.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

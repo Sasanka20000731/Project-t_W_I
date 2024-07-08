@@ -314,6 +314,56 @@ namespace PeojectTWI.Services.ReportService
 
         }
 
+        public List<PieChartModel> loadTicketPieChartData(DateTime From, DateTime To)
+        { 
+            var result =  from a in db.tblTickets
+                        join b in db.tblInventoryDatas on a.InventoryID equals b.InventoryID
+                        join c in db.tblProductCategories on b.ProductCategoryId equals c.ProductID
+                        where c.Active == true 
+                        group c by c.ProductName into g
+                        select new PieChartModel
+                        {
+                            category = g.Key,
+                            value = g.Count()
+                        };
+            return result.ToList();
+            //  (a.Start.Date >= startDate.Date && a.Start.Date <= endDate)
+        }
+
+        public DataSet DownloadTicketPieChartData(DateTime From, DateTime To)
+        {
+
+            var result = (from a in db.tblTickets
+                         join b in db.tblInventoryDatas on a.InventoryID equals b.InventoryID
+                         join c in db.tblProductCategories on b.ProductCategoryId equals c.ProductID
+                         where c.Active == true
+                         group c by c.ProductName into g
+                         select new PieChartModel
+                         {
+                             category = g.Key,
+                             value = g.Count()
+                         }).ToList();
+
+            DataSet chartDS = new DataSet("ChartDataSet");
+            DataTable chartTable = new DataTable("PieChartDataTable");
+
+            chartTable.Columns.Add("Category", typeof(string)).DefaultValue = null;
+            chartTable.Columns.Add("Value", typeof(int)).DefaultValue = null;
+
+            foreach (var chart in result)
+            {
+                DataRow row = chartTable.NewRow();
+                row["Category"] = chart.category;
+                row["Value"] = chart.value;
+
+                chartTable.Rows.Add(row);
+            }
+
+            chartDS.Tables.Add(chartTable);
+            return chartDS;
+
+
+        }
 
     }
 }

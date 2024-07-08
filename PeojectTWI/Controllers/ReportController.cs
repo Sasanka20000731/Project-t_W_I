@@ -248,6 +248,38 @@ namespace PeojectTWI.Controllers
             return File(stream, "application/pdf", "AudiTrail.pdf");
 
         }
+        public ActionResult TicketChart()
+        {
+            if (Session["LoggedUserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            return View();
+        }
+
+        public JsonResult loadTicketPieChartData(string from, string to)
+        {
+            var result = _reportService.loadTicketPieChartData (Convert.ToDateTime(from),Convert.ToDateTime(to));
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DownloadTicketChartData(string FromDate, string ToDate)
+        {
+            var AuditrailDS = _reportService.DownloadTicketPieChartData(Convert.ToDateTime(FromDate), Convert.ToDateTime(ToDate));
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/Crystal_Reports/TicketSummaryReport.rpt")));
+            rd.SetDataSource(AuditrailDS.Tables["PieChartDataTable"]);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "TicketSummaryReport.pdf");
+        }
+
+
 
 
     }

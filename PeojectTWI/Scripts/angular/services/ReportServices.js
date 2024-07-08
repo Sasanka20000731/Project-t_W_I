@@ -301,4 +301,107 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
         
     }
 
+    $scope.LoadPieChartData = function () {
+
+        if (($scope.fromDate != null && $scope.toDate != null) || ($scope.fromDate != undefined && $scope.toDate != undefined)) {
+
+            data = {
+                params: {
+                    from: $scope.fromDate,
+                    to: $scope.toDate
+                }
+            };
+            //debugger
+            $http.get('/Report/loadTicketPieChartData', data)
+                .success(function (response) {
+                    if (response && response.length !== 0) {
+                        //debugger
+                        $scope.ticketPieChartData = response;
+                        $scope.renderTicketChart();
+
+                    } else {
+
+                        alertify.error("No Records Available !!!", 3000);
+                    }
+                }).error(function (xhr) {
+                    alertify.error("Error", 3000);
+                    console.log(xhr.error);
+                })
+
+        } else {
+            alertify.error("Please Fill All Required Feilds !!!", 3000);
+        }
+
+    }
+
+    $scope.renderTicketChart = function () {
+
+        $scope.ticketPieChartData;
+        //debugger;
+
+
+        var data = $scope.ticketPieChartData;
+
+        // Extracting data for the pie chart
+        var pieLabels = data.map(function (item) {
+            return item.category; // Replace 'category' with the appropriate key for your labels
+        });
+        var pieData = data.map(function (item) {
+            return item.value; // Replace 'value' with the appropriate key for your data
+        });
+
+
+        // Get the context of the canvas element we want to select
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+
+        // Clear the previous chart instance if any
+        if ($scope.myPieChart) {
+            $scope.myPieChart.destroy();
+        }
+
+        // Create a new pie chart instance
+        $scope.myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: pieLabels,
+                datasets: [{
+                    data: pieData,
+                    backgroundColor: ['#4e73df', '#D4AC0D', '#36b9cc', '#BB8FCE', '#5DADE2','#EC7063'], // Add more colors as needed
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#BB8FCE', '#5DADE2', '#EC7063'], // Add more colors as needed
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 0, // For a pie chart, set cutoutPercentage to 0
+            }
+        });
+
+        //debugger;
+    };
+
+    $scope.DownloadTicketChartData = function () {
+
+        var FromDate = $scope.fromDate;
+        var ToDate = $scope.toDate;
+        //debugger
+        var url = '/Report/DownloadTicketChartData?FromDate=' + FromDate.toISOString() + '&ToDate=' + ToDate.toISOString();
+
+        window.open(url, '_blank');
+
+    }
+
 });
