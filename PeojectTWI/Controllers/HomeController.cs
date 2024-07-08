@@ -242,5 +242,18 @@ namespace PeojectTWI.Controllers
             return View();
         } 
 
+        public JsonResult ResetPassword(string emailAddress)
+        {
+            var result = _userService.ResetPassword(emailAddress);
+            if (result == 1)
+            {
+                var mail = CommonEmail(emailAddress, "testingbranchuser@gmail.com", "xclczwvfajxxpzeo", "User Login", "Dear User, Your password was reset. Use this password to log in. Password : 123456789");
+            }
+           
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

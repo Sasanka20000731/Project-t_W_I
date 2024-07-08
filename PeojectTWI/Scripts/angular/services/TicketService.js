@@ -92,7 +92,7 @@ myApp.controller("MyController", function ($scope, $http, $window, $uibModal, $u
         $http.get('/Ticket/AssignTicketToHandler',data)
             .success(function (response) {
                 if (response == 1) {
-                 debugger
+                 //debugger
                     alertify.success('Successfully Assigned', 3000);
 
                     var extendUrl = '/Ticket/AssignTicket';

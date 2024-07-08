@@ -353,5 +353,23 @@ namespace PeojectTWI.Services.UserService
 
           
         }
+
+        public int ResetPassword(string emailAddress) 
+        {
+            var user = db.tblUsers.FirstOrDefault(a => a.Email == emailAddress && a.Active == true);
+
+            if (user != null)
+            {
+                user.Password = "123456789";
+                db.SaveChanges();
+                return 1;
+            } 
+            
+            return 0;
+
+           
+
+        }
+
     }
 }

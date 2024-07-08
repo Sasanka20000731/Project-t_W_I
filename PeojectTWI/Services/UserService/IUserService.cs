@@ -28,5 +28,7 @@ namespace PeojectTWI.Services.UserService
 
         List<PieChartModel> LoadPieChartData();
 
+        int ResetPassword(string emailAddress); 
+
     }
 }

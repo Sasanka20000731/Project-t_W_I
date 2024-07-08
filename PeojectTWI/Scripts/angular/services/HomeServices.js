@@ -478,4 +478,33 @@
     // Initial data fetch
     //$scope.fetchData();
 
+    $scope.ForgetPassword = function () {
+
+        data = {
+            params: {
+                emailAddress: $scope.ForgetPasswordEmail
+            }
+        };
+        debugger;
+        $http.get('/Home/ResetPassword', data)
+            .success(function (response) {
+                if (response === 1) {
+                    debugger
+                    alertify.success("Your Password has send to your Email !!!");
+
+                } else {
+                    debugger
+
+                    alertify.error("Enter Valid Email Address !!!");
+
+                }
+
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+
+    }
+
+
 });
