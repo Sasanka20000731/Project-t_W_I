@@ -355,14 +355,10 @@ namespace PeojectTWI.Services.ReportService
                 DataRow row = chartTable.NewRow();
                 row["Category"] = chart.category;
                 row["Value"] = chart.value;
-
                 chartTable.Rows.Add(row);
             }
-
             chartDS.Tables.Add(chartTable);
             return chartDS;
-
-
         }
 
     }
