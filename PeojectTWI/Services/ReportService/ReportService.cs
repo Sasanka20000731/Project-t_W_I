@@ -294,9 +294,6 @@ namespace PeojectTWI.Services.ReportService
             AuditTrialTable.Columns.Add("COL3", typeof(string)).DefaultValue = null;
             AuditTrialTable.Columns.Add("COL4", typeof(string)).DefaultValue = null;
 
-
-
-
             foreach (var audit in dataList)
             {
                 DataRow row = AuditTrialTable.NewRow();
@@ -310,8 +307,6 @@ namespace PeojectTWI.Services.ReportService
 
             AuditTrialDS.Tables.Add(AuditTrialTable);
             return AuditTrialDS;
-
-
         }
 
         public List<PieChartModel> loadTicketPieChartData(DateTime From, DateTime To)
@@ -360,6 +355,87 @@ namespace PeojectTWI.Services.ReportService
             chartDS.Tables.Add(chartTable);
             return chartDS;
         }
+
+        public List<CommonReport> TicketManagementTimeReport(DateTime from, DateTime to, int ticketHandler)
+        {
+            List<CommonReport> reports = new List<CommonReport>();
+
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable1 = new DataTable();
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+                    command.CommandText = "EXEC sp_GetUserWorkingTimeByTicket @@FromDate, @@Todate,@@UserID";
+                    command.Parameters.Add(new SqlParameter("@@FromDate", from));
+                    command.Parameters.Add(new SqlParameter("@@Todate", to));
+                    command.Parameters.Add(new SqlParameter("@@UserID", ticketHandler));
+                    context.Database.Connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        DataTable1.Load(reader);
+                    }
+                }
+                foreach (DataRow row in DataTable1.Rows)
+                {
+                    CommonReport report = new CommonReport
+                    {
+                        COL1 = row["TicketId"] != DBNull.Value ? row["TicketId"].ToString() : "Not Available",
+                        COL2 = row["AssignedDate"] != DBNull.Value ? row["AssignedDate"].ToString() : "Not Available",
+                        COL3 = row["SubmitteDate"] != DBNull.Value ? row["SubmitteDate"].ToString() : "Pending",
+                        COL4 = row["Differences"] != DBNull.Value ? row["Differences"].ToString() : "Pending"
+                    };
+                    reports.Add(report);
+                }
+            }
+            return reports;
+
+        }
+
+        public DataSet DownloadTicketManagementTimeReport(DateTime from, DateTime to, int ticketHandler)
+        {
+
+            var DataSet = new DataSet("CommonDataSet");
+
+            using (var context = new ProjectDBEntities())
+            {
+                var DataTable = new DataTable("CommonDataTable");
+                DataTable.Columns.Add("COL1", typeof(string));
+                DataTable.Columns.Add("COL2", typeof(string));
+                DataTable.Columns.Add("COL3", typeof(string));
+                DataTable.Columns.Add("COL4", typeof(string));
+
+                using (var command = context.Database.Connection.CreateCommand())
+                {
+
+                    command.CommandText = "EXEC sp_GetUserWorkingTimeByTicket @@FromDate, @@Todate,@@UserID";
+                    command.Parameters.Add(new SqlParameter("@@FromDate", from));
+                    command.Parameters.Add(new SqlParameter("@@Todate", to));
+                    command.Parameters.Add(new SqlParameter("@@UserID", ticketHandler));
+
+                    context.Database.Connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var row = DataTable.NewRow();
+                            row["COL1"] = reader["TicketId"] != DBNull.Value ? reader["TicketId"].ToString() : "Not Available";
+                            row["COL2"] = reader["AssignedDate"] != DBNull.Value ? reader["AssignedDate"].ToString() : "Not Available";
+                            row["COL3"] = reader["SubmitteDate"] != DBNull.Value ? reader["SubmitteDate"].ToString() : "Pending";
+                            row["COL4"] = reader["Differences"] != DBNull.Value ? reader["Differences"].ToString() : "Pending";
+                            DataTable.Rows.Add(row);
+                        }
+                    }
+                }
+
+
+                DataSet.Tables.Add(DataTable);
+
+            }
+            return DataSet;
+
+        }
+
+
 
     }
 }

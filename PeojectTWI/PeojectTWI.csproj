@@ -280,6 +280,12 @@
       <DependentUpon>TicketSummaryReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Crystal_Reports\TicketTimeReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TicketTimeReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\DataSets\ChartDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1824,6 +1830,7 @@
     <Content Include="Views\Inventory\RemainingStock.cshtml" />
     <Content Include="Views\Home\ForgetPasswordPage.cshtml" />
     <Content Include="Views\Report\TicketChart.cshtml" />
+    <Content Include="Views\Report\TicketHandlersTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1860,6 +1867,10 @@
     <EmbeddedResource Include="Reports\Crystal_Reports\TicketSummaryReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>TicketSummaryReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal_Reports\TicketTimeReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TicketTimeReport.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

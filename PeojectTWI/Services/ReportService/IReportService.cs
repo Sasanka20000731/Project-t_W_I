@@ -32,5 +32,9 @@ namespace PeojectTWI.Services.ReportService
         List<PieChartModel> loadTicketPieChartData(DateTime From, DateTime To);
         DataSet DownloadTicketPieChartData(DateTime From, DateTime To);
 
+        List<CommonReport> TicketManagementTimeReport(DateTime from, DateTime to, int ticketHandler);
+
+        DataSet DownloadTicketManagementTimeReport(DateTime from, DateTime to, int ticketHandler);
+
     }
 }

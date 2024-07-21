@@ -404,4 +404,56 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
 
     }
 
+
+
+    $scope.LoadTicketHandlers = function () {
+        //debugger;
+        $http.get('/Ticket/GetTicketHandlers')
+            .success(function (response) {
+                    //debugger
+                $scope.TicketHandlers = response;
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+    }
+
+    $scope.SearchTicketHandlersTimeReport = function () {
+        debugger
+        data = {
+            params: {
+                from: $scope.TicketReportFormDate,
+                to: $scope.TicketReportToDate,
+                ticketHandler: $scope.DropTicketHandlersList
+            }
+        };
+        debugger
+        $http.get('/Report/TicketManagementTimeReport', data)
+            .success(function (response) {
+                debugger
+                if (response && response.length !== 0) {
+                    $scope.TiketTimeReportlist = response;
+                } else {
+
+                    alertify.error("No Records Available !!!", 3000);
+                }
+            }).error(function (xhr) {
+                alertify.error("Error", 3000);
+                console.log(xhr.error);
+            })
+
+    }
+
+    $scope.DownloadTicketHandlersTimeReport = function () {
+
+        var FromDate = $scope.TicketReportFormDate;
+        var ToDate = $scope.TicketReportToDate;
+        var url = '/Report/DownloadTicketManagementTimeReport?from=' + FromDate.toISOString() + '&to=' + ToDate.toISOString() + '&ticketHandler=' + $scope.DropTicketHandlersList;
+
+        window.open(url, '_blank');
+
+    }
+
+
+
 });

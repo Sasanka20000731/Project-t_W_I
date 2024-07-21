@@ -60,7 +60,7 @@ namespace PeojectTWI.Controllers
         }
         public JsonResult SearchUserManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
-            var result = _reportService.SearchUserManagementReport(FromDate,ToDate, ReportCategory, ReportType);
+            var result = _reportService.SearchUserManagementReport(FromDate, ToDate, ReportCategory, ReportType);
 
             return Json(result, JsonRequestBehavior.AllowGet);
 
@@ -97,7 +97,7 @@ namespace PeojectTWI.Controllers
         }
         public JsonResult SearchInventoryManagementReport(DateTime FromDate, DateTime ToDate, int ReportCategory, int ReportType)
         {
-            var result = _reportService.InventoryManagementReport(FromDate,ToDate,ReportCategory,ReportType);
+            var result = _reportService.InventoryManagementReport(FromDate, ToDate, ReportCategory, ReportType);
 
             return Json(result, JsonRequestBehavior.AllowGet);
 
@@ -216,7 +216,7 @@ namespace PeojectTWI.Controllers
                 return RedirectToAction("Login", "Home");
             }
             return View();
-        }        
+        }
 
         public JsonResult LoadAuditTrialTypes()
         {
@@ -259,7 +259,7 @@ namespace PeojectTWI.Controllers
 
         public JsonResult loadTicketPieChartData(string from, string to)
         {
-            var result = _reportService.loadTicketPieChartData (Convert.ToDateTime(from),Convert.ToDateTime(to));
+            var result = _reportService.loadTicketPieChartData(Convert.ToDateTime(from), Convert.ToDateTime(to));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -279,6 +279,36 @@ namespace PeojectTWI.Controllers
             return File(stream, "application/pdf", "TicketSummaryReport.pdf");
         }
 
+
+
+        public ActionResult TicketHandlersTime()
+        {
+
+            return View();
+        }
+
+        public JsonResult TicketManagementTimeReport(string from, string to, int ticketHandler)
+        {
+            var result = _reportService.TicketManagementTimeReport(Convert.ToDateTime(from),Convert.ToDateTime(to), ticketHandler);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult DownloadTicketManagementTimeReport(string from, string to, int ticketHandler)
+        {
+            var ReportDS = _reportService.DownloadTicketManagementTimeReport(Convert.ToDateTime(from), Convert.ToDateTime(to), ticketHandler);
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/Crystal_Reports/TicketTimeReport.rpt")));
+            rd.SetDataSource(ReportDS.Tables["CommonDataTable"]);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "TicketTimeReport.pdf");
+        }
 
 
 
