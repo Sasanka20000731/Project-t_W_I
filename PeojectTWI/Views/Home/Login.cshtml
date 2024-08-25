@@ -33,12 +33,12 @@
             top: 50%;
         }
 
-            .background .shape {
-                height: 200px;
-                width: 200px;
-                position: absolute;
-                border-radius: 50%;
-            }
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
 
         .shape:first-child {
             background: linear-gradient( #1845ad, #23a2f6 );
@@ -103,9 +103,9 @@
             font-weight: 300;
         }
 
-            input:active, input:focus {
-                background-color: #00000070 !important;
-            }
+        input:active, input:focus {
+            background-color: #00000070 !important;
+        }
 
         ::placeholder {
             color: #e5e5e5;
@@ -135,13 +135,15 @@
             <label for="username">User Name</label>
             <input type="text" name="FirstName" id="FirstName" ng-model="UserName" ng-change="CheckUserName()" placeholder="Full Name" required>
 
+            
             <label for="password">Password</label>
             <input type="password" name="Passowrd" id="Passowrd" ng-model="Passowrd" placeholder="Passowrd" required>
             <label style="color:red; font-weight:bold;" ng-show="InvalidUser">Invalid User</label>
-
+          
+        
             <input type="submit" name="submit" id="submit" ng-click="login()" value="Log In">
-            <input type="submit" name="submit" id="submit" ng-click="forgetPassword()" value="Forget Password" style="background-color: #ab9070; ">
-
+            <input type="submit" name="submit" id="submit" ng-click="forgetPassword()" value="Forget Password" style="background-color: #cbbcaa;">
+          
         </form>
 
 

@@ -5,71 +5,84 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>deleteProductCategory</h2>
+<h2>Delete Product Category</h2>
 
 <div>
-    <h4>productCategory</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            <lable>Product Name</lable>
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
+    <dl class="dl-horizontal" style="margin-left:5%">
 
-        <dt>
-            <lable>Brand Name</lable>
-        </dt>
+        <div class="row">
+            <lable id="topic">Product Name : </lable>  @Html.DisplayFor(model => model.ProductName)
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BrandName)
-        </dd>
-
-        <dt>
-            <lable>Vendor</lable>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VendorName)
-        </dd>
-
-        <dt>
-            <lable>Vendor Conact</lable>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VendorContact)
-        </dd>
-
-        <dt>
-            <lable>Vendor Address</lable>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VendorAddress)
-        </dd>
-
-        <dt>
-            <lable>Vendor Email</lable>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VendorEmail)
-        </dd>
-
-        <dt>
-            <lable>Status</lable>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Active)
-        </dd>
+        <div class="row">
+            <lable id="topic">Brand Name : </lable>  @Html.DisplayFor(model => model.BrandName)
+        </div>
+        <div class="row">
+            <lable id="topic">Vendor : </lable>   @Html.DisplayFor(model => model.VendorName)
+        </div>
+        <div class="row">
+            <lable id="topic">Vendor Conact : </lable>   @Html.DisplayFor(model => model.VendorContact)
+        </div>
+        <div class="row">
+            <lable id="topic">Vendor Address : </lable>  @Html.DisplayFor(model => model.VendorAddress)
+        </div>
+        <div class="row">
+            <lable id="topic">Vendor Email : </lable>  @Html.DisplayFor(model => model.VendorEmail)
+        </div>
+        <div class="row">
+            <lable id="topic">Status : </lable> @Html.DisplayFor(model => model.Active)
+        </div>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Delete", "RemoveProductCategory", new { pidDelete = Model.ProductID  }) |
-    @Html.ActionLink("Back to List", "Index")
+<p style="margin-left:5%">
+    @Html.ActionLink("Deactivate", "RemoveProductCategory", new { pidDelete = Model.ProductID }, new { @class = "btn-custom btn-delete" })
+    @Html.ActionLink("Back to List", "viewProductCategories", null, new { @class = "btn-custom btn-back" })
 </p>
+
+<style>
+    #topic {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333; /* Dark grey color */
+        margin-right: 10px;
+        display: inline-block;
+        width: 150px; /* Ensures alignment */
+    }
+    .row {
+    margin-bottom:2%;
+    }
+
+    .btn-custom {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .btn-delete {
+        background-color: #d9534f; /* Bootstrap's 'btn-danger' color */
+        border: 1px solid #d43f3a;
+    }
+
+        .btn-delete:hover {
+            background-color: #c9302c; /* Darker red on hover */
+        }
+
+    .btn-back {
+        background-color: #5bc0de; /* Bootstrap's 'btn-info' color */
+        border: 1px solid #46b8da;
+    }
+
+        .btn-back:hover {
+            background-color: #31b0d5; /* Darker blue on hover */
+        }
+
+   
+</style>

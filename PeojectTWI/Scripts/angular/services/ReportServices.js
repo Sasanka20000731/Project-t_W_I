@@ -301,6 +301,8 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
         
     }
 
+
+    $scope.showTicketChart = false;
     $scope.LoadPieChartData = function () {
 
         if (($scope.fromDate != null && $scope.toDate != null) || ($scope.fromDate != undefined && $scope.toDate != undefined)) {
@@ -318,6 +320,7 @@ myApp.controller("MyController", function ($scope, $http, $uibModal, $uibModalSt
                         //debugger
                         $scope.ticketPieChartData = response;
                         $scope.renderTicketChart();
+                        $scope.showTicketChart = true;
 
                     } else {
 

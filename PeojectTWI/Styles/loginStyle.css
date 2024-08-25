@@ -3,11 +3,11 @@
 
 body {
     /*background: url("") no-repeat center center fixed;*/
-    background-image: url('vendors/images/cover.png');
+    background-image: url('vendors/images/3519131.jpg');
     background-size: cover;
     font-family: 'Droid Serif', serif;
-    position:fixed center;
-    background-repeat:no-repeat;
+    position: fixed center;
+    background-repeat: no-repeat;
 }
 
 #container {

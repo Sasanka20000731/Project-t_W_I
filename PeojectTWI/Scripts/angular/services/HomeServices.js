@@ -15,7 +15,6 @@
                 alertify.success("error", 3000);
             })
 
-
         $scope.LoadDashbordChartData();
         $scope.fetchData();
     }
@@ -26,14 +25,11 @@
                 UserName: $scope.UserName
             }
         };
-        //debugger
         $http.get('/Home/VerifyUser', data)
             .success(function (response) {
-                //debugger
                 if (response === 0) {
                     $scope.InvalidUser = true;
                 } else {
-
                     $scope.InvalidUser = false;
                 }
 
@@ -71,7 +67,6 @@
                 })
 
         } else {
-            //debugger
             alertify.success("Fill User Name and Password !!!", 3000);
         }
     }
@@ -83,13 +78,11 @@
     }
 
     $scope.forgetPassword = function () {
-        //debugger
         var extendUrl = '/Home/ForgetPasswordPage';
         window.location.href = extendUrl;
     }
 
     $scope.LoadUserLevels = function () {
-        //debugger
         $http.get('/Home/getUserLlevels')
             .success(function (response) {
                 $scope.UserLevelList = response;
@@ -113,7 +106,6 @@
 
     $scope.validateEmail = function () {
         $scope.Email
-        //debugger;
         if (!$scope.Email || $scope.Email.trim() === "") {
             $scope.EmailAsyncError = true;
             $scope.EmailAsyncErrorMessage = "Enter Valid Email Address!!!";
@@ -180,7 +172,6 @@
                 UserId: $("#UserId").val()
             }
         };
-        //debugger;
         $http.get('/Home/getselectedUserDetails', data)
             .success(function (response) {
                 $scope.UserName = response[0].UserName;
@@ -194,7 +185,7 @@
                 $scope.MobileNumber = response[0].MobileNumber;
                 $scope.droUserLevels = response[0].UserLevel;
                 $scope.Active = response[0].Active;
-                //debugger
+
             })
             .error(function (xhr) {
                 console.log(xhr.error);
@@ -218,7 +209,7 @@
                 Email: $scope.Email,
                 MobileNumber: $scope.MobileNumber,
                 UserLevel: $scope.droUserLevels,
-                Active: $scope.Active//$scope.Active
+                Active: $scope.Active
             }
         };
         debugger;
@@ -239,25 +230,20 @@
     }
 
     $scope.loadUserProfile = function () {
-        //debugger
         //loadUserProfileDetails
         $scope.ShowForm = false;
         $scope.FirstNameTxtBox = undefined;
         $scope.LastNameTxtBox = undefined;
         $http.get('/Home/loadUserProfileDetails')
             .success(function (response) {
-
                 $scope.UserName = response[0].UserName;
                 $scope.FullName = response[0].FirstName + ' ' + response[0].LastName;
-
                 $scope.UserLevelString = response[0].UserLevelString;
                 $scope.MobileNumber = response[0].MobileNumber;
                 $scope.Email = response[0].Email;
-
                 $scope.DOB = response[0].stringDOB;
-
                 $scope.Password = response[0].Password;
-                //debugger
+
             })
             .error(function (xhr) {
                 console.log(xhr.error);
@@ -311,14 +297,9 @@
             .success(function (response) {
                 if (response === 1) {
                     debugger
-
-
                 } else {
                     debugger
-
-
                 }
-
             })
             .error(function (xhr) {
                 console.log(xhr.error);
@@ -332,7 +313,7 @@
         $http.get('/Home/loadDashbordChart')
             .then(function (response) {
                 var data = response.data;
-                //debugger
+
                 // Extracting data for the chart
                 var ticketCounts = data.map(function (item) {
                     return item.TicketCount;
@@ -341,7 +322,6 @@
                     return item.TicketDate;
                 });
 
-                // Chart.js code to create a chart
                 var ctx = document.getElementById('myAreaChart').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'line',
@@ -353,6 +333,7 @@
                             backgroundColor: 'rgba(78, 115, 223, 0.05)',
                             borderColor: 'rgba(78, 115, 223, 1)',
                             borderWidth: 1,
+
                         }]
                     },
                     options: {
@@ -385,7 +366,7 @@
                         animation: {
                             onComplete: function () {
                                 $scope.$apply(function () {
-                                    $scope.chartLoading = false; // Hide loading animation
+                                    $scope.chartLoading = false; 
                                 });
                             }
                         }
@@ -395,61 +376,46 @@
             .catch(function (error) {
                 console.log(error);
                 alertify.error("Error occurred while loading dashboard data.");
-                $scope.chartLoading = false; // Hide loading animation in case of error
+                $scope.chartLoading = false; 
             });
     }
 
     $scope.chartData = [];
 
-    // Fetch data from your API
-    $scope.fetchData = function () {
-        //debugger    
+    $scope.fetchData = function () {  
         $http.get('/Home/GetChartData')
             .success(function (response) {
-                //debugger
                 $scope.chartData = response;
                 $scope.renderChart();
             });
 
-
-
-
     };
 
     $scope.renderChart = function () {
-        //debugger;
         $scope.chartData;
-        //debugger;
-
-
         var data = $scope.chartData;
 
-        // Extracting data for the pie chart
         var pieLabels = data.map(function (item) {
-            return item.category; // Replace 'category' with the appropriate key for your labels
+            return item.category; 
         });
         var pieData = data.map(function (item) {
-            return item.value; // Replace 'value' with the appropriate key for your data
+            return item.value; 
         });
 
-
-        // Get the context of the canvas element we want to select
         var ctx = document.getElementById('myPieChart').getContext('2d');
 
-        // Clear the previous chart instance if any
         if ($scope.myPieChart) {
             $scope.myPieChart.destroy();
         }
 
-        // Create a new pie chart instance
         $scope.myPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: pieLabels,
                 datasets: [{
                     data: pieData,
-                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'], // Add more colors as needed
-                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'], // Add more colors as needed
+                    backgroundColor: ['#538196', '#2e6878', '#6fa192', '#c8d3db', '#9cbcc8'],
+                    hoverBackgroundColor: ['#c9e5f2', '#b6e0f3', '#a3d7ef', '#92d2ef','	#84cbeb'], 
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
                 }],
             },
@@ -468,18 +434,15 @@
                 legend: {
                     display: false
                 },
-                cutoutPercentage: 0, // For a pie chart, set cutoutPercentage to 0
+                cutoutPercentage: 0, 
             }
         });
 
-        //debugger;
     };
 
-    // Initial data fetch
-    //$scope.fetchData();
+  
 
     $scope.ForgetPassword = function () {
-
         data = {
             params: {
                 emailAddress: $scope.ForgetPasswordEmail
@@ -491,12 +454,10 @@
                 if (response === 1) {
                     debugger
                     alertify.success("Your Password has send to your Email !!!");
-
                 } else {
                     debugger
 
                     alertify.error("Enter Valid Email Address !!!");
-
                 }
 
             })

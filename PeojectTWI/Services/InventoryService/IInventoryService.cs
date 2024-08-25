@@ -33,8 +33,6 @@ namespace PeojectTWI.Services.InventoryService
 
         List<productCategory> GetProductCategoryValues();
 
-        //List<masterStore> GetmasterStoreValues();
-
         string CheckExsist(int dataType, int ProductCategory, string SerialNo);
         string ManageWareHouseData(int dataType, int ProductCategory,  string SerialNo);
 
@@ -46,8 +44,6 @@ namespace PeojectTWI.Services.InventoryService
         List<WHmanage> LoadRemainigStockbyVendor(int VendorID);
 
         List<WHmanage> LoadVendorStock(int VendorID);
-
-
 
     }
 

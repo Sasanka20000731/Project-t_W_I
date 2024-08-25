@@ -126,7 +126,7 @@ namespace PeojectTWI.Services.InventoryService
             ms.ProductId = tms.ProductId;
             ms.perchesedCount = tms.perchesedCount;
             ms.unitPrice = tms.unitPrice;
-
+            ms.MasterProductName = tms.tblProductCategory.ProductName;
 
             ms.PerchesedDateString= Convert.ToDateTime(tms.PerchesedDate).ToString("dd/MM/yyyy");             //.ToString("dd/MM/yyyy");
             ms.PerchesedDate = tms.PerchesedDate;

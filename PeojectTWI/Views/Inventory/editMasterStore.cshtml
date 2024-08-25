@@ -63,12 +63,25 @@
 
         <div class="form-group">
             <div class=" col-md-10">
-                <input type="submit" value="Update Master Store" class="btn btn-default" />
+                <input type="submit" value="Update Master Store" class="btn btn-custom btn-insert" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+<style>
+
+
+    .btn-custom {
+        background-color: #5cb85c;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        margin-right: 10px; /* Space between buttons */
+    }
+</style>

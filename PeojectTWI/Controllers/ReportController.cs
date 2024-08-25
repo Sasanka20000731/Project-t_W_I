@@ -301,6 +301,9 @@ namespace PeojectTWI.Controllers
             ReportDocument rd = new ReportDocument();
             rd.Load(Path.Combine(Server.MapPath("~/Reports/Crystal_Reports/TicketTimeReport.rpt")));
             rd.SetDataSource(ReportDS.Tables["CommonDataTable"]);
+
+            var result = _userService.loggedUserDetails(Convert.ToInt32(Session["LoggedUserID"]));
+            rd.SetParameterValue("Handler", result[0].FirstName+" "+ result[0].LastName+" ("+result[0].UserName+")");
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();

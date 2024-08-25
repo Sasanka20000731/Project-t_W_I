@@ -9,40 +9,35 @@
 
 <div ng-app="myapp" ng-controller="MyController">
 
-    <div class="row">
+    <div class="row date-range-container">
         <div class="col-md-4">
-            <div class="col-sm-6">
-                <lable>From</lable>
-            </div>
-            <div class="col-sm-6">
+            <div class="form-group">
+                <label for="fromDate">From</label>
                 <input type="date" id="fromDate" ng-model="fromDate" class="form-control" />
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="col-sm-6">
-                <lable>To</lable>
-            </div>
-            <div class="col-sm-6">
+            <div class="form-group">
+                <label for="toDate">To</label>
                 <input type="date" id="toDate" ng-model="toDate" class="form-control" />
             </div>
         </div>
 
-        <div class="col-md-4">
-            <button ng-click="LoadPieChartData()">
-                Load Chart
+        <div class="col-md-4 button-group">
+            <button class="btn btn-primary custom-button" ng-click="LoadPieChartData()">
+                <i class="fa fa-pie-chart" aria-hidden="true"></i> Load Chart
             </button>
-            <button ng-click="DownloadTicketChartData()">
-                Download
+            <button class="btn btn-secondary custom-button" ng-click="DownloadTicketChartData()">
+                <i class="fa fa-download" aria-hidden="true"></i> Download
             </button>
         </div>
-
     </div>
 
     <div class="row" style="margin-top:5%">
     </div>
 
-    <div class="row">
+    <div class="row" ng-show="showTicketChart">
         <div class="col-lg-5">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style=" background-image: linear-gradient(356deg, #bfd4ce 0%, #f5f5dc 100%);">
@@ -78,7 +73,73 @@
 
 </div>
 
+<style>
+    .date-range-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
 
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    }
+
+    .button-group {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .custom-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .btn-primary.custom-button {
+        background-color: #1a73e8;
+    }
+
+        .btn-primary.custom-button:hover {
+            background-color: #155ab5;
+        }
+
+    .btn-secondary.custom-button {
+        background-color: #6c757d;
+    }
+
+        .btn-secondary.custom-button:hover {
+            background-color: #5a6268;
+        }
+
+    .custom-button i {
+        margin-right: 8px;
+    }
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="~/Scripts/angular/angular.min.js"></script>

@@ -8,13 +8,13 @@
     <div class="row col-lg-12">
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2" style="background-image: linear-gradient(221deg, #e9decf 0%, #bb8496 100%); " box-shadow: 10px,11px,black,inset;>
+            <div class="card border-left-primary shadow h-100 py-2" style="background-color: #d0d8dc; " box-shadow: 10px,11px,black,inset;>
                 <i class="fa fa-clock-o" aria-hidden="true" style="position:absolute; margin: 8%; font-size: 111px; opacity:0.2;"></i>
                 <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                <lable style="color: #2d2e54">Pending Tickets</lable>  
+                                <lable style="color: #2d2e54; font-size:100%">Pending Tickets</lable>  
                             </div>
                             <div class="h2 mb-0 font-weight-bold text-gray-800">{{PendingTickets}}</div>
                         </div>
@@ -29,13 +29,13 @@
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2" style="background-image: linear-gradient(120deg, #fff1e0 0%, #dcb5e6 100%);">
+            <div class="card border-left-success shadow h-100 py-2" style="background-color: #d0d8dc;">
                 <i class="fa fa-folder-open" aria-hidden="true" style="position:absolute; margin: 8%; font-size: 111px; opacity:0.2;"></i>
                 <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Opened Tickets
+                                <lable style="color: #2d2e54">Opened Tickets</lable>
                             </div>
                             <div class="h2 mb-0 font-weight-bold text-gray-800">{{OpenedTickets}}</div>
                         </div>
@@ -49,13 +49,13 @@
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2" style="background-image: linear-gradient(209deg, #8cc0d8 0%, #dfffee 100%); ">
+            <div class="card border-left-info shadow h-100 py-2" style="background-color: #d0d8dc; ">
                 <i class="fa fa-window-close" aria-hidden="true" style="position:absolute; margin: 8%;  font-size: 111px; opacity:0.2;"></i>
                 <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Closed Tickets
+                                <lable style="color: #2d2e54">Closed Tickets</lable>
                             </div>
                             <div class="h2 mb-0 font-weight-bold text-gray-800">{{ClosedTickets}}</div>
                         </div>
@@ -68,14 +68,14 @@
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2" style="background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%); ">
+            <div class="card border-left-warning shadow h-100 py-2" style="background-color: #d0d8dc; ">
 
                 <i class="fa fa-calendar" aria-hidden="true" style="position:absolute; margin: 8%; font-size: 111px; opacity:0.2;"></i>
                 <div class="card-body" style="position:relative">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold  text-warning text-uppercase mb-1">
-                                <label style="color: #2e2958">Date</label>
+                              <lable style="color: #2d2e54">Date</lable>
                             </div>
                             <div class="h2 mb-0 font-weight-bold text-gray-800">{{CurrentDate}}</div>
                         </div>
@@ -95,7 +95,7 @@
        
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style=" background-image: linear-gradient(356deg, #E3FDF5 0%, #c7c7ee 100%);">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background-color: #d0d8dc;">
                     <h6 class="m-0 font-weight-bold text-primary"><lable style="color:black">Ticket Submittion Overview</lable></h6>
                 </div>
                 <div class="card-body" style="background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);">
@@ -112,10 +112,10 @@
 
         <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style=" background-image: linear-gradient(356deg, #bfd4ce 0%, #f5f5dc 100%);">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background-color: #d0d8dc;">
                     <h6 class="m-0 font-weight-bold text-primary"><lable style="color:black">Assigned Chart</lable></h6>
                 </div>
-                <div class="card-body" style="background-image: linear-gradient(-225deg, #E3FDF5 0%, #e4acd9 100%);">
+                <div class="card-body" style="background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);">
                     <canvas id="myPieChart"></canvas>
                 </div>
             </div>
