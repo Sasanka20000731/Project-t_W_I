@@ -403,7 +403,21 @@ namespace PeojectTWI.Services.TicketService
 
         }
 
-
+        public List<Ticket> GetLastTicketDetails(string SerialNumber)
+        {
+            var result = (from a in db.tblTickets
+                          join b in db.tblInventoryDatas on a.InventoryID equals b.InventoryID
+                          join c in db.tblSalesDetails on b.InventoryID equals c.InventoryId
+                          join d in db.tblCoustomerDetails on c.CoustomerId equals d.CoustomerId
+                          where b.SerialNumber == SerialNumber
+                          orderby a.CreatedDate descending 
+                          select new Ticket
+                          {
+                              TicketId = a.TicketId,
+                              CoustomerEmail = d.Email
+                          }).Take(1).ToList(); 
+            return result;
+        }
 
     }
 }

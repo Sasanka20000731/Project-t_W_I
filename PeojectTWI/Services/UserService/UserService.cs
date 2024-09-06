@@ -360,16 +360,55 @@ namespace PeojectTWI.Services.UserService
 
             if (user != null)
             {
-                user.Password = "123456789";
+                user.Password = "ADX4VeuwJ0BAoXSOXntYdAjr0CMni4/DuqJUOMeJYRY=";
                 db.SaveChanges();
                 return 1;
             } 
             
             return 0;
+        }
 
-           
+
+        public int CheckCurrentPassword(string enteredCurrentPassword, int loggeduser) 
+        {
+            var user = db.tblUsers.FirstOrDefault(a => a.Password == enteredCurrentPassword && a.Active == true && a.UserId == loggeduser);
+            if (user != null)
+            {
+                return 1;
+            }
+            else 
+            {
+                return 0;
+            }
 
         }
+
+        public int UpdateUserPassword(string enteredNewPassword, int loggeduser)
+        {
+            try
+            {
+                var entity = db.tblUsers.FindAsync(loggeduser).Result;
+                if (entity != null)
+                {
+                    entity.Password = enteredNewPassword;
+                  
+
+                    db.SaveChangesAsync().Wait();
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+
 
     }
 }

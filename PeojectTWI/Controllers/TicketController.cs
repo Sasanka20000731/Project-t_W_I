@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PeojectTWI.Models;
 
 namespace PeojectTWI.Controllers
 {
@@ -54,12 +55,18 @@ namespace PeojectTWI.Controllers
         }
 
         public JsonResult InsertTicket(string SerialNumber, string TicketRemark)
-        {
+            {
             
             var LoggedUser = Session["LoggedUserID"];
             if (LoggedUser != null || Convert.ToInt32(LoggedUser) != 0)
             {
                 var result = _ticketService.AddTicket(SerialNumber, TicketRemark, Convert.ToInt32(LoggedUser));
+                if (result == 1)
+                {
+                    var ticketdetails = _ticketService.GetLastTicketDetails(SerialNumber);
+                    TicketEmail(1, ticketdetails[0].TicketId, ticketdetails[0].CoustomerEmail);
+                }
+
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             else {
@@ -69,6 +76,22 @@ namespace PeojectTWI.Controllers
             
            
         }
+
+        public void TicketEmail(int type, int ticketId, string customerEmail )
+        {
+
+            // 1 = ticket create , 2 = ticket close
+            string EmailMessage;
+            string EmailSubject;
+            EmailMessage = type == 1 ? "Ticket was generated for your request. Ticket Number is "+ticketId.ToString()+" " : " Your ticket (Ticket Number : "+ticketId.ToString()+") was closed. Thank You...";
+            EmailSubject = type == 1 ? "Ticket Generated" : "Closed";
+
+            Email email = new Email();
+            email.SendEmail(customerEmail, "testingbranchuser@gmail.com", "xclczwvfajxxpzeo", EmailSubject, EmailMessage);
+
+
+        }
+
 
         public ActionResult AssignTicket()
         {
@@ -168,7 +191,7 @@ namespace PeojectTWI.Controllers
 
         public JsonResult LoadTicketdetailsToManage(int TicketId)
         {
-           
+        
             var result = _ticketService.LoadTicketdetailsToManage(TicketId); 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -176,6 +199,12 @@ namespace PeojectTWI.Controllers
         public JsonResult ManageTicketLevelToLevel(int TicketId, int StatusID, int? AssignTo)
         {
             var result = _ticketService.ManageTicketLevelToLevel(TicketId,StatusID,AssignTo);
+            if (result == 5) 
+            {
+
+                var ticketdata = _ticketService.SerchTickeList(TicketId, null).Last();
+                TicketEmail(2, TicketId,ticketdata.CoustomerEmail);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
+    <FunctionImportMapping FunctionImportName="sp_ViewAllInventoryData" FunctionName="ProjectDBModel.Store.sp_ViewAllInventoryData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.sp_ViewAllInventoryData_Result">
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+          <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+          <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
+          <ScalarProperty Name="PerchesedCount" ColumnName="PerchesedCount" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="InSaleInventory" ColumnName="InSaleInventory" />
+          <ScalarProperty Name="NotInAnyStore" ColumnName="NotInAnyStore" />
+          <ScalarProperty Name="RemainingCount" ColumnName="RemainingCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tblAccessForms">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblAccessForm">
+        <MappingFragment StoreEntitySet="tblAccessForms">
+          <ScalarProperty Name="CategoryIcon" ColumnName="CategoryIcon" />
+          <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
+          <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
+          <ScalarProperty Name="ShowingName" ColumnName="ShowingName" />
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAuditTrials">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblAuditTrial">
+        <MappingFragment StoreEntitySet="tblAuditTrial">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AuditTrialType" ColumnName="AuditTrialType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAuditTrialTypes">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblAuditTrialType">
+        <MappingFragment StoreEntitySet="tblAuditTrialTypes">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="AuditTrialType" ColumnName="AuditTrialType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCoustomerDetails">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblCoustomerDetail">
+        <MappingFragment StoreEntitySet="tblCoustomerDetails">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CoustomerName" ColumnName="CoustomerName" />
+          <ScalarProperty Name="CoustomerId" ColumnName="CoustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInventoryDatas">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblInventoryData">
+        <MappingFragment StoreEntitySet="tblInventoryData">
+          <ScalarProperty Name="OutedDateFromStore" ColumnName="OutedDateFromStore" />
+          <ScalarProperty Name="ToTheOutside" ColumnName="ToTheOutside" />
+          <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+          <ScalarProperty Name="ToTheStore" ColumnName="ToTheStore" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+          <ScalarProperty Name="ProductCategoryId" ColumnName="ProductCategoryId" />
+          <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInventoryHistories">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblInventoryHistory">
+        <MappingFragment StoreEntitySet="tblInventoryHistory">
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="inventoryId" ColumnName="inventoryId" />
+          <ScalarProperty Name="inventoryHistoryId" ColumnName="inventoryHistoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterStores">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblMasterStore">
+        <MappingFragment StoreEntitySet="tblMasterStore">
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="RecoredEnterdBy" ColumnName="RecoredEnterdBy" />
+          <ScalarProperty Name="PerchesedDate" ColumnName="PerchesedDate" />
+          <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+          <ScalarProperty Name="perchesedCount" ColumnName="perchesedCount" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="mStoreId" ColumnName="mStoreId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterTicketDetails">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblMasterTicketDetail">
+        <MappingFragment StoreEntitySet="tblMasterTicketDetails">
+          <ScalarProperty Name="IsAccepted" ColumnName="IsAccepted" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
+          <ScalarProperty Name="isAssigned" ColumnName="isAssigned" />
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="mTicketID" ColumnName="mTicketID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterTicketSequnces">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblMasterTicketSequnce">
+        <MappingFragment StoreEntitySet="tblMasterTicketSequnces">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="SequnceName" ColumnName="SequnceName" />
+          <ScalarProperty Name="SequanceIndexID" ColumnName="SequanceIndexID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterWarrenties">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblMasterWarrenty">
+        <MappingFragment StoreEntitySet="tblMasterWarrenty">
+          <ScalarProperty Name="IsExtended" ColumnName="IsExtended" />
+          <ScalarProperty Name="IsExpiered" ColumnName="IsExpiered" />
+          <ScalarProperty Name="WarrentyMonths" ColumnName="WarrentyMonths" />
+          <ScalarProperty Name="ExpierReminderDate" ColumnName="ExpierReminderDate" />
+          <ScalarProperty Name="WarrentyExpierdDate" ColumnName="WarrentyExpierdDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="WarrentyStartDate" ColumnName="WarrentyStartDate" />
+          <ScalarProperty Name="inventoryId" ColumnName="inventoryId" />
+          <ScalarProperty Name="mWarrentyId" ColumnName="mWarrentyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProductCategories">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblProductCategory">
+        <MappingFragment StoreEntitySet="tblProductCategories">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="VendorEmail" ColumnName="VendorEmail" />
+          <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
+          <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+          <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReportCategories">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblReportCategory">
+        <MappingFragment StoreEntitySet="tblReportCategory">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ReportCategoryName" ColumnName="ReportCategoryName" />
+          <ScalarProperty Name="ReportCategoryId" ColumnName="ReportCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReportTypes">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblReportType">
+        <MappingFragment StoreEntitySet="tblReportType">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ReportTypeName" ColumnName="ReportTypeName" />
+          <ScalarProperty Name="ReportTypeValue" ColumnName="ReportTypeValue" />
+          <ScalarProperty Name="ReportCategoryId" ColumnName="ReportCategoryId" />
+          <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSalesDetails">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblSalesDetail">
+        <MappingFragment StoreEntitySet="tblSalesDetails">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ExtendPrice" ColumnName="ExtendPrice" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="SoldPrice" ColumnName="SoldPrice" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="CoustomerId" ColumnName="CoustomerId" />
+          <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTickets">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblTicket">
+        <MappingFragment StoreEntitySet="tblTicket">
+          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+          <ScalarProperty Name="OpenedDate" ColumnName="OpenedDate" />
+          <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+          <ScalarProperty Name="IsOpen" ColumnName="IsOpen" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TicketDiscription" ColumnName="TicketDiscription" />
+          <ScalarProperty Name="CoustomerId" ColumnName="CoustomerId" />
+          <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTicketComments">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblTicketComment">
+        <MappingFragment StoreEntitySet="tblTicketComment">
+          <ScalarProperty Name="CommentedBy" ColumnName="CommentedBy" />
+          <ScalarProperty Name="CommentedDate" ColumnName="CommentedDate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="ticketCommentID" ColumnName="ticketCommentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTicketProjectDtls">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblTicketProjectDtl">
+        <MappingFragment StoreEntitySet="tblTicketProjectDtl">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CurrentSeqence" ColumnName="CurrentSeqence" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="TicketProjectId" ColumnName="TicketProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTicketStatus">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblTicketStatu">
+        <MappingFragment StoreEntitySet="tblTicketStatus">
+          <ScalarProperty Name="TicketStatus" ColumnName="TicketStatus" />
+          <ScalarProperty Name="TicketStatusId" ColumnName="TicketStatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTicketTaskAssigns">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblTicketTaskAssign">
+        <MappingFragment StoreEntitySet="tblTicketTaskAssign">
+          <ScalarProperty Name="StatustId" ColumnName="StatustId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="AssignedFrom" ColumnName="AssignedFrom" />
+          <ScalarProperty Name="ticketProjectId" ColumnName="ticketProjectId" />
+          <ScalarProperty Name="TaslAssignId" ColumnName="TaslAssignId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="AssignedTicketSequnceGroup" ColumnName="AssignedTicketSequnceGroup" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserlLevels">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblUserlLevel">
+        <MappingFragment StoreEntitySet="tblUserlLevel">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
+          <ScalarProperty Name="UserlevelID" ColumnName="UserlevelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblWarrentyExtendedDates">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblWarrentyExtendedDate">
+        <MappingFragment StoreEntitySet="tblWarrentyExtendedDate">
+          <ScalarProperty Name="createddate" ColumnName="createddate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="warrentyExtendedToDate" ColumnName="warrentyExtendedToDate" />
+          <ScalarProperty Name="warrentyExtendedFromDate" ColumnName="warrentyExtendedFromDate" />
+          <ScalarProperty Name="IsWarrentyExtended" ColumnName="IsWarrentyExtended" />
+          <ScalarProperty Name="IsExpired" ColumnName="IsExpired" />
+          <ScalarProperty Name="expiredDate" ColumnName="expiredDate" />
+          <ScalarProperty Name="mWarrentyId" ColumnName="mWarrentyId" />
+          <ScalarProperty Name="weId" ColumnName="weId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblWarrentyhistories">
+      <EntityTypeMapping TypeName="ProjectDBModel.tblWarrentyhistory">
+        <MappingFragment StoreEntitySet="tblWarrentyhistory">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="mWarrentyId" ColumnName="mWarrentyId" />
+          <ScalarProperty Name="whId" ColumnName="whId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

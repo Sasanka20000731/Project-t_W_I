@@ -252,7 +252,23 @@ namespace PeojectTWI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult ValidateCurrentPassword(string enteredCurrentPassword)
+        {
+            string encryptedPassword = _userService.EncryptText(enteredCurrentPassword);
 
+            var result = _userService.CheckCurrentPassword(encryptedPassword, Convert.ToInt32(Session["LoggedUserID"]));
+         
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult UpdateUserPassword(string newPassword)
+        {
+            string encryptedPassword = _userService.EncryptText(newPassword);
+
+            var result = _userService.UpdateUserPassword(encryptedPassword, Convert.ToInt32(Session["LoggedUserID"]));
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        
 
 
     }

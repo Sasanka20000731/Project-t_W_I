@@ -310,29 +310,37 @@ namespace PeojectTWI.Services.ReportService
         }
 
         public List<PieChartModel> loadTicketPieChartData(DateTime From, DateTime To)
-        { 
+        {
+            DateTime f = From;
+            DateTime t = To.AddHours(23).AddMinutes(59);
+
             var result =  from a in db.tblTickets
                         join b in db.tblInventoryDatas on a.InventoryID equals b.InventoryID
                         join c in db.tblProductCategories on b.ProductCategoryId equals c.ProductID
-                        where c.Active == true 
-                        group c by c.ProductName into g
+                        where c.Active == true && a.CreatedDate >= f
+                       && a.CreatedDate <= t
+                          group c by c.ProductName into g
                         select new PieChartModel
                         {
                             category = g.Key,
                             value = g.Count()
                         };
             return result.ToList();
-            //  (a.Start.Date >= startDate.Date && a.Start.Date <= endDate)
+           
         }
 
         public DataSet DownloadTicketPieChartData(DateTime From, DateTime To)
         {
+            DateTime f = From;
+            DateTime t = To.AddHours(23).AddMinutes(59);
+
 
             var result = (from a in db.tblTickets
                          join b in db.tblInventoryDatas on a.InventoryID equals b.InventoryID
                          join c in db.tblProductCategories on b.ProductCategoryId equals c.ProductID
-                         where c.Active == true
-                         group c by c.ProductName into g
+                         where c.Active == true && a.CreatedDate >= f
+                       && a.CreatedDate <= t
+                          group c by c.ProductName into g
                          select new PieChartModel
                          {
                              category = g.Key,

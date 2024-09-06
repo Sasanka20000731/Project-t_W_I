@@ -123,33 +123,46 @@
     };
 
     $scope.SaveUser = function () {
-
-        data = {
-            params: {
-                UserName: $scope.UserName,
-                FirstName: $scope.FirstName,
-                LastName: $scope.LastName,
-                DOB: $scope.DOB,
-                Email: $scope.Email,
-                MobileNumber: $scope.MobileNumber,
-                UserLevel: $("#droUserLevels").val()
-            }
-        };
-
-        $http.get('/Home/saveUser', data)
-            .success(function (response) {
-
-                if (response == 1) {
-                    alertify.success('User Successfully Inserted', 3000);
-                    $scope.ClearForm();
-                } else {
-                    alertify.error('Error', 5000);
+        //debugger
+        if (
+            ($scope.UserName != null || $scope.UserName != undefined) && ($scope.FirstName != null || $scope.FirstName != undefined)
+            && ($scope.LastName != null || $scope.LastName != undefined) && ($scope.DOB != null || $scope.DOB != undefined)
+            && ($scope.Email != null || $scope.Email != undefined) && ($scope.MobileNumber != null || $scope.MobileNumber != undefined)
+            && ($("#droUserLevels").val() != null || $("#droUserLevels").val() != undefined)
+        ) {
+            debugger
+            data = {
+                params: {
+                    UserName: $scope.UserName,
+                    FirstName: $scope.FirstName,
+                    LastName: $scope.LastName,
+                    DOB: $scope.DOB,
+                    Email: $scope.Email,
+                    MobileNumber: $scope.MobileNumber,
+                    UserLevel: $("#droUserLevels").val()
                 }
-            })
-            .error(function (xhr) {
-                console.log(xhr.error);
-            })
+            };
 
+            $http.get('/Home/saveUser', data)
+                .success(function (response) {
+
+                    if (response == 1) {
+                        alertify.success('User Successfully Inserted', 3000);
+                        $scope.ClearForm();
+                    } else {
+                        alertify.error('Error', 5000);
+                    }
+                })
+                .error(function (xhr) {
+                    console.log(xhr.error);
+                })
+
+
+        } else {
+            alertify.error('Please fill all data in form', 5000);
+        }
+
+        
 
     }
 
@@ -285,29 +298,6 @@
 
     }
 
-    $scope.CheckPassword = function (Password) {
-
-        data = {
-            params: {
-                Password: Password
-            }
-        };
-        debugger;
-        $http.get('/Home/CheckCurrentPassowrd', data)
-            .success(function (response) {
-                if (response === 1) {
-                    debugger
-                } else {
-                    debugger
-                }
-            })
-            .error(function (xhr) {
-                console.log(xhr.error);
-            })
-
-
-    }
-
     $scope.LoadDashbordChartData = function () {
         $scope.chartLoading = true; // Show loading animation
         $http.get('/Home/loadDashbordChart')
@@ -440,8 +430,6 @@
 
     };
 
-  
-
     $scope.ForgetPassword = function () {
         data = {
             params: {
@@ -453,10 +441,11 @@
             .success(function (response) {
                 if (response === 1) {
                     debugger
+                    $scope.ForgetPasswordEmail = undefined;
                     alertify.success("Your Password has send to your Email !!!");
                 } else {
                     debugger
-
+                    
                     alertify.error("Enter Valid Email Address !!!");
                 }
 
@@ -467,5 +456,73 @@
 
     }
 
+    $scope.currentPasswordError = false;
+    $scope.confirmPasswordError = false;
+
+    $scope.CheckPassword = function (Password) {
+
+        data = {
+            params: {
+                enteredCurrentPassword: Password
+            }
+        };
+        //debugger;
+        $http.get('/Home/ValidateCurrentPassword', data)
+            .success(function (response) {
+                if (response === 1) {
+                    $scope.currentPasswordError = false;
+                    //debugger
+                } else {
+                    //debugger
+                    $scope.currentPasswordError = true;
+                }
+            })
+            .error(function (xhr) {
+                console.log(xhr.error);
+            })
+    }
+
+    $scope.checkVerifyPassword = function () {
+        if ($scope.NewPassword2 === $scope.NewPassword1) {
+            $scope.confirmPasswordError = false;
+        } else {
+            $scope.confirmPasswordError = true;
+        }
+    }
+
+    $scope.UpdateUserPassword = function () {
+
+        if ($scope.NewPassword2 === $scope.NewPassword1) {
+            $scope.confirmPasswordError = false;
+
+            data = {
+                params: {
+                    newPassword: $scope.NewPassword2
+                }
+            };
+            //debugger;
+            $http.get('/Home/UpdateUserPassword', data)
+                .success(function (response) {
+                    if (response === 1) {
+                        $scope.CurrentPassword = undefined;
+                        $scope.NewPassword2 = undefined;
+                        $scope.NewPassword1 = undefined;
+
+                        alertify.success("User password updated successfully", 3000);
+                    } else {
+                        alertify.success("User password was not updated successfully !!! ", 3000);
+                    }
+                })
+                .error(function (xhr) {
+                    console.log(xhr.error);
+                })
+
+
+        } else {
+            alertify.error("User password was not match to update !!! ", 3000);
+            $scope.confirmPasswordError = true;
+        }
+
+    }
 
 });

@@ -22,5 +22,7 @@ namespace PeojectTWI.Services.TicketService
         int ManageTicketLevelToLevel(int TicketId, int StatusID, int? AssignTo);
         List<Ticket> SerchTickeList(int? TicketId, string customerContact = null);
 
+        List<Ticket> GetLastTicketDetails(string SerialNumber);
+
     }
 }
